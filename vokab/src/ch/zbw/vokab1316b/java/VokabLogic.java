@@ -2,7 +2,7 @@ package ch.zbw.vokab1316b.java;
 
 import java.util.ArrayList;
 
-public class VokabLogic {
+public class VokabLogic   {
 
 	private ArrayList<Vocabulary> vocabularylist;
 
@@ -55,8 +55,6 @@ public class VokabLogic {
 		}
 		return null;	 
 	}
-	
-	
 	
 	
 	
