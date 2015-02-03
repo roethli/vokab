@@ -85,15 +85,16 @@ public class VokabMainGui{
   		mainFrame.setTitle("Vokabel Trainer V1.0");
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	welcomescreen1.setHorizontalAlignment(SwingConstants.CENTER);
+    	welcomescreen2.setHorizontalAlignment(SwingConstants.CENTER);
+    	
     
     	// Set layout of all panels and frames
-		upperPanel.setLayout(new GridLayout(4, 3, 20, 20));
-		mainPanel.setLayout(new BorderLayout(20, 20));
-		//lowerPanel.setLayout(new BorderLayout(20, 20));
+		mainPanel.setLayout(new BorderLayout(25, 25));
     	
-    	// Set design and content of JLabel welcomescreen
+    	// Set design and content of JLabel welcomescreen	
     	Border border = LineBorder.createBlackLineBorder();
-    	welcomescreen1.setText("<html><body><br> Herzlich Willkommen zum Vokabel Trainer V1.0<br></body></html>");
+    	welcomescreen1.setText("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
     	welcomescreen1.setBorder(border);
     	welcomescreen2.setText("<html><body><br> Bitte wähle wie du weiter vorgehen möchtest:<br><br></body></html>");
     	welcomescreen2.setBorder(border);
@@ -118,7 +119,7 @@ public class VokabMainGui{
 	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
 	    mainFrame.setSize(800, 600);
 	    
-        // Das Fenster in der Mitte des Bildschirms platzieren und anzeigen
+        // Set window into the the middle of screen
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         mainFrame.setLocation(d.width/2 - mainFrame.getWidth()/2, d.height/2 - mainFrame.getHeight()/2);
         mainFrame.setVisible(true);
