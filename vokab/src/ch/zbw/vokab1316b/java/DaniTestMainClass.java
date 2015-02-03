@@ -3,16 +3,21 @@ package ch.zbw.vokab1316b.java;
 public class DaniTestMainClass {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		//Testclass for class VokabLogic
+		
 		VokabLogic testlogic = new VokabLogic();
-		testlogic.addCard("Hallo", "Hello", 1);
-		testlogic.addCard("Deine Mutter", "your mother", 1);
-		testlogic.showCardSolution("Hallo");
-		testlogic.showCardSolution("Deine Mutter");
-		testlogic.showCardFrontside("Hello");
 		
+		//Add card (Frontside, Backside, Category)
+		testlogic.addCard("Hallo", "hello", 1);
+		testlogic.addCard("Hund", "dog", 1);
 		
+		//Show backside of Card "Hallo" and "Hund"
+		System.out.println(testlogic.showCardBackside("Hallo"));
+		System.out.println(testlogic.showCardBackside("Hund"));
+		
+		//Show frontside of Card "Hello" and "Dog"
+		System.out.println(testlogic.showCardFrontside("hello"));
+		System.out.println(testlogic.showCardFrontside("dog"));
 		
 	}
 
