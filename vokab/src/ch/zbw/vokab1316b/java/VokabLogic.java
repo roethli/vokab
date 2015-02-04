@@ -60,6 +60,15 @@ public class VokabLogic {
 		return null;
 	}
 	
+	public void showNextCard()
+	{
+		
+	}
 	
-
+	public void showPrevCard()
+	{
+		
+	}
+	
+	
 }
