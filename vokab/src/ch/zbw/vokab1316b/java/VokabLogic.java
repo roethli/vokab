@@ -10,10 +10,13 @@ import java.util.ArrayList;
 public class VokabLogic {
 
 	private ArrayList<Vocabulary> vocabularylist;
-
+	private int category_max;
+	boolean success;
 	public VokabLogic() {
-
+	
 		this.vocabularylist = new ArrayList<Vocabulary>();
+		this.category_max = 5;
+		this.success = false;
 	}
 	/*
 	 * addCard with frontside backside and category
@@ -24,8 +27,19 @@ public class VokabLogic {
 		vocabularylist.add(new Vocabulary(frontside, backside, category));
 	}
 
-	public void moveCard(int index) {
-		// Move Category of Card + 1 or - 1
+	public void moveCard(String frontside) {
+		for(Vocabulary v : vocabularylist)
+		{
+			if(frontside.equals(v.getFrontside()) && success && v.getCategory()<category_max)
+			{
+				int category_temp = v.getCategory();
+				v.setCategory(category_temp +1);
+			}
+			else
+			{
+				v.setCategory(1);
+			}
+		}
 	}
 
 	public String showCardFrontside(String backside) {
@@ -45,5 +59,7 @@ public class VokabLogic {
 		}
 		return null;
 	}
+	
+	
 
 }
