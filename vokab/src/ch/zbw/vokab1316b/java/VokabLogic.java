@@ -76,6 +76,8 @@ public class VokabLogic {
 
 		if (getIndex(frontside) + 1 < vocabularylist.size()) {
 			Vocabulary index1 = vocabularylist.get(getIndex(frontside) + 1);
+			int success = index1.getSucesses();
+			index1.setSucesses(success +1);
 			return index1.getFrontside();
 		} else {
 			return null;
