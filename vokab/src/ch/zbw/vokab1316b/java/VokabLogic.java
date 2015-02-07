@@ -72,10 +72,10 @@ public class VokabLogic {
 		return null;
 	}
 
-	public String showNextCard(int index) {
+	public String showNextCard(String frontside) {
 
-		if (index + 1 < vocabularylist.size()) {
-			Vocabulary index1 = vocabularylist.get(index + 1);
+		if (getIndex(frontside) + 1 < vocabularylist.size()) {
+			Vocabulary index1 = vocabularylist.get(getIndex(frontside) + 1);
 			return index1.getFrontside();
 		} else {
 			return null;
@@ -83,14 +83,28 @@ public class VokabLogic {
 
 	}
 
-	public String showPrevCard(int index) {
+	public String showPrevCard(String frontside) {
 
-		if (index - 1 >= 0) {
-			Vocabulary index1 = vocabularylist.get(index - 1);
+		if (getIndex(frontside) - 1 >= 0) {
+			Vocabulary index1 = vocabularylist.get(getIndex(frontside) - 1);
 			return index1.getFrontside();
 		} else {
 			return null;
 		}
 
+	}
+	
+	public int getIndex(String frontside)
+	{
+	    for (int i = 0; i < vocabularylist.size(); i++)
+	    {
+	        Vocabulary voc_temp = vocabularylist.get(i);
+	        if (frontside.equals(voc_temp.getFrontside()))
+	        {
+	            return i;
+	        }
+	    } 
+
+	    return -1;
 	}
 }

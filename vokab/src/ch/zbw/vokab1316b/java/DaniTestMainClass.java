@@ -19,7 +19,7 @@ public class DaniTestMainClass {
 //		Show backside of Card "Hallo" and "Hund"
 		
 		System.out.println(testlogic.showCardBackside("Hund"));
-		System.out.println(testlogic.showNextCard(1));
+		System.out.println(testlogic.showNextCard( "Nein"));
 		//System.out.println(testlogic.showCardBackside("Hund"));
 		
 		
