@@ -5,7 +5,7 @@ public class DaniTestMainClass {
 	public static void main(String[] args) {
 		//Testclass for class VokabLogic
 		
-		VokabLogic testlogic = new VokabLogic(3);
+		VokabLogic testlogic = new VokabLogic();
 		
 		//Add card (Frontside, Backside, Category)
 		testlogic.addCard("Hallo", "hello", 1);
