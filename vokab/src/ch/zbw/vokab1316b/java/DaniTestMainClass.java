@@ -13,18 +13,19 @@ public class DaniTestMainClass {
 		testlogic.addCard("Nein", "no", 1);
 		testlogic.addCard("Ja", "yes", 1);
 		testlogic.moveCard("Hallo", true);
-		System.out.println(testlogic.showNextCard(0));
-		System.out.println(testlogic.showNextCard(1));
-		System.out.println(testlogic.showNextCard(2));
 		
-/*		//Show backside of Card "Hallo" and "Hund"
-		System.out.println(testlogic.showCardBackside("Hallo"));
+		
+		
+//		Show backside of Card "Hallo" and "Hund"
+		
 		System.out.println(testlogic.showCardBackside("Hund"));
+		System.out.println(testlogic.showNextCard(1));
+		//System.out.println(testlogic.showCardBackside("Hund"));
 		
 		
 		//Show frontside of Card "Hello" and "Dog"
-		System.out.println(testlogic.showCardFrontside("hello"));
-		System.out.println(testlogic.showCardFrontside("dog"));*/
+		//System.out.println(testlogic.showCardFrontside("hello"));
+		//System.out.println(testlogic.showCardFrontside("dog"));
 		
 	}
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * @author Daniel Röthlisberger, ZbW
- * @version 1.0 02.02.2015
+ * @version 1.0 07s.02.2015
  */
 
 public class VokabLogic {
@@ -12,10 +12,9 @@ public class VokabLogic {
 	private ArrayList<Vocabulary> vocabularylist;
 	private int category_max;
 	boolean success;
-	
-	
+
 	public VokabLogic() {
-	
+
 		this.vocabularylist = new ArrayList<Vocabulary>();
 		this.category_max = 5;
 		this.success = false;
@@ -29,48 +28,28 @@ public class VokabLogic {
 		vocabularylist.add(new Vocabulary(frontside, backside, category));
 	}
 
-
 	/*
 	 * moveCard category, if success and the category is not on maximum + 1
-	 * moveCard category, if not success - 1
-	 * If Card category is on maximum and success change nothing
-	 * 
+	 * moveCard category, if not success - 1 If Card category is on maximum and
+	 * success change nothing
 	 */
-	
+
 	public void moveCard(String frontside, boolean success) {
 		for (Vocabulary v : vocabularylist) {
 			if (frontside.equals(v.getFrontside()) && success
 					&& v.getCategory() < this.category_max) {
 				int category_temp = v.getCategory();
 				v.setCategory(category_temp + 1);
-			} 
-			else
-			{
+			} else {
 				v.setCategory(1);
 			}
-			
+
 		}
 	}
 
-	public void moveCard(String frontside) {
-		for(Vocabulary v : vocabularylist)
-		{
-			if(frontside.equals(v.getFrontside()) && success && v.getCategory()<category_max)
-			{
-				int category_temp = v.getCategory();
-				v.setCategory(category_temp +1);
-			}
-			else
-			{
-				v.setCategory(1);
-			}
-		}
-	}
-
-	
-	
 	/*
-	 * @return return a string with the voc. on the front side of the vocabulary card
+	 * @return return a string with the voc. on the front side of the vocabulary
+	 * card
 	 */
 	public String showCardFrontside(String backside) {
 		for (Vocabulary v : vocabularylist) {
@@ -82,40 +61,36 @@ public class VokabLogic {
 	}
 
 	/*
-	 * @return return a string with the voc. on the back side of the vocabulary card
+	 * @return return a string with the voc. on the back side of the vocabulary
+	 * card
 	 */
 	public String showCardBackside(String frontside) {
 		for (Vocabulary v : vocabularylist) {
 			if (frontside.equals(v.getFrontside()))
 				return v.getBackside();
-
 		}
 		return null;
 	}
-	
-	public String showNextCard(int index)
-	{
-		//"index" is the index of card in arraylist
-		 int i = index;
-		 if(index > 0 && index <= vocabularylist.size() )
-		 {
-		 Vocabulary t = vocabularylist.get(i+1);
-		 return t.getFrontside();
-		 }
-		 else 
-		 {
-			 Vocabulary t2 = vocabularylist.get(i);
-			return t2.getFrontside();
-		 }
-		
-	}	
-	
-	
-	
-	public void showPrevCard()
-	{
-		
+
+	public String showNextCard(int index) {
+
+		if (index + 1 < vocabularylist.size()) {
+			Vocabulary index1 = vocabularylist.get(index + 1);
+			return index1.getFrontside();
+		} else {
+			return null;
+		}
+
 	}
-	
-	
+
+	public String showPrevCard(int index) {
+
+		if (index - 1 >= 0) {
+			Vocabulary index1 = vocabularylist.get(index - 1);
+			return index1.getFrontside();
+		} else {
+			return null;
+		}
+
+	}
 }
