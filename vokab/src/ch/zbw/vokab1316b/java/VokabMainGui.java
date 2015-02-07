@@ -46,7 +46,7 @@ public class VokabMainGui{
 	JFrame mainFrame;
 	
 	// Variables (1=de, 2=en, 3=fr, 4=it)
-	private int languagestatus = 1;
+	int languagestatus = 1;
 	
   	// Declare key buttons
   	private JButton starten;
@@ -145,24 +145,82 @@ public class VokabMainGui{
         mainFrame.setVisible(true);
   	}
   	
-    /**
-     * 'Hilfe'-Funktion: Zeige Hilfe zur Anwendung.
-     */
-    private void zeigeHilfe()
+    //Help window in different languages
+    private void showHelpDE()
     {
         JOptionPane.showMessageDialog(mainFrame, 
                     "Hier werden Sie geholfen!",
                     "Hilfe",
                     JOptionPane.INFORMATION_MESSAGE);
     }
+    private void showHelpEN()
+    {
+        JOptionPane.showMessageDialog(mainFrame, 
+                    "You get help here!",
+                    "Help",
+                    JOptionPane.INFORMATION_MESSAGE);
+    }
+    private void showHelpFR()
+    {
+        JOptionPane.showMessageDialog(mainFrame, 
+                    "Ici, ils obtiennent de l'aide!",
+                    "Aide",
+                    JOptionPane.INFORMATION_MESSAGE);
+    }
+    private void showHelpIT()
+    {
+        JOptionPane.showMessageDialog(mainFrame, 
+                    "Qui ottengono aiuto!",
+                    "Aiuto",
+                    JOptionPane.INFORMATION_MESSAGE);
+    }
     
+    //Method to change language to german
+    private void changeLanguageDE()
+    {
+    	welcomescreen1.setText("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
+    	welcomescreen2.setText("<html><body><br> Bitte wähle wie du weiter vorgehen möchtest:<br><br></body></html>");
+    	starten.setText("starten");
+    	speichernladen.setText("speichern/laden");
+    	erfassen.setText("erfassen");
+    	hilfe.setText("hilfe");
+    	languagestatus = 1;
+    }
+    
+    //Method to change language to english
     private void changeLanguageEN()
     {
+    	welcomescreen1.setText("<html><body><h1><strong>Welcome to Vokabel Trainer V1.0</strong></h1></body></html>");
+    	welcomescreen2.setText("<html><body><br> Please choose how you want to proceed further:<br><br></body></html>");
     	starten.setText("start");
-    	speichernladen.setText("saveload");
+    	speichernladen.setText("save/load");
     	erfassen.setText("register");
     	hilfe.setText("help");
     	languagestatus = 2;
+    }
+    
+    //Method to change language to french
+    private void changeLanguageFR()
+    {
+    	welcomescreen1.setText("<html><body><h1><strong>Bienvenue à Vokabel Trainer V1.0</strong></h1></body></html>");
+    	welcomescreen2.setText("<html><body><br> S'il vous plaît choisir la façon dont vous voulez aller plus loin:<br><br></body></html>");
+    	starten.setText("démarrer");
+    	speichernladen.setText("sauver/charge");
+    	erfassen.setText("saisie");
+    	hilfe.setText("aidez-moi");
+    	languagestatus = 3;
+    }
+    
+    //Method to change language to italian
+    private void changeLanguageIT()
+    {
+    	welcomescreen1.setText("<html><body><h1><strong>Benvenuti a Vokabel Trainer V1.0</strong></h1></body></html>");
+    	welcomescreen2.setText("<html><body><br>Si prega di scegliere come si vuole procedere ulteriormente:<br><br></body></html>");
+    	starten.setText("inizio");
+    	speichernladen.setText("salvare/carico");
+    	erfassen.setText("cattura");
+    	hilfe.setText("aiuto");
+    	languagestatus = 4;
     }
 
 	// Declare listener class for buttons
@@ -171,7 +229,13 @@ public class VokabMainGui{
 	    // Is called when help button is pressed
 		public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("hilfe")) {
-		zeigeHilfe();
+	    showHelpDE();}
+		else if(e.getActionCommand().equals("help")) {
+		showHelpEN();}
+		else if(e.getActionCommand().equals("aidez-moi")) {
+	    showHelpFR();}
+		else if(e.getActionCommand().equals("aiuto")) {
+	    showHelpIT();
 		}
 	}
 }
@@ -181,8 +245,18 @@ public class VokabMainGui{
 	class ComboboxListener implements ActionListener {
 	    // Is called when help button is pressed
 		public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("en")) {
-			changeLanguageEN();
+			String selectedItem = (String)languagebox.getSelectedItem();
+			if(selectedItem.equals("de")) {
+				changeLanguageDE();
+			}
+			else if(selectedItem.equals("en")) {
+				changeLanguageEN();
+		}
+			else if(selectedItem.equals("fr")) {
+				changeLanguageFR();
+		}
+			else if(selectedItem.equals("it")) {
+				changeLanguageIT();
 		}
 	}
 }
