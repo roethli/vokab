@@ -93,10 +93,24 @@ public class VokabLogic {
 		return null;
 	}
 	
-	public void showNextCard()
+	public String showNextCard(int index)
 	{
+		//"index" is the index of card in arraylist
+		 int i = index;
+		 if(index > 0 && index <= vocabularylist.size() )
+		 {
+		 Vocabulary t = vocabularylist.get(i+1);
+		 return t.getFrontside();
+		 }
+		 else 
+		 {
+			 Vocabulary t2 = vocabularylist.get(i);
+			return t2.getFrontside();
+		 }
 		
-	}
+	}	
+	
+	
 	
 	public void showPrevCard()
 	{
