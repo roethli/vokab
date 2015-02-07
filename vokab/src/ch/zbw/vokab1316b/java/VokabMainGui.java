@@ -3,6 +3,7 @@ package ch.zbw.vokab1316b.java;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -43,11 +45,14 @@ public class VokabMainGui{
 	// Main frame
 	JFrame mainFrame;
 	
+	// Variables (1=de, 2=en, 3=fr, 4=it)
+	private int languagestatus = 1;
+	
   	// Declare key buttons
   	private JButton starten;
-  	private JButton hilfe;
   	private JButton speichernladen;
   	private JButton erfassen;
+  	private JButton hilfe;
   
   	// Declare panels
   	private JPanel upperPanel;
@@ -57,6 +62,9 @@ public class VokabMainGui{
   	// Declare label
   	private JLabel welcomescreen1;
   	private JLabel welcomescreen2;
+  	
+  	// Declare and create combobox
+  	private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
   	
   	public VokabMainGui() {
   		// Main frame
@@ -87,10 +95,11 @@ public class VokabMainGui{
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	welcomescreen1.setHorizontalAlignment(SwingConstants.CENTER);
     	welcomescreen2.setHorizontalAlignment(SwingConstants.CENTER);
-    	
     
     	// Set layout of all panels and frames
+    	//mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		mainPanel.setLayout(new BorderLayout(25, 25));
+		upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     	
     	// Set design and content of JLabel welcomescreen	
     	Border border = LineBorder.createBlackLineBorder();
@@ -99,19 +108,30 @@ public class VokabMainGui{
     	welcomescreen2.setText("<html><body><br> Bitte wähle wie du weiter vorgehen möchtest:<br><br></body></html>");
     	welcomescreen2.setBorder(border);
     	
+    	// Listener
+    	starten.addActionListener(new ButtonListener());
+    	speichernladen.addActionListener(new ButtonListener());
+    	erfassen.addActionListener(new ButtonListener());
+    	hilfe.addActionListener(new ButtonListener());
+    	languagebox.addActionListener(new ComboboxListener());
+    	  	
     	// Add buttons to lowerPanel
     	lowerPanel.add(starten);
-    	lowerPanel.add(hilfe);
     	lowerPanel.add(speichernladen);
     	lowerPanel.add(erfassen);
+    	lowerPanel.add(hilfe);
     	
     	// Add label to mainPanel
     	mainPanel.add(welcomescreen1);
     	mainPanel.add(welcomescreen2);
     	
-		// Assemble hook/state panel
+    	// Add combobox to upperPanel
+    	upperPanel.add(languagebox);
+    	
+		// Assemble welcome screens to mainPanel
 		mainPanel.add(welcomescreen1, BorderLayout.NORTH);
 		mainPanel.add(welcomescreen2, BorderLayout.CENTER);
+		
 
 	    // Add all panels to frame
 	    mainFrame.add(upperPanel, BorderLayout.NORTH);
@@ -125,17 +145,48 @@ public class VokabMainGui{
         mainFrame.setVisible(true);
   	}
   	
+    /**
+     * 'Hilfe'-Funktion: Zeige Hilfe zur Anwendung.
+     */
+    private void zeigeHilfe()
+    {
+        JOptionPane.showMessageDialog(mainFrame, 
+                    "Hier werden Sie geholfen!",
+                    "Hilfe",
+                    JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void changeLanguageEN()
+    {
+    	starten.setText("start");
+    	speichernladen.setText("saveload");
+    	erfassen.setText("register");
+    	hilfe.setText("help");
+    	languagestatus = 2;
+    }
+
 	// Declare listener class for buttons
 	// ...
 	class ButtonListener implements ActionListener {
-	    // Is called when key button is pressed
+	    // Is called when help button is pressed
 		public void actionPerformed(ActionEvent e) {
-			// Add number to display
-			String zahl1 = e.getActionCommand();
-			// display.setText(display.getText());
+		if(e.getActionCommand().equals("hilfe")) {
+		zeigeHilfe();
 		}
 	}
-  	
+}
+	
+	// Declare listener class for combobox
+	// ...
+	class ComboboxListener implements ActionListener {
+	    // Is called when help button is pressed
+		public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals("en")) {
+			changeLanguageEN();
+		}
+	}
+}
+	
   	/**
   	 * Main method to start the application
   	 */
