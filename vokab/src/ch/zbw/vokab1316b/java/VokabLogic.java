@@ -109,4 +109,5 @@ public class VokabLogic {
 
 	    return -1;
 	}
+	
 }
