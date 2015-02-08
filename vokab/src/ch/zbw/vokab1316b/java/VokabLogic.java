@@ -3,7 +3,7 @@ package ch.zbw.vokab1316b.java;
 import java.util.ArrayList;
 
 /**
- * @author Daniel Röthlisberger, ZbW
+ * @author Daniel Rï¿½thlisberger, ZbW
  * @version 1.0 07s.02.2015
  */
 
