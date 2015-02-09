@@ -12,6 +12,8 @@ public class VokabLogic {
 	private ArrayList<Vocabulary> vocabularylist;
 	private int category_max;
 	boolean success;
+	private int successcounter; //Simple counter for success
+	private int faultcounter; // Simple counter for faults
 
 	public VokabLogic() {
 
@@ -76,8 +78,8 @@ public class VokabLogic {
 
 		if (getIndex(frontside) + 1 < vocabularylist.size()) {
 			Vocabulary index1 = vocabularylist.get(getIndex(frontside) + 1);
-			int success = index1.getSucesses();
-			index1.setSucesses(success +1);
+			int temp_counter = this.successcounter;
+			this.successcounter = temp_counter +1;
 			return index1.getFrontside();
 		} else {
 			return null;
@@ -109,5 +111,38 @@ public class VokabLogic {
 
 	    return -1;
 	}
+
+	public ArrayList<Vocabulary> getVocabularylist() {
+		return vocabularylist;
+	}
+
+	public void setVocabularylist(ArrayList<Vocabulary> vocabularylist) {
+		this.vocabularylist = vocabularylist;
+	}
+
+	public int getCategory_max() {
+		return category_max;
+	}
+
+	public void setCategory_max(int category_max) {
+		this.category_max = category_max;
+	}
+
+	public int getSuccesscounter() {
+		return successcounter;
+	}
+
+	public void setSuccesscounter(int successcounter) {
+		this.successcounter = successcounter;
+	}
+
+	public int getFaultcounter() {
+		return faultcounter;
+	}
+
+	public void setFaultcounter(int faultcounter) {
+		this.faultcounter = faultcounter;
+	}
+
 	
 }

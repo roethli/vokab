@@ -17,8 +17,8 @@ public class Vocabulary {
 	//variable category of a voc. card
 	private int category;
 	
-	private int faults;
-	private int sucesses;
+	private int cardFaults;
+	private int cardSucesses;
 
 	public Vocabulary(String frontside, String backside, int category) {
 		//declare variable frontside
@@ -28,25 +28,26 @@ public class Vocabulary {
 		//declare variable category
 		this.category = category;
 		
-		this.faults = 0;
-		
-		this.sucesses = 0;
+		this.cardFaults = 0;		
+		this.cardSucesses = 0;
 	}
 
-	public int getFaults() {
-		return faults;
+	public int getCardFaults() {
+		return cardFaults;
 	}
 
-	public void setFaults(int faults) {
-		this.faults = faults;
+	public void setCardFaults() {
+		int temp_CardFaults = this.cardFaults;
+		this.cardFaults = temp_CardFaults+1;
 	}
 
-	public int getSucesses() {
-		return sucesses;
+	public int getCardSucesses() {
+		return cardSucesses;
 	}
 
-	public void setSucesses(int sucesses) {
-		this.sucesses = sucesses;
+	public void setCardSucesses() {
+		int temp_CardSuccess = this.cardSucesses;
+		this.cardSucesses = temp_CardSuccess +1;
 	}
 
 	/*

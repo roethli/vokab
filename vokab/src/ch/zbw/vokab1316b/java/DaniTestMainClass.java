@@ -15,7 +15,6 @@ public class DaniTestMainClass {
 		testlogic.moveCard("Hallo", true);
 		
 		
-		
 //		Show backside of Card "Hallo" and "Hund"
 		
 		System.out.println(testlogic.showCardBackside("Hund"));
