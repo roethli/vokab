@@ -12,7 +12,7 @@ public class VokabLogic {
 	private ArrayList<Vocabulary> vocabularylist;
 	private int category_max;
 	boolean success;
-	private int successcounter; //Simple counter for success
+	private int successcounter; // Simple counter for success
 	private int faultcounter; // Simple counter for faults
 
 	public VokabLogic() {
@@ -78,8 +78,7 @@ public class VokabLogic {
 
 		if (getIndex(frontside) + 1 < vocabularylist.size()) {
 			Vocabulary index1 = vocabularylist.get(getIndex(frontside) + 1);
-			int temp_counter = this.successcounter;
-			this.successcounter = temp_counter +1;
+			setSuccesscounter();
 			return index1.getFrontside();
 		} else {
 			return null;
@@ -97,19 +96,29 @@ public class VokabLogic {
 		}
 
 	}
-	
-	public int getIndex(String frontside)
-	{
-	    for (int i = 0; i < vocabularylist.size(); i++)
-	    {
-	        Vocabulary voc_temp = vocabularylist.get(i);
-	        if (frontside.equals(voc_temp.getFrontside()))
-	        {
-	            return i;
-	        }
-	    } 
 
-	    return -1;
+	public int getIndex(String frontside) {
+		for (int i = 0; i < vocabularylist.size(); i++) {
+			Vocabulary voc_temp = vocabularylist.get(i);
+			if (frontside.equals(voc_temp.getFrontside())) {
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+	public String checkCard(String input) {
+
+		for (Vocabulary v : vocabularylist) {
+			if (input.equals(v.getBackside()))
+				return "Richtig!";
+			else
+			{
+				return "Falsch!";
+			}
+		}
+		return null;
 	}
 
 	public ArrayList<Vocabulary> getVocabularylist() {
@@ -132,17 +141,15 @@ public class VokabLogic {
 		return successcounter;
 	}
 
-	public void setSuccesscounter(int successcounter) {
-		this.successcounter = successcounter;
+	public void setSuccesscounter() {
+		this.successcounter = this.successcounter+1;
 	}
 
 	public int getFaultcounter() {
 		return faultcounter;
 	}
 
-	public void setFaultcounter(int faultcounter) {
-		this.faultcounter = faultcounter;
+	public void setFaultcounter() {
+		this.faultcounter = this.faultcounter+1;
 	}
-
-	
 }

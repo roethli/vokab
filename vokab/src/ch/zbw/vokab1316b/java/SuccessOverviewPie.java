@@ -12,8 +12,8 @@ private VokabLogic cards;
    */
   public static void main(String[] args) {
     VokabLogic cards = new VokabLogic();
-    cards.setSuccesscounter(13);
-    cards.setFaultcounter(4);
+    cards.setSuccesscounter();
+    cards.setFaultcounter();
 	 int testcounter_success = cards.getSuccesscounter(); //variables to fill up the bar 1
 	int testcounter_faults = cards.getFaultcounter(); //variables to fill up the bar 2
 	  

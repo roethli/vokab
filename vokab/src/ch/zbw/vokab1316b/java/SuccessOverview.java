@@ -38,7 +38,6 @@ public class SuccessOverview extends ApplicationFrame {
 		final JFreeChart chart = createChart(dataset);
 		final ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new Dimension(600, 270));
-
 		setContentPane(chartPanel);
 	}
 
@@ -54,8 +53,8 @@ public class SuccessOverview extends ApplicationFrame {
 		testkarten.addCard("Hallo", "hello", 1);
 		testkarten.addCard("Nein", "no", 1);
 		testkarten.showNextCard("Hallo");
-		testkarten.setSuccesscounter(10);
-		testkarten.setFaultcounter(4);
+		testkarten.setSuccesscounter();
+		testkarten.setFaultcounter();
 
 		
 		// row keys...
