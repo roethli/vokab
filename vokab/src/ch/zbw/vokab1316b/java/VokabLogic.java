@@ -4,23 +4,26 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * @author Daniel Rï¿½thlisberger, ZbW
+ * @author Daniel Röthlisberger, ZbW
  * @version 1.0 07s.02.2015
  */
 
 public class VokabLogic {
 
-	private ArrayList<Vocabulary> vocabularylist;
-	private int category_max;
-	boolean success;
+	private ArrayList<Vocabulary> vocabularylist; // Arraylist for the words
+	private int category_max; // category maximum
+	boolean success; // success?
 	private int successcounter; // Simple counter for success
 	private int faultcounter; // Simple counter for faults
-
+	private boolean switch_card_side;
+	
+	
 	public VokabLogic() {
 
-		this.vocabularylist = new ArrayList<Vocabulary>();
-		this.category_max = 5;
-		this.success = false;
+		this.vocabularylist = new ArrayList<Vocabulary>(); //initialize Arraylist
+		this.category_max = 5; // initialize maximum of categories 5
+		this.success = false; // initialize success 
+		this.switch_card_side = false; // initalize cardside - TRUE is backside FALSE is frontside
 	}
 
 	/*
@@ -75,18 +78,24 @@ public class VokabLogic {
 		return null;
 	}
 
-	public String showNextCard(String frontside) {
+//	/*
+//	 * NICHT MEHR NÖTIG DA NEUE LOGIC MIT RANDOMS BESTEHT - ABER NOCH AUFBEWAHREN!
+//	 */
+//	public String showNextCard(String frontside) {
+//
+//		if (getIndex(frontside) + 1 < vocabularylist.size()) {
+//			Vocabulary index1 = vocabularylist.get(getIndex(frontside) + 1);
+//			setSuccesscounter();
+//			return index1.getFrontside();
+//		} else {
+//			return null;
+//		}
+//
+//	}
 
-		if (getIndex(frontside) + 1 < vocabularylist.size()) {
-			Vocabulary index1 = vocabularylist.get(getIndex(frontside) + 1);
-			setSuccesscounter();
-			return index1.getFrontside();
-		} else {
-			return null;
-		}
-
-	}
-
+	/*
+	 * Method to show the prev. card....
+	 */
 	public String showPrevCard(String frontside) {
 
 		if (getIndex(frontside) - 1 >= 0) {
@@ -98,6 +107,9 @@ public class VokabLogic {
 
 	}
 
+	/*
+	 * Help method for getting the Index in the Arraylist of a Card
+	 */
 	public int getIndex(String frontside) {
 		for (int i = 0; i < vocabularylist.size(); i++) {
 			Vocabulary voc_temp = vocabularylist.get(i);
@@ -109,82 +121,145 @@ public class VokabLogic {
 		return -1;
 	}
 
+	/*
+	 * Check card if solution is right or wrong!
+	 */
 	public String checkCard(String input) {
 
 		for (Vocabulary v : vocabularylist) {
 			if (input.equals(v.getBackside()))
 				return "Richtig!";
-			else
-			{
+			else {
 				return "Falsch!";
 			}
 		}
 		return null;
 	}
 
-	public String cardLogic()
-	{
+	/*
+	 * MAIN LOGIC MAIN LOGIC MAIN LOGIC MAIN LOGIC .....
+	 */
+	public String cardLogicByRandom() {
 		Random r = new Random();
 		int low = 1;
 		int high = 100;
-		int random = r.nextInt(high-low) + low;
-		
-		
+		int random = r.nextInt(high - low) + low;
+
 		{
-			for(Vocabulary v : vocabularylist)
-			{
-				
-				for(int i = 0; i<vocabularylist.size(); i++)
-				{
-					if(v.getCategory() == 1 && random == 1-50)
+			for (Vocabulary v : vocabularylist) {
+				if (v.getCategory() == 1 && random > 0 && random <= 50) {
+					if(!this.switch_card_side)
 					{
 						return v.getFrontside();
-						
 					}
 					else
 					{
+						return v.getBackside();
+					}
+				} else if (v.getCategory() == 2 && random > 50 && random <= 70) {
+					if(!this.switch_card_side)
+					{
 						return v.getFrontside();
 					}
-				
+					else
+					{
+						return v.getBackside();
+					}
+				} else if (v.getCategory() == 3 && random > 70 && random <= 85) {
+					if(!this.switch_card_side)
+					{
+						return v.getFrontside();
+					}
+					else
+					{
+						return v.getBackside();
+					}
+				} else if (v.getCategory() == 4 && random > 85 && random <= 95) {
+					if(!this.switch_card_side)
+					{
+						return v.getFrontside();
+					}
+					else
+					{
+						return v.getBackside();
+					}
+				} else if (v.getCategory() == 5 && random > 95 && random <= 100) {
+					if(!this.switch_card_side)
+					{
+						return v.getFrontside();
+					}
+					else
+					{
+						return v.getBackside();
+					}
 				}
-			
-				
+
 			}
 		}
 		return null;
 	}
-	
-	
-	
+
+	public boolean isSwitch_card_side() {
+		return switch_card_side;
+	}
+
+	public void setSwitch_card_side(boolean switch_card_side) {
+		this.switch_card_side = switch_card_side;
+	}
+
+	/*
+	 * Getter for Vocabulary Arraylist...
+	 */
 	public ArrayList<Vocabulary> getVocabularylist() {
 		return vocabularylist;
 	}
 
+	/*
+	 * Setter for a Arraylist
+	 */
 	public void setVocabularylist(ArrayList<Vocabulary> vocabularylist) {
 		this.vocabularylist = vocabularylist;
 	}
 
+	/*
+	 * Getter to find out the Category maximum
+	 */
 	public int getCategory_max() {
 		return category_max;
 	}
 
+	/*
+	 * setter to set the Category Maximum.... ACHTUNG NICHT BENUTZEN
+	 */
 	public void setCategory_max(int category_max) {
 		this.category_max = category_max;
 	}
 
+	/*
+	 * get the actual INT for succeeded cards
+	 */
 	public int getSuccesscounter() {
 		return successcounter;
 	}
 
+	/*
+	 * get the actual INT for succeeded cards + 1
+	 */
 	public void setSuccesscounter() {
-		this.successcounter = this.successcounter+1;
+		this.successcounter = this.successcounter + 1;
 	}
 
+	/*
+	 * get the actual INT for Fault cards
+	 */
 	public int getFaultcounter() {
 		return faultcounter;
 	}
 
+	/*
+	 * set the actual INT for Fault cards +1
+	 */
 	public void setFaultcounter() {
-		this.faultcounter = this.faultcounter+1;
+		this.faultcounter = this.faultcounter + 1;
 	}
 }
