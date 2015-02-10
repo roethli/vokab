@@ -56,7 +56,7 @@ public class Vocabulary {
 	public String getFrontside() {
 		return frontside;
 	}
-
+	
 	/*
 	 * set frontside String of a vocabulary card
 	 */

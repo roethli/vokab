@@ -1,6 +1,7 @@
 package ch.zbw.vokab1316b.java;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * @author Daniel R�thlisberger, ZbW
@@ -121,6 +122,40 @@ public class VokabLogic {
 		return null;
 	}
 
+	public String cardLogic()
+	{
+		Random r = new Random();
+		int low = 1;
+		int high = 100;
+		int random = r.nextInt(high-low) + low;
+		
+		
+		{
+			for(Vocabulary v : vocabularylist)
+			{
+				
+				for(int i = 0; i<vocabularylist.size(); i++)
+				{
+					if(v.getCategory() == 1 && random == 1-50)
+					{
+						return v.getFrontside();
+						
+					}
+					else
+					{
+						return v.getFrontside();
+					}
+				
+				}
+			
+				
+			}
+		}
+		return null;
+	}
+	
+	
+	
 	public ArrayList<Vocabulary> getVocabularylist() {
 		return vocabularylist;
 	}
