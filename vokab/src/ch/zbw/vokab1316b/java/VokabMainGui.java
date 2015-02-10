@@ -75,7 +75,7 @@ public class VokabMainGui{
   	  	hilfe = new JButton("hilfe");
   	    speichernladen = new JButton("speichern/laden");
   	    erfassen = new JButton("erfassen");
-  	  
+  	      	  
   	  	// Create other GUI elements
   	  	welcomescreen1 = new JLabel();
   	  	welcomescreen2 = new JLabel();
@@ -100,7 +100,7 @@ public class VokabMainGui{
     	//mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		mainPanel.setLayout(new BorderLayout(25, 25));
 		upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-    	
+		    	
     	// Set design and content of JLabel welcomescreen	
     	Border border = LineBorder.createBlackLineBorder();
     	welcomescreen1.setText("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
@@ -149,30 +149,34 @@ public class VokabMainGui{
     private void showHelpDE()
     {
         JOptionPane.showMessageDialog(mainFrame, 
-                    "Hier werden Sie geholfen!",
-                    "Hilfe",
-                    JOptionPane.INFORMATION_MESSAGE);
+        	        "Would you like some green eggs to go "
+        	    	+ "with that ham?",
+        	    	"A Silly Question",
+                    JOptionPane.QUESTION_MESSAGE);
     }
     private void showHelpEN()
     {
         JOptionPane.showMessageDialog(mainFrame, 
-                    "You get help here!",
-                    "Help",
-                    JOptionPane.INFORMATION_MESSAGE);
+    	        "Would you like some green eggs to go "
+    	    	+ "with that ham?",
+    	    	"A Silly Question",
+                JOptionPane.QUESTION_MESSAGE);
     }
     private void showHelpFR()
     {
         JOptionPane.showMessageDialog(mainFrame, 
-                    "Ici, ils obtiennent de l'aide!",
-                    "Aide",
-                    JOptionPane.INFORMATION_MESSAGE);
+    	        "Would you like some green eggs to go "
+    	    	+ "with that ham?",
+    	    	"A Silly Question",
+                JOptionPane.QUESTION_MESSAGE);
     }
     private void showHelpIT()
     {
         JOptionPane.showMessageDialog(mainFrame, 
-                    "Qui ottengono aiuto!",
-                    "Aiuto",
-                    JOptionPane.INFORMATION_MESSAGE);
+    	        "Would you like some green eggs to go "
+    	    	+ "with that ham?",
+    	    	"A Silly Question",
+                JOptionPane.QUESTION_MESSAGE);
     }
     
     //Method to change language to german
@@ -207,7 +211,7 @@ public class VokabMainGui{
     	starten.setText("démarrer");
     	speichernladen.setText("sauver/charge");
     	erfassen.setText("saisie");
-    	hilfe.setText("aidez-moi");
+    	hilfe.setText("aidez");
     	languagestatus = 3;
     }
     
@@ -232,7 +236,7 @@ public class VokabMainGui{
 	    showHelpDE();}
 		else if(e.getActionCommand().equals("help")) {
 		showHelpEN();}
-		else if(e.getActionCommand().equals("aidez-moi")) {
+		else if(e.getActionCommand().equals("aidez")) {
 	    showHelpFR();}
 		else if(e.getActionCommand().equals("aiuto")) {
 	    showHelpIT();
