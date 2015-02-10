@@ -64,7 +64,7 @@ public class VokabMainGui{
   	private JLabel welcomescreen2;
   	
   	// Declare and create combobox
-  	private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
+   private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
   	
   	public VokabMainGui() {
   		// Main frame
