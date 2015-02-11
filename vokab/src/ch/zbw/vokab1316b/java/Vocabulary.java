@@ -1,13 +1,18 @@
 package ch.zbw.vokab1316b.java;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /*
  * 
- * @Author Daniel Röthlisberger ZbW
+ * @Author Daniel Rï¿½thlisberger ZbW
  * @Version 1.0 02.02.2015
  * 
  * 
  */
 
+@XmlRootElement
 public class Vocabulary {
 	
 	//variabe frontside of a voc. card
@@ -20,6 +25,14 @@ public class Vocabulary {
 	private int cardFaults;
 	private int cardSucesses;
 
+	/*
+	 * constructor with no parameter needed for XML-marshalling
+	 */
+	public Vocabulary() {
+		
+	}
+	
+	
 	public Vocabulary(String frontside, String backside, int category) {
 		//declare variable frontside
 		this.frontside = frontside;
@@ -32,6 +45,7 @@ public class Vocabulary {
 		this.cardSucesses = 0;
 	}
 
+	@XmlElement
 	public int getCardFaults() {
 		return cardFaults;
 	}
@@ -40,7 +54,7 @@ public class Vocabulary {
 		int temp_CardFaults = this.cardFaults;
 		this.cardFaults = temp_CardFaults+1;
 	}
-
+	@XmlElement
 	public int getCardSucesses() {
 		return cardSucesses;
 	}
@@ -53,6 +67,7 @@ public class Vocabulary {
 	/*
 	 * @return frontside String of a vocabulary card
 	 */
+	@XmlElement
 	public String getFrontside() {
 		return frontside;
 	}
@@ -68,6 +83,7 @@ public class Vocabulary {
 	/*
 	 * @return String of a vocabulary card
 	 */
+	@XmlElement
 	public String getBackside() {
 		return backside;
 	}
@@ -82,6 +98,7 @@ public class Vocabulary {
 	/*
 	 * @return int of the category of a vocabulary card
 	 */
+	@XmlElement
 	public int getCategory() {
 		return category;
 	}

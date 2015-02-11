@@ -30,6 +30,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.*;
 
+import ch.zbw.vokab1316b.java.Exporter;
 import ch.zbw.vokab1316b.java.*;
 
 /**
@@ -264,6 +265,8 @@ public class VokabMainGui{
 			}
 			else if (e.getSource() == speichernladen) {
 				System.out.println("speichern/laden");
+				Exporter ex = new Exporter();
+				ex.exportToFile(null);
 			}
 			else if (e.getSource() == erfassen) {
 				System.out.println("erfassen");
