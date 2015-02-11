@@ -105,7 +105,7 @@ public class VokabMainGui{
     	Border border = LineBorder.createBlackLineBorder();
     	welcomescreen1.setText("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
     	welcomescreen1.setBorder(border);
-    	welcomescreen2.setText("<html><body><br> Bitte wähle wie du weiter vorgehen möchtest:<br><br></body></html>");
+    	welcomescreen2.setText("<html><body><br> Bitte wï¿½hle wie du weiter vorgehen mï¿½chtest:<br><br></body></html>");
     	welcomescreen2.setBorder(border);
     	
     	// Listener
@@ -175,8 +175,8 @@ public class VokabMainGui{
     private void showHelpFR()
     {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        "Dans cette fenêtre, une aide simple est offert."
-        		    + "\nLes sujets suivants sont abordés:"
+        	        "Dans cette fenï¿½tre, une aide simple est offert."
+        		    + "\nLes sujets suivants sont abordï¿½s:"
         	    	+ "\nSujet1"
         	    	+ "\nSujet2"
         	    	+ "\nSujet3"
@@ -203,7 +203,7 @@ public class VokabMainGui{
     private void changeLanguageDE()
     {
     	welcomescreen1.setText("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
-    	welcomescreen2.setText("<html><body><br> Bitte wähle wie du weiter vorgehen möchtest:<br><br></body></html>");
+    	welcomescreen2.setText("<html><body><br> Bitte wï¿½hle wie du weiter vorgehen mï¿½chtest:<br><br></body></html>");
     	starten.setText("Starten");
     	speichernladen.setText("Speichern/Laden");
     	erfassen.setText("Erfassen");
@@ -226,9 +226,9 @@ public class VokabMainGui{
     //Method to change language to french
     private void changeLanguageFR()
     {
-    	welcomescreen1.setText("<html><body><h1><strong>Bienvenue à Vokabel Trainer V1.0</strong></h1></body></html>");
-    	welcomescreen2.setText("<html><body><br> S'il vous plaît choisir la façon dont vous voulez aller plus loin:<br><br></body></html>");
-    	starten.setText("Démarrer");
+    	welcomescreen1.setText("<html><body><h1><strong>Bienvenue ï¿½ Vokabel Trainer V1.0</strong></h1></body></html>");
+    	welcomescreen2.setText("<html><body><br> S'il vous plaï¿½t choisir la faï¿½on dont vous voulez aller plus loin:<br><br></body></html>");
+    	starten.setText("Dï¿½marrer");
     	speichernladen.setText("Sauver/charge");
     	erfassen.setText("Saisie");
     	hilfe.setText("Aidez");
@@ -252,15 +252,28 @@ public class VokabMainGui{
 	class ButtonListener implements ActionListener {
 	    // Is called when help button is pressed
 		public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("Hilfe")) {
-	    showHelpDE();}
-		else if(e.getActionCommand().equals("Help")) {
-		showHelpEN();}
-		else if(e.getActionCommand().equals("Aidez")) {
-	    showHelpFR();}
-		else if(e.getActionCommand().equals("Aiuto")) {
-	    showHelpIT();
-		}
+			if (e.getSource() == starten) {
+				System.out.println("starten");
+			}
+			else if (e.getSource() == hilfe) {
+				System.out.println("hilfe");
+				if (e.getActionCommand().equals("Hilfe")) showHelpDE();
+				else if(e.getActionCommand().equals("Help")) showHelpEN();
+				else if(e.getActionCommand().equals("Aidez")) showHelpFR();
+				else if(e.getActionCommand().equals("Aiuto")) showHelpIT();
+			}
+			else if (e.getSource() == speichernladen) {
+				System.out.println("speichern/laden");
+			}
+			else if (e.getSource() == erfassen) {
+				System.out.println("erfassen");
+			}
+			else {
+				System.out.println("eeeelse");
+			}
+			
+			
+
 	}
 }
 	
