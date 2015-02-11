@@ -12,7 +12,7 @@ import javax.xml.bind.Marshaller;
 public class Exporter {
 	
 	public void exportToFile(ArrayList<Vocabulary> arrList) {
-		Vocabulary v = new Vocabulary("Book", "Buch", 3); 
+		Vocabulary voc = new Vocabulary("Book", "Buch", 3); 
 		
 		try {
 			File file = new File("file.xml");
@@ -22,8 +22,8 @@ public class Exporter {
 			 // output pretty printed
 			 jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		 
-			 jaxbMarshaller.marshal(v, file);
-			 jaxbMarshaller.marshal(v, System.out);
+			 jaxbMarshaller.marshal(voc, file);
+			 jaxbMarshaller.marshal(voc, System.out);
 		 
 		 }
 		 catch (JAXBException e) {

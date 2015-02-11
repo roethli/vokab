@@ -51,7 +51,8 @@ public class VokabMainGui{
 	
   	// Declare key buttons
   	private JButton starten;
-  	private JButton speichernladen;
+  	private JButton speichern;
+  	private JButton laden;
   	private JButton erfassen;
   	private JButton hilfe;
   
@@ -74,7 +75,8 @@ public class VokabMainGui{
   		// Create key buttons
   	  	starten = new JButton("Starten");
   	  	hilfe = new JButton("Hilfe");
-  	    speichernladen = new JButton("Speichern/Laden");
+  	    speichern = new JButton("Speichern");
+  	    laden = new JButton("Laden");
   	    erfassen = new JButton("Erfassen");
   	      	  
   	  	// Create other GUI elements
@@ -111,14 +113,16 @@ public class VokabMainGui{
     	
     	// Listener
     	starten.addActionListener(new ButtonListener());
-    	speichernladen.addActionListener(new ButtonListener());
+    	speichern.addActionListener(new ButtonListener());
+    	laden.addActionListener(new ButtonListener());
     	erfassen.addActionListener(new ButtonListener());
     	hilfe.addActionListener(new ButtonListener());
     	languagebox.addActionListener(new ComboboxListener());
     	  	
     	// Add buttons to lowerPanel
     	lowerPanel.add(starten);
-    	lowerPanel.add(speichernladen);
+    	lowerPanel.add(speichern);
+    	lowerPanel.add(laden);
     	lowerPanel.add(erfassen);
     	lowerPanel.add(hilfe);
     	
@@ -206,7 +210,8 @@ public class VokabMainGui{
     	welcomescreen1.setText("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
     	welcomescreen2.setText("<html><body><br> Bitte w�hle wie du weiter vorgehen m�chtest:<br><br></body></html>");
     	starten.setText("Starten");
-    	speichernladen.setText("Speichern/Laden");
+    	speichern.setText("Speichern");
+    	laden.setText("Laden");
     	erfassen.setText("Erfassen");
     	hilfe.setText("Hilfe");
     	languagestatus = 1;
@@ -218,7 +223,8 @@ public class VokabMainGui{
     	welcomescreen1.setText("<html><body><h1><strong>Welcome to Vokabel Trainer V1.0</strong></h1></body></html>");
     	welcomescreen2.setText("<html><body><br> Please choose how you want to proceed further:<br><br></body></html>");
     	starten.setText("Start");
-    	speichernladen.setText("Save/Load");
+    	speichern.setText("Save");
+    	laden.setText("Load");
     	erfassen.setText("Register");
     	hilfe.setText("Help");
     	languagestatus = 2;
@@ -230,7 +236,8 @@ public class VokabMainGui{
     	welcomescreen1.setText("<html><body><h1><strong>Bienvenue � Vokabel Trainer V1.0</strong></h1></body></html>");
     	welcomescreen2.setText("<html><body><br> S'il vous pla�t choisir la fa�on dont vous voulez aller plus loin:<br><br></body></html>");
     	starten.setText("D�marrer");
-    	speichernladen.setText("Sauver/charge");
+    	speichern.setText("Sauver");
+    	laden.setText("Charge");
     	erfassen.setText("Saisie");
     	hilfe.setText("Aidez");
     	languagestatus = 3;
@@ -242,7 +249,8 @@ public class VokabMainGui{
     	welcomescreen1.setText("<html><body><h1><strong>Benvenuti a Vokabel Trainer V1.0</strong></h1></body></html>");
     	welcomescreen2.setText("<html><body><br>Si prega di scegliere come si vuole procedere ulteriormente:<br><br></body></html>");
     	starten.setText("Inizio");
-    	speichernladen.setText("Salvare/Carico");
+    	speichern.setText("Salvare");
+    	laden.setText("Carico");
     	erfassen.setText("Cattura");
     	hilfe.setText("Aiuto");
     	languagestatus = 4;
@@ -263,10 +271,16 @@ public class VokabMainGui{
 				else if(e.getActionCommand().equals("Aidez")) showHelpFR();
 				else if(e.getActionCommand().equals("Aiuto")) showHelpIT();
 			}
-			else if (e.getSource() == speichernladen) {
-				System.out.println("speichern/laden");
+			else if (e.getSource() == speichern) {
+				System.out.println("speichern");
 				Exporter ex = new Exporter();
 				ex.exportToFile(null);
+			}
+			else if (e.getSource() == laden) {
+				System.out.println("laden");
+				Importer imp = new Importer();
+				imp.importFromFile();
+
 			}
 			else if (e.getSource() == erfassen) {
 				System.out.println("erfassen");
