@@ -1,6 +1,7 @@
 package ch.zbw.vokab1316b.java;
 
 import java.util.ArrayList;
+import java.io.File;
 import ch.zbw.vokab1316b.java.Vocabulary;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -14,13 +15,14 @@ public class Exporter {
 		Vocabulary v = new Vocabulary("Book", "Buch", 3); 
 		
 		try {
+			File file = new File("file.xml");
 			 JAXBContext jaxbContext = JAXBContext.newInstance(Vocabulary.class);
 			 Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 		 
 			 // output pretty printed
 			 jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		 
-			 //jaxbMarshaller.marshal(v, file);
+			 jaxbMarshaller.marshal(v, file);
 			 jaxbMarshaller.marshal(v, System.out);
 		 
 		 }
