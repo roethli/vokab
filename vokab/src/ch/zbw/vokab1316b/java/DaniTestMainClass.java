@@ -8,13 +8,14 @@ public class DaniTestMainClass {
 		VokabLogic testlogic = new VokabLogic();
 		
 		//Add card (Frontside, Backside, Category)
+		
 		testlogic.addCard("Hallo", "hello", 3);
 		testlogic.addCard("Hund", "dog", 2);
 		testlogic.addCard("Hund", "dog", 4);
 		testlogic.addCard("Katze", "cat", 2);
 		testlogic.addCard("Frosch", "frog", 3);
-		testlogic.addCard("Mutter", "mother", 3);
-		testlogic.addCard("Vater", "father", 1);
+		testlogic.addCard("Mutter", "mother", 1);
+		testlogic.addCard("Vater", "father", 5);
 		testlogic.addCard("Stuhl", "Chair", 1);
 	
 		testlogic.addCard("Ja", "yes", 5);

@@ -71,10 +71,10 @@ public class VokabMainGui{
   		mainFrame = new JFrame("Vokabel Trainer V1.0");
   		
   		// Create key buttons
-  	  	starten = new JButton("starten");
-  	  	hilfe = new JButton("hilfe");
-  	    speichernladen = new JButton("speichern/laden");
-  	    erfassen = new JButton("erfassen");
+  	  	starten = new JButton("Starten");
+  	  	hilfe = new JButton("Hilfe");
+  	    speichernladen = new JButton("Speichern/Laden");
+  	    erfassen = new JButton("Erfassen");
   	      	  
   	  	// Create other GUI elements
   	  	welcomescreen1 = new JLabel();
@@ -149,34 +149,54 @@ public class VokabMainGui{
     private void showHelpDE()
     {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        "Would you like some green eggs to go "
-        	    	+ "with that ham?",
-        	    	"A Silly Question",
+        	        "In diesem Fenster wird eine einfache Hilfe angeboten."
+        		    + "\nFolgende Themen werden bearbeitet:"
+        	    	+ "\nThema1"
+        	    	+ "\nThema2"
+        	    	+ "\nThema3"
+        	    	+ "\n"
+        	    	+ "\nSprache: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
+        	    	"Hilfe!",
                     JOptionPane.QUESTION_MESSAGE);
     }
     private void showHelpEN()
     {
         JOptionPane.showMessageDialog(mainFrame, 
-    	        "Would you like some green eggs to go "
-    	    	+ "with that ham?",
-    	    	"A Silly Question",
-                JOptionPane.QUESTION_MESSAGE);
+        	        "In this window, a simple help is offered."
+        		    + "\nThe following topics are dealt with:"
+        	    	+ "\nTopic1"
+        	    	+ "\nTopic2"
+        	    	+ "\nTopic3"
+        	    	+ "\n"
+        	    	+ "\nLanguage: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
+        	    	"Help!",
+                    JOptionPane.QUESTION_MESSAGE);
     }
     private void showHelpFR()
     {
         JOptionPane.showMessageDialog(mainFrame, 
-    	        "Would you like some green eggs to go "
-    	    	+ "with that ham?",
-    	    	"A Silly Question",
-                JOptionPane.QUESTION_MESSAGE);
+        	        "Dans cette fenêtre, une aide simple est offert."
+        		    + "\nLes sujets suivants sont abordés:"
+        	    	+ "\nSujet1"
+        	    	+ "\nSujet2"
+        	    	+ "\nSujet3"
+        	    	+ "\n"
+        	    	+ "\nLangue: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
+        	    	"Aidez!",
+                    JOptionPane.QUESTION_MESSAGE);
     }
     private void showHelpIT()
     {
         JOptionPane.showMessageDialog(mainFrame, 
-    	        "Would you like some green eggs to go "
-    	    	+ "with that ham?",
-    	    	"A Silly Question",
-                JOptionPane.QUESTION_MESSAGE);
+        	        "In questa finestra, un semplice aiuto viene offerto."
+        		    + "\nI seguenti argomenti sono trattati:"
+        	    	+ "\nArgomento1"
+        	    	+ "\nArgomento2"
+        	    	+ "\nArgomento3"
+        	    	+ "\n"
+        	    	+ "\nLingua: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
+        	    	"Aiuto!",
+                    JOptionPane.QUESTION_MESSAGE);
     }
     
     //Method to change language to german
@@ -184,10 +204,10 @@ public class VokabMainGui{
     {
     	welcomescreen1.setText("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
     	welcomescreen2.setText("<html><body><br> Bitte wähle wie du weiter vorgehen möchtest:<br><br></body></html>");
-    	starten.setText("starten");
-    	speichernladen.setText("speichern/laden");
-    	erfassen.setText("erfassen");
-    	hilfe.setText("hilfe");
+    	starten.setText("Starten");
+    	speichernladen.setText("Speichern/Laden");
+    	erfassen.setText("Erfassen");
+    	hilfe.setText("Hilfe");
     	languagestatus = 1;
     }
     
@@ -196,10 +216,10 @@ public class VokabMainGui{
     {
     	welcomescreen1.setText("<html><body><h1><strong>Welcome to Vokabel Trainer V1.0</strong></h1></body></html>");
     	welcomescreen2.setText("<html><body><br> Please choose how you want to proceed further:<br><br></body></html>");
-    	starten.setText("start");
-    	speichernladen.setText("save/load");
-    	erfassen.setText("register");
-    	hilfe.setText("help");
+    	starten.setText("Start");
+    	speichernladen.setText("Save/Load");
+    	erfassen.setText("Register");
+    	hilfe.setText("Help");
     	languagestatus = 2;
     }
     
@@ -208,10 +228,10 @@ public class VokabMainGui{
     {
     	welcomescreen1.setText("<html><body><h1><strong>Bienvenue à Vokabel Trainer V1.0</strong></h1></body></html>");
     	welcomescreen2.setText("<html><body><br> S'il vous plaît choisir la façon dont vous voulez aller plus loin:<br><br></body></html>");
-    	starten.setText("démarrer");
-    	speichernladen.setText("sauver/charge");
-    	erfassen.setText("saisie");
-    	hilfe.setText("aidez");
+    	starten.setText("Démarrer");
+    	speichernladen.setText("Sauver/charge");
+    	erfassen.setText("Saisie");
+    	hilfe.setText("Aidez");
     	languagestatus = 3;
     }
     
@@ -220,10 +240,10 @@ public class VokabMainGui{
     {
     	welcomescreen1.setText("<html><body><h1><strong>Benvenuti a Vokabel Trainer V1.0</strong></h1></body></html>");
     	welcomescreen2.setText("<html><body><br>Si prega di scegliere come si vuole procedere ulteriormente:<br><br></body></html>");
-    	starten.setText("inizio");
-    	speichernladen.setText("salvare/carico");
-    	erfassen.setText("cattura");
-    	hilfe.setText("aiuto");
+    	starten.setText("Inizio");
+    	speichernladen.setText("Salvare/Carico");
+    	erfassen.setText("Cattura");
+    	hilfe.setText("Aiuto");
     	languagestatus = 4;
     }
 
@@ -232,13 +252,13 @@ public class VokabMainGui{
 	class ButtonListener implements ActionListener {
 	    // Is called when help button is pressed
 		public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("hilfe")) {
+		if(e.getActionCommand().equals("Hilfe")) {
 	    showHelpDE();}
-		else if(e.getActionCommand().equals("help")) {
+		else if(e.getActionCommand().equals("Help")) {
 		showHelpEN();}
-		else if(e.getActionCommand().equals("aidez")) {
+		else if(e.getActionCommand().equals("Aidez")) {
 	    showHelpFR();}
-		else if(e.getActionCommand().equals("aiuto")) {
+		else if(e.getActionCommand().equals("Aiuto")) {
 	    showHelpIT();
 		}
 	}
