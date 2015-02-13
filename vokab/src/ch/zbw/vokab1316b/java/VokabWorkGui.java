@@ -1,12 +1,11 @@
 package ch.zbw.vokab1316b.java;
 
-import ch.zbw.vokab1316b.java.Exporter;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,11 +25,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.*;
+
+import ch.zbw.vokab1316b.java.*;
 
 /**
  * This class implements a simple phone GUI. When creating a new object of this
@@ -38,145 +40,195 @@ import javax.swing.border.*;
  * react on user actions, such as pressing a button.
  * 
  * @author Marcel Baumgartner, ZbW
- * @version 1.0 02.02.2015
+ * @version 1.0 11.02.2015
  */
-public class VokabMainGui{
-	
-	VokabWorkGui vokabworkgui = new VokabWorkGui();
+public class VokabWorkGui {
 	
 	// Main frame
 	JFrame mainFrame;
 	
-	// Klassenvariabeln
-	// languagestatus 1=de, 2=en, 3=fr, 4=it
-	int languagestatus = 1;
-	
-	// 
-	String welcometext1DE = ("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
-	String welcometext2DE = ("<html><body><h3>Bitte wähle wie du weiter vorgehen möchtest:</h3><br><br>"
-	    	+ "Starten: Hiermit startest du das Lernprogramm Vokab V1.0<br>"
-	    	+ "Speichern\\Laden: Laden oder speichern von Karteien!<br>"
-	    	+ "Erfassen: Hinzufügen von Lernkarteien!<br>"
-	    	+ "Hilfe: Kurzhilfe zu den wichtigesten Themen</body></html>");
-	
-	String welcometext1EN = ("<html><body><h1><strong>Welcome to Vokabel Trainer V1.0</strong></h1></body></html>");
-	String welcometext2EN = ("<html><body><br> Please choose how you want to proceed further:<br><br></body></html>");
-	
-	String welcometext1FR = ("<html><body><h1><strong>Bienvenue à Vokabel Trainer V1.0</strong></h1></body></html>");
-	String welcometext2FR = ("<html><body><br> S'il vous plaît choisir la façon dont vous voulez aller plus loin:<br><br></body></html>");
-	
-	String welcometext1IT = ("<html><body><h1><strong>Benvenuti a Vokabel Trainer V1.0</strong></h1></body></html>");
-	String welcometext2IT = ("<html><body><br>Si prega di scegliere come si vuole procedere ulteriormente:<br><br></body></html>");
-	
+	// Variables (1=de, 2=en, 3=fr, 4=it)
+    int languagestatus = 1;
+
   	// Declare key buttons
-  	private JButton starten;
-  	private JButton speichern;
-  	private JButton laden;
-  	private JButton erfassen;
+  	private JButton pruefen;
+  	private JButton weiter;
+  	private JButton beenden;
   	private JButton hilfe;
   
   	// Declare panels
   	private JPanel upperPanel;
   	private JPanel mainPanel;
+  	private JPanel textPanel;
+  	private JPanel fieldPanel;
   	private JPanel lowerPanel;
   	
   	// Declare label
-  	private JLabel welcomescreen1;
-  	private JLabel welcomescreen2;
+  	private JLabel frontsidelabel;
+  	private JLabel backsidelabel;
+  	private JLabel resultlabel;
+  	
+  	private JTextField frontside;
+  	private JTextField backside;
+  	private JTextField result;
   	
   	// Declare and create combobox
-    private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
+   private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
   	
-    // Get languagestatus
-	public int getLanguagestatus() {
-		return languagestatus;
-	}
-
-	// Set languagestatus
-	public void setLanguagestatus(int languagestatus) {
-		this.languagestatus = languagestatus;
-	}
-
-	public VokabMainGui() {
+  	public VokabWorkGui() {
   		// Main frame
   		mainFrame = new JFrame("Vokabel Trainer V1.0");
   		
   		// Create key buttons
-  	  	starten = new JButton("Starten");
-  	  	speichern = new JButton("Speichern");
-  	    laden = new JButton("Laden");
-  	    erfassen = new JButton("Erfassen");
+  	  	pruefen = new JButton("Prüfen");
+  	  	weiter = new JButton("Weiter");
+  	    beenden = new JButton("Beenden");
   	    hilfe = new JButton("Hilfe");
-  	  
-  	  	// Create other GUI elements
-  	  	welcomescreen1 = new JLabel();
-  	  	welcomescreen2 = new JLabel();
+  	      	  
+  	  	// Create labels and set display options
+  	  	frontsidelabel = new JLabel("Frage:");
+  	  	backsidelabel = new JLabel("Antwort:");
+  	  	resultlabel = new JLabel("Resultat:");
+  	  	
+  	  	// Create textfields and set display options
+		frontside = new JTextField();
+		frontside.setColumns(15);
+		frontside.setEditable(false);
+		backside = new JTextField();
+		result = new JTextField();
+		result.setEditable(false);
   	  	
   	  	// Create panels
   	  	upperPanel = new JPanel();
   	  	mainPanel = new JPanel();
+  	  	textPanel = new JPanel();
+  	  	fieldPanel = new JPanel();
   	  	lowerPanel = new JPanel();
   	}
   	
   	// Assembles and displays the GUI.
   	public void paint(){
   		
-    	// Initialise frame and GUI elements
+		//Neue Logik erstellen
+		final VokabLogic logic = new VokabLogic();
+  		
+     	// Set layout of all panels and frames
+		upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+    	mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+    	textPanel.setLayout(new BorderLayout(10, 10));
+    	fieldPanel.setLayout(new BorderLayout(10, 10));
   		mainFrame.setTitle("Vokabel Trainer V1.0");
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	welcomescreen1.setHorizontalAlignment(SwingConstants.CENTER);
-    	welcomescreen2.setHorizontalAlignment(SwingConstants.CENTER);
-    
-    	// Set layout of all panels and frames
-    	//mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		mainPanel.setLayout(new BorderLayout(25, 25));
-		upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		    	
-    	// Set design and content of JLabel welcomescreen	
-    	Border border = LineBorder.createBlackLineBorder();
-    	welcomescreen1.setText(welcometext1DE);
-    	welcomescreen1.setBorder(border);
-    	welcomescreen2.setText(welcometext2DE);
-    	welcomescreen2.setBorder(border);
-    	
-    	// Listener
-    	starten.addActionListener(new ButtonListener());
-    	speichern.addActionListener(new ButtonListener());
-    	laden.addActionListener(new ButtonListener());
-    	erfassen.addActionListener(new ButtonListener());
+    	// Buttons einem Listener hinzufügen
+    	beenden.addActionListener(new ButtonListener());
     	hilfe.addActionListener(new ButtonListener());
     	languagebox.addActionListener(new ComboboxListener());
     	  	
-    	// Add buttons to lowerPanel
-    	lowerPanel.add(starten);
-    	lowerPanel.add(speichern);
-    	lowerPanel.add(laden);
-    	lowerPanel.add(erfassen);
+    	// Add buttons to Panels
+    	lowerPanel.add(pruefen);
+    	lowerPanel.add(weiter);
+    	lowerPanel.add(beenden);
     	lowerPanel.add(hilfe);
     	
-    	// Add label to mainPanel
-    	mainPanel.add(welcomescreen1);
-    	mainPanel.add(welcomescreen2);
+    	// Add Panels to mainPanel
+    	mainPanel.add(fieldPanel, BorderLayout.WEST);
+    	mainPanel.add(textPanel, BorderLayout.EAST);
     	
     	// Add combobox to upperPanel
     	upperPanel.add(languagebox);
     	
-		// Assemble welcome screens to mainPanel
-		mainPanel.add(welcomescreen1, BorderLayout.NORTH);
-		mainPanel.add(welcomescreen2, BorderLayout.CENTER);
+		// Add textfields to textPanel
+		textPanel.add(frontside, BorderLayout.NORTH);
+		textPanel.add(backside, BorderLayout.CENTER);
+		textPanel.add(result, BorderLayout.SOUTH);
 		
+		// Add labels to fieldPanel
+		fieldPanel.add(frontsidelabel, BorderLayout.NORTH);
+		fieldPanel.add(backsidelabel, BorderLayout.CENTER);
+		fieldPanel.add(resultlabel, BorderLayout.SOUTH);
 
-	    // Add all panels to frame
+	    // Add all panels to frame and set size of frame
 	    mainFrame.add(upperPanel, BorderLayout.NORTH);
 	    mainFrame.add(mainPanel, BorderLayout.CENTER);
 	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
-	    mainFrame.setSize(800, 600);
 	    
-        // Set window into the the middle of screen
+        // Set size of window and place it to middle of screen
+	    mainFrame.setSize(600, 400);
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         mainFrame.setLocation(d.width/2 - mainFrame.getWidth()/2, d.height/2 - mainFrame.getHeight()/2);
         mainFrame.setVisible(true);
+        
+		/**
+		 * Testkarten hinzufügen
+		 */
+		logic.addCard("Hallo", "hello", 1);
+		logic.addCard("Nein", "no", 2);
+		logic.addCard("Tier", "animal", 3);
+		logic.addCard("Hund", "dog", 4);
+		logic.addCard("Katze", "cat", 5);
+		
+		/**
+		 * Erster Eintrag in Textfeld
+		 */
+		frontside.setText(logic.cardLogicByRandom());
+		
+		/**
+		 * Prüfen-Button auf Listener setzen und Karten auf Richtigkeit prüfen
+		 */
+		pruefen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				boolean check = logic.checkCard(backside.getText(), frontside.getText());
+				/*
+				 * wenn true nächste Karte anzeigen und "Richtig :-)" ausgeben - txtfield_ty clearen usw.
+				 */
+				if(check)
+				{
+					result.setText("richtig");
+					result.setBackground(Color.green);
+					//backside.setText("");
+					//frontside.setText(logic.cardLogicByRandom());
+				}
+				/*
+				 * Wenn false nochmal probieren und "Falsch :-(" ausgeben
+				 */
+				else
+				{
+					result.setText("falsch");
+					result.setBackground(Color.red);
+				}
+			}
+		});
+		
+		weiter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				boolean check = logic.checkCard(backside.getText(), frontside.getText());
+				/*
+				 * Immer Ergebnis von letzter Karte löschen
+				 */
+				result.setBackground(Color.white);
+				result.setText("");
+				/*
+				 * Wenn true nächste Karte laden ohne Resultat zeigen
+				 */
+				if(check)
+				{
+					//result.setText("richtig");
+					//result.setBackground(Color.green);
+					backside.setText("");
+					frontside.setText(logic.cardLogicByRandom());
+				}
+				/*
+				 * Wenn false nochmal probieren und "Falsch :-(" ausgeben
+				 */
+				else
+				{
+					//result.setText("falsch");
+					result.setBackground(Color.white);
+				}
+			}
+		});
   	}
   	
     //Help window in different languages
@@ -220,12 +272,9 @@ public class VokabMainGui{
     //Method to change language to german
     private void changeLanguageDE()
     {
-    	welcomescreen1.setText(welcometext1DE);
-    	welcomescreen2.setText(welcometext2DE);
-    	starten.setText("Starten");
-    	speichern.setText("Speichern");
-    	laden.setText("Laden");
-    	erfassen.setText("Erfassen");
+    	pruefen.setText("Prüfen");
+    	weiter.setText("Weiter");
+    	beenden.setText("Beenden");
     	hilfe.setText("Hilfe");
     	languagestatus = 1;
     }
@@ -233,12 +282,9 @@ public class VokabMainGui{
     //Method to change language to english
     private void changeLanguageEN()
     {
-    	welcomescreen1.setText(welcometext1EN);
-    	welcomescreen2.setText(welcometext2EN);
-    	starten.setText("Start");
-    	speichern.setText("Save");
-    	laden.setText("Load");
-    	erfassen.setText("Register");
+    	pruefen.setText("Check");
+    	weiter.setText("Next");
+    	beenden.setText("Close");
     	hilfe.setText("Help");
     	languagestatus = 2;
     }
@@ -246,12 +292,9 @@ public class VokabMainGui{
     //Method to change language to french
     private void changeLanguageFR()
     {
-    	welcomescreen1.setText(welcometext1FR);
-    	welcomescreen2.setText(welcometext2FR);
-    	starten.setText("Démarrer");
-    	speichern.setText("Sauver");
-    	laden.setText("Charge");
-    	erfassen.setText("Saisie");
+    	pruefen.setText("Démarrer");
+    	weiter.setText("Sauver/charge");
+    	beenden.setText("Saisie");
     	hilfe.setText("Aidez");
     	languagestatus = 3;
     }
@@ -259,16 +302,13 @@ public class VokabMainGui{
     //Method to change language to italian
     private void changeLanguageIT()
     {
-    	welcomescreen1.setText(welcometext1IT);
-    	welcomescreen2.setText(welcometext2IT);
-    	starten.setText("Inizio");
-    	speichern.setText("Salvare");
-    	laden.setText("Carico");
-    	erfassen.setText("Cattura");
+    	pruefen.setText("Inizio");
+    	weiter.setText("Salvare/Carico");
+    	beenden.setText("Cattura");
     	hilfe.setText("Aiuto");
     	languagestatus = 4;
     }
-
+    
 	// Declare listener class for buttons
 	// ...
 	class ButtonListener implements ActionListener {
@@ -280,31 +320,12 @@ public class VokabMainGui{
 				else if(e.getActionCommand().equals("Aidez")) showHelpFR();
 				else if(e.getActionCommand().equals("Aiuto")) showHelpIT();
 			}
-			if (e.getSource() == starten){
-				if(e.getActionCommand().equals("Starten")) vokabworkgui.paint();
-				else if(e.getActionCommand().equals("Start")) vokabworkgui.paint();
-				else if(e.getActionCommand().equals("Démarrer")) vokabworkgui.paint();
-				else if(e.getActionCommand().equals("Inizio")) vokabworkgui.paint();
-			}
-			if (e.getSource() == speichern) {
-				System.out.println("speichern");
-				Exporter ex = new Exporter();
-				ex.exportToFile(null);
-			}
-			else if (e.getSource() == laden) {
-				System.out.println("laden");
-				Importer imp = new Importer();
-				imp.importFromFile();
-			}
-			else if (e.getSource() == erfassen) {
-				System.out.println("erfassen");
-			}
-		}
 	}
+}
 	
 	// Declare listener class for combobox
 	class ComboboxListener implements ActionListener {
-	    // Is called when help button is pressed
+	    // Is called when combobox is selected
 		public void actionPerformed(ActionEvent e) {
 			String selectedItem = (String)languagebox.getSelectedItem();
 			if(selectedItem.equals("de")) {
@@ -338,7 +359,7 @@ public class VokabMainGui{
 		    // If Nimbus is not available, you can set the GUI to another look and feel.
 		}
 		
-		VokabMainGui gui = new VokabMainGui();
+		VokabWorkGui gui = new VokabWorkGui();
 		gui.paint();
 	}  	
 }
