@@ -43,11 +43,31 @@ import ch.zbw.vokab1316b.java.*;
  */
 public class VokabMainGui{
 	
+	VokabWorkGui vokabworkgui = new VokabWorkGui();
+	
 	// Main frame
 	JFrame mainFrame;
 	
-	// Variables (1=de, 2=en, 3=fr, 4=it)
+	// Klassenvariabeln
+	// languagestatus 1=de, 2=en, 3=fr, 4=it
 	int languagestatus = 1;
+	
+	// 
+	String welcometext1DE = ("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
+	String welcometext2DE = ("<html><body><h3>Bitte wähle wie du weiter vorgehen möchtest:</h3><br><br>"
+	    	+ "Starten: Hiermit startest du das Lernprogramm Vokab V1.0<br>"
+	    	+ "Speichern\\Laden: Laden oder speichern von Karteien!<br>"
+	    	+ "Erfassen: Hinzufügen von Lernkarteien!<br>"
+	    	+ "Hilfe: Kurzhilfe zu den wichtigesten Themen</body></html>");
+	
+	String welcometext1EN = ("<html><body><h1><strong>Welcome to Vokabel Trainer V1.0</strong></h1></body></html>");
+	String welcometext2EN = ("<html><body><br> Please choose how you want to proceed further:<br><br></body></html>");
+	
+	String welcometext1FR = ("<html><body><h1><strong>Bienvenue à Vokabel Trainer V1.0</strong></h1></body></html>");
+	String welcometext2FR = ("<html><body><br> S'il vous plaît choisir la façon dont vous voulez aller plus loin:<br><br></body></html>");
+	
+	String welcometext1IT = ("<html><body><h1><strong>Benvenuti a Vokabel Trainer V1.0</strong></h1></body></html>");
+	String welcometext2IT = ("<html><body><br>Si prega di scegliere come si vuole procedere ulteriormente:<br><br></body></html>");
 	
   	// Declare key buttons
   	private JButton starten;
@@ -66,19 +86,29 @@ public class VokabMainGui{
   	private JLabel welcomescreen2;
   	
   	// Declare and create combobox
-   private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
+    private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
   	
-  	public VokabMainGui() {
+    // Get languagestatus
+	public int getLanguagestatus() {
+		return languagestatus;
+	}
+
+	// Set languagestatus
+	public void setLanguagestatus(int languagestatus) {
+		this.languagestatus = languagestatus;
+	}
+
+	public VokabMainGui() {
   		// Main frame
   		mainFrame = new JFrame("Vokabel Trainer V1.0");
   		
   		// Create key buttons
   	  	starten = new JButton("Starten");
-  	  	hilfe = new JButton("Hilfe");
-  	    speichern = new JButton("Speichern");
+  	  	speichern = new JButton("Speichern");
   	    laden = new JButton("Laden");
   	    erfassen = new JButton("Erfassen");
-  	      	  
+  	    hilfe = new JButton("Hilfe");
+  	  
   	  	// Create other GUI elements
   	  	welcomescreen1 = new JLabel();
   	  	welcomescreen2 = new JLabel();
@@ -106,9 +136,9 @@ public class VokabMainGui{
 		    	
     	// Set design and content of JLabel welcomescreen	
     	Border border = LineBorder.createBlackLineBorder();
-    	welcomescreen1.setText("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
+    	welcomescreen1.setText(welcometext1DE);
     	welcomescreen1.setBorder(border);
-    	welcomescreen2.setText("<html><body><br> Bitte wï¿½hle wie du weiter vorgehen mï¿½chtest:<br><br></body></html>");
+    	welcomescreen2.setText(welcometext2DE);
     	welcomescreen2.setBorder(border);
     	
     	// Listener
@@ -155,11 +185,7 @@ public class VokabMainGui{
     {
         JOptionPane.showMessageDialog(mainFrame, 
         	        "In diesem Fenster wird eine einfache Hilfe angeboten."
-        		    + "\nFolgende Themen werden bearbeitet:"
-        	    	+ "\nThema1"
-        	    	+ "\nThema2"
-        	    	+ "\nThema3"
-        	    	+ "\n"
+        		    + "\nFolgende Themen werden bearbeitet:" + "\nThema1" + "\nThema2" + "\nThema3" + "\n"
         	    	+ "\nSprache: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
         	    	"Hilfe!",
                     JOptionPane.QUESTION_MESSAGE);
@@ -168,11 +194,7 @@ public class VokabMainGui{
     {
         JOptionPane.showMessageDialog(mainFrame, 
         	        "In this window, a simple help is offered."
-        		    + "\nThe following topics are dealt with:"
-        	    	+ "\nTopic1"
-        	    	+ "\nTopic2"
-        	    	+ "\nTopic3"
-        	    	+ "\n"
+        		    + "\nThe following topics are dealt with:" + "\nTopic1"	+ "\nTopic2" + "\nTopic3" + "\n"
         	    	+ "\nLanguage: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
         	    	"Help!",
                     JOptionPane.QUESTION_MESSAGE);
@@ -180,12 +202,8 @@ public class VokabMainGui{
     private void showHelpFR()
     {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        "Dans cette fenï¿½tre, une aide simple est offert."
-        		    + "\nLes sujets suivants sont abordï¿½s:"
-        	    	+ "\nSujet1"
-        	    	+ "\nSujet2"
-        	    	+ "\nSujet3"
-        	    	+ "\n"
+        	        "Dans cette fenêtre, une aide simple est offert."
+        		    + "\nLes sujets suivants sont abordés:"	+ "\nSujet1" + "\nSujet2" + "\nSujet3" + "\n"
         	    	+ "\nLangue: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
         	    	"Aidez!",
                     JOptionPane.QUESTION_MESSAGE);
@@ -194,11 +212,7 @@ public class VokabMainGui{
     {
         JOptionPane.showMessageDialog(mainFrame, 
         	        "In questa finestra, un semplice aiuto viene offerto."
-        		    + "\nI seguenti argomenti sono trattati:"
-        	    	+ "\nArgomento1"
-        	    	+ "\nArgomento2"
-        	    	+ "\nArgomento3"
-        	    	+ "\n"
+        		    + "\nI seguenti argomenti sono trattati:" + "\nArgomento1" + "\nArgomento2" + "\nArgomento3" + "\n"
         	    	+ "\nLingua: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
         	    	"Aiuto!",
                     JOptionPane.QUESTION_MESSAGE);
@@ -207,8 +221,8 @@ public class VokabMainGui{
     //Method to change language to german
     private void changeLanguageDE()
     {
-    	welcomescreen1.setText("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
-    	welcomescreen2.setText("<html><body><br> Bitte wï¿½hle wie du weiter vorgehen mï¿½chtest:<br><br></body></html>");
+    	welcomescreen1.setText(welcometext1DE);
+    	welcomescreen2.setText(welcometext2DE);
     	starten.setText("Starten");
     	speichern.setText("Speichern");
     	laden.setText("Laden");
@@ -220,8 +234,8 @@ public class VokabMainGui{
     //Method to change language to english
     private void changeLanguageEN()
     {
-    	welcomescreen1.setText("<html><body><h1><strong>Welcome to Vokabel Trainer V1.0</strong></h1></body></html>");
-    	welcomescreen2.setText("<html><body><br> Please choose how you want to proceed further:<br><br></body></html>");
+    	welcomescreen1.setText(welcometext1EN);
+    	welcomescreen2.setText(welcometext2EN);
     	starten.setText("Start");
     	speichern.setText("Save");
     	laden.setText("Load");
@@ -233,9 +247,9 @@ public class VokabMainGui{
     //Method to change language to french
     private void changeLanguageFR()
     {
-    	welcomescreen1.setText("<html><body><h1><strong>Bienvenue ï¿½ Vokabel Trainer V1.0</strong></h1></body></html>");
-    	welcomescreen2.setText("<html><body><br> S'il vous plaï¿½t choisir la faï¿½on dont vous voulez aller plus loin:<br><br></body></html>");
-    	starten.setText("Dï¿½marrer");
+    	welcomescreen1.setText(welcometext1FR);
+    	welcomescreen2.setText(welcometext2FR);
+    	starten.setText("Démarrer");
     	speichern.setText("Sauver");
     	laden.setText("Charge");
     	erfassen.setText("Saisie");
@@ -246,8 +260,8 @@ public class VokabMainGui{
     //Method to change language to italian
     private void changeLanguageIT()
     {
-    	welcomescreen1.setText("<html><body><h1><strong>Benvenuti a Vokabel Trainer V1.0</strong></h1></body></html>");
-    	welcomescreen2.setText("<html><body><br>Si prega di scegliere come si vuole procedere ulteriormente:<br><br></body></html>");
+    	welcomescreen1.setText(welcometext1IT);
+    	welcomescreen2.setText(welcometext2IT);
     	starten.setText("Inizio");
     	speichern.setText("Salvare");
     	laden.setText("Carico");
@@ -261,17 +275,19 @@ public class VokabMainGui{
 	class ButtonListener implements ActionListener {
 	    // Is called when help button is pressed
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == starten) {
-				System.out.println("starten");
-			}
-			else if (e.getSource() == hilfe) {
-				System.out.println("hilfe");
-				if (e.getActionCommand().equals("Hilfe")) showHelpDE();
+			if (e.getSource() == hilfe){
+				if(e.getActionCommand().equals("Hilfe")) showHelpDE();
 				else if(e.getActionCommand().equals("Help")) showHelpEN();
 				else if(e.getActionCommand().equals("Aidez")) showHelpFR();
 				else if(e.getActionCommand().equals("Aiuto")) showHelpIT();
 			}
-			else if (e.getSource() == speichern) {
+			if (e.getSource() == starten){
+				if(e.getActionCommand().equals("Starten")) vokabworkgui.paint();
+				else if(e.getActionCommand().equals("Start")) vokabworkgui.paint();
+				else if(e.getActionCommand().equals("Démarrer")) vokabworkgui.paint();
+				else if(e.getActionCommand().equals("Inizio")) vokabworkgui.paint();
+			}
+			if (e.getSource() == speichern) {
 				System.out.println("speichern");
 				Exporter ex = new Exporter();
 				ex.exportToFile(null);
@@ -280,19 +296,12 @@ public class VokabMainGui{
 				System.out.println("laden");
 				Importer imp = new Importer();
 				imp.importFromFile();
-
 			}
 			else if (e.getSource() == erfassen) {
 				System.out.println("erfassen");
 			}
-			else {
-				System.out.println("eeeelse");
-			}
-			
-			
-
+		}
 	}
-}
 	
 	// Declare listener class for combobox
 	// ...
@@ -305,15 +314,15 @@ public class VokabMainGui{
 			}
 			else if(selectedItem.equals("en")) {
 				changeLanguageEN();
-		}
+			}
 			else if(selectedItem.equals("fr")) {
 				changeLanguageFR();
-		}
+			}
 			else if(selectedItem.equals("it")) {
 				changeLanguageIT();
+			}
 		}
 	}
-}
 	
   	/**
   	 * Main method to start the application
