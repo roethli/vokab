@@ -109,5 +109,9 @@ public class Vocabulary {
 	public void setCategory(int category) {
 		this.category = category;
 	}
-
+	
+	
+		
+		
+	
 }

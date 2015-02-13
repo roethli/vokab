@@ -124,16 +124,20 @@ public class VokabLogic {
 	/*
 	 * Check card if solution is right or wrong!
 	 */
-	public String checkCard(String input) {
-
+	public boolean checkCard(String input, String frontside) {
+		
 		for (Vocabulary v : vocabularylist) {
-			if (input.equals(v.getBackside()))
-				return "Richtig!";
-			else {
-				return "Falsch!";
+			if(showCardBackside(frontside).equals(input))
+			{
+				return true;
 			}
+			else
+			{
+				return false;
+			}
+		
 		}
-		return null;
+		return false;
 	}
 
 	/*
