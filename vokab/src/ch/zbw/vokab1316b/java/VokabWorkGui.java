@@ -47,9 +47,6 @@ public class VokabWorkGui {
 	// Main frame
 	JFrame mainFrame;
 	
-	// Variables (1=de, 2=en, 3=fr, 4=it)
-    int languagestatus = 1;
-
   	// Declare key buttons
   	private JButton pruefen;
   	private JButton weiter;
@@ -73,7 +70,7 @@ public class VokabWorkGui {
   	private JTextField result;
   	
   	// Declare and create combobox
-   private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
+    private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
   	
   	public VokabWorkGui() {
   		// Main frame
@@ -106,12 +103,19 @@ public class VokabWorkGui {
   	  	lowerPanel = new JPanel();
   	}
   	
+  	String languagestatus = "de";
+    
   	// Assembles and displays the GUI.
   	public void paint(){
   		
-		//Neue Logik erstellen
+  		//Neue Logik erstellen
 		final VokabLogic logic = new VokabLogic();
-  		
+		final VokabMainGui mainGui = new VokabMainGui();
+		
+		// Variables
+	    		
+		languagestatus = mainGui.getLanguagestatus();
+		
      	// Set layout of all panels and frames
 		upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     	mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -185,7 +189,7 @@ public class VokabWorkGui {
 				 */
 				if(check)
 				{
-					result.setText("richtig");
+					result.setText(mainGui.getLanguagestatus());
 					result.setBackground(Color.green);
 					//backside.setText("");
 					//frontside.setText(logic.cardLogicByRandom());
@@ -269,44 +273,38 @@ public class VokabWorkGui {
                     JOptionPane.QUESTION_MESSAGE);
     }
     
-    //Method to change language to german
+    //Method to change language to de,en,fr,it
     private void changeLanguageDE()
     {
     	pruefen.setText("Prüfen");
     	weiter.setText("Weiter");
     	beenden.setText("Beenden");
     	hilfe.setText("Hilfe");
-    	languagestatus = 1;
+    	languagestatus = "de";
     }
-    
-    //Method to change language to english
     private void changeLanguageEN()
     {
     	pruefen.setText("Check");
     	weiter.setText("Next");
     	beenden.setText("Close");
     	hilfe.setText("Help");
-    	languagestatus = 2;
+    	languagestatus = "en";
     }
-    
-    //Method to change language to french
     private void changeLanguageFR()
     {
     	pruefen.setText("Démarrer");
     	weiter.setText("Sauver/charge");
     	beenden.setText("Saisie");
     	hilfe.setText("Aidez");
-    	languagestatus = 3;
+    	languagestatus = "fr";
     }
-    
-    //Method to change language to italian
     private void changeLanguageIT()
     {
     	pruefen.setText("Inizio");
     	weiter.setText("Salvare/Carico");
     	beenden.setText("Cattura");
     	hilfe.setText("Aiuto");
-    	languagestatus = 4;
+    	languagestatus = "it";
     }
     
 	// Declare listener class for buttons

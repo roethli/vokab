@@ -42,16 +42,15 @@ import javax.swing.border.*;
  */
 public class VokabMainGui{
 	
-	VokabWorkGui vokabworkgui = new VokabWorkGui();
+	VokabWorkGui workGui = new VokabWorkGui();
 	
 	// Main frame
 	JFrame mainFrame;
 	
 	// Klassenvariabeln
-	// languagestatus 1=de, 2=en, 3=fr, 4=it
-	int languagestatus = 1;
+	String languagestatus = "de";
 	
-	// 
+	// Set welcome text
 	String welcometext1DE = ("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
 	String welcometext2DE = ("<html><body><h3>Bitte wähle wie du weiter vorgehen möchtest:</h3><br><br>"
 	    	+ "Starten: Hiermit startest du das Lernprogramm Vokab V1.0<br>"
@@ -88,12 +87,12 @@ public class VokabMainGui{
     private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
   	
     // Get languagestatus
-	public int getLanguagestatus() {
+	public String getLanguagestatus() {
 		return languagestatus;
 	}
 
 	// Set languagestatus
-	public void setLanguagestatus(int languagestatus) {
+	public void setLanguagestatus(String languagestatus) {
 		this.languagestatus = languagestatus;
 	}
 
@@ -185,7 +184,7 @@ public class VokabMainGui{
         JOptionPane.showMessageDialog(mainFrame, 
         	        "In diesem Fenster wird eine einfache Hilfe angeboten."
         		    + "\nFolgende Themen werden bearbeitet:" + "\nThema1" + "\nThema2" + "\nThema3" + "\n"
-        	    	+ "\nSprache: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
+        	    	+ "\nSprache: " + languagestatus,
         	    	"Hilfe!",
                     JOptionPane.QUESTION_MESSAGE);
     }
@@ -194,7 +193,7 @@ public class VokabMainGui{
         JOptionPane.showMessageDialog(mainFrame, 
         	        "In this window, a simple help is offered."
         		    + "\nThe following topics are dealt with:" + "\nTopic1"	+ "\nTopic2" + "\nTopic3" + "\n"
-        	    	+ "\nLanguage: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
+        	    	+ "\nLanguage: " + languagestatus,
         	    	"Help!",
                     JOptionPane.QUESTION_MESSAGE);
     }
@@ -203,7 +202,7 @@ public class VokabMainGui{
         JOptionPane.showMessageDialog(mainFrame, 
         	        "Dans cette fenêtre, une aide simple est offert."
         		    + "\nLes sujets suivants sont abordés:"	+ "\nSujet1" + "\nSujet2" + "\nSujet3" + "\n"
-        	    	+ "\nLangue: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
+        	    	+ "\nLangue: " + languagestatus,
         	    	"Aidez!",
                     JOptionPane.QUESTION_MESSAGE);
     }
@@ -212,7 +211,7 @@ public class VokabMainGui{
         JOptionPane.showMessageDialog(mainFrame, 
         	        "In questa finestra, un semplice aiuto viene offerto."
         		    + "\nI seguenti argomenti sono trattati:" + "\nArgomento1" + "\nArgomento2" + "\nArgomento3" + "\n"
-        	    	+ "\nLingua: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
+        	    	+ "\nLingua: " + languagestatus,
         	    	"Aiuto!",
                     JOptionPane.QUESTION_MESSAGE);
     }
@@ -227,7 +226,7 @@ public class VokabMainGui{
     	laden.setText("Laden");
     	erfassen.setText("Erfassen");
     	hilfe.setText("Hilfe");
-    	languagestatus = 1;
+    	languagestatus = "de";
     }
     
     //Method to change language to english
@@ -240,7 +239,7 @@ public class VokabMainGui{
     	laden.setText("Load");
     	erfassen.setText("Register");
     	hilfe.setText("Help");
-    	languagestatus = 2;
+    	languagestatus = "en";
     }
     
     //Method to change language to french
@@ -253,7 +252,7 @@ public class VokabMainGui{
     	laden.setText("Charge");
     	erfassen.setText("Saisie");
     	hilfe.setText("Aidez");
-    	languagestatus = 3;
+    	languagestatus = "fr";
     }
     
     //Method to change language to italian
@@ -266,11 +265,10 @@ public class VokabMainGui{
     	laden.setText("Carico");
     	erfassen.setText("Cattura");
     	hilfe.setText("Aiuto");
-    	languagestatus = 4;
+    	languagestatus = "it";
     }
 
 	// Declare listener class for buttons
-	// ...
 	class ButtonListener implements ActionListener {
 	    // Is called when help button is pressed
 		public void actionPerformed(ActionEvent e) {
@@ -281,10 +279,10 @@ public class VokabMainGui{
 				else if(e.getActionCommand().equals("Aiuto")) showHelpIT();
 			}
 			if (e.getSource() == starten){
-				if(e.getActionCommand().equals("Starten")) vokabworkgui.paint();
-				else if(e.getActionCommand().equals("Start")) vokabworkgui.paint();
-				else if(e.getActionCommand().equals("Démarrer")) vokabworkgui.paint();
-				else if(e.getActionCommand().equals("Inizio")) vokabworkgui.paint();
+				if(e.getActionCommand().equals("Starten")) workGui.paint();
+				else if(e.getActionCommand().equals("Start")) workGui.paint();
+				else if(e.getActionCommand().equals("Démarrer")) workGui.paint();
+				else if(e.getActionCommand().equals("Inizio")) workGui.paint();
 			}
 			if (e.getSource() == speichern) {
 				System.out.println("speichern");
