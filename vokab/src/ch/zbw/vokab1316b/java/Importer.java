@@ -9,20 +9,21 @@ import javax.xml.bind.Unmarshaller;
 
 public class Importer {
 
-	public ArrayList<Vocabulary> importFromFile() {
+	public ArrayList<Vocabulary> importFromFile(File file) {
 		try {
-			 
-			File file = new File("file.xml");
+
+			// File file = new File("file.xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(Vocabulary.class);
-	 
+
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			Vocabulary voc = (Vocabulary) jaxbUnmarshaller.unmarshal(file);
 			System.out.println(voc.getFrontside() + " " + voc.getBackside());
-	 
-		  } catch (JAXBException e) {
+
+		} 
+		catch (JAXBException e) {
 			e.printStackTrace();
-		  }
-		
+		}
+
 		return null;
 	}
 
