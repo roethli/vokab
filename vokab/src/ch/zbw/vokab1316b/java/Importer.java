@@ -2,6 +2,7 @@ package ch.zbw.vokab1316b.java;
 
 import java.util.ArrayList;
 import ch.zbw.vokab1316b.java.Vocabulary;
+import ch.zbw.vokab1316b.java.VokabList;
 import java.io.File;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -9,21 +10,20 @@ import javax.xml.bind.Unmarshaller;
 
 public class Importer {
 
-	public ArrayList<Vocabulary> importFromFile() {
+	public ArrayList<Vocabulary> importFromFile(File file) {
+		VokabList vl = new VokabList();
 		try {
-			 
-			File file = new File("file.xml");
-			JAXBContext jaxbContext = JAXBContext.newInstance(Vocabulary.class);
-	 
+			JAXBContext jaxbContext = JAXBContext.newInstance(VokabList.class);
+
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			Vocabulary voc = (Vocabulary) jaxbUnmarshaller.unmarshal(file);
-			System.out.println(voc.getFrontside() + " " + voc.getBackside());
-	 
-		  } catch (JAXBException e) {
+			vl = (VokabList) jaxbUnmarshaller.unmarshal(file);
+			//System.out.println(vl.getVocabularylist().get(0).getBackside());
+		} 
+		catch (JAXBException e) {
 			e.printStackTrace();
-		  }
-		
-		return null;
+		}
+
+		return vl.getVocabularylist();
 	}
 
 }
