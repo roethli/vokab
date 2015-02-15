@@ -290,9 +290,15 @@ public class VokabMainGui{
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
 					System.out.println("Saving: " + file.getName() + ".");
-					System.out.println("speichern");
+					final VokabLogic logic = new VokabLogic().getInstance();
+					logic.addCard("Hallo", "hello", 1);
+					logic.addCard("Nein", "no", 2);
+					logic.addCard("Tier", "animal", 3);
+					logic.addCard("Hund", "dog", 4);
+					logic.addCard("Katze", "cat", 5);
+
 					Exporter ex = new Exporter();
-					ex.exportToFile(null, file);
+					ex.exportToFile(logic.getVocabularylist(), file);
 				}
 				else {
 					System.out.println("Save command cancelled by user.");
@@ -304,9 +310,9 @@ public class VokabMainGui{
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
 					System.out.println("Opening: " + file.getName() + ".");
-					System.out.println("laden");
+					final VokabLogic logic = new VokabLogic().getInstance();
 					Importer imp = new Importer();
-					imp.importFromFile(file);
+					logic.setVocabularylist(imp.importFromFile(file));
 				}
 				else {
 					System.out.println("Open command cancelled by user.");

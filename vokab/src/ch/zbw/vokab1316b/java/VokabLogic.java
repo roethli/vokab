@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * @author Daniel Röthlisberger, ZbW
+ * @author Daniel Rï¿½thlisberger, ZbW
  * @version 1.0 07s.02.2015
  */
 
 public class VokabLogic {
 
+	private static VokabLogic instance = null;
+	
 	private ArrayList<Vocabulary> vocabularylist; // Arraylist for the words
 	private int category_max; // category maximum
 	boolean success; // success?
@@ -18,12 +20,20 @@ public class VokabLogic {
 	private boolean switch_card_side;
 	
 	
-	public VokabLogic() {
-
-		this.vocabularylist = new ArrayList<Vocabulary>(); //initialize Arraylist
-		this.category_max = 5; // initialize maximum of categories 5
-		this.success = false; // initialize success 
-		this.switch_card_side = false; // initalize cardside - TRUE is backside FALSE is frontside
+	protected VokabLogic() {
+		
+	}
+	
+	public static VokabLogic getInstance() {
+		if (instance == null) {
+			instance = new VokabLogic();
+			instance.vocabularylist = new ArrayList<Vocabulary>(); //initialize Arraylist
+			instance.category_max = 5; // initialize maximum of categories 5
+			instance.success = false; // initialize success 
+			instance.switch_card_side = false; // initalize cardside - TRUE is backside FALSE is frontside
+		}
+		return instance;
+		
 	}
 
 	/*
@@ -79,7 +89,7 @@ public class VokabLogic {
 	}
 
 //	/*
-//	 * NICHT MEHR NÖTIG DA NEUE LOGIC MIT RANDOMS BESTEHT - ABER NOCH AUFBEWAHREN!
+//	 * NICHT MEHR Nï¿½TIG DA NEUE LOGIC MIT RANDOMS BESTEHT - ABER NOCH AUFBEWAHREN!
 //	 */
 //	public String showNextCard(String frontside) {
 //

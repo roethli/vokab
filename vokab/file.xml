@@ -1,8 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<vocabulary>
-    <backside>Buch</backside>
-    <cardFaults>0</cardFaults>
-    <cardSucesses>0</cardSucesses>
-    <category>3</category>
-    <frontside>Book</frontside>
-</vocabulary>
+<vokabList>
+    <vocabularylist>
+        <backside>hello</backside>
+        <cardFaults>0</cardFaults>
+        <cardSucesses>0</cardSucesses>
+        <category>1</category>
+        <frontside>Hallo</frontside>
+    </vocabularylist>
+    <vocabularylist>
+        <backside>no</backside>
+        <cardFaults>0</cardFaults>
+        <cardSucesses>0</cardSucesses>
+        <category>2</category>
+        <frontside>Nein</frontside>
+    </vocabularylist>
+    <vocabularylist>
+        <backside>animal</backside>
+        <cardFaults>0</cardFaults>
+        <cardSucesses>0</cardSucesses>
+        <category>3</category>
+        <frontside>Tier</frontside>
+    </vocabularylist>
+    <vocabularylist>
+        <backside>dog</backside>
+        <cardFaults>0</cardFaults>
+        <cardSucesses>0</cardSucesses>
+        <category>4</category>
+        <frontside>Hund</frontside>
+    </vocabularylist>
+    <vocabularylist>
+        <backside>cat</backside>
+        <cardFaults>0</cardFaults>
+        <cardSucesses>0</cardSucesses>
+        <category>5</category>
+        <frontside>Katze</frontside>
+    </vocabularylist>
+</vokabList>

@@ -77,7 +77,7 @@ public class VokabWorkGui {
   		mainFrame = new JFrame("Vokabel Trainer V1.0");
   		
   		// Create key buttons
-  	  	pruefen = new JButton("Prüfen");
+  	  	pruefen = new JButton("Prï¿½fen");
   	  	weiter = new JButton("Weiter");
   	    beenden = new JButton("Beenden");
   	    hilfe = new JButton("Hilfe");
@@ -109,7 +109,7 @@ public class VokabWorkGui {
   	public void paint(){
   		
   		//Neue Logik erstellen
-		final VokabLogic logic = new VokabLogic();
+		final VokabLogic logic = new VokabLogic().getInstance();
 		final VokabMainGui mainGui = new VokabMainGui();
 		
 		// Variables
@@ -125,7 +125,7 @@ public class VokabWorkGui {
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		    	
-    	// Buttons einem Listener hinzufügen
+    	// Buttons einem Listener hinzufï¿½gen
     	beenden.addActionListener(new ButtonListener());
     	hilfe.addActionListener(new ButtonListener());
     	languagebox.addActionListener(new ComboboxListener());
@@ -165,7 +165,7 @@ public class VokabWorkGui {
         mainFrame.setVisible(true);
         
 		/**
-		 * Testkarten hinzufügen
+		 * Testkarten hinzufï¿½gen
 		 */
 		logic.addCard("Hallo", "hello", 1);
 		logic.addCard("Nein", "no", 2);
@@ -179,13 +179,13 @@ public class VokabWorkGui {
 		frontside.setText(logic.cardLogicByRandom());
 		
 		/**
-		 * Prüfen-Button auf Listener setzen und Karten auf Richtigkeit prüfen
+		 * Prï¿½fen-Button auf Listener setzen und Karten auf Richtigkeit prï¿½fen
 		 */
 		pruefen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean check = logic.checkCard(backside.getText(), frontside.getText());
 				/*
-				 * wenn true nächste Karte anzeigen und "Richtig :-)" ausgeben - txtfield_ty clearen usw.
+				 * wenn true nï¿½chste Karte anzeigen und "Richtig :-)" ausgeben - txtfield_ty clearen usw.
 				 */
 				if(check)
 				{
@@ -209,12 +209,12 @@ public class VokabWorkGui {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean check = logic.checkCard(backside.getText(), frontside.getText());
 				/*
-				 * Immer Ergebnis von letzter Karte löschen
+				 * Immer Ergebnis von letzter Karte lï¿½schen
 				 */
 				result.setBackground(Color.white);
 				result.setText("");
 				/*
-				 * Wenn true nächste Karte laden ohne Resultat zeigen
+				 * Wenn true nï¿½chste Karte laden ohne Resultat zeigen
 				 */
 				if(check)
 				{
@@ -257,8 +257,8 @@ public class VokabWorkGui {
     private void showHelpFR()
     {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        "Dans cette fenêtre, une aide simple est offert."
-        		    + "\nLes sujets suivants sont abordés:"	+ "\nSujet1" + "\nSujet2" + "\nSujet3" + "\n"
+        	        "Dans cette fenï¿½tre, une aide simple est offert."
+        		    + "\nLes sujets suivants sont abordï¿½s:"	+ "\nSujet1" + "\nSujet2" + "\nSujet3" + "\n"
         	    	+ "\nLangue: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
         	    	"Aidez!",
                     JOptionPane.QUESTION_MESSAGE);
@@ -276,7 +276,7 @@ public class VokabWorkGui {
     //Method to change language to de,en,fr,it
     private void changeLanguageDE()
     {
-    	pruefen.setText("Prüfen");
+    	pruefen.setText("Prï¿½fen");
     	weiter.setText("Weiter");
     	beenden.setText("Beenden");
     	hilfe.setText("Hilfe");
@@ -292,7 +292,7 @@ public class VokabWorkGui {
     }
     private void changeLanguageFR()
     {
-    	pruefen.setText("Démarrer");
+    	pruefen.setText("Dï¿½marrer");
     	weiter.setText("Sauver/charge");
     	beenden.setText("Saisie");
     	hilfe.setText("Aidez");
