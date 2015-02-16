@@ -77,7 +77,7 @@ public class VokabWorkGui {
   		mainFrame = new JFrame("Vokabel Trainer V1.0");
   		
   		// Create key buttons
-  	  	pruefen = new JButton("Prï¿½fen");
+  	  	pruefen = new JButton("Pruefen");
   	  	weiter = new JButton("Weiter");
   	    beenden = new JButton("Beenden");
   	    hilfe = new JButton("Hilfe");
@@ -189,7 +189,7 @@ public class VokabWorkGui {
 				 */
 				if(check)
 				{
-					result.setText(mainGui.getLanguagestatus());
+					result.setText("richtig");
 					result.setBackground(Color.green);
 					//backside.setText("");
 					//frontside.setText(logic.cardLogicByRandom());
@@ -276,7 +276,7 @@ public class VokabWorkGui {
     //Method to change language to de,en,fr,it
     private void changeLanguageDE()
     {
-    	pruefen.setText("Prï¿½fen");
+    	pruefen.setText("Pruefen");
     	weiter.setText("Weiter");
     	beenden.setText("Beenden");
     	hilfe.setText("Hilfe");
@@ -292,7 +292,7 @@ public class VokabWorkGui {
     }
     private void changeLanguageFR()
     {
-    	pruefen.setText("Dï¿½marrer");
+    	pruefen.setText("Démarrer");
     	weiter.setText("Sauver/charge");
     	beenden.setText("Saisie");
     	hilfe.setText("Aidez");
