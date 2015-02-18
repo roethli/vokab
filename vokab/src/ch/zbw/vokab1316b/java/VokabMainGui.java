@@ -33,7 +33,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.*;
 
 /**
- * This class implements a simple phone GUI. When creating a new object of this
+ * This class implements a simple learning main GUI. When creating a new object of this
  * class the GUI components, such as buttons, labels, etc. are displayed and
  * react on user actions, such as pressing a button.
  * 

@@ -35,12 +35,12 @@ import javax.swing.border.*;
 import ch.zbw.vokab1316b.java.*;
 
 /**
- * This class implements a simple phone GUI. When creating a new object of this
+ * This class implements a simple learning work GUI. When creating a new object of this
  * class the GUI components, such as buttons, labels, etc. are displayed and
  * react on user actions, such as pressing a button.
  * 
  * @author Marcel Baumgartner, ZbW
- * @version 1.0 11.02.2015
+ * @version 1.0 02.02.2015
  */
 public class VokabWorkGui {
 	
