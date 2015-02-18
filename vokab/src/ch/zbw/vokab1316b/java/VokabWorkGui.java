@@ -191,8 +191,6 @@ public class VokabWorkGui {
 				{
 					result.setText("richtig");
 					result.setBackground(Color.green);
-					//backside.setText("");
-					//frontside.setText(logic.cardLogicByRandom());
 				}
 				/*
 				 * Wenn false nochmal probieren und "Falsch :-(" ausgeben
@@ -314,6 +312,9 @@ public class VokabWorkGui {
 				else if(e.getActionCommand().equals("Help")) showHelpEN();
 				else if(e.getActionCommand().equals("Aidez")) showHelpFR();
 				else if(e.getActionCommand().equals("Aiuto")) showHelpIT();
+			}
+			else if(e.getSource() == beenden){
+				mainFrame.setVisible(false);
 			}
 	}
 }

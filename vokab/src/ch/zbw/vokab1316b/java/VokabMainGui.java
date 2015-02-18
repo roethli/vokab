@@ -52,17 +52,17 @@ public class VokabMainGui{
 	
 	// Set welcome text
 	String welcometext1DE = ("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
-	String welcometext2DE = ("<html><body><h3>Bitte wï¿½hle wie du weiter vorgehen mï¿½chtest:</h3><br><br>"
+	String welcometext2DE = ("<html><body><h3>Bitte waehle wie du weiter vorgehen moechtest:</h3><br><br>"
 	    	+ "Starten: Hiermit startest du das Lernprogramm Vokab V1.0<br>"
 	    	+ "Speichern\\Laden: Laden oder speichern von Karteien!<br>"
-	    	+ "Erfassen: Hinzufï¿½gen von Lernkarteien!<br>"
+	    	+ "Erfassen: Hinzufuegen von Lernkarteien!<br>"
 	    	+ "Hilfe: Kurzhilfe zu den wichtigesten Themen</body></html>");
 	
 	String welcometext1EN = ("<html><body><h1><strong>Welcome to Vokabel Trainer V1.0</strong></h1></body></html>");
 	String welcometext2EN = ("<html><body><br> Please choose how you want to proceed further:<br><br></body></html>");
 	
-	String welcometext1FR = ("<html><body><h1><strong>Bienvenue ï¿½ Vokabel Trainer V1.0</strong></h1></body></html>");
-	String welcometext2FR = ("<html><body><br> S'il vous plaï¿½t choisir la faï¿½on dont vous voulez aller plus loin:<br><br></body></html>");
+	String welcometext1FR = ("<html><body><h1><strong>Bienvenue à Vokabel Trainer V1.0</strong></h1></body></html>");
+	String welcometext2FR = ("<html><body><br> S'il vous plaît choisir la faï¿½on dont vous voulez aller plus loin:<br><br></body></html>");
 	
 	String welcometext1IT = ("<html><body><h1><strong>Benvenuti a Vokabel Trainer V1.0</strong></h1></body></html>");
 	String welcometext2IT = ("<html><body><br>Si prega di scegliere come si vuole procedere ulteriormente:<br><br></body></html>");
@@ -200,7 +200,7 @@ public class VokabMainGui{
     private void showHelpFR()
     {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        "Dans cette fenï¿½tre, une aide simple est offert."
+        	        "Dans cette fenêtre, une aide simple est offert."
         		    + "\nLes sujets suivants sont abordï¿½s:"	+ "\nSujet1" + "\nSujet2" + "\nSujet3" + "\n"
         	    	+ "\nLangue: " + languagestatus,
         	    	"Aidez!",
@@ -247,7 +247,7 @@ public class VokabMainGui{
     {
     	welcomescreen1.setText(welcometext1FR);
     	welcomescreen2.setText(welcometext2FR);
-    	starten.setText("Dï¿½marrer");
+    	starten.setText("Dèmarrer");
     	speichern.setText("Sauver");
     	laden.setText("Charge");
     	erfassen.setText("Saisie");
