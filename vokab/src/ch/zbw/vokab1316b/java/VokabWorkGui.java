@@ -123,7 +123,7 @@ public class VokabWorkGui {
     	fieldPanel.setLayout(new BorderLayout(10, 10));
   		mainFrame.setTitle("Vokabel Trainer V1.0");
     	mainFrame.setResizable(false);
-    	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		    	
     	// Buttons einem Listener hinzuf�gen
     	beenden.addActionListener(new ButtonListener());
@@ -218,8 +218,6 @@ public class VokabWorkGui {
 				 */
 				if(check)
 				{
-					//result.setText("richtig");
-					//result.setBackground(Color.green);
 					backside.setText("");
 					frontside.setText(logic.cardLogicByRandom());
 				}
@@ -228,7 +226,6 @@ public class VokabWorkGui {
 				 */
 				else
 				{
-					//result.setText("falsch");
 					result.setBackground(Color.white);
 				}
 			}
