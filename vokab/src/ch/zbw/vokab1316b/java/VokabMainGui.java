@@ -61,8 +61,8 @@ public class VokabMainGui{
 	String welcometext1EN = ("<html><body><h1><strong>Welcome to Vokabel Trainer V1.0</strong></h1></body></html>");
 	String welcometext2EN = ("<html><body><br> Please choose how you want to proceed further:<br><br></body></html>");
 	
-	String welcometext1FR = ("<html><body><h1><strong>Bienvenue à Vokabel Trainer V1.0</strong></h1></body></html>");
-	String welcometext2FR = ("<html><body><br> S'il vous plaît choisir la faï¿½on dont vous voulez aller plus loin:<br><br></body></html>");
+	String welcometext1FR = ("<html><body><h1><strong>Bienvenue ï¿½ Vokabel Trainer V1.0</strong></h1></body></html>");
+	String welcometext2FR = ("<html><body><br> S'il vous plaï¿½t choisir la faï¿½on dont vous voulez aller plus loin:<br><br></body></html>");
 	
 	String welcometext1IT = ("<html><body><h1><strong>Benvenuti a Vokabel Trainer V1.0</strong></h1></body></html>");
 	String welcometext2IT = ("<html><body><br>Si prega di scegliere come si vuole procedere ulteriormente:<br><br></body></html>");
@@ -200,7 +200,7 @@ public class VokabMainGui{
     private void showHelpFR()
     {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        "Dans cette fenêtre, une aide simple est offert."
+        	        "Dans cette fenï¿½tre, une aide simple est offert."
         		    + "\nLes sujets suivants sont abordï¿½s:"	+ "\nSujet1" + "\nSujet2" + "\nSujet3" + "\n"
         	    	+ "\nLangue: " + languagestatus,
         	    	"Aidez!",
@@ -247,7 +247,7 @@ public class VokabMainGui{
     {
     	welcomescreen1.setText(welcometext1FR);
     	welcomescreen2.setText(welcometext2FR);
-    	starten.setText("Dèmarrer");
+    	starten.setText("Dï¿½marrer");
     	speichern.setText("Sauver");
     	laden.setText("Charge");
     	erfassen.setText("Saisie");
@@ -285,35 +285,61 @@ public class VokabMainGui{
 				else if(e.getActionCommand().equals("Inizio")) workGui.paint();
 			}
 			if (e.getSource() == speichern) {
+
+				// instantiate a new file dialog
 				final JFileChooser fc = new JFileChooser();
 				int returnVal = fc.showSaveDialog(mainFrame);
+				// user clicked 'save' in file dialog
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+					// instantiate file from path returned from file dialog
 					File file = fc.getSelectedFile();
 					System.out.println("Saving: " + file.getName() + ".");
+
+					// get instance of VocabLogik by calling getInstance-singleton-method
 					final VokabLogic logic = new VokabLogic().getInstance();
+
+					// adding some dummy-Vocabulary-objects to verify exporting works the way we expect it to 
 					logic.addCard("Hallo", "hello", 1);
 					logic.addCard("Nein", "no", 2);
 					logic.addCard("Tier", "animal", 3);
 					logic.addCard("Hund", "dog", 4);
 					logic.addCard("Katze", "cat", 5);
 
+					// create instance of Exporter
 					Exporter ex = new Exporter();
+
+					// export all vocabs, get list from logic
 					ex.exportToFile(logic.getVocabularylist(), file);
 				}
 				else {
+					// user clicked on 'cancel' in file dialog
 					System.out.println("Save command cancelled by user.");
 				}
 			}
 			else if (e.getSource() == laden) {
+
+				// instantiate a new file dialog
 				final JFileChooser fc = new JFileChooser();
 				int returnVal = fc.showOpenDialog(mainFrame);
+
+				// user clicked 'open' in file dialog
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					// create instance of file using path returned from file dialog
 					File file = fc.getSelectedFile();
+					// output result (just for debugging purposes)
 					System.out.println("Opening: " + file.getName() + ".");
+
+					// get instance of VocabLogik by calling getInstance-singleton-method
 					final VokabLogic logic = new VokabLogic().getInstance();
+
+					// create instance of Importer
 					Importer imp = new Importer();
+
+					// replace vocab-list in logic by arraylist returned from Importer 
 					logic.setVocabularylist(imp.importFromFile(file));
 				}
+				// user clicked 'cancel'
 				else {
 					System.out.println("Open command cancelled by user.");
 				}

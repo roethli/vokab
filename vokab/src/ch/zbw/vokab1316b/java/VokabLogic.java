@@ -10,6 +10,7 @@ import java.util.Random;
 
 public class VokabLogic {
 
+	
 	private static VokabLogic instance = null;
 	
 	private ArrayList<Vocabulary> vocabularylist; // Arraylist for the words
@@ -19,12 +20,13 @@ public class VokabLogic {
 	private int faultcounter; // Simple counter for faults
 	private boolean switch_card_side;
 	
-	
+	// only here to avoid instantiation, for getting an instace 'getInstance' needs to be called
 	protected VokabLogic() {
 		
 	}
-	
-	public static VokabLogic getInstance() {
+
+	// always returns the same instance of VocabLogik, no matter from which class this is called 
+	public VokabLogic getInstance() {
 		if (instance == null) {
 			instance = new VokabLogic();
 			instance.vocabularylist = new ArrayList<Vocabulary>(); //initialize Arraylist
