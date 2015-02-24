@@ -42,7 +42,7 @@ import ch.zbw.vokab1316b.java.*;
  * @author Marcel Baumgartner, ZbW
  * @version 1.0 02.02.2015
  */
-public class VokabWorkGui {
+public class WorkGUI {
 	
 	// Main frame
 	JFrame mainFrame;
@@ -72,7 +72,7 @@ public class VokabWorkGui {
   	// Declare and create combobox
     private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
   	
-  	public VokabWorkGui() {
+  	public WorkGUI() {
   		// Main frame
   		mainFrame = new JFrame("Vokabel Trainer V1.0");
   		
@@ -109,8 +109,8 @@ public class VokabWorkGui {
   	public void paint(){
   		
   		//Neue Logik erstellen
-		final VokabLogic logic = new VokabLogic().getInstance();
-		final VokabMainGui mainGui = new VokabMainGui();
+		final Logic logic = new Logic().getInstance();
+		final MainGUI mainGui = new MainGUI();
 		
 		// Variables
 	    		
@@ -167,11 +167,11 @@ public class VokabWorkGui {
 		/**
 		 * Testkarten hinzuf�gen
 		 */
-		logic.addCard("Hallo", "hello", 1);
-		logic.addCard("Nein", "no", 2);
-		logic.addCard("Tier", "animal", 3);
-		logic.addCard("Hund", "dog", 4);
-		logic.addCard("Katze", "cat", 5);
+		logic.addCard("Hallo", "hello", 1, "de", "en");
+		logic.addCard("Nein", "no", 2, "de", "en");
+		logic.addCard("Tier", "animal", 3, "de", "en");
+		logic.addCard("Hund", "dog", 4, "de", "en");
+		logic.addCard("Katze", "cat", 5, "de", "en");
 		
 		/**
 		 * Erster Eintrag in Textfeld
@@ -355,7 +355,7 @@ public class VokabWorkGui {
 		    // If Nimbus is not available, you can set the GUI to another look and feel.
 		}
 		
-		VokabWorkGui gui = new VokabWorkGui();
+		WorkGUI gui = new WorkGUI();
 		gui.paint();
 	}  	
 }

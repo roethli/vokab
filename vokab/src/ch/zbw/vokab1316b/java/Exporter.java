@@ -2,7 +2,7 @@ package ch.zbw.vokab1316b.java;
 
 import java.util.ArrayList;
 import java.io.File;
-import ch.zbw.vokab1316b.java.VokabList;
+import ch.zbw.vokab1316b.java.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -23,13 +23,13 @@ public class Exporter {
 	 * @param arraylist containing Vocabulary objects
 	 */
 
-	public void exportToFile(ArrayList<Vocabulary> arrList, File file) {
+	public void exportToFile(ArrayList<Card> arrList, File file) {
 
 		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(VokabList.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(List.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
-			VokabList vl = new VokabList();
+			List vl = new List();
 			vl.setVocabularylist(arrList);
 			
 			// output pretty printed

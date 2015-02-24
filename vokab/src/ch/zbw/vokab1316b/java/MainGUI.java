@@ -40,9 +40,9 @@ import javax.swing.border.*;
  * @author Marcel Baumgartner, ZbW
  * @version 1.0 02.02.2015
  */
-public class VokabMainGui{
+public class MainGUI{
 	
-	VokabWorkGui workGui = new VokabWorkGui();
+	WorkGUI workGui = new WorkGUI();
 	
 	// Main frame
 	JFrame mainFrame;
@@ -96,7 +96,7 @@ public class VokabMainGui{
 		this.languagestatus = languagestatus;
 	}
 
-	public VokabMainGui() {
+	public MainGUI() {
   		// Main frame
   		mainFrame = new JFrame("Vokabel Trainer V1.0");
   		
@@ -297,14 +297,15 @@ public class VokabMainGui{
 					System.out.println("Saving: " + file.getName() + ".");
 
 					// get instance of VocabLogik by calling getInstance-singleton-method
-					final VokabLogic logic = new VokabLogic().getInstance();
+					final Logic logic = new Logic().getInstance();
 
 					// adding some dummy-Vocabulary-objects to verify exporting works the way we expect it to 
-					logic.addCard("Hallo", "hello", 1);
-					logic.addCard("Nein", "no", 2);
-					logic.addCard("Tier", "animal", 3);
-					logic.addCard("Hund", "dog", 4);
-					logic.addCard("Katze", "cat", 5);
+					logic.addCard("Hallo", "hello", 1, "de", "en");
+					logic.addCard("Nein", "no", 2, "de", "en");
+					logic.addCard("Tier", "animal", 3, "de", "en");
+					logic.addCard("Hund", "dog", 4, "de", "en");
+					logic.addCard("Katze", "cat", 5, "de", "en");
+					
 
 					// create instance of Exporter
 					Exporter ex = new Exporter();
@@ -331,7 +332,7 @@ public class VokabMainGui{
 					System.out.println("Opening: " + file.getName() + ".");
 
 					// get instance of VocabLogik by calling getInstance-singleton-method
-					final VokabLogic logic = new VokabLogic().getInstance();
+					final Logic logic = new Logic().getInstance();
 
 					// create instance of Importer
 					Importer imp = new Importer();
@@ -386,7 +387,7 @@ public class VokabMainGui{
 		    // If Nimbus is not available, you can set the GUI to another look and feel.
 		}
 		
-		VokabMainGui gui = new VokabMainGui();
+		MainGUI gui = new MainGUI();
 		gui.paint();
 	}  	
 }

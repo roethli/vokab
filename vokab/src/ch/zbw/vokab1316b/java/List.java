@@ -1,6 +1,6 @@
 package ch.zbw.vokab1316b.java;
 
-import ch.zbw.vokab1316b.java.Vocabulary;
+import ch.zbw.vokab1316b.java.Card;
 
 import java.util.ArrayList;
 
@@ -19,20 +19,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @XmlRootElement
-public class VokabList {
+public class List {
 
-	private ArrayList<Vocabulary> vocabularylist; // Arraylist for the words
+	private ArrayList<Card> vocabularylist; // Arraylist for the words
 
-	public VokabList() {
+	public List() {
 		
 	}
 
 	@XmlElement
-	public ArrayList<Vocabulary> getVocabularylist() {
+	public ArrayList<Card> getVocabularylist() {
 		return vocabularylist;
 	}
 
-	public void setVocabularylist(ArrayList<Vocabulary> vocabularylist) {
+	public void setVocabularylist(ArrayList<Card> vocabularylist) {
 		this.vocabularylist = vocabularylist;
 	}
 }

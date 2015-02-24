@@ -8,12 +8,12 @@ import java.util.Random;
  * @version 1.0 07s.02.2015
  */
 
-public class VokabLogic {
+public class Logic {
 
 	
-	private static VokabLogic instance = null;
+	private static Logic instance = null;
 	
-	private ArrayList<Vocabulary> vocabularylist; // Arraylist for the words
+	private ArrayList<Card> vocabularylist; // Arraylist for the words
 	private int category_max; // category maximum
 	boolean success; // success?
 	private int successcounter; // Simple counter for success
@@ -21,15 +21,15 @@ public class VokabLogic {
 	private boolean switch_card_side;
 	
 	// only here to avoid instantiation, for getting an instace 'getInstance' needs to be called
-	protected VokabLogic() {
+	protected Logic() {
 		
 	}
 
 	// always returns the same instance of VocabLogik, no matter from which class this is called 
-	public VokabLogic getInstance() {
+	public Logic getInstance() {
 		if (instance == null) {
-			instance = new VokabLogic();
-			instance.vocabularylist = new ArrayList<Vocabulary>(); //initialize Arraylist
+			instance = new Logic();
+			instance.vocabularylist = new ArrayList<Card>(); //initialize Arraylist
 			instance.category_max = 5; // initialize maximum of categories 5
 			instance.success = false; // initialize success 
 			instance.switch_card_side = false; // initalize cardside - TRUE is backside FALSE is frontside
@@ -42,8 +42,8 @@ public class VokabLogic {
 	 * addCard with front side, back side and category
 	 */
 
-	public void addCard(String frontside, String backside, int category) {
-		vocabularylist.add(new Vocabulary(frontside, backside, category));
+	public void addCard(String frontside, String backside, int category, String lang_frontside, String lang_backside) {
+		vocabularylist.add(new Card(frontside, backside, category, lang_backside, lang_frontside));
 	}
 
 	/*
@@ -53,7 +53,7 @@ public class VokabLogic {
 	 */
 
 	public void moveCard(String frontside, boolean success) {
-		for (Vocabulary v : vocabularylist) {
+		for (Card v : vocabularylist) {
 			if (frontside.equals(v.getFrontside()) && success
 					&& v.getCategory() < this.category_max) {
 				int category_temp = v.getCategory();
@@ -70,7 +70,7 @@ public class VokabLogic {
 	 * card
 	 */
 	public String showCardFrontside(String backside) {
-		for (Vocabulary v : vocabularylist) {
+		for (Card v : vocabularylist) {
 			if (backside.equals(v.getBackside()))
 				return v.getFrontside();
 
@@ -83,62 +83,62 @@ public class VokabLogic {
 	 * card
 	 */
 	public String showCardBackside(String frontside) {
-		for (Vocabulary v : vocabularylist) {
+		for (Card v : vocabularylist) {
 			if (frontside.equals(v.getFrontside()))
 				return v.getBackside();
 		}
 		return null;
 	}
 
-//	/*
-//	 * NICHT MEHR N�TIG DA NEUE LOGIC MIT RANDOMS BESTEHT - ABER NOCH AUFBEWAHREN!
-//	 */
-//	public String showNextCard(String frontside) {
+////	/*
+////	 * NICHT MEHR N�TIG DA NEUE LOGIC MIT RANDOMS BESTEHT - ABER NOCH AUFBEWAHREN!
+////	 */
+////	public String showNextCard(String frontside) {
+////
+////		if (getIndex(frontside) + 1 < vocabularylist.size()) {
+////			Vocabulary index1 = vocabularylist.get(getIndex(frontside) + 1);
+////			setSuccesscounter();
+////			return index1.getFrontside();
+////		} else {
+////			return null;
+////		}
+////
+////	}
 //
-//		if (getIndex(frontside) + 1 < vocabularylist.size()) {
-//			Vocabulary index1 = vocabularylist.get(getIndex(frontside) + 1);
-//			setSuccesscounter();
+//	/*
+//	 * Method to show the prev. card....
+//	 */
+//	public String showPrevCard(String frontside) {
+//
+//		if (getIndex(frontside) - 1 >= 0) {
+//			Vocabulary index1 = vocabularylist.get(getIndex(frontside) - 1);
 //			return index1.getFrontside();
 //		} else {
 //			return null;
 //		}
 //
 //	}
-
-	/*
-	 * Method to show the prev. card....
-	 */
-	public String showPrevCard(String frontside) {
-
-		if (getIndex(frontside) - 1 >= 0) {
-			Vocabulary index1 = vocabularylist.get(getIndex(frontside) - 1);
-			return index1.getFrontside();
-		} else {
-			return null;
-		}
-
-	}
-
-	/*
-	 * Help method for getting the Index in the Arraylist of a Card
-	 */
-	public int getIndex(String frontside) {
-		for (int i = 0; i < vocabularylist.size(); i++) {
-			Vocabulary voc_temp = vocabularylist.get(i);
-			if (frontside.equals(voc_temp.getFrontside())) {
-				return i;
-			}
-		}
-
-		return -1;
-	}
+//
+//	/*
+//	 * Help method for getting the Index in the Arraylist of a Card
+//	 */
+//	public int getIndex(String frontside) {
+//		for (int i = 0; i < vocabularylist.size(); i++) {
+//			Vocabulary voc_temp = vocabularylist.get(i);
+//			if (frontside.equals(voc_temp.getFrontside())) {
+//				return i;
+//			}
+//		}
+//
+//		return -1;
+//	}
 
 	/*
 	 * Check card if solution is right or wrong!
 	 */
 	public boolean checkCard(String input, String frontside) {
 		
-		for (Vocabulary v : vocabularylist) {
+		for (Card v : vocabularylist) {
 			if(showCardBackside(frontside).equals(input))
 			{
 				return true;
@@ -162,7 +162,7 @@ public class VokabLogic {
 		int random = r.nextInt(high - low) + low;
 
 		{
-			for (Vocabulary v : vocabularylist) {
+			for (Card v : vocabularylist) {
 				if (v.getCategory() == 1 && random > 0 && random <= 50) {
 					if(!this.switch_card_side)
 					{
@@ -226,14 +226,14 @@ public class VokabLogic {
 	/*
 	 * Getter for Vocabulary Arraylist...
 	 */
-	public ArrayList<Vocabulary> getVocabularylist() {
+	public ArrayList<Card> getVocabularylist() {
 		return vocabularylist;
 	}
 
 	/*
 	 * Setter for a Arraylist
 	 */
-	public void setVocabularylist(ArrayList<Vocabulary> vocabularylist) {
+	public void setVocabularylist(ArrayList<Card> vocabularylist) {
 		this.vocabularylist = vocabularylist;
 	}
 

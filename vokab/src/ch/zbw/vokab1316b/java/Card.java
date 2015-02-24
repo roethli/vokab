@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 
 @XmlRootElement
-public class Vocabulary {
+public class Card {
 	
 	//variabe frontside of a voc. card
 	private String frontside;
@@ -22,25 +22,33 @@ public class Vocabulary {
 	//variable category of a voc. card
 	private int category;
 	
+	private String lang_frontside;
+	
+	private String lang_backside;
+	
+	
+	
 	private int cardFaults;
 	private int cardSucesses;
 
 	/*
 	 * constructor with no parameter needed for XML-marshalling
 	 */
-	public Vocabulary() {
+	public Card() {
 		
 	}
 	
 	
-	public Vocabulary(String frontside, String backside, int category) {
+	public Card(String frontside, String backside, int category, String lang_frontside, String lang_backside) {
 		//declare variable frontside
 		this.frontside = frontside;
 		//declare variable backside
 		this.backside = backside;
 		//declare variable category
 		this.category = category;
-		
+		this.lang_backside = lang_backside;
+
+		this.lang_frontside = lang_frontside;
 		this.cardFaults = 0;		
 		this.cardSucesses = 0;
 	}

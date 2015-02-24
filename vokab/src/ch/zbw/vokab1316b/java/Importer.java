@@ -1,8 +1,8 @@
 package ch.zbw.vokab1316b.java;
 
 import java.util.ArrayList;
-import ch.zbw.vokab1316b.java.Vocabulary;
-import ch.zbw.vokab1316b.java.VokabList;
+import ch.zbw.vokab1316b.java.Card;
+import ch.zbw.vokab1316b.java.List;
 import java.io.File;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -23,13 +23,13 @@ public class Importer {
 	 * @param file instance of <a href="http://docs.oracle.com/javase/7/docs/api/java/io/File.html">File</a> 
 	 * @return arraylist containing Vocabulary objects
 	 */
-	public ArrayList<Vocabulary> importFromFile(File file) {
-		VokabList vl = new VokabList();
+	public ArrayList<Card> importFromFile(File file) {
+		List vl = new List();
 		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(VokabList.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(List.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			vl = (VokabList) jaxbUnmarshaller.unmarshal(file);
+			vl = (List) jaxbUnmarshaller.unmarshal(file);
 			//System.out.println(vl.getVocabularylist().get(0).getBackside());
 		} 
 		catch (JAXBException e) {
