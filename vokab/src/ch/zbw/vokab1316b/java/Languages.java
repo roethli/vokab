@@ -8,11 +8,15 @@ public class Languages {
 	// Definiere Variable für Spracheeinstellung
 	String language = "de";
 	
+	// Definiere Produktdetails
+	String product = "Vokab Trainer ";
+	String version = "V1.0";
+	
 	// Definiere Titel für alle Sprachen
-	String titleDe = ("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
-	String titleEn = ("<html><body><h1><strong>Welcome to Vokabel Trainer V1.0</strong></h1></body></html>");
-	String titleFr = ("<html><body><h1><strong>Bienvenue a Vokabel Trainer V1.0</strong></h1></body></html>");
-	String titleIt = ("<html><body><h1><strong>Benvenuti a Vokabel Trainer V1.0</strong></h1></body></html>");
+	String titleDe = ("<html><body><h1><strong>Herzlich Willkommen!</strong></h1></body></html>");
+	String titleEn = ("<html><body><h1><strong>Welcome!</strong></h1></body></html>");
+	String titleFr = ("<html><body><h1><strong>Bienvenue!</strong></h1></body></html>");
+	String titleIt = ("<html><body><h1><strong>Benvenuti!</strong></h1></body></html>");
 	
 	// Definiere Textinhalt für alle Sprachen
 	String contentDe = ("<html><body><h3>Bitte waehle wie du weiter vorgehen moechtest:</h3><br><br>"
@@ -37,6 +41,14 @@ public class Languages {
 	// Gib Spracheinstellung
 	public String getLanguage() {
 		return language;
+	}
+	
+	// Gib Produktdetails
+	public String getProduct() {
+		return product;
+	}
+	public String getVersion() {
+		return version;
 	}
 	
 	// Setze Spracheinstellung

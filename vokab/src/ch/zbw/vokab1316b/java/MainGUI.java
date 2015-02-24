@@ -111,14 +111,13 @@ public class MainGUI{
   	public void paint(){
   		
     	// Initialise frame and GUI elements
-  		mainFrame.setTitle("Vokabel Trainer V1.0");
+  		mainFrame.setTitle(languages.getProduct() + languages.getVersion());
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
     	lblContent.setHorizontalAlignment(SwingConstants.CENTER);
     
     	// Set layout of all panels and frames
-    	//mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		mainPanel.setLayout(new BorderLayout(25, 25));
 		upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		    	
@@ -202,8 +201,7 @@ public class MainGUI{
     }
     
     //Method to change language to german
-    private void setLangDe()
-    {
+    private void setLangDe() {
     	lblTitle.setText(titleDe);
     	lblContent.setText(contentDe);
     	btnStart.setText("Starten");
@@ -215,9 +213,8 @@ public class MainGUI{
     }
     
     //Method to change language to english
-    private void setLangEn()
-    {
-    	lblTitle.setText(titleEn);
+    private void setLangEn() {
+        lblTitle.setText(titleEn);
     	lblContent.setText(contentEn);
     	btnStart.setText("Start");
     	btnSave.setText("Save");
@@ -228,11 +225,10 @@ public class MainGUI{
     }
     
     //Method to change language to french
-    private void setLangFr()
-    {
+    private void setLangFr() {
     	lblTitle.setText(titleFr);
     	lblContent.setText(contentFr);
-    	btnStart.setText("D�marrer");
+    	btnStart.setText("Demarrer");
     	btnSave.setText("Sauver");
     	btnLoad.setText("Charge");
     	btnRegister.setText("Saisie");
@@ -241,8 +237,7 @@ public class MainGUI{
     }
     
     //Method to change language to italian
-    private void setLangIt()
-    {
+    private void setLangIt() {
     	lblTitle.setText(titleIt);
     	lblContent.setText(contentIt);
     	btnStart.setText("Inizio");
@@ -266,7 +261,7 @@ public class MainGUI{
 			if (e.getSource() == btnStart){
 				if(e.getActionCommand().equals("Starten")) workGUI.paint();
 				else if(e.getActionCommand().equals("Start")) workGUI.paint();
-				else if(e.getActionCommand().equals("D�marrer")) workGUI.paint();
+				else if(e.getActionCommand().equals("Demarrer")) workGUI.paint();
 				else if(e.getActionCommand().equals("Inizio")) workGUI.paint();
 			}
 			if (e.getSource() == btnSave) {
