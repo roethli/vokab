@@ -48,10 +48,10 @@ public class WorkGUI {
 	JFrame mainFrame;
 	
   	// Declare key buttons
-  	private JButton pruefen;
-  	private JButton weiter;
-  	private JButton beenden;
-  	private JButton hilfe;
+  	private JButton btnCheck;
+  	private JButton btnNext;
+  	private JButton btnClose;
+  	
   
   	// Declare panels
   	private JPanel upperPanel;
@@ -61,13 +61,14 @@ public class WorkGUI {
   	private JPanel lowerPanel;
   	
   	// Declare label
+  	// TODO Lables workgui?
   	private JLabel frontsidelabel;
   	private JLabel backsidelabel;
   	private JLabel resultlabel;
   	
-  	private JTextField frontside;
-  	private JTextField backside;
-  	private JTextField result;
+  	private JTextField txtFront;
+  	private JTextField txtBack;
+  	private JTextField txtResult;
   	
   	// Declare and create combobox
     private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
@@ -77,23 +78,22 @@ public class WorkGUI {
   		mainFrame = new JFrame("Vokabel Trainer V1.0");
   		
   		// Create key buttons
-  	  	pruefen = new JButton("Pruefen");
-  	  	weiter = new JButton("Weiter");
-  	    beenden = new JButton("Beenden");
-  	    hilfe = new JButton("Hilfe");
-  	      	  
+  	  	btnCheck = new JButton("Pruefen");
+  	  	btnNext = new JButton("Weiter");
+  	    btnClose = new JButton("Beenden");
+  	  
   	  	// Create labels and set display options
   	  	frontsidelabel = new JLabel("Frage:");
   	  	backsidelabel = new JLabel("Antwort:");
   	  	resultlabel = new JLabel("Resultat:");
   	  	
   	  	// Create textfields and set display options
-		frontside = new JTextField();
-		frontside.setColumns(15);
-		frontside.setEditable(false);
-		backside = new JTextField();
-		result = new JTextField();
-		result.setEditable(false);
+		txtFront = new JTextField();
+		txtFront.setColumns(15);
+		txtFront.setEditable(false);
+		txtBack = new JTextField();
+		txtResult = new JTextField();
+		txtResult.setEditable(false);
   	  	
   	  	// Create panels
   	  	upperPanel = new JPanel();
@@ -103,7 +103,7 @@ public class WorkGUI {
   	  	lowerPanel = new JPanel();
   	}
   	
-  	String languagestatus = "de";
+  	String language = "de";
     
   	// Assembles and displays the GUI.
   	public void paint(){
@@ -114,7 +114,7 @@ public class WorkGUI {
 		
 		// Variables
 	    		
-		languagestatus = mainGui.getLanguagestatus();
+		language = mainGui.getLanguagestatus();
 		
      	// Set layout of all panels and frames
 		upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -126,15 +126,13 @@ public class WorkGUI {
     	mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		    	
     	// Buttons einem Listener hinzufï¿½gen
-    	beenden.addActionListener(new ButtonListener());
-    	hilfe.addActionListener(new ButtonListener());
+    	btnClose.addActionListener(new ButtonListener());
     	languagebox.addActionListener(new ComboboxListener());
     	  	
     	// Add buttons to Panels
-    	lowerPanel.add(pruefen);
-    	lowerPanel.add(weiter);
-    	lowerPanel.add(beenden);
-    	lowerPanel.add(hilfe);
+    	lowerPanel.add(btnCheck);
+    	lowerPanel.add(btnNext);
+    	lowerPanel.add(btnClose);
     	
     	// Add Panels to mainPanel
     	mainPanel.add(fieldPanel, BorderLayout.WEST);
@@ -144,9 +142,9 @@ public class WorkGUI {
     	upperPanel.add(languagebox);
     	
 		// Add textfields to textPanel
-		textPanel.add(frontside, BorderLayout.NORTH);
-		textPanel.add(backside, BorderLayout.CENTER);
-		textPanel.add(result, BorderLayout.SOUTH);
+		textPanel.add(txtFront, BorderLayout.NORTH);
+		textPanel.add(txtBack, BorderLayout.CENTER);
+		textPanel.add(txtResult, BorderLayout.SOUTH);
 		
 		// Add labels to fieldPanel
 		fieldPanel.add(frontsidelabel, BorderLayout.NORTH);
@@ -176,130 +174,97 @@ public class WorkGUI {
 		/**
 		 * Erster Eintrag in Textfeld
 		 */
-		frontside.setText(logic.getCard());
+		txtFront.setText(logic.getCard());
 		
 		/**
 		 * Prï¿½fen-Button auf Listener setzen und Karten auf Richtigkeit prï¿½fen
 		 */
-		pruefen.addActionListener(new ActionListener() {
+		btnCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				boolean check = logic.checkInput(backside.getText(), frontside.getText());
+				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
 				/*
 				 * wenn true nï¿½chste Karte anzeigen und "Richtig :-)" ausgeben - txtfield_ty clearen usw.
 				 */
-				if(check)
+				if(txtBack.getText().equals(""))
 				{
-					result.setText("richtig");
-					result.setBackground(Color.green);
+					txtResult.setText("bitte gib etwas ein!?");
+				}
+				
+				else if(check)
+				{
+					txtResult.setText("richtig");
+					txtResult.setBackground(Color.green);
 				}
 				/*
 				 * Wenn false nochmal probieren und "Falsch :-(" ausgeben
 				 */
 				else
 				{
-					result.setText("falsch");
-					result.setBackground(Color.red);
+					txtResult.setText("falsch");
+					txtResult.setBackground(Color.red);
 				}
 			}
 		});
 		
-		weiter.addActionListener(new ActionListener() {
+		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				boolean check = logic.checkInput(backside.getText(), frontside.getText());
+				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
 				/*
 				 * Immer Ergebnis von letzter Karte lï¿½schen
 				 */
-				result.setBackground(Color.white);
-				result.setText("");
+				txtResult.setBackground(Color.white);
+				txtResult.setText("");
 				/*
 				 * Wenn true nï¿½chste Karte laden ohne Resultat zeigen
 				 */
-				if(check)
+				if(txtBack.getText().equals(""))
 				{
-					backside.setText("");
-					frontside.setText(logic.getCard());
+					txtResult.setText("bitte gib etwas ein!?");
+				}
+				else if(check)
+				{
+					txtBack.setText("");
+					txtFront.setText(logic.getCard());
 				}
 				/*
 				 * Wenn false nochmal probieren und "Falsch :-(" ausgeben
 				 */
 				else
 				{
-					result.setBackground(Color.white);
+					txtResult.setBackground(Color.white);
 				}
 			}
 		});
   	}
-  	
-    //Help window in different languages
-    private void showHelpDE()
-    {
-        JOptionPane.showMessageDialog(mainFrame, 
-        	        "In diesem Fenster wird eine einfache Hilfe angeboten."
-        		    + "\nFolgende Themen werden bearbeitet:" + "\nThema1" + "\nThema2" + "\nThema3" + "\n"
-        	    	+ "\nSprache: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
-        	    	"Hilfe!",
-                    JOptionPane.QUESTION_MESSAGE);
-    }
-    private void showHelpEN()
-    {
-        JOptionPane.showMessageDialog(mainFrame, 
-        	        "In this window, a simple help is offered."
-        		    + "\nThe following topics are dealt with:" + "\nTopic1"	+ "\nTopic2" + "\nTopic3" + "\n"
-        	    	+ "\nLanguage: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
-        	    	"Help!",
-                    JOptionPane.QUESTION_MESSAGE);
-    }
-    private void showHelpFR()
-    {
-        JOptionPane.showMessageDialog(mainFrame, 
-        	        "Dans cette fenï¿½tre, une aide simple est offert."
-        		    + "\nLes sujets suivants sont abordï¿½s:"	+ "\nSujet1" + "\nSujet2" + "\nSujet3" + "\n"
-        	    	+ "\nLangue: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
-        	    	"Aidez!",
-                    JOptionPane.QUESTION_MESSAGE);
-    }
-    private void showHelpIT()
-    {
-        JOptionPane.showMessageDialog(mainFrame, 
-        	        "In questa finestra, un semplice aiuto viene offerto."
-        		    + "\nI seguenti argomenti sono trattati:" + "\nArgomento1" + "\nArgomento2" + "\nArgomento3" + "\n"
-        	    	+ "\nLingua: " + languagestatus + " (1=de, 2=en, 3=fr, 4=it)",
-        	    	"Aiuto!",
-                    JOptionPane.QUESTION_MESSAGE);
-    }
     
     //Method to change language to de,en,fr,it
     private void changeLanguageDE()
     {
-    	pruefen.setText("Pruefen");
-    	weiter.setText("Weiter");
-    	beenden.setText("Beenden");
-    	hilfe.setText("Hilfe");
-    	languagestatus = "de";
+    	btnCheck.setText("Pruefen");
+    	btnNext.setText("Weiter");
+    	btnClose.setText("Beenden");
+    	language = "de";
     }
     private void changeLanguageEN()
     {
-    	pruefen.setText("Check");
-    	weiter.setText("Next");
-    	beenden.setText("Close");
-    	hilfe.setText("Help");
-    	languagestatus = "en";
+    	btnCheck.setText("Check");
+    	btnNext.setText("Next");
+    	btnClose.setText("Close");
+    	language = "en";
     }
     private void changeLanguageFR()
     {
-    	pruefen.setText("Démarrer");
-    	weiter.setText("Sauver/charge");
-    	beenden.setText("Saisie");
-    	hilfe.setText("Aidez");
-    	languagestatus = "fr";
+    	btnCheck.setText("Démarrer");
+    	btnNext.setText("Sauver/charge");
+    	btnClose.setText("Saisie");
+    	language = "fr";
     }
     private void changeLanguageIT()
     {
-    	pruefen.setText("Inizio");
-    	weiter.setText("Salvare/Carico");
-    	beenden.setText("Cattura");
-    	hilfe.setText("Aiuto");
-    	languagestatus = "it";
+    	btnCheck.setText("Inizio");
+    	btnNext.setText("Salvare/Carico");
+    	btnClose.setText("Cattura");
+    	language = "it";
     }
     
 	// Declare listener class for buttons
@@ -307,17 +272,11 @@ public class WorkGUI {
 	class ButtonListener implements ActionListener {
 	    // Is called when help button is pressed
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == hilfe){
-				if(e.getActionCommand().equals("Hilfe")) showHelpDE();
-				else if(e.getActionCommand().equals("Help")) showHelpEN();
-				else if(e.getActionCommand().equals("Aidez")) showHelpFR();
-				else if(e.getActionCommand().equals("Aiuto")) showHelpIT();
-			}
-			else if(e.getSource() == beenden){
+			if(e.getSource() == btnClose){
 				mainFrame.setVisible(false);
 			}
+		}
 	}
-}
 	
 	// Declare listener class for combobox
 	class ComboboxListener implements ActionListener {

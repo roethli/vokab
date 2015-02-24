@@ -48,7 +48,7 @@ public class MainGUI{
 	JFrame mainFrame;
 	
 	// Klassenvariabeln
-	String languagestatus = "de";
+	String language = "de";
 	
 	// Set welcome text
 	String welcometext1DE = ("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
@@ -80,20 +80,20 @@ public class MainGUI{
   	private JPanel lowerPanel;
   	
   	// Declare label
-  	private JLabel welcomescreen1;
-  	private JLabel welcomescreen2;
+  	private JLabel lblTitle;
+  	private JLabel lblContent;
   	
   	// Declare and create combobox
     private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
   	
     // Get languagestatus
 	public String getLanguagestatus() {
-		return languagestatus;
+		return language;
 	}
 
 	// Set languagestatus
 	public void setLanguagestatus(String languagestatus) {
-		this.languagestatus = languagestatus;
+		this.language = languagestatus;
 	}
 
 	public MainGUI() {
@@ -108,8 +108,8 @@ public class MainGUI{
   	    btnHelp = new JButton("Hilfe");
   	  
   	  	// Create other GUI elements
-  	  	welcomescreen1 = new JLabel();
-  	  	welcomescreen2 = new JLabel();
+  	  	lblTitle = new JLabel();
+  	  	lblContent = new JLabel();
   	  	
   	  	// Create panels
   	  	upperPanel = new JPanel();
@@ -124,8 +124,8 @@ public class MainGUI{
   		mainFrame.setTitle("Vokabel Trainer V1.0");
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	welcomescreen1.setHorizontalAlignment(SwingConstants.CENTER);
-    	welcomescreen2.setHorizontalAlignment(SwingConstants.CENTER);
+    	lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+    	lblContent.setHorizontalAlignment(SwingConstants.CENTER);
     
     	// Set layout of all panels and frames
     	//mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -134,10 +134,10 @@ public class MainGUI{
 		    	
     	// Set design and content of JLabel welcomescreen	
     	Border border = LineBorder.createBlackLineBorder();
-    	welcomescreen1.setText(welcometext1DE);
-    	welcomescreen1.setBorder(border);
-    	welcomescreen2.setText(welcometext2DE);
-    	welcomescreen2.setBorder(border);
+    	lblTitle.setText(welcometext1DE);
+    	lblTitle.setBorder(border);
+    	lblContent.setText(welcometext2DE);
+    	lblContent.setBorder(border);
     	
     	// Listener
     	btnStart.addActionListener(new ButtonListener());
@@ -155,15 +155,15 @@ public class MainGUI{
     	lowerPanel.add(btnHelp);
     	
     	// Add label to mainPanel
-    	mainPanel.add(welcomescreen1);
-    	mainPanel.add(welcomescreen2);
+    	mainPanel.add(lblTitle);
+    	mainPanel.add(lblContent);
     	
     	// Add combobox to upperPanel
     	upperPanel.add(languagebox);
     	
 		// Assemble welcome screens to mainPanel
-		mainPanel.add(welcomescreen1, BorderLayout.NORTH);
-		mainPanel.add(welcomescreen2, BorderLayout.CENTER);
+		mainPanel.add(lblTitle, BorderLayout.NORTH);
+		mainPanel.add(lblContent, BorderLayout.CENTER);
 		
 
 	    // Add all panels to frame
@@ -184,7 +184,7 @@ public class MainGUI{
         JOptionPane.showMessageDialog(mainFrame, 
         	        "In diesem Fenster wird eine einfache Hilfe angeboten."
         		    + "\nFolgende Themen werden bearbeitet:" + "\nThema1" + "\nThema2" + "\nThema3" + "\n"
-        	    	+ "\nSprache: " + languagestatus,
+        	    	+ "\nSprache: " + language,
         	    	"Hilfe!",
                     JOptionPane.QUESTION_MESSAGE);
     }
@@ -193,7 +193,7 @@ public class MainGUI{
         JOptionPane.showMessageDialog(mainFrame, 
         	        "In this window, a simple help is offered."
         		    + "\nThe following topics are dealt with:" + "\nTopic1"	+ "\nTopic2" + "\nTopic3" + "\n"
-        	    	+ "\nLanguage: " + languagestatus,
+        	    	+ "\nLanguage: " + language,
         	    	"Help!",
                     JOptionPane.QUESTION_MESSAGE);
     }
@@ -202,7 +202,7 @@ public class MainGUI{
         JOptionPane.showMessageDialog(mainFrame, 
         	        "Dans cette fen�tre, une aide simple est offert."
         		    + "\nLes sujets suivants sont abord�s:"	+ "\nSujet1" + "\nSujet2" + "\nSujet3" + "\n"
-        	    	+ "\nLangue: " + languagestatus,
+        	    	+ "\nLangue: " + language,
         	    	"Aidez!",
                     JOptionPane.QUESTION_MESSAGE);
     }
@@ -211,7 +211,7 @@ public class MainGUI{
         JOptionPane.showMessageDialog(mainFrame, 
         	        "In questa finestra, un semplice aiuto viene offerto."
         		    + "\nI seguenti argomenti sono trattati:" + "\nArgomento1" + "\nArgomento2" + "\nArgomento3" + "\n"
-        	    	+ "\nLingua: " + languagestatus,
+        	    	+ "\nLingua: " + language,
         	    	"Aiuto!",
                     JOptionPane.QUESTION_MESSAGE);
     }
@@ -219,53 +219,53 @@ public class MainGUI{
     //Method to change language to german
     private void changeLanguageDE()
     {
-    	welcomescreen1.setText(welcometext1DE);
-    	welcomescreen2.setText(welcometext2DE);
+    	lblTitle.setText(welcometext1DE);
+    	lblContent.setText(welcometext2DE);
     	btnStart.setText("Starten");
     	btnSave.setText("Speichern");
     	btnLoad.setText("Laden");
     	btnRegister.setText("Erfassen");
     	btnHelp.setText("Hilfe");
-    	languagestatus = "de";
+    	language = "de";
     }
     
     //Method to change language to english
     private void changeLanguageEN()
     {
-    	welcomescreen1.setText(welcometext1EN);
-    	welcomescreen2.setText(welcometext2EN);
+    	lblTitle.setText(welcometext1EN);
+    	lblContent.setText(welcometext2EN);
     	btnStart.setText("Start");
     	btnSave.setText("Save");
     	btnLoad.setText("Load");
     	btnRegister.setText("Register");
     	btnHelp.setText("Help");
-    	languagestatus = "en";
+    	language = "en";
     }
     
     //Method to change language to french
     private void changeLanguageFR()
     {
-    	welcomescreen1.setText(welcometext1FR);
-    	welcomescreen2.setText(welcometext2FR);
+    	lblTitle.setText(welcometext1FR);
+    	lblContent.setText(welcometext2FR);
     	btnStart.setText("D�marrer");
     	btnSave.setText("Sauver");
     	btnLoad.setText("Charge");
     	btnRegister.setText("Saisie");
     	btnHelp.setText("Aidez");
-    	languagestatus = "fr";
+    	language = "fr";
     }
     
     //Method to change language to italian
     private void changeLanguageIT()
     {
-    	welcomescreen1.setText(welcometext1IT);
-    	welcomescreen2.setText(welcometext2IT);
+    	lblTitle.setText(welcometext1IT);
+    	lblContent.setText(welcometext2IT);
     	btnStart.setText("Inizio");
     	btnSave.setText("Salvare");
     	btnLoad.setText("Carico");
     	btnRegister.setText("Cattura");
     	btnHelp.setText("Aiuto");
-    	languagestatus = "it";
+    	language = "it";
     }
 
 	// Declare listener class for buttons
