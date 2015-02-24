@@ -68,11 +68,11 @@ public class MainGUI{
 	String welcometext2IT = ("<html><body><br>Si prega di scegliere come si vuole procedere ulteriormente:<br><br></body></html>");
 	
   	// Declare key buttons
-  	private JButton starten;
-  	private JButton speichern;
-  	private JButton laden;
-  	private JButton erfassen;
-  	private JButton hilfe;
+  	private JButton btnStart;
+  	private JButton btnSave;
+  	private JButton btnLoad;
+  	private JButton btnRegister;
+  	private JButton btnHelp;
   
   	// Declare panels
   	private JPanel upperPanel;
@@ -101,11 +101,11 @@ public class MainGUI{
   		mainFrame = new JFrame("Vokabel Trainer V1.0");
   		
   		// Create key buttons
-  	  	starten = new JButton("Starten");
-  	  	speichern = new JButton("Speichern");
-  	    laden = new JButton("Laden");
-  	    erfassen = new JButton("Erfassen");
-  	    hilfe = new JButton("Hilfe");
+  	  	btnStart = new JButton("Starten");
+  	  	btnSave = new JButton("Speichern");
+  	    btnLoad = new JButton("Laden");
+  	    btnRegister = new JButton("Erfassen");
+  	    btnHelp = new JButton("Hilfe");
   	  
   	  	// Create other GUI elements
   	  	welcomescreen1 = new JLabel();
@@ -140,19 +140,19 @@ public class MainGUI{
     	welcomescreen2.setBorder(border);
     	
     	// Listener
-    	starten.addActionListener(new ButtonListener());
-    	speichern.addActionListener(new ButtonListener());
-    	laden.addActionListener(new ButtonListener());
-    	erfassen.addActionListener(new ButtonListener());
-    	hilfe.addActionListener(new ButtonListener());
+    	btnStart.addActionListener(new ButtonListener());
+    	btnSave.addActionListener(new ButtonListener());
+    	btnLoad.addActionListener(new ButtonListener());
+    	btnRegister.addActionListener(new ButtonListener());
+    	btnHelp.addActionListener(new ButtonListener());
     	languagebox.addActionListener(new ComboboxListener());
     	  	
     	// Add buttons to lowerPanel
-    	lowerPanel.add(starten);
-    	lowerPanel.add(speichern);
-    	lowerPanel.add(laden);
-    	lowerPanel.add(erfassen);
-    	lowerPanel.add(hilfe);
+    	lowerPanel.add(btnStart);
+    	lowerPanel.add(btnSave);
+    	lowerPanel.add(btnLoad);
+    	lowerPanel.add(btnRegister);
+    	lowerPanel.add(btnHelp);
     	
     	// Add label to mainPanel
     	mainPanel.add(welcomescreen1);
@@ -221,11 +221,11 @@ public class MainGUI{
     {
     	welcomescreen1.setText(welcometext1DE);
     	welcomescreen2.setText(welcometext2DE);
-    	starten.setText("Starten");
-    	speichern.setText("Speichern");
-    	laden.setText("Laden");
-    	erfassen.setText("Erfassen");
-    	hilfe.setText("Hilfe");
+    	btnStart.setText("Starten");
+    	btnSave.setText("Speichern");
+    	btnLoad.setText("Laden");
+    	btnRegister.setText("Erfassen");
+    	btnHelp.setText("Hilfe");
     	languagestatus = "de";
     }
     
@@ -234,11 +234,11 @@ public class MainGUI{
     {
     	welcomescreen1.setText(welcometext1EN);
     	welcomescreen2.setText(welcometext2EN);
-    	starten.setText("Start");
-    	speichern.setText("Save");
-    	laden.setText("Load");
-    	erfassen.setText("Register");
-    	hilfe.setText("Help");
+    	btnStart.setText("Start");
+    	btnSave.setText("Save");
+    	btnLoad.setText("Load");
+    	btnRegister.setText("Register");
+    	btnHelp.setText("Help");
     	languagestatus = "en";
     }
     
@@ -247,11 +247,11 @@ public class MainGUI{
     {
     	welcomescreen1.setText(welcometext1FR);
     	welcomescreen2.setText(welcometext2FR);
-    	starten.setText("D�marrer");
-    	speichern.setText("Sauver");
-    	laden.setText("Charge");
-    	erfassen.setText("Saisie");
-    	hilfe.setText("Aidez");
+    	btnStart.setText("D�marrer");
+    	btnSave.setText("Sauver");
+    	btnLoad.setText("Charge");
+    	btnRegister.setText("Saisie");
+    	btnHelp.setText("Aidez");
     	languagestatus = "fr";
     }
     
@@ -260,11 +260,11 @@ public class MainGUI{
     {
     	welcomescreen1.setText(welcometext1IT);
     	welcomescreen2.setText(welcometext2IT);
-    	starten.setText("Inizio");
-    	speichern.setText("Salvare");
-    	laden.setText("Carico");
-    	erfassen.setText("Cattura");
-    	hilfe.setText("Aiuto");
+    	btnStart.setText("Inizio");
+    	btnSave.setText("Salvare");
+    	btnLoad.setText("Carico");
+    	btnRegister.setText("Cattura");
+    	btnHelp.setText("Aiuto");
     	languagestatus = "it";
     }
 
@@ -272,19 +272,19 @@ public class MainGUI{
 	class ButtonListener implements ActionListener {
 	    // Is called when help button is pressed
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == hilfe){
+			if (e.getSource() == btnHelp){
 				if(e.getActionCommand().equals("Hilfe")) showHelpDE();
 				else if(e.getActionCommand().equals("Help")) showHelpEN();
 				else if(e.getActionCommand().equals("Aidez")) showHelpFR();
 				else if(e.getActionCommand().equals("Aiuto")) showHelpIT();
 			}
-			if (e.getSource() == starten){
+			if (e.getSource() == btnStart){
 				if(e.getActionCommand().equals("Starten")) workGui.paint();
 				else if(e.getActionCommand().equals("Start")) workGui.paint();
 				else if(e.getActionCommand().equals("D�marrer")) workGui.paint();
 				else if(e.getActionCommand().equals("Inizio")) workGui.paint();
 			}
-			if (e.getSource() == speichern) {
+			if (e.getSource() == btnSave) {
 
 				// instantiate a new file dialog
 				final JFileChooser fc = new JFileChooser();
@@ -318,7 +318,7 @@ public class MainGUI{
 					System.out.println("Save command cancelled by user.");
 				}
 			}
-			else if (e.getSource() == laden) {
+			else if (e.getSource() == btnLoad) {
 
 				// instantiate a new file dialog
 				final JFileChooser fc = new JFileChooser();
@@ -345,7 +345,7 @@ public class MainGUI{
 					System.out.println("Open command cancelled by user.");
 				}
 			}
-			else if (e.getSource() == erfassen) {
+			else if (e.getSource() == btnRegister) {
 				System.out.println("erfassen");
 			}
 		}

@@ -176,14 +176,14 @@ public class WorkGUI {
 		/**
 		 * Erster Eintrag in Textfeld
 		 */
-		frontside.setText(logic.cardLogicByRandom());
+		frontside.setText(logic.getCard());
 		
 		/**
 		 * Pr�fen-Button auf Listener setzen und Karten auf Richtigkeit pr�fen
 		 */
 		pruefen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				boolean check = logic.checkCard(backside.getText(), frontside.getText());
+				boolean check = logic.checkInput(backside.getText(), frontside.getText());
 				/*
 				 * wenn true n�chste Karte anzeigen und "Richtig :-)" ausgeben - txtfield_ty clearen usw.
 				 */
@@ -205,7 +205,7 @@ public class WorkGUI {
 		
 		weiter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				boolean check = logic.checkCard(backside.getText(), frontside.getText());
+				boolean check = logic.checkInput(backside.getText(), frontside.getText());
 				/*
 				 * Immer Ergebnis von letzter Karte l�schen
 				 */
@@ -217,7 +217,7 @@ public class WorkGUI {
 				if(check)
 				{
 					backside.setText("");
-					frontside.setText(logic.cardLogicByRandom());
+					frontside.setText(logic.getCard());
 				}
 				/*
 				 * Wenn false nochmal probieren und "Falsch :-(" ausgeben

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * @author Daniel Rï¿½thlisberger, ZbW
+ * @author Daniel Röthlisberger, ZbW
  * @version 1.0 07s.02.2015
  */
 
@@ -12,7 +12,6 @@ public class Logic {
 
 	
 	private static Logic instance = null;
-	
 	private ArrayList<Card> vocabularylist; // Arraylist for the words
 	private int category_max; // category maximum
 	boolean success; // success?
@@ -54,10 +53,9 @@ public class Logic {
 
 	public void moveCard(String frontside, boolean success) {
 		for (Card v : vocabularylist) {
-			if (frontside.equals(v.getFrontside()) && success
+			if (frontside.equals(v.getFront()) && success
 					&& v.getCategory() < this.category_max) {
 				int category_temp = v.getCategory();
-				v.setCategory(category_temp + 1);
 			} else {
 				v.setCategory(1);
 			}
@@ -69,10 +67,10 @@ public class Logic {
 	 * @return return a string with the voc. on the front side of the vocabulary
 	 * card
 	 */
-	public String showCardFrontside(String backside) {
+	public String showFront(String back) {
 		for (Card v : vocabularylist) {
-			if (backside.equals(v.getBackside()))
-				return v.getFrontside();
+			if (back.equals(v.getBack()))
+				return v.getFront();
 
 		}
 		return null;
@@ -82,10 +80,10 @@ public class Logic {
 	 * @return return a string with the voc. on the back side of the vocabulary
 	 * card
 	 */
-	public String showCardBackside(String frontside) {
+	public String showBack(String front) {
 		for (Card v : vocabularylist) {
-			if (frontside.equals(v.getFrontside()))
-				return v.getBackside();
+			if (front.equals(v.getFront()))
+				return v.getBack();
 		}
 		return null;
 	}
@@ -136,10 +134,10 @@ public class Logic {
 	/*
 	 * Check card if solution is right or wrong!
 	 */
-	public boolean checkCard(String input, String frontside) {
+	public boolean checkInput(String input, String front) {
 		
 		for (Card v : vocabularylist) {
-			if(showCardBackside(frontside).equals(input))
+			if(showBack(front).equals(input))
 			{
 				return true;
 			}
@@ -153,9 +151,9 @@ public class Logic {
 	}
 
 	/*
-	 * MAIN LOGIC MAIN LOGIC MAIN LOGIC MAIN LOGIC .....
+	 * main logic
 	 */
-	public String cardLogicByRandom() {
+	public String getCard() {
 		Random r = new Random();
 		int low = 1;
 		int high = 100;
@@ -166,47 +164,47 @@ public class Logic {
 				if (v.getCategory() == 1 && random > 0 && random <= 50) {
 					if(!this.switch_card_side)
 					{
-						return v.getFrontside();
+						return v.getFront();
 					}
 					else
 					{
-						return v.getBackside();
+						return v.getBack();
 					}
 				} else if (v.getCategory() == 2 && random > 50 && random <= 70) {
 					if(!this.switch_card_side)
 					{
-						return v.getFrontside();
+						return v.getFront();
 					}
 					else
 					{
-						return v.getBackside();
+						return v.getBack();
 					}
 				} else if (v.getCategory() == 3 && random > 70 && random <= 85) {
 					if(!this.switch_card_side)
 					{
-						return v.getFrontside();
+						return v.getFront();
 					}
 					else
 					{
-						return v.getBackside();
+						return v.getBack();
 					}
 				} else if (v.getCategory() == 4 && random > 85 && random <= 95) {
 					if(!this.switch_card_side)
 					{
-						return v.getFrontside();
+						return v.getFront();
 					}
 					else
 					{
-						return v.getBackside();
+						return v.getBack();
 					}
 				} else if (v.getCategory() == 5 && random > 95 && random <= 100) {
 					if(!this.switch_card_side)
 					{
-						return v.getFrontside();
+						return v.getFront();
 					}
 					else
 					{
-						return v.getBackside();
+						return v.getBack();
 					}
 				}
 
@@ -214,7 +212,8 @@ public class Logic {
 		}
 		return null;
 	}
-
+	
+	// TODO switch_card_side ?
 	public boolean isSwitch_card_side() {
 		return switch_card_side;
 	}
@@ -226,6 +225,7 @@ public class Logic {
 	/*
 	 * Getter for Vocabulary Arraylist...
 	 */
+	// TODO getVocabularlist used?
 	public ArrayList<Card> getVocabularylist() {
 		return vocabularylist;
 	}
@@ -233,6 +233,7 @@ public class Logic {
 	/*
 	 * Setter for a Arraylist
 	 */
+	// TODO setVocabularylist used?
 	public void setVocabularylist(ArrayList<Card> vocabularylist) {
 		this.vocabularylist = vocabularylist;
 	}
@@ -261,6 +262,7 @@ public class Logic {
 	/*
 	 * get the actual INT for succeeded cards + 1
 	 */
+	// TODO sucess counter
 	public void setSuccesscounter() {
 		this.successcounter = this.successcounter + 1;
 	}
@@ -268,6 +270,8 @@ public class Logic {
 	/*
 	 * get the actual INT for Fault cards
 	 */
+	// TODO fault counter
+	
 	public int getFaultcounter() {
 		return faultcounter;
 	}
@@ -275,6 +279,8 @@ public class Logic {
 	/*
 	 * set the actual INT for Fault cards +1
 	 */
+	
+	// TODO fault counter setter
 	public void setFaultcounter() {
 		this.faultcounter = this.faultcounter + 1;
 	}

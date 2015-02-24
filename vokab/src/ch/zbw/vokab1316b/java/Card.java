@@ -14,93 +14,88 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Card {
-	
-	//variabe frontside of a voc. card
-	private String frontside;
-	//variable backside of a voc. card
-	private String backside;
-	//variable category of a voc. card
+
+	// variabe frontside of a voc. card
+	private String front;
+	// variable backside of a voc. card
+	private String back;
+	// variable category of a voc. card
 	private int category;
-	
-	private String lang_frontside;
-	
-	private String lang_backside;
-	
-	
-	
-	private int cardFaults;
-	private int cardSucesses;
+	private String langFront;
+	private String langBack;
+	private int faults;
+	private int successful;
 
 	/*
 	 * constructor with no parameter needed for XML-marshalling
 	 */
 	public Card() {
-		
+
 	}
-	
-	
-	public Card(String frontside, String backside, int category, String lang_frontside, String lang_backside) {
-		//declare variable frontside
-		this.frontside = frontside;
-		//declare variable backside
-		this.backside = backside;
-		//declare variable category
+
+	public Card(String front, String back, int category, String langFront,
+			String langBack) {
+		// declare variable frontside
+		this.front = front;
+		// declare variable backside
+		this.back = back;
+		// declare variable category
 		this.category = category;
-		this.lang_backside = lang_backside;
-
-		this.lang_frontside = lang_frontside;
-		this.cardFaults = 0;		
-		this.cardSucesses = 0;
+		this.langBack = langBack;
+		this.langFront = langFront;
+		this.faults = 0;
+		this.successful = 0;
 	}
 
 	@XmlElement
-	public int getCardFaults() {
-		return cardFaults;
+	public int getFaults() {
+		return faults;
 	}
 
-	public void setCardFaults() {
-		int temp_CardFaults = this.cardFaults;
-		this.cardFaults = temp_CardFaults+1;
+	public void setFaults() {
+		int temp_CardFaults = this.faults;
+		this.faults = temp_CardFaults + 1;
 	}
+
 	@XmlElement
-	public int getCardSucesses() {
-		return cardSucesses;
+	public int getSuccessful() {
+		return successful;
 	}
 
-	public void setCardSucesses() {
-		int temp_CardSuccess = this.cardSucesses;
-		this.cardSucesses = temp_CardSuccess +1;
+	public void setSuccessful() {
+		int temp_CardSuccess = this.successful;
+		this.successful = temp_CardSuccess + 1;
 	}
 
 	/*
 	 * @return frontside String of a vocabulary card
 	 */
 	@XmlElement
-	public String getFrontside() {
-		return frontside;
+	public String getFront() {
+		return front;
 	}
-	
+
 	/*
 	 * set frontside String of a vocabulary card
 	 */
 
-	public void setFrontside(String frontside) {
-		this.frontside = frontside;
+	public void setFront(String front) {
+		this.front = front;
 	}
 
 	/*
 	 * @return String of a vocabulary card
 	 */
 	@XmlElement
-	public String getBackside() {
-		return backside;
+	public String getBack() {
+		return back;
 	}
 
 	/*
 	 * set backside String of a vocabulary card
 	 */
-	public void setBackside(String backside) {
-		this.backside = backside;
+	public void setBack(String back) {
+		this.back = back;
 	}
 
 	/*
@@ -117,9 +112,5 @@ public class Card {
 	public void setCategory(int category) {
 		this.category = category;
 	}
-	
-	
-		
-		
-	
+
 }
