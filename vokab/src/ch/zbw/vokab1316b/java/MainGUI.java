@@ -49,9 +49,6 @@ public class MainGUI{
 	// Main frame
 	JFrame mainFrame;
 	
-	// Klassenvariabeln
-	String language;
-	
 	// Definiere MainGUI Titel für alle Sprachen
 	String titleDe = languages.getTitleDe();
 	String titleEn = languages.getTitleEn();
@@ -174,28 +171,32 @@ public class MainGUI{
     //Help window in different languages
     private void getHelpDe() {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        helpDe,
+        	        helpDe
+        	        + "Sprache: " + languages.getLanguage(),
         	    	"Hilfe!",
                     JOptionPane.QUESTION_MESSAGE);
     }
     
     private void getHelpEn() {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        helpEn,
+        	        helpEn
+        	        + "Language: " + languages.getLanguage(),
         	    	"Help!",
                     JOptionPane.QUESTION_MESSAGE);
     }
     
     private void getHelpFr() {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        helpFr,
+        	        helpFr
+        	        + "Langue: " + languages.getLanguage(),
         	    	"Aidez!",
                     JOptionPane.QUESTION_MESSAGE);
     }
     
     private void getHelpIt() {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        helpIt,
+        	        helpIt
+        	        + "Lingua: " + languages.getLanguage(),
         	    	"Aiuto!",
                     JOptionPane.QUESTION_MESSAGE);
     }
