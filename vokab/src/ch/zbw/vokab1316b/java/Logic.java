@@ -56,9 +56,11 @@ public class Logic {
 			if (frontside.equals(v.getFront()) && success
 					&& v.getCategory() < this.category_max) {
 				int category_temp = v.getCategory();
-			} else {
-				v.setCategory(1);
-			}
+				v.setCategory(category_temp+1);
+		}
+			//else {
+//				v.setCategory(1);
+//			}
 
 		}
 	}
@@ -139,6 +141,12 @@ public class Logic {
 		for (Card v : vocabularylist) {
 			if(showBack(front).equals(input))
 			{
+				if(showBack(front).equals(v.getBack()))
+				{
+					v.setCategory(v.getCategory()+1);
+					System.out.println(v.getCategory());
+					return true;
+				}
 				return true;
 			}
 			else
@@ -206,11 +214,12 @@ public class Logic {
 					{
 						return v.getBack();
 					}
+					
 				}
 
 			}
 		}
-		return null;
+		return getCard();
 	}
 	
 	// TODO switch_card_side ?
