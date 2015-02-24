@@ -44,6 +44,8 @@ import ch.zbw.vokab1316b.java.*;
  */
 public class WorkGUI {
 	
+	Languages languages = new Languages();
+	
 	// Main frame
 	JFrame mainFrame;
 	
@@ -51,7 +53,6 @@ public class WorkGUI {
   	private JButton btnCheck;
   	private JButton btnNext;
   	private JButton btnClose;
-  	
   
   	// Declare panels
   	private JPanel upperPanel;
@@ -110,12 +111,7 @@ public class WorkGUI {
   		
   		//Neue Logik erstellen
 		final Logic logic = new Logic().getInstance();
-		final MainGUI mainGui = new MainGUI();
-		
-		// Variables
-	    		
-		language = mainGui.getLanguagestatus();
-		
+
      	// Set layout of all panels and frames
 		upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     	mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));

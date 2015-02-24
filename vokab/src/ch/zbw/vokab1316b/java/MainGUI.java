@@ -42,30 +42,33 @@ import javax.swing.border.*;
  */
 public class MainGUI{
 	
-	WorkGUI workGui = new WorkGUI();
+	// Instanziere Klasse WorkGUI und Languages
+	WorkGUI workGUI = new WorkGUI();
+	Languages languages = new Languages();
 	
 	// Main frame
 	JFrame mainFrame;
 	
 	// Klassenvariabeln
-	String language = "de";
+	String language;
 	
-	// Set welcome text
-	String welcometext1DE = ("<html><body><h1><strong>Herzlich Willkommen zum Vokabel Trainer V1.0</strong></h1></body></html>");
-	String welcometext2DE = ("<html><body><h3>Bitte waehle wie du weiter vorgehen moechtest:</h3><br><br>"
-	    	+ "Starten: Hiermit startest du das Lernprogramm Vokab V1.0<br>"
-	    	+ "Speichern\\Laden: Laden oder speichern von Karteien!<br>"
-	    	+ "Erfassen: Hinzufuegen von Lernkarteien!<br>"
-	    	+ "Hilfe: Kurzhilfe zu den wichtigesten Themen</body></html>");
+	// Definiere MainGUI Titel für alle Sprachen
+	String titleDe = languages.getTitleDe();
+	String titleEn = languages.getTitleEn();
+	String titleFr = languages.getTitleFr();
+	String titleIt = languages.getTitleIt();
 	
-	String welcometext1EN = ("<html><body><h1><strong>Welcome to Vokabel Trainer V1.0</strong></h1></body></html>");
-	String welcometext2EN = ("<html><body><br> Please choose how you want to proceed further:<br><br></body></html>");
-	
-	String welcometext1FR = ("<html><body><h1><strong>Bienvenue ï¿½ Vokabel Trainer V1.0</strong></h1></body></html>");
-	String welcometext2FR = ("<html><body><br> S'il vous plaï¿½t choisir la faï¿½on dont vous voulez aller plus loin:<br><br></body></html>");
-	
-	String welcometext1IT = ("<html><body><h1><strong>Benvenuti a Vokabel Trainer V1.0</strong></h1></body></html>");
-	String welcometext2IT = ("<html><body><br>Si prega di scegliere come si vuole procedere ulteriormente:<br><br></body></html>");
+	// Definiere MainGUI Textinhalt für alle Sprachen
+	String contentDe = languages.getContentDe();
+	String contentEn = languages.getContentEn();
+	String contentFr = languages.getContentFr();
+	String contentIt = languages.getContentIt();
+
+	// Definiere Hilfe Textinhalt für alle Sprachen
+	String helpDe = languages.getHelptextDe();
+	String helpEn = languages.getHelptextEn();
+	String helpFr = languages.getHelptextFr();
+	String helpIt = languages.getHelptextIt();
 	
   	// Declare key buttons
   	private JButton btnStart;
@@ -86,16 +89,6 @@ public class MainGUI{
   	// Declare and create combobox
     private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
   	
-    // Get languagestatus
-	public String getLanguagestatus() {
-		return language;
-	}
-
-	// Set languagestatus
-	public void setLanguagestatus(String languagestatus) {
-		this.language = languagestatus;
-	}
-
 	public MainGUI() {
   		// Main frame
   		mainFrame = new JFrame("Vokabel Trainer V1.0");
@@ -134,9 +127,9 @@ public class MainGUI{
 		    	
     	// Set design and content of JLabel welcomescreen	
     	Border border = LineBorder.createBlackLineBorder();
-    	lblTitle.setText(welcometext1DE);
+    	lblTitle.setText(titleDe);
     	lblTitle.setBorder(border);
-    	lblContent.setText(welcometext2DE);
+    	lblContent.setText(contentDe);
     	lblContent.setBorder(border);
     	
     	// Listener
@@ -179,93 +172,84 @@ public class MainGUI{
   	}
   	
     //Help window in different languages
-    private void showHelpDE()
-    {
+    private void getHelpDe() {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        "In diesem Fenster wird eine einfache Hilfe angeboten."
-        		    + "\nFolgende Themen werden bearbeitet:" + "\nThema1" + "\nThema2" + "\nThema3" + "\n"
-        	    	+ "\nSprache: " + language,
+        	        helpDe,
         	    	"Hilfe!",
                     JOptionPane.QUESTION_MESSAGE);
     }
-    private void showHelpEN()
-    {
+    
+    private void getHelpEn() {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        "In this window, a simple help is offered."
-        		    + "\nThe following topics are dealt with:" + "\nTopic1"	+ "\nTopic2" + "\nTopic3" + "\n"
-        	    	+ "\nLanguage: " + language,
+        	        helpEn,
         	    	"Help!",
                     JOptionPane.QUESTION_MESSAGE);
     }
-    private void showHelpFR()
-    {
+    
+    private void getHelpFr() {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        "Dans cette fenï¿½tre, une aide simple est offert."
-        		    + "\nLes sujets suivants sont abordï¿½s:"	+ "\nSujet1" + "\nSujet2" + "\nSujet3" + "\n"
-        	    	+ "\nLangue: " + language,
+        	        helpFr,
         	    	"Aidez!",
                     JOptionPane.QUESTION_MESSAGE);
     }
-    private void showHelpIT()
-    {
+    
+    private void getHelpIt() {
         JOptionPane.showMessageDialog(mainFrame, 
-        	        "In questa finestra, un semplice aiuto viene offerto."
-        		    + "\nI seguenti argomenti sono trattati:" + "\nArgomento1" + "\nArgomento2" + "\nArgomento3" + "\n"
-        	    	+ "\nLingua: " + language,
+        	        helpIt,
         	    	"Aiuto!",
                     JOptionPane.QUESTION_MESSAGE);
     }
     
     //Method to change language to german
-    private void changeLanguageDE()
+    private void setLangDe()
     {
-    	lblTitle.setText(welcometext1DE);
-    	lblContent.setText(welcometext2DE);
+    	lblTitle.setText(titleDe);
+    	lblContent.setText(contentDe);
     	btnStart.setText("Starten");
     	btnSave.setText("Speichern");
     	btnLoad.setText("Laden");
     	btnRegister.setText("Erfassen");
     	btnHelp.setText("Hilfe");
-    	language = "de";
+    	languages.setLanguage("de");
     }
     
     //Method to change language to english
-    private void changeLanguageEN()
+    private void setLangEn()
     {
-    	lblTitle.setText(welcometext1EN);
-    	lblContent.setText(welcometext2EN);
+    	lblTitle.setText(titleEn);
+    	lblContent.setText(contentEn);
     	btnStart.setText("Start");
     	btnSave.setText("Save");
     	btnLoad.setText("Load");
     	btnRegister.setText("Register");
     	btnHelp.setText("Help");
-    	language = "en";
+    	languages.setLanguage("en");
     }
     
     //Method to change language to french
-    private void changeLanguageFR()
+    private void setLangFr()
     {
-    	lblTitle.setText(welcometext1FR);
-    	lblContent.setText(welcometext2FR);
+    	lblTitle.setText(titleFr);
+    	lblContent.setText(contentFr);
     	btnStart.setText("Dï¿½marrer");
     	btnSave.setText("Sauver");
     	btnLoad.setText("Charge");
     	btnRegister.setText("Saisie");
     	btnHelp.setText("Aidez");
-    	language = "fr";
+    	languages.setLanguage("fr");
     }
     
     //Method to change language to italian
-    private void changeLanguageIT()
+    private void setLangIt()
     {
-    	lblTitle.setText(welcometext1IT);
-    	lblContent.setText(welcometext2IT);
+    	lblTitle.setText(titleIt);
+    	lblContent.setText(contentIt);
     	btnStart.setText("Inizio");
     	btnSave.setText("Salvare");
     	btnLoad.setText("Carico");
     	btnRegister.setText("Cattura");
     	btnHelp.setText("Aiuto");
-    	language = "it";
+    	languages.setLanguage("it");
     }
 
 	// Declare listener class for buttons
@@ -273,16 +257,16 @@ public class MainGUI{
 	    // Is called when help button is pressed
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnHelp){
-				if(e.getActionCommand().equals("Hilfe")) showHelpDE();
-				else if(e.getActionCommand().equals("Help")) showHelpEN();
-				else if(e.getActionCommand().equals("Aidez")) showHelpFR();
-				else if(e.getActionCommand().equals("Aiuto")) showHelpIT();
+				if(e.getActionCommand().equals("Hilfe")) getHelpDe();
+				else if(e.getActionCommand().equals("Help")) getHelpEn();
+				else if(e.getActionCommand().equals("Aidez")) getHelpFr();
+				else if(e.getActionCommand().equals("Aiuto")) getHelpIt();
 			}
 			if (e.getSource() == btnStart){
-				if(e.getActionCommand().equals("Starten")) workGui.paint();
-				else if(e.getActionCommand().equals("Start")) workGui.paint();
-				else if(e.getActionCommand().equals("Dï¿½marrer")) workGui.paint();
-				else if(e.getActionCommand().equals("Inizio")) workGui.paint();
+				if(e.getActionCommand().equals("Starten")) workGUI.paint();
+				else if(e.getActionCommand().equals("Start")) workGUI.paint();
+				else if(e.getActionCommand().equals("Dï¿½marrer")) workGUI.paint();
+				else if(e.getActionCommand().equals("Inizio")) workGUI.paint();
 			}
 			if (e.getSource() == btnSave) {
 
@@ -357,16 +341,16 @@ public class MainGUI{
 		public void actionPerformed(ActionEvent e) {
 			String selectedItem = (String)languagebox.getSelectedItem();
 			if(selectedItem.equals("de")) {
-				changeLanguageDE();
+				setLangDe();
 			}
 			else if(selectedItem.equals("en")) {
-				changeLanguageEN();
+				setLangEn();
 			}
 			else if(selectedItem.equals("fr")) {
-				changeLanguageFR();
+				setLangFr();
 			}
 			else if(selectedItem.equals("it")) {
-				changeLanguageIT();
+				setLangIt();
 			}
 		}
 	}
