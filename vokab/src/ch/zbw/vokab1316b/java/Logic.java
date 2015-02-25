@@ -3,6 +3,8 @@ package ch.zbw.vokab1316b.java;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 /**
  * @author Daniel Röthlisberger, ZbW
  * @version 1.0 07s.02.2015
@@ -56,19 +58,16 @@ public class Logic {
 	 * success change nothing
 	 */
 
-	public void moveCard(String frontside, boolean success) {
-		for (Card v : vocabularylist) {
-			if (frontside.equals(v.getFront()) && success
-					&& v.getCategory() < this.category_max) {
-				int category_temp = v.getCategory();
-				v.setCategory(category_temp + 1);
-			}
-			// else {
-			// v.setCategory(1);
-			// }
-
-		}
-	}
+//	public void moveCard(String frontside, boolean success) {
+//		for (Card v : vocabularylist) {
+//			if (frontside.equals(v.getFront()) && success
+//					&& v.getCategory() < this.category_max) {
+//				int category_temp = v.getCategory();
+//				v.setCategory(category_temp + 1);
+//			}
+//
+//		}
+//	}
 
 	/*
 	 * @return return a string with the voc. on the front side of the vocabulary
@@ -83,61 +82,7 @@ public class Logic {
 		return null;
 	}
 
-	/*
-	 * @return return a string with the voc. on the back side of the vocabulary
-	 * card
-	 */
-	public String showBack(String front) {
-		for (Card v : vocabularylist) {
-			if (front.equals(v.getFront()))
-				return v.getBack();
-		}
-		return null;
-	}
-
-	// // /*
-	// // * NICHT MEHR Nï¿½TIG DA NEUE LOGIC MIT RANDOMS BESTEHT - ABER NOCH
-	// AUFBEWAHREN!
-	// // */
-	// // public String showNextCard(String frontside) {
-	// //
-	// // if (getIndex(frontside) + 1 < vocabularylist.size()) {
-	// // Vocabulary index1 = vocabularylist.get(getIndex(frontside) + 1);
-	// // setSuccesscounter();
-	// // return index1.getFrontside();
-	// // } else {
-	// // return null;
-	// // }
-	// //
-	// // }
-	//
-	// /*
-	// * Method to show the prev. card....
-	// */
-	// public String showPrevCard(String frontside) {
-	//
-	// if (getIndex(frontside) - 1 >= 0) {
-	// Vocabulary index1 = vocabularylist.get(getIndex(frontside) - 1);
-	// return index1.getFrontside();
-	// } else {
-	// return null;
-	// }
-	//
-	// }
-	//
-	// /*
-	// * Help method for getting the Index in the Arraylist of a Card
-	// */
-	// public int getIndex(String frontside) {
-	// for (int i = 0; i < vocabularylist.size(); i++) {
-	// Vocabulary voc_temp = vocabularylist.get(i);
-	// if (frontside.equals(voc_temp.getFrontside())) {
-	// return i;
-	// }
-	// }
-	//
-	// return -1;
-	// }
+	
 
 	/*
 	 * Check card if solution is right or wrong!
@@ -146,16 +91,18 @@ public class Logic {
 
 		for (Card v : vocabularylist) {
 			if (v.getFront().equals(front)) {
-				if (v.getBack().equals(input))
-				{
-					if(v.getCategory() < getCategory_max())
-					v.setCategory(v.getCategory() + 1);
-					System.out.println(v.getCategory());
-					return true;
-				
-				}
-				else {
-					return false;
+				if (v.getBack().equals(input)) {
+					if (v.getCategory() < getCategory_max())
+						v.setCategory(v.getCategory() + 1);
+						setSuccesscounter();
+					return true;					
+				} else {
+					if (v.getCategory() > 1) {
+						v.setCategory(v.getCategory() - 1);
+						System.out.println(v.getCategory());
+						setFaultcounter();
+						return false;
+					}
 				}
 			}
 		}
@@ -283,4 +230,17 @@ public class Logic {
 	public void setFaultcounter() {
 		this.faultcounter = this.faultcounter + 1;
 	}
+	
+	/**
+	 * Erfolgsübersicht Einfach - anzahl falsche / richtige
+	 */
+	 public void getOverview(){
+	        JOptionPane.showMessageDialog(
+	        	        null, "Anzahl Richtig: "+ getSuccesscounter() + "\n" + "Anzahl Falsche: " + getFaultcounter() ,
+	        	    	"Erfolgsübersicht",
+	                    JOptionPane.INFORMATION_MESSAGE);
+	    }
+	
+	
+	
 }
