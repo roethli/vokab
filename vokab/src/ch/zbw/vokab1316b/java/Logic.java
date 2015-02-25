@@ -171,7 +171,7 @@ public class Logic {
 	}
 	
 	
-	
+	//
 	// TODO switch_card_side ?
 	public boolean isSwitch_card_side() {
 		return switch_card_side;
