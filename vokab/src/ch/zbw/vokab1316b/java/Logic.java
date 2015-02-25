@@ -170,7 +170,7 @@ public class Logic {
 		return getCard();
 	}
 	
-	
+	//
 	//
 	// TODO switch_card_side ?
 	public boolean isSwitch_card_side() {
