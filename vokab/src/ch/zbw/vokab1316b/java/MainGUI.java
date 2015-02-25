@@ -40,8 +40,8 @@ import javax.swing.border.*;
  * @author Marcel Baumgartner, ZbW
  * @version 1.0 02.02.2015
  */
-public class MainGUI{
-	
+public class MainGUI {
+
 	// Instanziere Klasse WorkGUI und Languages
 	WorkGUI workGUI = new WorkGUI();
 	Languages languages = new Languages();
@@ -176,6 +176,7 @@ public class MainGUI{
     	btnRegister.setText("Erfassen");
     	btnHelp.setText("Hilfe");
     	languages.setLanguage("de");
+    	System.out.println(languages.getLanguage());
     }
     
     //Method to change language to english
@@ -188,6 +189,7 @@ public class MainGUI{
     	btnRegister.setText("Register");
     	btnHelp.setText("Help");
     	languages.setLanguage("en");
+    	System.out.println(languages.getLanguage());
     }
     
     //Method to change language to french
@@ -200,6 +202,7 @@ public class MainGUI{
     	btnRegister.setText("Saisie");
     	btnHelp.setText("Aidez");
     	languages.setLanguage("fr");
+    	System.out.println(languages.getLanguage());
     }
     
     //Method to change language to italian
@@ -212,6 +215,7 @@ public class MainGUI{
     	btnRegister.setText("Cattura");
     	btnHelp.setText("Aiuto");
     	languages.setLanguage("it");
+    	System.out.println(languages.getLanguage());
     }
 
 	// Declare listener class for buttons

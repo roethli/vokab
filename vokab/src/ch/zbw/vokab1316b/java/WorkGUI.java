@@ -77,6 +77,9 @@ public class WorkGUI {
     private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
   	
   	public WorkGUI() {
+  		
+  		String test;
+  		
   		// Main frame
   		mainFrame = new JFrame(languages.getProduct() + languages.getVersion());
   		
@@ -106,12 +109,12 @@ public class WorkGUI {
   	  	lowerPanel = new JPanel();
   	}
   	
-  	String language = "de";
-    
   	// Assembles and displays the GUI.
   	public void paint(){
   		
-  		// Neue Logik erstellen
+  		setLang();
+  		
+   		// Neue Logik erstellen
 		final Logic logic = new Logic().getInstance();
 
      	// Set layout of all panels and frames
@@ -160,9 +163,7 @@ public class WorkGUI {
         mainFrame.setLocation(d.width/2 - mainFrame.getWidth()/2, d.height/2 - mainFrame.getHeight()/2);
         mainFrame.setVisible(true);
         
-		/**
-		 * Testkarten hinzufuegen
-		 */
+		// Testkarten hinzufuegen
 		logic.addCard("Hallo", "hello", 1, "de", "en");
 		logic.addCard("Nein", "no", 2, "de", "en");
 		logic.addCard("Tier", "animal", 3, "de", "en");
@@ -207,60 +208,75 @@ public class WorkGUI {
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
-				/*
-				 * Immer Ergebnis von letzter Karte loeschen
-				 */
-				txtResult.setBackground(Color.white);
-				txtResult.setText("");
-				/*
-				 * Wenn true naechste Karte laden ohne Resultat zeigen
-				 */
+				// Wenn textfield back leer, aufforderung zur eingabe anzeigen
 				if(txtBack.getText().equals("") && languages.getLanguage() == "de") {
 					txtResult.setText("Bitte gib eine Loesung ein!");
 				}
 				else if(txtBack.getText().equals("") && languages.getLanguage() == "en") {
 					txtResult.setText("Please type in an answer!");
 				}
-				else if(check)
-				{
+				else if(txtBack.getText().equals("") && languages.getLanguage() == "fr") {
+					txtResult.setText("Silvous plaits eingeben!");
+				}
+				else if(txtBack.getText().equals("") && languages.getLanguage() == "it") {
+					txtResult.setText("Bitte eingeben IT!");
+				}
+				// Wenn true textfield back leeren, Resultat OK ausgeben und naechste Karte laden
+				else if(check) {
 					txtBack.setText("");
+					txtResult.setText("OK");
 					txtFront.setText(logic.getCard());
 				}
-				/*
-				 * Wenn false nochmal probieren und "Falsch :-(" ausgeben
-				 */
-				else
-				{
-					txtResult.setBackground(Color.white);
+				// Wenn false textfield back leeren und als Resultat X ausgeben
+				else {
+					txtBack.setText("");
+					txtResult.setText("X");
 				}
 			}
 		});
   	}
     
     //Method to change language to de,en,fr,it
-    private void changeLanguageDE() {
+    private void setLang() {
+    	if (languages.getLanguage()=="de") {
+    		setLangDe();
+    	}
+    	else if (languages.getLanguage()=="en") {
+    		setLangEn();
+    	}
+    	else if (languages.getLanguage()=="fr") {
+    		setLangFr();
+    	}
+    	else 
+    		setLangIt();	
+    }
+  	private void setLangDe() {
     	btnCheck.setText("Pruefen");
     	btnNext.setText("Weiter");
     	btnClose.setText("Beenden");
     	languages.setLanguage("de");
+    	System.out.println(languages.getLanguage());
     }
-    private void changeLanguageEN() {
+    private void setLangEn() {
     	btnCheck.setText("Check");
     	btnNext.setText("Next");
     	btnClose.setText("Close");
-    	language = "en";
+    	languages.setLanguage("en");
+    	System.out.println(languages.getLanguage());
     }
-    private void changeLanguageFR() {
+    private void setLangFr() {
     	btnCheck.setText("Démarrer");
     	btnNext.setText("Sauver/charge");
     	btnClose.setText("Saisie");
-    	language = "fr";
+    	languages.setLanguage("fr");
+    	System.out.println(languages.getLanguage());
     }
-    private void changeLanguageIT() {
+    private void setLangIt() {
     	btnCheck.setText("Inizio");
     	btnNext.setText("Salvare/Carico");
     	btnClose.setText("Cattura");
-    	language = "it";
+    	languages.setLanguage("it");
+    	System.out.println(languages.getLanguage());
     }
     
 	// Declare listener class for buttons
@@ -282,16 +298,16 @@ public class WorkGUI {
 		public void actionPerformed(ActionEvent e) {
 			String selectedItem = (String)languagebox.getSelectedItem();
 			if(selectedItem.equals("de")) {
-				changeLanguageDE();
+				setLangDe();
 			}
 			else if(selectedItem.equals("en")) {
-				changeLanguageEN();
+				setLangEn();
 			}
 			else if(selectedItem.equals("fr")) {
-				changeLanguageFR();
+				setLangFr();
 			}
 			else if(selectedItem.equals("it")) {
-				changeLanguageIT();
+				setLangIt();
 			}
 		}
 	}
