@@ -29,7 +29,7 @@ public class Languages {
 	String contentIt = ("<html><body><br>Si prega di scegliere come si vuole procedere ulteriormente:<br><br></body></html>");
 	
 	// Definiere Textinhalt Hilfefunktion für alle Sprachen
-    String helpDe = "In diesem Fenster wird eine einfache Hilfe angeboten."
+    String helpDe = "34In diesem Fenster wird eine einfache Hilfe angeboten."
         		    + "\nFolgende Themen werden bearbeitet:" + "\nThema1" + "\nThema2" + "\nThema3" + "\n\n";
     String helpEn = "In this window, a simple help is offered."
         		    + "\nThe following topics are dealt with:" + "\nTopic1"	+ "\nTopic2" + "\nTopic3" + "\n\n";

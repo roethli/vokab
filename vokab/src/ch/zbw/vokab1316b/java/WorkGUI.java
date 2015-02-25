@@ -45,6 +45,7 @@ import ch.zbw.vokab1316b.java.*;
 public class WorkGUI {
 	
 	Languages languages = new Languages();
+	Logic logic = new Logic();
 	
 	// Main frame
 	JFrame mainFrame;
@@ -63,10 +64,11 @@ public class WorkGUI {
   	
   	// Declare label
   	// TODO Lables workgui?
-  	private JLabel frontsidelabel;
-  	private JLabel backsidelabel;
-  	private JLabel resultlabel;
+  	private JLabel lblFront;
+  	private JLabel lblBack;
+  	private JLabel lblResult;
   	
+  	// Declare textfield
   	private JTextField txtFront;
   	private JTextField txtBack;
   	private JTextField txtResult;
@@ -76,7 +78,7 @@ public class WorkGUI {
   	
   	public WorkGUI() {
   		// Main frame
-  		mainFrame = new JFrame("Vokabel Trainer V1.0");
+  		mainFrame = new JFrame(languages.getProduct() + languages.getVersion());
   		
   		// Create key buttons
   	  	btnCheck = new JButton("Pruefen");
@@ -84,9 +86,9 @@ public class WorkGUI {
   	    btnClose = new JButton("Beenden");
   	  
   	  	// Create labels and set display options
-  	  	frontsidelabel = new JLabel("Frage:");
-  	  	backsidelabel = new JLabel("Antwort:");
-  	  	resultlabel = new JLabel("Resultat:");
+  	  	lblFront = new JLabel("Frage:");
+  	  	lblBack = new JLabel("Antwort:");
+  	  	lblResult = new JLabel("Resultat:");
   	  	
   	  	// Create textfields and set display options
 		txtFront = new JTextField();
@@ -109,7 +111,7 @@ public class WorkGUI {
   	// Assembles and displays the GUI.
   	public void paint(){
   		
-  		//Neue Logik erstellen
+  		// Neue Logik erstellen
 		final Logic logic = new Logic().getInstance();
 
      	// Set layout of all panels and frames
@@ -117,11 +119,11 @@ public class WorkGUI {
     	mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
     	textPanel.setLayout(new BorderLayout(10, 10));
     	fieldPanel.setLayout(new BorderLayout(10, 10));
-  		mainFrame.setTitle("Vokabel Trainer V1.0");
+  		mainFrame.setTitle(languages.getProduct() + languages.getVersion());
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		    	
-    	// Buttons einem Listener hinzufï¿½gen
+    	// Buttons einem Listener hinzufuegen
     	btnClose.addActionListener(new ButtonListener());
     	languagebox.addActionListener(new ComboboxListener());
     	  	
@@ -143,9 +145,9 @@ public class WorkGUI {
 		textPanel.add(txtResult, BorderLayout.SOUTH);
 		
 		// Add labels to fieldPanel
-		fieldPanel.add(frontsidelabel, BorderLayout.NORTH);
-		fieldPanel.add(backsidelabel, BorderLayout.CENTER);
-		fieldPanel.add(resultlabel, BorderLayout.SOUTH);
+		fieldPanel.add(lblFront, BorderLayout.NORTH);
+		fieldPanel.add(lblBack, BorderLayout.CENTER);
+		fieldPanel.add(lblResult, BorderLayout.SOUTH);
 
 	    // Add all panels to frame and set size of frame
 	    mainFrame.add(upperPanel, BorderLayout.NORTH);
@@ -159,7 +161,7 @@ public class WorkGUI {
         mainFrame.setVisible(true);
         
 		/**
-		 * Testkarten hinzufï¿½gen
+		 * Testkarten hinzufuegen
 		 */
 		logic.addCard("Hallo", "hello", 1, "de", "en");
 		logic.addCard("Nein", "no", 2, "de", "en");
@@ -167,23 +169,23 @@ public class WorkGUI {
 		logic.addCard("Hund", "dog", 4, "de", "en");
 		logic.addCard("Katze", "cat", 5, "de", "en");
 		
-		/**
-		 * Erster Eintrag in Textfeld
-		 */
+        // Setze erstes Wort in Front Textfield
 		txtFront.setText(logic.getCard());
 		
 		/**
-		 * Prï¿½fen-Button auf Listener setzen und Karten auf Richtigkeit prï¿½fen
+		 * Pruefen-Button auf Listener setzen und Karten auf Richtigkeit pruefen
 		 */
 		btnCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
 				/*
-				 * wenn true nï¿½chste Karte anzeigen und "Richtig :-)" ausgeben - txtfield_ty clearen usw.
+				 * wenn true naechste Karte anzeigen und "Richtig :-)" ausgeben - txtfield_ty clearen usw.
 				 */
-				if(txtBack.getText().equals(""))
-				{
-					txtResult.setText("bitte gib etwas ein!?");
+				if(txtBack.getText().equals("") && languages.getLanguage() == "de") {
+					txtResult.setText("Bitte gib eine Loesung ein!");
+				}
+				else if(txtBack.getText().equals("") && languages.getLanguage() == "en") {
+					txtResult.setText("Please type in an answer!");
 				}
 				
 				else if(check)
@@ -206,16 +208,18 @@ public class WorkGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
 				/*
-				 * Immer Ergebnis von letzter Karte lï¿½schen
+				 * Immer Ergebnis von letzter Karte loeschen
 				 */
 				txtResult.setBackground(Color.white);
 				txtResult.setText("");
 				/*
-				 * Wenn true nï¿½chste Karte laden ohne Resultat zeigen
+				 * Wenn true naechste Karte laden ohne Resultat zeigen
 				 */
-				if(txtBack.getText().equals(""))
-				{
-					txtResult.setText("bitte gib etwas ein!?");
+				if(txtBack.getText().equals("") && languages.getLanguage() == "de") {
+					txtResult.setText("Bitte gib eine Loesung ein!");
+				}
+				else if(txtBack.getText().equals("") && languages.getLanguage() == "en") {
+					txtResult.setText("Please type in an answer!");
 				}
 				else if(check)
 				{
@@ -234,29 +238,25 @@ public class WorkGUI {
   	}
     
     //Method to change language to de,en,fr,it
-    private void changeLanguageDE()
-    {
+    private void changeLanguageDE() {
     	btnCheck.setText("Pruefen");
     	btnNext.setText("Weiter");
     	btnClose.setText("Beenden");
-    	language = "de";
+    	languages.setLanguage("de");
     }
-    private void changeLanguageEN()
-    {
+    private void changeLanguageEN() {
     	btnCheck.setText("Check");
     	btnNext.setText("Next");
     	btnClose.setText("Close");
     	language = "en";
     }
-    private void changeLanguageFR()
-    {
+    private void changeLanguageFR() {
     	btnCheck.setText("Démarrer");
     	btnNext.setText("Sauver/charge");
     	btnClose.setText("Saisie");
     	language = "fr";
     }
-    private void changeLanguageIT()
-    {
+    private void changeLanguageIT() {
     	btnCheck.setText("Inizio");
     	btnNext.setText("Salvare/Carico");
     	btnClose.setText("Cattura");
@@ -270,6 +270,8 @@ public class WorkGUI {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btnClose){
 				mainFrame.setVisible(false);
+				logic.getOverview();
+				
 			}
 		}
 	}

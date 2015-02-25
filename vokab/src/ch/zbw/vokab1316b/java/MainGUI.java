@@ -49,24 +49,6 @@ public class MainGUI{
 	// Main frame
 	JFrame mainFrame;
 	
-	// Definiere MainGUI Titel für alle Sprachen
-	String titleDe = languages.getTitleDe();
-	String titleEn = languages.getTitleEn();
-	String titleFr = languages.getTitleFr();
-	String titleIt = languages.getTitleIt();
-	
-	// Definiere MainGUI Textinhalt für alle Sprachen
-	String contentDe = languages.getContentDe();
-	String contentEn = languages.getContentEn();
-	String contentFr = languages.getContentFr();
-	String contentIt = languages.getContentIt();
-
-	// Definiere Hilfe Textinhalt für alle Sprachen
-	String helpDe = languages.getHelptextDe();
-	String helpEn = languages.getHelptextEn();
-	String helpFr = languages.getHelptextFr();
-	String helpIt = languages.getHelptextIt();
-	
   	// Declare key buttons
   	private JButton btnStart;
   	private JButton btnSave;
@@ -88,7 +70,7 @@ public class MainGUI{
   	
 	public MainGUI() {
   		// Main frame
-  		mainFrame = new JFrame("Vokabel Trainer V1.0");
+  		mainFrame = new JFrame(languages.getProduct() + languages.getVersion());
   		
   		// Create key buttons
   	  	btnStart = new JButton("Starten");
@@ -123,9 +105,9 @@ public class MainGUI{
 		    	
     	// Set design and content of JLabel welcomescreen	
     	Border border = LineBorder.createBlackLineBorder();
-    	lblTitle.setText(titleDe);
+    	lblTitle.setText(languages.getTitleDe());
     	lblTitle.setBorder(border);
-    	lblContent.setText(contentDe);
+    	lblContent.setText(languages.getContentDe());
     	lblContent.setBorder(border);
     	
     	// Listener
@@ -169,41 +151,25 @@ public class MainGUI{
   	
     //Help window in different languages
     private void getHelpDe() {
-        JOptionPane.showMessageDialog(mainFrame, 
-        	        helpDe
-        	        + "Sprache: " + languages.getLanguage(),
-        	    	"Hilfe!",
-                    JOptionPane.QUESTION_MESSAGE);
+        JOptionPane.showMessageDialog(mainFrame, languages.getHelptextDe() + "Sprache: " + languages.getLanguage(), "Hilfe!", JOptionPane.QUESTION_MESSAGE);
     }
     
     private void getHelpEn() {
-        JOptionPane.showMessageDialog(mainFrame, 
-        	        helpEn
-        	        + "Language: " + languages.getLanguage(),
-        	    	"Help!",
-                    JOptionPane.QUESTION_MESSAGE);
+        JOptionPane.showMessageDialog(mainFrame, languages.getHelptextEn() + "Language: " + languages.getLanguage(), "Help!", JOptionPane.QUESTION_MESSAGE);
     }
     
     private void getHelpFr() {
-        JOptionPane.showMessageDialog(mainFrame, 
-        	        helpFr
-        	        + "Langue: " + languages.getLanguage(),
-        	    	"Aidez!",
-                    JOptionPane.QUESTION_MESSAGE);
+        JOptionPane.showMessageDialog(mainFrame, languages.getHelptextFr() + "Langue: " + languages.getLanguage(), "Aidez!", JOptionPane.QUESTION_MESSAGE);
     }
     
     private void getHelpIt() {
-        JOptionPane.showMessageDialog(mainFrame, 
-        	        helpIt
-        	        + "Lingua: " + languages.getLanguage(),
-        	    	"Aiuto!",
-                    JOptionPane.QUESTION_MESSAGE);
+        JOptionPane.showMessageDialog(mainFrame, languages.getHelptextIt() + "Lingua: " + languages.getLanguage(), "Aiuto!", JOptionPane.QUESTION_MESSAGE);
     }
     
     //Method to change language to german
     private void setLangDe() {
-    	lblTitle.setText(titleDe);
-    	lblContent.setText(contentDe);
+    	lblTitle.setText(languages.getTitleDe());
+    	lblContent.setText(languages.getContentDe());
     	btnStart.setText("Starten");
     	btnSave.setText("Speichern");
     	btnLoad.setText("Laden");
@@ -214,8 +180,8 @@ public class MainGUI{
     
     //Method to change language to english
     private void setLangEn() {
-        lblTitle.setText(titleEn);
-    	lblContent.setText(contentEn);
+        lblTitle.setText(languages.getTitleEn());
+    	lblContent.setText(languages.getContentEn());
     	btnStart.setText("Start");
     	btnSave.setText("Save");
     	btnLoad.setText("Load");
@@ -226,8 +192,8 @@ public class MainGUI{
     
     //Method to change language to french
     private void setLangFr() {
-    	lblTitle.setText(titleFr);
-    	lblContent.setText(contentFr);
+    	lblTitle.setText(languages.getTitleFr());
+    	lblContent.setText(languages.getContentFr());
     	btnStart.setText("Demarrer");
     	btnSave.setText("Sauver");
     	btnLoad.setText("Charge");
@@ -238,8 +204,8 @@ public class MainGUI{
     
     //Method to change language to italian
     private void setLangIt() {
-    	lblTitle.setText(titleIt);
-    	lblContent.setText(contentIt);
+    	lblTitle.setText(languages.getTitleIt());
+    	lblContent.setText(languages.getContentIt());
     	btnStart.setText("Inizio");
     	btnSave.setText("Salvare");
     	btnLoad.setText("Carico");
