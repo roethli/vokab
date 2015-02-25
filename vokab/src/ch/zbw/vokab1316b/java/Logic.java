@@ -52,27 +52,7 @@ public class Logic {
 				lang_backside, lang_frontside));
 	}
 
-	/*
-	 * moveCard category, if success and the category is not on maximum + 1
-	 * moveCard category, if not success - 1 If Card category is on maximum and
-	 * success change nothing
-	 */
 
-//	public void moveCard(String frontside, boolean success) {
-//		for (Card v : vocabularylist) {
-//			if (frontside.equals(v.getFront()) && success
-//					&& v.getCategory() < this.category_max) {
-//				int category_temp = v.getCategory();
-//				v.setCategory(category_temp + 1);
-//			}
-//
-//		}
-//	}
-
-	/*
-	 * @return return a string with the voc. on the front side of the vocabulary
-	 * card
-	 */
 	public String showFront(String back) {
 		for (Card v : vocabularylist) {
 			if (back.equals(v.getBack()))
@@ -82,20 +62,28 @@ public class Logic {
 		return null;
 	}
 
-	
-
 	/*
 	 * Check card if solution is right or wrong!
 	 */
 	public boolean checkInput(String input, String front) {
+
+		if (!switch_card_side) {
+			return checkInputNormal(input, front);
+		} else {
+			return checkInputTurned(input, front);
+		}
+
+	}
+
+	private boolean checkInputNormal(String input, String front) {
 
 		for (Card v : vocabularylist) {
 			if (v.getFront().equals(front)) {
 				if (v.getBack().equals(input)) {
 					if (v.getCategory() < getCategory_max())
 						v.setCategory(v.getCategory() + 1);
-						setSuccesscounter();
-					return true;					
+					setSuccesscounter();
+					return true;
 				} else {
 					if (v.getCategory() > 1) {
 						v.setCategory(v.getCategory() - 1);
@@ -105,9 +93,32 @@ public class Logic {
 					}
 				}
 			}
+
 		}
 		return false;
+	}
 
+	private boolean checkInputTurned(String input, String back) {
+
+		for (Card v2 : vocabularylist) {
+			if (v2.getBack().equals(back)) {
+				if (v2.getFront().equals(input)) {
+					if (v2.getCategory() < getCategory_max())
+						v2.setCategory(v2.getCategory() + 1);
+					setSuccesscounter();
+					return true;
+				} else {
+					if (v2.getCategory() > 1) {
+						v2.setCategory(v2.getCategory() - 1);
+						System.out.println(v2.getCategory());
+						setFaultcounter();
+						return false;
+					}
+				}
+			}
+
+		}
+		return false;
 	}
 
 	/*
@@ -158,7 +169,9 @@ public class Logic {
 		}
 		return getCard();
 	}
-
+	
+	
+	
 	// TODO switch_card_side ?
 	public boolean isSwitch_card_side() {
 		return switch_card_side;
@@ -230,17 +243,15 @@ public class Logic {
 	public void setFaultcounter() {
 		this.faultcounter = this.faultcounter + 1;
 	}
-	
+
 	/**
 	 * Erfolgsübersicht Einfach - anzahl falsche / richtige
 	 */
-	 public void getOverview(){
-	        JOptionPane.showMessageDialog(
-	        	        null, "Anzahl Richtig: "+ getSuccesscounter() + "\n" + "Anzahl Falsche: " + getFaultcounter() ,
-	        	    	"Erfolgsübersicht",
-	                    JOptionPane.INFORMATION_MESSAGE);
-	    }
-	
-	
-	
+	public void getOverview() {
+		JOptionPane.showMessageDialog(null, "Anzahl Richtig: "
+				+ getSuccesscounter() + "\n" + "Anzahl Falsche: "
+				+ getFaultcounter(), "Erfolgsübersicht",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
 }
