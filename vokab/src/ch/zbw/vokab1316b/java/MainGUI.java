@@ -46,6 +46,9 @@ public class MainGUI {
 	WorkGUI workGUI = new WorkGUI();
 	Languages languages = new Languages();
 	
+    // Test
+	String langboxmain;
+	
 	// Main frame
 	JFrame mainFrame;
 	
@@ -147,6 +150,11 @@ public class MainGUI {
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         mainFrame.setLocation(d.width/2 - mainFrame.getWidth()/2, d.height/2 - mainFrame.getHeight()/2);
         mainFrame.setVisible(true);
+  	}
+  	
+  	// Test
+  	public String getLangBoxMain() {
+  		return langboxmain;
   	}
   	
     //Help window in different languages
@@ -308,15 +316,19 @@ public class MainGUI {
 			String selectedItem = (String)languagebox.getSelectedItem();
 			if(selectedItem.equals("de")) {
 				setLangDe();
+				langboxmain = selectedItem;
 			}
 			else if(selectedItem.equals("en")) {
 				setLangEn();
+				langboxmain = selectedItem;
 			}
 			else if(selectedItem.equals("fr")) {
 				setLangFr();
+				langboxmain = selectedItem;
 			}
 			else if(selectedItem.equals("it")) {
 				setLangIt();
+				langboxmain = selectedItem;
 			}
 		}
 	}

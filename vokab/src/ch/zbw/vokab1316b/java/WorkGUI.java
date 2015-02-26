@@ -14,6 +14,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -58,27 +59,23 @@ public class WorkGUI {
   	// Declare panels
   	private JPanel upperPanel;
   	private JPanel mainPanel;
-  	private JPanel textPanel;
-  	private JPanel fieldPanel;
   	private JPanel lowerPanel;
   	
   	// Declare label
   	// TODO Lables workgui?
-  	private JLabel lblFront;
-  	private JLabel lblBack;
+  	private JLabel lblDesc1;
+  	private JLabel lblDesc2;
   	private JLabel lblResult;
+  	private JLabel lblSpace;
   	
   	// Declare textfield
   	private JTextField txtFront;
   	private JTextField txtBack;
-  	private JTextField txtResult;
   	
   	// Declare and create combobox
     private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
-  	
+    
   	public WorkGUI() {
-  		
-  		String test;
   		
   		// Main frame
   		mainFrame = new JFrame(languages.getProduct() + languages.getVersion());
@@ -89,23 +86,30 @@ public class WorkGUI {
   	    btnClose = new JButton("Beenden");
   	  
   	  	// Create labels and set display options
-  	  	lblFront = new JLabel("Frage:");
-  	  	lblBack = new JLabel("Antwort:");
-  	  	lblResult = new JLabel("Resultat:");
+		lblResult = new JLabel();
+		lblResult.setOpaque(true);
+		lblResult.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDesc1 = new JLabel("En:");
+		lblDesc1.setOpaque(true);
+		lblDesc1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDesc2 = new JLabel("De:");
+		lblDesc2.setOpaque(true);
+		lblDesc2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSpace = new JLabel();
+		lblSpace.setOpaque(true);
   	  	
   	  	// Create textfields and set display options
 		txtFront = new JTextField();
 		txtFront.setColumns(15);
 		txtFront.setEditable(false);
+		txtFront.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBack = new JTextField();
-		txtResult = new JTextField();
-		txtResult.setEditable(false);
+		txtBack.setHorizontalAlignment(SwingConstants.CENTER);
+
   	  	
   	  	// Create panels
   	  	upperPanel = new JPanel();
   	  	mainPanel = new JPanel();
-  	  	textPanel = new JPanel();
-  	  	fieldPanel = new JPanel();
   	  	lowerPanel = new JPanel();
   	}
   	
@@ -119,9 +123,10 @@ public class WorkGUI {
 
      	// Set layout of all panels and frames
 		upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-    	mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-    	textPanel.setLayout(new BorderLayout(10, 10));
-    	fieldPanel.setLayout(new BorderLayout(10, 10));
+		// mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+    	mainPanel.setLayout(new GridLayout(10, 1));
+    	// textPanel.setLayout(new BorderLayout(10, 10));
+    	// fieldPanel.setLayout(new BorderLayout(10, 10));
   		mainFrame.setTitle(languages.getProduct() + languages.getVersion());
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -136,21 +141,24 @@ public class WorkGUI {
     	lowerPanel.add(btnClose);
     	
     	// Add Panels to mainPanel
-    	mainPanel.add(fieldPanel, BorderLayout.WEST);
-    	mainPanel.add(textPanel, BorderLayout.EAST);
+    	// mainPanel.add(fieldPanel, BorderLayout.WEST);
+    	// mainPanel.add(textPanel, BorderLayout.EAST);
     	
     	// Add combobox to upperPanel
     	upperPanel.add(languagebox);
     	
 		// Add textfields to textPanel
-		textPanel.add(txtFront, BorderLayout.NORTH);
-		textPanel.add(txtBack, BorderLayout.CENTER);
-		textPanel.add(txtResult, BorderLayout.SOUTH);
+    	mainPanel.add(lblDesc1);
+		mainPanel.add(txtFront);
+		mainPanel.add(lblSpace);
+		mainPanel.add(lblDesc2);
+		mainPanel.add(txtBack);
+		mainPanel.add(lblResult);
 		
 		// Add labels to fieldPanel
-		fieldPanel.add(lblFront, BorderLayout.NORTH);
-		fieldPanel.add(lblBack, BorderLayout.CENTER);
-		fieldPanel.add(lblResult, BorderLayout.SOUTH);
+		// fieldPanel.add(lblFront, BorderLayout.NORTH);
+		// fieldPanel.add(lblBack, BorderLayout.CENTER);
+		// fieldPanel.add(lblResult1, BorderLayout.SOUTH);
 
 	    // Add all panels to frame and set size of frame
 	    mainFrame.add(upperPanel, BorderLayout.NORTH);
@@ -183,24 +191,24 @@ public class WorkGUI {
 				 * wenn true naechste Karte anzeigen und "Richtig :-)" ausgeben - txtfield_ty clearen usw.
 				 */
 				if(txtBack.getText().equals("") && languages.getLanguage() == "de") {
-					txtResult.setText("Bitte gib eine Loesung ein!");
+					lblResult.setText("Bitte gib eine Loesung ein!");
 				}
 				else if(txtBack.getText().equals("") && languages.getLanguage() == "en") {
-					txtResult.setText("Please type in an answer!");
+					lblResult.setText("Please type in an answer!");
 				}
 				
 				else if(check)
 				{
-					txtResult.setText("richtig");
-					txtResult.setBackground(Color.green);
+					lblResult.setText("richtig");
+					lblResult.setBackground(Color.green);
 				}
 				/*
 				 * Wenn false nochmal probieren und "Falsch :-(" ausgeben
 				 */
 				else
 				{
-					txtResult.setText("falsch");
-					txtResult.setBackground(Color.red);
+					lblResult.setText("falsch");
+					lblResult.setBackground(Color.red);
 				}
 			}
 		});
@@ -210,27 +218,27 @@ public class WorkGUI {
 				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
 				// Wenn textfield back leer, aufforderung zur eingabe anzeigen
 				if(txtBack.getText().equals("") && languages.getLanguage() == "de") {
-					txtResult.setText("Bitte gib eine Loesung ein!");
+					lblResult.setText("Bitte gib eine Loesung ein!");
 				}
 				else if(txtBack.getText().equals("") && languages.getLanguage() == "en") {
-					txtResult.setText("Please type in an answer!");
+					lblResult.setText("Please type in an answer!");
 				}
 				else if(txtBack.getText().equals("") && languages.getLanguage() == "fr") {
-					txtResult.setText("Silvous plaits eingeben!");
+					lblResult.setText("Silvous plaits eingeben!");
 				}
 				else if(txtBack.getText().equals("") && languages.getLanguage() == "it") {
-					txtResult.setText("Bitte eingeben IT!");
+					lblResult.setText("Bitte eingeben IT!");
 				}
 				// Wenn true textfield back leeren, Resultat OK ausgeben und naechste Karte laden
 				else if(check) {
 					txtBack.setText("");
-					txtResult.setText("OK");
+					lblResult.setText("OK");
 					txtFront.setText(logic.getCard());
 				}
 				// Wenn false textfield back leeren und als Resultat X ausgeben
 				else {
 					txtBack.setText("");
-					txtResult.setText("X");
+					lblResult.setText("X");
 				}
 			}
 		});
@@ -238,13 +246,13 @@ public class WorkGUI {
     
     //Method to change language to de,en,fr,it
     private void setLang() {
-    	if (languages.getLanguage()=="de") {
+    	if (languages.getLanguage().equals("de")) {
     		setLangDe();
     	}
-    	else if (languages.getLanguage()=="en") {
+    	else if (languages.getLanguage().equals("en")) {
     		setLangEn();
     	}
-    	else if (languages.getLanguage()=="fr") {
+    	else if (languages.getLanguage().equals("fr")) {
     		setLangFr();
     	}
     	else 
