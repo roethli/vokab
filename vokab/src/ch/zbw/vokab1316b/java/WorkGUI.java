@@ -36,141 +36,114 @@ import javax.swing.border.*;
 import ch.zbw.vokab1316b.java.*;
 
 /**
- * This class implements a simple learning work GUI. When creating a new object of this
- * class the GUI components, such as buttons, labels, etc. are displayed and
- * react on user actions, such as pressing a button.
+ * Diese Klasse implementiert einen einfachen Lern-GUI.
+ * Beim erstellen der Klassen wird der Work-GUI zum lernen mittels Komponenten wie Labels, Textfields, Buttons, etc. angezeigt
+ * und reagiert auf User-Befehle wie z.B. das drücken eines Buttons.
  * 
  * @author Marcel Baumgartner, ZbW
  * @version 1.0 02.02.2015
  */
 public class WorkGUI {
 	
+	// Klasse Languages und Logic instanzieren
 	Languages languages = new Languages();
 	Logic logic = new Logic();
 	
-	// Main frame
-	JFrame mainFrame;
+	// Frame erstellen und beschriften
+	JFrame mainFrame = new JFrame(languages.getProduct() + languages.getVersion());
+		
+	// Panels, Labels, Textfields und Buttons erstellen, zum Teil auch gleich beschriften.
+  	private JPanel upperPanel  = new JPanel();
+  	private JPanel mainPanel  = new JPanel();
+  	private JPanel mainLeftPanel  = new JPanel();
+  	private JPanel mainRightPanel  = new JPanel();
+  	private JPanel lowerPanel  = new JPanel();
+  	
+  	private JLabel lblDesc1 = new JLabel("De:");
+  	private JLabel lblDesc2 = new JLabel("En:");
+  	private JLabel lblResult = new JLabel();
+  	private JLabel lblSpaceCenter  = new JLabel();
+  	private JLabel lblSpaceLeft  = new JLabel("                                                            ");
+  	private JLabel lblSpaceRight  = new JLabel("                                                            ");
+
+  	private JTextField txtFront = new JTextField();
+  	private JTextField txtBack = new JTextField();
+  	
+	private JButton btnSwitch = new JButton(languages.getLangBtnSwitch());
+  	private JButton btnNext = new JButton(languages.getLangBtnNext());
+  	private JButton btnClose = new JButton(languages.getLangBtnClose());
 	
-  	// Declare key buttons
-  	private JButton btnCheck;
-  	private JButton btnNext;
-  	private JButton btnClose;
-  
-  	// Declare panels
-  	private JPanel upperPanel;
-  	private JPanel mainPanel;
-  	private JPanel lowerPanel;
-  	
-  	// Declare label
-  	// TODO Lables workgui?
-  	private JLabel lblDesc1;
-  	private JLabel lblDesc2;
-  	private JLabel lblResult;
-  	private JLabel lblSpace;
-  	
-  	// Declare textfield
-  	private JTextField txtFront;
-  	private JTextField txtBack;
-  	
-  	// Declare and create combobox
-    private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
+  	// Combobox (Sprachauswahl) erstellen und mit Objekten abfüllen
+    private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
     
   	public WorkGUI() {
   		
-  		// Main frame
-  		mainFrame = new JFrame(languages.getProduct() + languages.getVersion());
-  		
-  		// Create key buttons
-  	  	btnCheck = new JButton("Pruefen");
-  	  	btnNext = new JButton("Weiter");
-  	    btnClose = new JButton("Beenden");
-  	  
-  	  	// Create labels and set display options
-		lblResult = new JLabel();
+     	// Layout Einstellungen für Frame und Panels
+		mainFrame.setTitle(languages.getProduct() + languages.getVersion());
+    	mainFrame.setResizable(false);
+    	mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    	mainFrame.setSize(600, 400);
+    	upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+    	mainPanel.setLayout(new GridLayout(10, 1));
+    	
+        // Labels Layout konfigurieren
 		lblResult.setOpaque(true);
 		lblResult.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDesc1 = new JLabel("En:");
 		lblDesc1.setOpaque(true);
 		lblDesc1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDesc2 = new JLabel("De:");
 		lblDesc2.setOpaque(true);
 		lblDesc2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSpace = new JLabel();
-		lblSpace.setOpaque(true);
+		lblSpaceCenter.setOpaque(true);
+		lblSpaceLeft.setOpaque(true);
+		lblSpaceRight.setOpaque(true);
   	  	
-  	  	// Create textfields and set display options
-		txtFront = new JTextField();
+  	  	// Textfelder Layout konfigurieren
 		txtFront.setColumns(15);
 		txtFront.setEditable(false);
 		txtFront.setHorizontalAlignment(SwingConstants.CENTER);
-		txtBack = new JTextField();
 		txtBack.setHorizontalAlignment(SwingConstants.CENTER);
-
-  	  	
-  	  	// Create panels
-  	  	upperPanel = new JPanel();
-  	  	mainPanel = new JPanel();
-  	  	lowerPanel = new JPanel();
+		
+    	// Listener für Button Close und die Sprachbox erstellen
+    	btnClose.addActionListener(new ButtonListener());
+    	boxLanguage.addActionListener(new ComboboxListener());
+		
   	}
   	
-  	// Assembles and displays the GUI.
+  	// Zusammenbauen und anzeigen des Work-GUI.
   	public void paint(){
   		
   		setLang();
+  		setFocus();
   		
-   		// Neue Logik erstellen
+   		// Klasse Logik instanzieren
 		final Logic logic = new Logic().getInstance();
-
-     	// Set layout of all panels and frames
-		upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		// mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-    	mainPanel.setLayout(new GridLayout(10, 1));
-    	// textPanel.setLayout(new BorderLayout(10, 10));
-    	// fieldPanel.setLayout(new BorderLayout(10, 10));
-  		mainFrame.setTitle(languages.getProduct() + languages.getVersion());
-    	mainFrame.setResizable(false);
-    	mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		    	
-    	// Buttons einem Listener hinzufuegen
-    	btnClose.addActionListener(new ButtonListener());
-    	languagebox.addActionListener(new ComboboxListener());
-    	  	
-    	// Add buttons to Panels
-    	lowerPanel.add(btnCheck);
-    	lowerPanel.add(btnNext);
-    	lowerPanel.add(btnClose);
-    	
-    	// Add Panels to mainPanel
-    	// mainPanel.add(fieldPanel, BorderLayout.WEST);
-    	// mainPanel.add(textPanel, BorderLayout.EAST);
-    	
-    	// Add combobox to upperPanel
-    	upperPanel.add(languagebox);
-    	
-		// Add textfields to textPanel
-    	mainPanel.add(lblDesc1);
-		mainPanel.add(txtFront);
-		mainPanel.add(lblSpace);
-		mainPanel.add(lblDesc2);
-		mainPanel.add(txtBack);
-		mainPanel.add(lblResult);
-		
-		// Add labels to fieldPanel
-		// fieldPanel.add(lblFront, BorderLayout.NORTH);
-		// fieldPanel.add(lblBack, BorderLayout.CENTER);
-		// fieldPanel.add(lblResult1, BorderLayout.SOUTH);
-
-	    // Add all panels to frame and set size of frame
-	    mainFrame.add(upperPanel, BorderLayout.NORTH);
-	    mainFrame.add(mainPanel, BorderLayout.CENTER);
-	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
-	    
-        // Set size of window and place it to middle of screen
-	    mainFrame.setSize(600, 400);
+        
+        // GUI zentral im Bildschirm setzen
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         mainFrame.setLocation(d.width/2 - mainFrame.getWidth()/2, d.height/2 - mainFrame.getHeight()/2);
         mainFrame.setVisible(true);
-        
+    	
+		// Platziert die Elemente in den Panels
+    	upperPanel.add(boxLanguage);
+    	mainPanel.add(lblDesc1);
+		mainPanel.add(txtFront);
+		mainPanel.add(lblSpaceCenter);
+		mainPanel.add(lblDesc2);
+		mainPanel.add(txtBack);
+		mainPanel.add(lblResult);
+		mainLeftPanel.add(lblSpaceLeft);
+		mainRightPanel.add(lblSpaceRight);
+    	lowerPanel.add(btnSwitch);
+    	lowerPanel.add(btnNext);
+    	lowerPanel.add(btnClose);
+		
+	    // Alle Panels dem Frame hinzufügen und Layout bestimmen
+	    mainFrame.add(upperPanel, BorderLayout.NORTH);
+	    mainFrame.add(mainPanel, BorderLayout.CENTER);
+	    mainFrame.add(mainLeftPanel,  BorderLayout.WEST);
+	    mainFrame.add(mainRightPanel,  BorderLayout.EAST);
+	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
+	    
 		// Testkarten hinzufuegen
 		logic.addCard("Hallo", "hello", 1, "de", "en");
 		logic.addCard("Nein", "no", 2, "de", "en");
@@ -178,119 +151,71 @@ public class WorkGUI {
 		logic.addCard("Hund", "dog", 4, "de", "en");
 		logic.addCard("Katze", "cat", 5, "de", "en");
 		
-        // Setze erstes Wort in Front Textfield
+        // Füllt erstes Wort zum übersetzen in's Front-Textfiled
 		txtFront.setText(logic.getCard());
 		
-		/**
-		 * Pruefen-Button auf Listener setzen und Karten auf Richtigkeit pruefen
-		 */
-		btnCheck.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
-				/*
-				 * wenn true naechste Karte anzeigen und "Richtig :-)" ausgeben - txtfield_ty clearen usw.
-				 */
-				if(txtBack.getText().equals("") && languages.getLanguage() == "de") {
-					lblResult.setText("Bitte gib eine Loesung ein!");
-				}
-				else if(txtBack.getText().equals("") && languages.getLanguage() == "en") {
-					lblResult.setText("Please type in an answer!");
-				}
-				
-				else if(check)
-				{
-					lblResult.setText("richtig");
-					lblResult.setBackground(Color.green);
-				}
-				/*
-				 * Wenn false nochmal probieren und "Falsch :-(" ausgeben
-				 */
-				else
-				{
-					lblResult.setText("falsch");
-					lblResult.setBackground(Color.red);
-				}
-			}
-		});
+		// Prüfen Knopf wird allenfalls ausgebaut
+//		/**
+//		 * Pruefen-Button auf Listener setzen und Karten auf Richtigkeit pruefen
+//		 */
+//		btnCheck.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
+//				// wenn true, nächste Karte anzeigen und "OK" ausgeben - txtfield_ty clearen usw.
+//				if(txtBack.getText().equals("") && languages.getLanguage() == "de") {
+//					lblResult.setText("Bitte gib eine Loesung ein!");
+//				}
+//				else if(txtBack.getText().equals("") && languages.getLanguage() == "en") {
+//					lblResult.setText("Please type in an answer!");
+//				}
+//				// wenn true, nächste Karte anzeigen und "OK" ausgeben - txtfield_ty clearen usw.
+//				else if(check)
+//				{
+//					lblResult.setText("richtig");
+//					lblResult.setBackground(Color.green);
+//				}
+//				/*
+//				 * Wenn false nochmal probieren und "Falsch :-(" ausgeben
+//				 */
+//				else
+//				{
+//					lblResult.setText("falsch");
+//					lblResult.setBackground(Color.red);
+//				}
+//			}
+//		});
 		
+		// Listener für Next Button.
+		// Prüft Eingabe und reagiert entsprechend.
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
-				// Wenn textfield back leer, aufforderung zur eingabe anzeigen
-				if(txtBack.getText().equals("") && languages.getLanguage() == "de") {
-					lblResult.setText("Bitte gib eine Loesung ein!");
+				// Wenn keine Eingabe, Text anzeigen mit Aufforderung zur Lösungseingabe und Fokus wieder auf Feld txtBack setzen
+				if(txtBack.getText().equals("")) {
+					lblResult.setText(languages.getLangRequest());
+					setFocus();
 				}
-				else if(txtBack.getText().equals("") && languages.getLanguage() == "en") {
-					lblResult.setText("Please type in an answer!");
-				}
-				else if(txtBack.getText().equals("") && languages.getLanguage() == "fr") {
-					lblResult.setText("Silvous plaits eingeben!");
-				}
-				else if(txtBack.getText().equals("") && languages.getLanguage() == "it") {
-					lblResult.setText("Bitte eingeben IT!");
-				}
-				// Wenn true textfield back leeren, Resultat OK ausgeben und naechste Karte laden
+				// Wenn Eingabe Richtig (also true): Lösungstext löschen, "OK" ausgeben und nächste Karte laden und Fokus wieder auf Feld txtBack setzen
 				else if(check) {
 					txtBack.setText("");
 					lblResult.setText("OK");
 					txtFront.setText(logic.getCard());
+					setFocus();
 				}
-				// Wenn false textfield back leeren und als Resultat X ausgeben
+				// Wenn Eingabe Falsch (also false): Lösungstext löschen, "X" ausgeben und nächste Karte laden und Fokus wieder auf Feld txtBack setzen
 				else {
 					txtBack.setText("");
 					lblResult.setText("X");
+					txtFront.setText(logic.getCard());
+					setFocus();
 				}
 			}
 		});
   	}
     
-    //Method to change language to de,en,fr,it
-    private void setLang() {
-    	if (languages.getLanguage().equals("de")) {
-    		setLangDe();
-    	}
-    	else if (languages.getLanguage().equals("en")) {
-    		setLangEn();
-    	}
-    	else if (languages.getLanguage().equals("fr")) {
-    		setLangFr();
-    	}
-    	else 
-    		setLangIt();	
-    }
-  	private void setLangDe() {
-    	btnCheck.setText("Pruefen");
-    	btnNext.setText("Weiter");
-    	btnClose.setText("Beenden");
-    	languages.setLanguage("de");
-    	System.out.println(languages.getLanguage());
-    }
-    private void setLangEn() {
-    	btnCheck.setText("Check");
-    	btnNext.setText("Next");
-    	btnClose.setText("Close");
-    	languages.setLanguage("en");
-    	System.out.println(languages.getLanguage());
-    }
-    private void setLangFr() {
-    	btnCheck.setText("Démarrer");
-    	btnNext.setText("Sauver/charge");
-    	btnClose.setText("Saisie");
-    	languages.setLanguage("fr");
-    	System.out.println(languages.getLanguage());
-    }
-    private void setLangIt() {
-    	btnCheck.setText("Inizio");
-    	btnNext.setText("Salvare/Carico");
-    	btnClose.setText("Cattura");
-    	languages.setLanguage("it");
-    	System.out.println(languages.getLanguage());
-    }
-    
-	// Declare listener class for buttons
-	// ...
+	// Listener für Close Button.
+	// Schliesst mainFrame der Klasse Work-GUI und zeigt die Auswertung an.
 	class ButtonListener implements ActionListener {
-	    // Is called when help button is pressed
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btnClose){
 				mainFrame.setVisible(false);
@@ -300,25 +225,45 @@ public class WorkGUI {
 		}
 	}
 	
-	// Declare listener class for combobox
+	// Listener für Sprachauswahl.
+	// Setzt die in der Combobox gewählte Sprache.
 	class ComboboxListener implements ActionListener {
 	    // Is called when combobox is selected
 		public void actionPerformed(ActionEvent e) {
-			String selectedItem = (String)languagebox.getSelectedItem();
+			String selectedItem = (String)boxLanguage.getSelectedItem();
 			if(selectedItem.equals("de")) {
-				setLangDe();
+				languages.setLanguage("de");
+				setLang();
 			}
 			else if(selectedItem.equals("en")) {
-				setLangEn();
+				languages.setLanguage("en");
+				setLang();
 			}
 			else if(selectedItem.equals("fr")) {
-				setLangFr();
+				languages.setLanguage("fr");
+				setLang();
 			}
 			else if(selectedItem.equals("it")) {
-				setLangIt();
+				languages.setLanguage("it");
+				setLang();
 			}
 		}
 	}
+	
+  	// Methode setzt die via Combobox gewählte Sprache
+  	private void setLang() {
+    	btnSwitch.setText(languages.getLangBtnSwitch());
+    	btnNext.setText(languages.getLangBtnNext());
+    	btnClose.setText(languages.getLangBtnClose());
+    	System.out.println(languages.getLanguage());
+    }
+  	
+    // Setzt Next Button als Standard Button (Enter)
+  	// Setzt txtBack Feld aktiv für Eingabe
+  	public void setFocus(){
+        mainFrame.getRootPane().setDefaultButton(btnNext);
+        txtBack.requestFocusInWindow();
+  	}
 	
   	/**
   	 * Main method to start the application

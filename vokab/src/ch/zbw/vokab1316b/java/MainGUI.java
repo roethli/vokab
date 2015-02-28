@@ -33,9 +33,9 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.*;
 
 /**
- * This class implements a simple learning main GUI. When creating a new object of this
- * class the GUI components, such as buttons, labels, etc. are displayed and
- * react on user actions, such as pressing a button.
+ * Diese Klasse implementiert einen einfachen Start-GUI (Main-GUI).
+ * Beim erstellen der Klassen wird der Main-GUI mittels Komponenten wie Labels, Textfields, Buttons, etc. angezeigt
+ * und reagiert auf User-Befehle wie z.B. das drücken eines Buttons.
  * 
  * @author Marcel Baumgartner, ZbW
  * @version 1.0 02.02.2015
@@ -46,202 +46,99 @@ public class MainGUI {
 	WorkGUI workGUI = new WorkGUI();
 	Languages languages = new Languages();
 	
-    // Test
-	String langboxmain;
-	
 	// Main frame
-	JFrame mainFrame;
+	JFrame mainFrame = new JFrame(languages.getProduct() + languages.getVersion());
 	
   	// Declare key buttons
-  	private JButton btnStart;
-  	private JButton btnSave;
-  	private JButton btnLoad;
-  	private JButton btnRegister;
-  	private JButton btnHelp;
+  	private JButton btnStart = new JButton(languages.getLangBtnStart());
+  	private JButton btnSave = new JButton(languages.getLangBtnSave());
+  	private JButton btnLoad = new JButton(languages.getLangBtnLoad());
+  	private JButton btnRegister = new JButton(languages.getLangBtnRegister());
+  	private JButton btnHelp = new JButton(languages.getLangBtnHelp());
   
   	// Declare panels
-  	private JPanel upperPanel;
-  	private JPanel mainPanel;
-  	private JPanel lowerPanel;
+  	private JPanel upperPanel = new JPanel();
+  	private JPanel mainPanel = new JPanel();
+  	private JPanel lowerPanel = new JPanel();
   	
   	// Declare label
-  	private JLabel lblTitle;
-  	private JLabel lblContent;
+  	private JLabel lblTitle  = new JLabel(languages.getTitle());
+  	private JLabel lblContent  = new JLabel(languages.getContent());
   	
   	// Declare and create combobox
-    private JComboBox languagebox = new JComboBox(new Object[] {"de","en","fr","it"});
+    private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
   	
-	public MainGUI() {
-  		// Main frame
-  		mainFrame = new JFrame(languages.getProduct() + languages.getVersion());
-  		
-  		// Create key buttons
-  	  	btnStart = new JButton("Starten");
-  	  	btnSave = new JButton("Speichern");
-  	    btnLoad = new JButton("Laden");
-  	    btnRegister = new JButton("Erfassen");
-  	    btnHelp = new JButton("Hilfe");
-  	  
-  	  	// Create other GUI elements
-  	  	lblTitle = new JLabel();
-  	  	lblContent = new JLabel();
-  	  	
-  	  	// Create panels
-  	  	upperPanel = new JPanel();
-  	  	mainPanel = new JPanel();
-  	  	lowerPanel = new JPanel();
-  	}
-  	
-  	// Assembles and displays the GUI.
-  	public void paint(){
-  		
-    	// Initialise frame and GUI elements
+    public MainGUI() {
+		
+    	// Layout Einstellungen für Frame und Panels
   		mainFrame.setTitle(languages.getProduct() + languages.getVersion());
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	mainFrame.setSize(800, 600);
+    	mainPanel.setLayout(new BorderLayout(25, 25));
+    	upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+    	
+    	// Labels Layout konfigurieren
+    	Border border = LineBorder.createBlackLineBorder();
+    	lblTitle.setBorder(border);
+    	lblContent.setBorder(border);
     	lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
     	lblContent.setHorizontalAlignment(SwingConstants.CENTER);
-    
-    	// Set layout of all panels and frames
-		mainPanel.setLayout(new BorderLayout(25, 25));
-		upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		    	
-    	// Set design and content of JLabel welcomescreen	
-    	Border border = LineBorder.createBlackLineBorder();
-    	lblTitle.setText(languages.getTitleDe());
-    	lblTitle.setBorder(border);
-    	lblContent.setText(languages.getContentDe());
-    	lblContent.setBorder(border);
-    	
-    	// Listener
+    	  	
+    	// Listener für alle Buttons und die Sprachbox erstellen
     	btnStart.addActionListener(new ButtonListener());
     	btnSave.addActionListener(new ButtonListener());
     	btnLoad.addActionListener(new ButtonListener());
     	btnRegister.addActionListener(new ButtonListener());
     	btnHelp.addActionListener(new ButtonListener());
-    	languagebox.addActionListener(new ComboboxListener());
-    	  	
-    	// Add buttons to lowerPanel
-    	lowerPanel.add(btnStart);
+    	boxLanguage.addActionListener(new ComboboxListener());
+  	}
+    
+	// Zusammenbauen und anzeigen des Main-GUI.
+  	public void paint(){
+  		
+  	    // GUI zentral im Bildschirm setzen
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        mainFrame.setLocation(d.width/2 - mainFrame.getWidth()/2, d.height/2 - mainFrame.getHeight()/2);
+        mainFrame.setVisible(true);
+        
+  	    // Platziert die Elemente in den Panels
+  		upperPanel.add(boxLanguage);
+    	mainPanel.add(lblTitle);
+    	mainPanel.add(lblContent);
+    	mainPanel.add(lblTitle, BorderLayout.NORTH);
+		mainPanel.add(lblContent, BorderLayout.CENTER);
+		lowerPanel.add(btnStart);
     	lowerPanel.add(btnSave);
     	lowerPanel.add(btnLoad);
     	lowerPanel.add(btnRegister);
     	lowerPanel.add(btnHelp);
-    	
-    	// Add label to mainPanel
-    	mainPanel.add(lblTitle);
-    	mainPanel.add(lblContent);
-    	
-    	// Add combobox to upperPanel
-    	upperPanel.add(languagebox);
-    	
-		// Assemble welcome screens to mainPanel
-		mainPanel.add(lblTitle, BorderLayout.NORTH);
-		mainPanel.add(lblContent, BorderLayout.CENTER);
 		
-
-	    // Add all panels to frame
+    	// Alle Panels dem Frame hinzufügen und Layout bestimmen
 	    mainFrame.add(upperPanel, BorderLayout.NORTH);
 	    mainFrame.add(mainPanel, BorderLayout.CENTER);
 	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
-	    mainFrame.setSize(800, 600);
 	    
-        // Set window into the the middle of screen
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        mainFrame.setLocation(d.width/2 - mainFrame.getWidth()/2, d.height/2 - mainFrame.getHeight()/2);
-        mainFrame.setVisible(true);
   	}
-  	
-  	// Test
-  	public String getLangBoxMain() {
-  		return langboxmain;
-  	}
-  	
-    //Help window in different languages
-    private void getHelpDe() {
-        JOptionPane.showMessageDialog(mainFrame, languages.getHelptextDe() + "Sprache: " + languages.getLanguage(), "Hilfe!", JOptionPane.QUESTION_MESSAGE);
-    }
-    
-    private void getHelpEn() {
-        JOptionPane.showMessageDialog(mainFrame, languages.getHelptextEn() + "Language: " + languages.getLanguage(), "Help!", JOptionPane.QUESTION_MESSAGE);
-    }
-    
-    private void getHelpFr() {
-        JOptionPane.showMessageDialog(mainFrame, languages.getHelptextFr() + "Langue: " + languages.getLanguage(), "Aidez!", JOptionPane.QUESTION_MESSAGE);
-    }
-    
-    private void getHelpIt() {
-        JOptionPane.showMessageDialog(mainFrame, languages.getHelptextIt() + "Lingua: " + languages.getLanguage(), "Aiuto!", JOptionPane.QUESTION_MESSAGE);
-    }
-    
-    //Method to change language to german
-    private void setLangDe() {
-    	lblTitle.setText(languages.getTitleDe());
-    	lblContent.setText(languages.getContentDe());
-    	btnStart.setText("Starten");
-    	btnSave.setText("Speichern");
-    	btnLoad.setText("Laden");
-    	btnRegister.setText("Erfassen");
-    	btnHelp.setText("Hilfe");
-    	languages.setLanguage("de");
-    	System.out.println(languages.getLanguage());
-    }
-    
-    //Method to change language to english
-    private void setLangEn() {
-        lblTitle.setText(languages.getTitleEn());
-    	lblContent.setText(languages.getContentEn());
-    	btnStart.setText("Start");
-    	btnSave.setText("Save");
-    	btnLoad.setText("Load");
-    	btnRegister.setText("Register");
-    	btnHelp.setText("Help");
-    	languages.setLanguage("en");
-    	System.out.println(languages.getLanguage());
-    }
-    
-    //Method to change language to french
-    private void setLangFr() {
-    	lblTitle.setText(languages.getTitleFr());
-    	lblContent.setText(languages.getContentFr());
-    	btnStart.setText("Demarrer");
-    	btnSave.setText("Sauver");
-    	btnLoad.setText("Charge");
-    	btnRegister.setText("Saisie");
-    	btnHelp.setText("Aidez");
-    	languages.setLanguage("fr");
-    	System.out.println(languages.getLanguage());
-    }
-    
-    //Method to change language to italian
-    private void setLangIt() {
-    	lblTitle.setText(languages.getTitleIt());
-    	lblContent.setText(languages.getContentIt());
-    	btnStart.setText("Inizio");
-    	btnSave.setText("Salvare");
-    	btnLoad.setText("Carico");
-    	btnRegister.setText("Cattura");
-    	btnHelp.setText("Aiuto");
-    	languages.setLanguage("it");
-    	System.out.println(languages.getLanguage());
-    }
 
-	// Declare listener class for buttons
+	// Listener für Buttons.
+	// Startet Lern-GUI, In- oder Exportiert Karteikarten, startet Erfassen-GUI und ruft Hilfe auf.
 	class ButtonListener implements ActionListener {
-	    // Is called when help button is pressed
 		public void actionPerformed(ActionEvent e) {
+			// Wird aufgerufen, wenn der Help Button gedrückt wird
 			if (e.getSource() == btnHelp){
-				if(e.getActionCommand().equals("Hilfe")) getHelpDe();
-				else if(e.getActionCommand().equals("Help")) getHelpEn();
-				else if(e.getActionCommand().equals("Aidez")) getHelpFr();
-				else if(e.getActionCommand().equals("Aiuto")) getHelpIt();
+				getHelp();
 			}
+			// Wird aufgerufen, wenn der Starten Button gedrückt wird
 			if (e.getSource() == btnStart){
-				if(e.getActionCommand().equals("Starten")) workGUI.paint();
-				else if(e.getActionCommand().equals("Start")) workGUI.paint();
-				else if(e.getActionCommand().equals("Demarrer")) workGUI.paint();
-				else if(e.getActionCommand().equals("Inizio")) workGUI.paint();
+				workGUI.paint();
+				workGUI.setFocus();
 			}
+			// Wird aufgerufen, wenn der Erfassen Button gedrückt wird
+			if (e.getSource() == btnRegister) {
+				System.out.println("erfassen");
+			}
+			// Wird aufgerufen, wenn der Speichern Button gedrückt wird
 			if (e.getSource() == btnSave) {
 
 				// instantiate a new file dialog
@@ -276,6 +173,7 @@ public class MainGUI {
 					System.out.println("Save command cancelled by user.");
 				}
 			}
+			// Wird aufgerufen, wenn der Laden Button gedrückt wird
 			else if (e.getSource() == btnLoad) {
 
 				// instantiate a new file dialog
@@ -303,35 +201,51 @@ public class MainGUI {
 					System.out.println("Open command cancelled by user.");
 				}
 			}
-			else if (e.getSource() == btnRegister) {
-				System.out.println("erfassen");
+		}
+	}
+	
+	// Listener für Sprachauswahl.
+	// Setzt die in der Combobox gewählte Sprache.
+	class ComboboxListener implements ActionListener {
+	    // Is called when help button is pressed
+		public void actionPerformed(ActionEvent e) {
+			String selectedItem = (String)boxLanguage.getSelectedItem();
+			if(selectedItem.equals("de")) {
+				languages.setLanguage("de");
+				setLang();
+			}
+			else if(selectedItem.equals("en")) {
+				languages.setLanguage("en");
+				setLang();
+			}
+			else if(selectedItem.equals("fr")) {
+				languages.setLanguage("fr");
+				setLang();
+			}
+			else if(selectedItem.equals("it")) {
+				languages.setLanguage("it");
+				setLang();
 			}
 		}
 	}
 	
-	// Declare listener class for combobox
-	class ComboboxListener implements ActionListener {
-	    // Is called when help button is pressed
-		public void actionPerformed(ActionEvent e) {
-			String selectedItem = (String)languagebox.getSelectedItem();
-			if(selectedItem.equals("de")) {
-				setLangDe();
-				langboxmain = selectedItem;
-			}
-			else if(selectedItem.equals("en")) {
-				setLangEn();
-				langboxmain = selectedItem;
-			}
-			else if(selectedItem.equals("fr")) {
-				setLangFr();
-				langboxmain = selectedItem;
-			}
-			else if(selectedItem.equals("it")) {
-				setLangIt();
-				langboxmain = selectedItem;
-			}
-		}
-	}
+  	// Methode setzt die via Combobox gewählte Sprache
+  	private void setLang() {
+    	lblTitle.setText(languages.getTitle());
+    	lblContent.setText(languages.getContent());
+    	btnStart.setText(languages.getLangBtnStart());
+    	btnSave.setText(languages.getLangBtnSave());
+    	btnLoad.setText(languages.getLangBtnLoad());
+    	btnRegister.setText(languages.getLangBtnRegister());
+    	btnHelp.setText(languages.getLangBtnHelp());
+    	System.out.println(languages.getLanguage());
+    }
+  	
+    // Methode zum anzeigen der Hilfefunktion
+    private void getHelp() {
+        JOptionPane.showMessageDialog(mainFrame, languages.getLangHelp()
+        + languages.getWordLanguage() + ": " + languages.getLanguage(), languages.getLangBtnHelp() + "!", JOptionPane.QUESTION_MESSAGE);
+    }
 	
   	/**
   	 * Main method to start the application
