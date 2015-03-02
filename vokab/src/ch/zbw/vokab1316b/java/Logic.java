@@ -53,7 +53,6 @@ public class Logic {
 				lang_frontside, lang_backside));
 	}
 
-
 	public String showFront(String back) {
 		for (Card v : vocabularylist) {
 			if (back.equals(v.getBack()))
@@ -86,12 +85,11 @@ public class Logic {
 					setSuccesscounter();
 					return true;
 				} else {
-					if (v.getCategory() > 1) {
-						v.setCategory(v.getCategory() - 1);
+					
+						v.setCategory(1);
 						System.out.println(v.getCategory());
 						setFaultcounter();
 						return false;
-					}
 				}
 			}
 
@@ -170,40 +168,39 @@ public class Logic {
 		}
 		return getCard();
 	}
-	
-	private String getBack(String back)
-	{
-		for(Card v : vocabularylist)
-		{
-			back = v.getBack();
-			if(v.getBack().equals(back))
-			{
-				return v.getBack();
-			}
-		}
-		return null;
-	}
-	
-	
-	public String getCardLang(String text)
-	{
-	
-		for(Card v : vocabularylist)
-		{
-			if(v.getFront().equals(text) && v.getLangFront().equals(v.getLangFront()))
-			{
-			return v.getLangFront();
-			}
-			else if(v.getBack().equals(text) && v.getLangBack().equals(v.getLangBack()))
-					{
+
+	public String getCardLangFront(String text) {
+
+		for (Card v : vocabularylist) {
+			if (v.getFront().equals(text)
+					&& v.getLangFront().equals(v.getLangFront())) {
+				return v.getLangFront();
+			} else if (v.getBack().equals(text)
+					&& v.getLangBack().equals(v.getLangBack())) {
 				return v.getLangBack();
-					}
-		
+			}  
+			
+
 		}
 		return null;
 	}
 
-		
+	public String getCardLangBack(String text) {
+
+		for (Card v : vocabularylist) {
+			if (v.getFront().equals(text)
+					&& v.getLangFront().equals(v.getLangFront())) {
+				return v.getLangBack();
+			} else if (v.getBack().equals(text)
+					&& v.getLangBack().equals(v.getLangBack())) {
+				return v.getLangFront();
+			}  
+			
+
+		}
+		return null;
+	}
+	
 	
 	//
 	//
@@ -261,7 +258,6 @@ public class Logic {
 		this.successcounter = this.successcounter + 1;
 	}
 
-	
 	/*
 	 * get the actual INT for Fault cards
 	 */
