@@ -113,4 +113,22 @@ public class Card {
 		this.category = category;
 	}
 
+	public String getLangFront() {
+		return langFront;
+	}
+
+	public void setLangFront(String langFront) {
+		this.langFront = langFront;
+	}
+
+	public String getLangBack() {
+		return langBack;
+	}
+
+	public void setLangBack(String langBack) {
+		this.langBack = langBack;
+	}
+	
+	
+
 }

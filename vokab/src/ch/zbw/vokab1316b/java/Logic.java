@@ -1,6 +1,7 @@
 package ch.zbw.vokab1316b.java;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -49,7 +50,7 @@ public class Logic {
 	public void addCard(String frontside, String backside, int category,
 			String lang_frontside, String lang_backside) {
 		vocabularylist.add(new Card(frontside, backside, category,
-				lang_backside, lang_frontside));
+				lang_frontside, lang_backside));
 	}
 
 
@@ -170,6 +171,40 @@ public class Logic {
 		return getCard();
 	}
 	
+	private String getBack(String back)
+	{
+		for(Card v : vocabularylist)
+		{
+			back = v.getBack();
+			if(v.getBack().equals(back))
+			{
+				return v.getBack();
+			}
+		}
+		return null;
+	}
+	
+	
+	public String getCardLang(String text)
+	{
+	
+		for(Card v : vocabularylist)
+		{
+			if(v.getFront().equals(text) && v.getLangFront().equals(v.getLangFront()))
+			{
+			return v.getLangFront();
+			}
+			else if(v.getBack().equals(text) && v.getLangBack().equals(v.getLangBack()))
+					{
+				return v.getLangBack();
+					}
+		
+		}
+		return null;
+	}
+
+		
+	
 	//
 	//
 	// TODO switch_card_side ?
@@ -226,6 +261,7 @@ public class Logic {
 		this.successcounter = this.successcounter + 1;
 	}
 
+	
 	/*
 	 * get the actual INT for Fault cards
 	 */
