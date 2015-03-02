@@ -93,6 +93,20 @@ public class Languages {
     String requestFr = ("S'il vous plait entrer une solution!");
     String requestIt = ("Inserisci una soluzione!");
     
+    // Übersetzung Feedback auf korrekt oder falsche Antwort
+    String feedbackOkDe = ("letzte Antwort war korrekt!");
+    String feedbackNokDe1 = ("letzte Antwort war falsch!");
+    String feedbackNokDe2 = ("(Auflösung: ");
+    String feedbackOkEn = ("last answer was correct!");
+    String feedbackNokEn1 = ("last answer was wrong!");
+    String feedbackNokEn2 = ("(solution: ");
+    String feedbackOkFr = ("dernière réponse était correcte!");
+    String feedbackNokFr1 = ("dernière réponse était fausse!");
+    String feedbackNokFr2 = ("(solution: ");
+    String feedbackOkIt = ("ultima risposta era corretta!");
+    String feedbackNokIt1 = ("ultima risposta era sbagliata!");
+    String feedbackNokIt2 = ("(soluzione: ");
+    
 	// Gib aktuell Spracheinstellung
 	public String getLanguage() {
 		return language;
@@ -301,4 +315,49 @@ public class Languages {
 			else
 				return closeIt;			
 			}
+		
+		// Gib Übersetzung korrekte Antwort
+		public String getLangOk() {
+			if(language == "de"){
+				return feedbackOkDe;			
+			}
+			if(language == "en"){
+				return feedbackOkEn;			
+			}
+			if(language == "fr"){
+				return feedbackOkFr;			
+			}
+			else
+				return feedbackOkIt;			
+			}
+		
+		// Gib Übersetzung falsche Antwort
+		public String getLangNok1() {
+			if(language == "de"){
+				return feedbackNokDe1;			
+			}
+			if(language == "en"){
+				return feedbackNokEn1;			
+			}
+			if(language == "fr"){
+				return feedbackNokFr1;			
+			}
+			else
+				return feedbackNokIt1;			
+			}
+		
+		// Gib Übersetzung falsche Antwort
+			public String getLangNok2() {
+				if(language == "de"){
+					return feedbackNokDe2;			
+				}
+				if(language == "en"){
+					return feedbackNokEn2;			
+				}
+				if(language == "fr"){
+					return feedbackNokFr2;			
+				}
+				else
+					return feedbackNokIt2;			
+				}
 }

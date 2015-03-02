@@ -59,12 +59,13 @@ public class WorkGUI {
   	private JPanel mainRightPanel  = new JPanel();
   	private JPanel lowerPanel  = new JPanel();
   	
-  	private JLabel lblDesc1 = new JLabel("De:");
-  	private JLabel lblDesc2 = new JLabel("En:");
-  	private JLabel lblResult = new JLabel();
+  	private JLabel lblDesc1 = new JLabel();
+  	private JLabel lblDesc2 = new JLabel();
+  	private JLabel lblResult1 = new JLabel();
+  	private JLabel lblResult2 = new JLabel();
   	private JLabel lblSpaceCenter  = new JLabel();
-  	private JLabel lblSpaceLeft  = new JLabel("                                                            ");
-  	private JLabel lblSpaceRight  = new JLabel("                                                            ");
+  	private JLabel lblSpaceLeft  = new JLabel("                                        ");
+  	private JLabel lblSpaceRight  = new JLabel("                                        ");
 
   	private JTextField txtFront = new JTextField();
   	private JTextField txtBack = new JTextField();
@@ -87,8 +88,10 @@ public class WorkGUI {
     	mainPanel.setLayout(new GridLayout(10, 1));
     	
         // Labels Layout konfigurieren
-		lblResult.setOpaque(true);
-		lblResult.setHorizontalAlignment(SwingConstants.CENTER);
+		lblResult1.setOpaque(true);
+		lblResult1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblResult2.setOpaque(true);
+		lblResult2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDesc1.setOpaque(true);
 		lblDesc1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDesc2.setOpaque(true);
@@ -130,7 +133,8 @@ public class WorkGUI {
 		mainPanel.add(lblSpaceCenter);
 		mainPanel.add(lblDesc2);
 		mainPanel.add(txtBack);
-		mainPanel.add(lblResult);
+		mainPanel.add(lblResult1);
+		mainPanel.add(lblResult2);
 		mainLeftPanel.add(lblSpaceLeft);
 		mainRightPanel.add(lblSpaceRight);
     	lowerPanel.add(btnSwitch);
@@ -145,68 +149,71 @@ public class WorkGUI {
 	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
 	    
 		// Testkarten hinzufuegen
-		logic.addCard("Hallo", "hello", 1, "de", "en");
-		logic.addCard("Nein", "no", 2, "de", "en");
-		logic.addCard("Tier", "animal", 3, "de", "en");
-		logic.addCard("Hund", "dog", 4, "de", "en");
-		logic.addCard("Katze", "cat", 5, "de", "en");
+		logic.addCard("hallo", "hello", 1, "de", "en");
+		logic.addCard("nein", "no", 2, "de", "en");
+		logic.addCard("tier", "animal", 3, "de", "en");
+		logic.addCard("hund", "dog", 4, "de", "en");
+		logic.addCard("katze", "cat", 5, "de", "en");
 		
-        // Füllt erstes Wort zum übersetzen in's Front-Textfiled
+        // Füllt erstes Wort zum übersetzen in's Front-Textfield und beschriftet die Sprache der Boxen
 		txtFront.setText(logic.getCard());
+		lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));
+		lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
 		
-		// Prüfen Knopf wird allenfalls ausgebaut
-//		/**
-//		 * Pruefen-Button auf Listener setzen und Karten auf Richtigkeit pruefen
-//		 */
-//		btnCheck.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
-//				// wenn true, nächste Karte anzeigen und "OK" ausgeben - txtfield_ty clearen usw.
-//				if(txtBack.getText().equals("") && languages.getLanguage() == "de") {
-//					lblResult.setText("Bitte gib eine Loesung ein!");
-//				}
-//				else if(txtBack.getText().equals("") && languages.getLanguage() == "en") {
-//					lblResult.setText("Please type in an answer!");
-//				}
-//				// wenn true, nächste Karte anzeigen und "OK" ausgeben - txtfield_ty clearen usw.
-//				else if(check)
-//				{
-//					lblResult.setText("richtig");
-//					lblResult.setBackground(Color.green);
-//				}
-//				/*
-//				 * Wenn false nochmal probieren und "Falsch :-(" ausgeben
-//				 */
-//				else
-//				{
-//					lblResult.setText("falsch");
-//					lblResult.setBackground(Color.red);
-//				}
-//			}
-//		});
+		
+		// Switch Knopf dreht Lernkarten. Wenn false dann true und wenn true dann false. Am schluss neue karte laden
+		/**
+		 * Switch-Button auf Listener setzen. Boolean Switch card side auf false oder true setzen.
+		 * Nächste Karte laden.
+		 */
+		btnSwitch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (logic.isSwitch_card_side() == true) {
+					logic.setSwitch_card_side(false);
+					System.out.println(logic.isSwitch_card_side());
+					txtFront.setText(logic.getCard());
+					lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));
+					lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
+				}
+				else {
+					logic.setSwitch_card_side(true);
+					System.out.println(logic.isSwitch_card_side());
+					txtFront.setText(logic.getCard());
+					lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));
+					lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
+				}
+			}
+		});
 		
 		// Listener für Next Button.
 		// Prüft Eingabe und reagiert entsprechend.
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
+				// Zurücksetzen des Lösungsfeldes
+				lblResult2.setText("");
 				// Wenn keine Eingabe, Text anzeigen mit Aufforderung zur Lösungseingabe und Fokus wieder auf Feld txtBack setzen
 				if(txtBack.getText().equals("")) {
-					lblResult.setText(languages.getLangRequest());
+					lblResult1.setText(languages.getLangRequest());
 					setFocus();
 				}
 				// Wenn Eingabe Richtig (also true): Lösungstext löschen, "OK" ausgeben und nächste Karte laden und Fokus wieder auf Feld txtBack setzen
 				else if(check) {
 					txtBack.setText("");
-					lblResult.setText("OK");
+					lblResult1.setText(languages.getLangOk());
 					txtFront.setText(logic.getCard());
+					lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));
+					lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
 					setFocus();
 				}
 				// Wenn Eingabe Falsch (also false): Lösungstext löschen, "X" ausgeben und nächste Karte laden und Fokus wieder auf Feld txtBack setzen
 				else {
 					txtBack.setText("");
-					lblResult.setText("X");
+					lblResult1.setText(languages.getLangNok1());
+					lblResult2.setText(languages.getLangNok2() + logic.getSolution(txtFront.getText()) + ")");
 					txtFront.setText(logic.getCard());
+					lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));
+					lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
 					setFocus();
 				}
 			}

@@ -81,7 +81,7 @@ public class MainGUI {
     	// Labels Layout konfigurieren
     	Border border = LineBorder.createBlackLineBorder();
     	lblTitle.setBorder(border);
-    	lblContent.setBorder(border);
+    	//lblContent.setBorder(border);
     	lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
     	lblContent.setHorizontalAlignment(SwingConstants.CENTER);
     	  	
@@ -155,11 +155,11 @@ public class MainGUI {
 					final Logic logic = new Logic().getInstance();
 
 					// adding some dummy-Vocabulary-objects to verify exporting works the way we expect it to 
-					logic.addCard("Hallo", "hello", 1, "de", "en");
-					logic.addCard("Nein", "no", 2, "de", "en");
-					logic.addCard("Tier", "animal", 3, "de", "en");
-					logic.addCard("Hund", "dog", 4, "de", "en");
-					logic.addCard("Katze", "cat", 5, "de", "en");
+					logic.addCard("hallo", "hello", 1, "de", "en");
+					logic.addCard("nein", "no", 2, "de", "en");
+					logic.addCard("tier", "animal", 3, "de", "en");
+					logic.addCard("hund", "dog", 4, "de", "en");
+					logic.addCard("katze", "cat", 5, "de", "en");
 					
 
 					// create instance of Exporter
