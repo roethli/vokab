@@ -79,7 +79,11 @@ public class RegisterGUI {
   	  	
   	  	// Textfelder Layout konfigurieren
 		txtFront.setHorizontalAlignment(SwingConstants.CENTER);
+		txtFront.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBack.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBack.setHorizontalAlignment(SwingConstants.CENTER);
+		txtLang1.setHorizontalAlignment(SwingConstants.CENTER);
+		txtLang2.setHorizontalAlignment(SwingConstants.CENTER);
 		
     	// Listener für Button Close und die Sprachbox erstellen
     	btnClose.addActionListener(new ButtonListener());
@@ -121,24 +125,19 @@ public class RegisterGUI {
 	    mainFrame.add(mainLeftPanel,  BorderLayout.WEST);
 	    mainFrame.add(mainRightPanel,  BorderLayout.EAST);
 	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
-	    
-		// Testkarten hinzufuegen
-		logic.addCard("hallo", "hello", 1, "de", "en");
-		logic.addCard("nein", "no", 2, "de", "en");
-		logic.addCard("tier", "animal", 3, "de", "en");
-		logic.addCard("hund", "dog", 4, "de", "en");
-		logic.addCard("katze", "cat", 5, "de", "en");
-		
-        // Füllt erstes Wort zum übersetzen in's Front-Textfiled
-		// txtFront.setText(logic.getCard());
-		
-		// Listener für Save Button.
+	    		
+        // Listener für Save Button.
 		// Prüft Eingabe und reagiert entsprechend.
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				logic.addCard(txtFront.getText(), txtBack.getText(), 1, txtLang1.getText(), txtLang2.getText());
 				System.out.println(logic.checkInput("ape", "affe"));
-				// felder wieder löschen...
+				//Alle Eingabefelder wieder löschen damit bereit für nächste Karte
+				txtFront.setText("");
+				txtBack.setText("");
+				txtLang1.setText("");
+				txtLang2.setText("");
+				setFocus();
 			}
 		});
   	}
@@ -149,8 +148,6 @@ public class RegisterGUI {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btnClose){
 				mainFrame.setVisible(false);
-				logic.getOverview();
-				
 			}
 		}
 	}

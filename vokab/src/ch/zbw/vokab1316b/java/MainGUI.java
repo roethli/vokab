@@ -42,8 +42,9 @@ import javax.swing.border.*;
  */
 public class MainGUI {
 
-	// Instanziere Klasse WorkGUI und Languages
+	// Instanziere Klasse WorkGUI, RegisterGUI und Languages
 	WorkGUI workGUI = new WorkGUI();
+	RegisterGUI registerGUI = new RegisterGUI();
 	Languages languages = new Languages();
 	
 	// Main frame
@@ -69,7 +70,7 @@ public class MainGUI {
     private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
   	
     public MainGUI() {
-		
+    			
     	// Layout Einstellungen für Frame und Panels
   		mainFrame.setTitle(languages.getProduct() + languages.getVersion());
     	mainFrame.setResizable(false);
@@ -136,7 +137,8 @@ public class MainGUI {
 			}
 			// Wird aufgerufen, wenn der Erfassen Button gedrückt wird
 			if (e.getSource() == btnRegister) {
-				System.out.println("erfassen");
+				registerGUI.paint();
+				registerGUI.setFocus();
 			}
 			// Wird aufgerufen, wenn der Speichern Button gedrückt wird
 			if (e.getSource() == btnSave) {
@@ -152,15 +154,7 @@ public class MainGUI {
 					System.out.println("Saving: " + file.getName() + ".");
 
 					// get instance of VocabLogik by calling getInstance-singleton-method
-					final Logic logic = new Logic().getInstance();
-
-					// adding some dummy-Vocabulary-objects to verify exporting works the way we expect it to 
-					logic.addCard("hallo", "hello", 1, "de", "en");
-					logic.addCard("nein", "no", 2, "de", "en");
-					logic.addCard("tier", "animal", 3, "de", "en");
-					logic.addCard("hund", "dog", 4, "de", "en");
-					logic.addCard("katze", "cat", 5, "de", "en");
-					
+					final Logic logic = new Logic().getInstance();					
 
 					// create instance of Exporter
 					Exporter ex = new Exporter();

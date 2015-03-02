@@ -77,8 +77,7 @@ public class WorkGUI {
   	// Combobox (Sprachauswahl) erstellen und mit Objekten abfüllen
     private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
     
-  	public WorkGUI() {
-  		
+  	public WorkGUI() {  		
      	// Layout Einstellungen für Frame und Panels
 		mainFrame.setTitle(languages.getProduct() + languages.getVersion());
     	mainFrame.setResizable(false);
@@ -149,11 +148,9 @@ public class WorkGUI {
 	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
 	    
 		// Testkarten hinzufuegen
-		logic.addCard("hallo", "hello", 1, "de", "en");
-		logic.addCard("nein", "no", 2, "de", "en");
-		logic.addCard("tier", "animal", 3, "de", "en");
-		logic.addCard("hund", "dog", 4, "de", "en");
-		logic.addCard("katze", "cat", 5, "de", "en");
+		logic.addCard("haus", "house", 1, "de", "en");
+		logic.addCard("spiel", "game", 1, "de", "en");
+		
 		
         // Füllt erstes Wort zum übersetzen in's Front-Textfield und beschriftet die Sprache der Boxen
 		txtFront.setText(logic.getCard());
@@ -197,7 +194,8 @@ public class WorkGUI {
 					lblResult1.setText(languages.getLangRequest());
 					setFocus();
 				}
-				// Wenn Eingabe Richtig (also true): Lösungstext löschen, "OK" ausgeben und nächste Karte laden und Fokus wieder auf Feld txtBack setzen
+				// Wenn Eingabe Richtig (also true): Lösungstext löschen, Feedback ausgeben
+				// nächste Karte laden und Fokus wieder auf Feld txtBack setzen
 				else if(check) {
 					txtBack.setText("");
 					lblResult1.setText(languages.getLangOk());
@@ -206,7 +204,8 @@ public class WorkGUI {
 					lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
 					setFocus();
 				}
-				// Wenn Eingabe Falsch (also false): Lösungstext löschen, "X" ausgeben und nächste Karte laden und Fokus wieder auf Feld txtBack setzen
+				// Wenn Eingabe Falsch (also false): Lösungstext löschen, Feedback ausgeben,
+				// nächste Karte laden und Fokus wieder auf Feld txtBack setzen
 				else {
 					txtBack.setText("");
 					lblResult1.setText(languages.getLangNok1());
