@@ -201,6 +201,24 @@ public class Logic {
 		return null;
 	}
 	
+	public String getSolution(String text)
+	{
+		for(Card v : vocabularylist)
+		{
+			if(v.getFront().equals(text))
+			{
+				if(!switch_card_side)
+				{
+				return v.getBack();
+				}
+				else
+				return v.getFront();
+			}
+			
+		}
+		return null;
+	}
+	
 	
 	//
 	//
