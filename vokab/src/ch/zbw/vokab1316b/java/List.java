@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class List {
 
-	private ArrayList<Card> vocabularylist; // Arraylist für die Karten
+	private ArrayList<Card> vocabularylist; // ArrayList für die Karten
 
 	public List() {
 		
