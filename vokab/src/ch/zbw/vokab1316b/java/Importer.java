@@ -9,19 +9,20 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 /**
- * This class implements importing Vocubalary-Lists as arraylist from a file containing marshalled Vocaulary objects encoded in XML.
- * For unmarshalling JAXB is used. 
- * 
+ * Diese Klasse implementiert das Importieren von Vocabulary-Listen aus einer Datei, welche als XML kodierte,
+ * serialisierte Vocabulary-Objekte enthält.
+ * Für die Deserialisierung wird JAXB verwendet.
+ *
  * @author Habib Ben Abdelbaki, ZbW
  * @version 1.0 19.02.2015
  */
 
 public class Importer {
 	/**
-	 * Imports Vocabulary objects from a file
+	 * Importiert Vocabulary-Objekte aus einer Datei
 	 * 
-	 * @param file instance of <a href="http://docs.oracle.com/javase/7/docs/api/java/io/File.html">File</a> 
-	 * @return arraylist containing Vocabulary objects
+	 * @param Datei-Instanz der Klasse <a href="http://docs.oracle.com/javase/7/docs/api/java/io/File.html">File</a> 
+	 * @return ArrayList, welche Vocabulary-Objekte enthält
 	 */
 	public ArrayList<Card> importFromFile(File file) {
 		List vl = new List();
@@ -30,7 +31,7 @@ public class Importer {
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			vl = (List) jaxbUnmarshaller.unmarshal(file);
-			//System.out.println(vl.getVocabularylist().get(0).getBackside());
+			System.out.println(vl.getVocabularylist().get(0).getBack());
 		} 
 		catch (JAXBException e) {
 			e.printStackTrace();

@@ -38,7 +38,7 @@ import ch.zbw.vokab1316b.java.*;
 /**
  * Diese Klasse implementiert einen einfachen Lern-GUI.
  * Beim erstellen der Klassen wird der Work-GUI zum lernen mittels Komponenten wie Labels, Textfields, Buttons, etc. angezeigt
- * und reagiert auf User-Befehle wie z.B. das drücken eines Buttons.
+ * und reagiert auf User-Befehle wie z.B. das drï¿½cken eines Buttons.
  * 
  * @author Marcel Baumgartner, ZbW
  * @version 1.0 02.02.2015
@@ -62,6 +62,7 @@ public class WorkGUI {
   	private JLabel lblDesc1 = new JLabel();
   	private JLabel lblDesc2 = new JLabel();
   	private JLabel lblResult1 = new JLabel();
+  	private JLabel lblResult2 = new JLabel();
   	private JLabel lblSpaceCenter  = new JLabel();
   	private JLabel lblSpaceLeft  = new JLabel("                                        ");
   	private JLabel lblSpaceRight  = new JLabel("                                        ");
@@ -73,11 +74,11 @@ public class WorkGUI {
   	private JButton btnNext = new JButton(languages.getLangBtnNext());
   	private JButton btnClose = new JButton(languages.getLangBtnClose());
 	
-  	// Combobox (Sprachauswahl) erstellen und mit Objekten abfüllen
+  	// Combobox (Sprachauswahl) erstellen und mit Objekten abfï¿½llen
     private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
     
   	public WorkGUI() {  		
-     	// Layout Einstellungen für Frame und Panels
+     	// Layout Einstellungen fï¿½r Frame und Panels
 		mainFrame.setTitle(languages.getProduct() + languages.getVersion());
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -88,6 +89,8 @@ public class WorkGUI {
         // Labels Layout konfigurieren
 		lblResult1.setOpaque(true);
 		lblResult1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblResult2.setOpaque(true);
+		lblResult2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDesc1.setOpaque(true);
 		lblDesc1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDesc2.setOpaque(true);
@@ -102,7 +105,7 @@ public class WorkGUI {
 		txtFront.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBack.setHorizontalAlignment(SwingConstants.CENTER);
 		
-    	// Listener für Button Close und die Sprachbox erstellen
+    	// Listener fï¿½r Button Close und die Sprachbox erstellen
     	btnClose.addActionListener(new ButtonListener());
     	boxLanguage.addActionListener(new ComboboxListener());
   	}
@@ -111,6 +114,7 @@ public class WorkGUI {
   	public void paint(String language){
   		this.languages.language = language;
   		this.boxLanguage.setSelectedItem(language);
+  		setLang();
   		setFocus();
   		
    		// Klasse Logik instanzieren
@@ -129,25 +133,22 @@ public class WorkGUI {
 		mainPanel.add(lblDesc2);
 		mainPanel.add(txtBack);
 		mainPanel.add(lblResult1);
+		mainPanel.add(lblResult2);
 		mainLeftPanel.add(lblSpaceLeft);
 		mainRightPanel.add(lblSpaceRight);
     	lowerPanel.add(btnSwitch);
     	lowerPanel.add(btnNext);
     	lowerPanel.add(btnClose);
 		
-	    // Alle Panels dem Frame hinzufügen und Layout bestimmen
+	    // Alle Panels dem Frame hinzufï¿½gen und Layout bestimmen
 	    mainFrame.add(upperPanel, BorderLayout.NORTH);
 	    mainFrame.add(mainPanel, BorderLayout.CENTER);
 	    mainFrame.add(mainLeftPanel,  BorderLayout.WEST);
 	    mainFrame.add(mainRightPanel,  BorderLayout.EAST);
 	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
-	    
-		// Testkarten hinzufuegen
-		logic.addCard("haus", "house", 1, "de", "en");
-		logic.addCard("spiel", "game", 1, "de", "en");
+	    		
 		
-		
-        // Füllt erstes Wort zum übersetzen in das Front-Textfield und beschriftet die Sprache der Boxen
+        // Fï¿½llt erstes Wort zum ï¿½bersetzen in's Front-Textfield und beschriftet die Sprache der Boxen
 		txtFront.setText(logic.getCard());
 		lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));
 		lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
@@ -156,7 +157,7 @@ public class WorkGUI {
 		// Switch Knopf dreht Lernkarten. Wenn false dann true und wenn true dann false. Am schluss neue karte laden
 		/**
 		 * Switch-Button auf Listener setzen. Boolean Switch card side auf false oder true setzen.
-		 * Nächste Karte laden.
+		 * Nï¿½chste Karte laden.
 		 */
 		btnSwitch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -177,36 +178,34 @@ public class WorkGUI {
 			}
 		});
 		
-		// Listener für Next Button.
-		// Prüft Eingabe und reagiert entsprechend.
+		// Listener fï¿½r Next Button.
+		// Prï¿½ft Eingabe und reagiert entsprechend.
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
-				// Wenn keine Eingabe, Popup mit Aufforderung zur Lösungseingabe und Fokus wieder auf Feld txtBack setzen
+				// Zurï¿½cksetzen des Lï¿½sungsfeldes
+				lblResult2.setText("");
+				// Wenn keine Eingabe, Text anzeigen mit Aufforderung zur Lï¿½sungseingabe und Fokus wieder auf Feld txtBack setzen
 				if(txtBack.getText().equals("")) {
-					JOptionPane.showMessageDialog(null,
-							languages.getLangRequest(),
-                            languages.getWordAttention(),
-	                        JOptionPane.WARNING_MESSAGE);
+					lblResult1.setText(languages.getLangRequest());
 					setFocus();
 				}
-				// Wenn Eingabe Richtig (also true): Lösungstext löschen,
-				// nächste Karte laden und Fokus wieder auf Feld txtBack setzen
+				// Wenn Eingabe Richtig (also true): Lï¿½sungstext lï¿½schen, Feedback ausgeben
+				// nï¿½chste Karte laden und Fokus wieder auf Feld txtBack setzen
 				else if(check) {
 					txtBack.setText("");
+					lblResult1.setText(languages.getLangOk());
 					txtFront.setText(logic.getCard());
 					lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));
 					lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
 					setFocus();
 				}
-				// Wenn Eingabe Falsch (also false): Lösungstext löschen, Feedback ausgeben,
-				// nächste Karte laden und Fokus wieder auf Feld txtBack setzen
+				// Wenn Eingabe Falsch (also false): Lï¿½sungstext lï¿½schen, Feedback ausgeben,
+				// nï¿½chste Karte laden und Fokus wieder auf Feld txtBack setzen
 				else {
-					JOptionPane.showMessageDialog(null,
-                            languages.getLangNok1() + languages.getLangNok2() + logic.getSolution(txtFront.getText()) + ")",
-                            languages.getWordAttention(),
-	                        JOptionPane.WARNING_MESSAGE);
 					txtBack.setText("");
+					lblResult1.setText(languages.getLangNok1());
+					lblResult2.setText(languages.getLangNok2() + logic.getSolution(txtFront.getText()) + ")");
 					txtFront.setText(logic.getCard());
 					lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));
 					lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
@@ -216,7 +215,7 @@ public class WorkGUI {
 		});
   	}
     
-	// Listener für Close Button.
+	// Listener fï¿½r Close Button.
 	// Schliesst mainFrame der Klasse Work-GUI und zeigt die Auswertung an.
 	class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -227,8 +226,8 @@ public class WorkGUI {
 		}
 	}
 	
-	// Listener für Sprachauswahl.
-	// Setzt die in der Combobox gewählte Sprache.
+	// Listener fï¿½r Sprachauswahl.
+	// Setzt die in der Combobox gewï¿½hlte Sprache.
 	class ComboboxListener implements ActionListener {
 	    // Is called when combobox is selected
 		public void actionPerformed(ActionEvent e) {
@@ -252,7 +251,7 @@ public class WorkGUI {
 		}
 	}
 	
-  	// Methode setzt die via Combobox gewählte Sprache
+  	// Methode setzt die via Combobox gewï¿½hlte Sprache
   	private void setLang() {
     	btnSwitch.setText(languages.getLangBtnSwitch());
     	btnNext.setText(languages.getLangBtnNext());
@@ -261,7 +260,7 @@ public class WorkGUI {
     }
   	
     // Setzt Next Button als Standard Button (Enter)
-  	// Setzt txtBack Feld aktiv für Eingabe
+  	// Setzt txtBack Feld aktiv fï¿½r Eingabe
   	public void setFocus(){
         mainFrame.getRootPane().setDefaultButton(btnNext);
         txtBack.requestFocusInWindow();

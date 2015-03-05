@@ -6,7 +6,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -16,7 +15,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -37,7 +35,7 @@ import javax.swing.border.*;
 /**
  * Diese Klasse implementiert einen einfachen Start-GUI (Main-GUI).
  * Beim erstellen der Klassen wird der Main-GUI mittels Komponenten wie Labels, Textfields, Buttons, etc. angezeigt
- * und reagiert auf User-Befehle wie z.B. das drücken eines Buttons.
+ * und reagiert auf User-Befehle wie z.B. das drï¿½cken eines Buttons.
  * 
  * @author Marcel Baumgartner, ZbW
  * @version 1.0 02.02.2015
@@ -49,40 +47,30 @@ public class MainGUI {
 	RegisterGUI registerGUI = new RegisterGUI();
 	Languages languages = new Languages();
 	
-    // Schriftarten definieren
-	Font buttonFont = new Font("arial", Font.TRUETYPE_FONT, 15);
-	Font titleFont = new Font("arial", Font.BOLD, 25);
-	Font contentFont = new Font("arial", Font.TRUETYPE_FONT, 12);
-		
-	// Bild laden
-	ImageIcon picture = new ImageIcon("vokablogo.png");
-    
 	// Main frame
 	JFrame mainFrame = new JFrame(languages.getProduct() + languages.getVersion());
 	
-  	// Erstellen und beschriften der Buttons
+  	// Declare key buttons
   	private JButton btnStart = new JButton(languages.getLangBtnStart());
   	private JButton btnSave = new JButton(languages.getLangBtnSave());
   	private JButton btnLoad = new JButton(languages.getLangBtnLoad());
   	private JButton btnRegister = new JButton(languages.getLangBtnRegister());
   	private JButton btnHelp = new JButton(languages.getLangBtnHelp());
   
-  	// Erstellen der Panels
+  	// Declare panels
   	private JPanel upperPanel = new JPanel();
   	private JPanel mainPanel = new JPanel();
   	private JPanel lowerPanel = new JPanel();
   	
-  	// Erstellen der Labels
+  	// Declare label
   	private JLabel lblTitle  = new JLabel(languages.getTitle());
-  	private JLabel lblContent  = new JLabel(picture);
-  	// private JLabel lblContent  = new JLabel(languages.getContent());
+  	private JLabel lblContent  = new JLabel(languages.getContent());
   	
-  	// Deklarieren und erstellen der Combobox
+  	// Declare and create combobox
     private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
   	
     public MainGUI() {
-    	
-    	// Layout Einstellungen für Frame und Panels
+    	// Layout Einstellungen fï¿½r Frame und Panels
   		mainFrame.setTitle(languages.getProduct() + languages.getVersion());
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,31 +78,25 @@ public class MainGUI {
     	mainPanel.setLayout(new BorderLayout(25, 25));
     	upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     	
-    	// Schriftart für Buttons und Labels definieren
-    	btnStart.setFont(buttonFont);
-    	btnSave.setFont(buttonFont);
-    	btnLoad.setFont(buttonFont);
-    	btnRegister.setFont(buttonFont);
-    	btnHelp.setFont(buttonFont);
-    	lblContent.setFont(contentFont);
-    	lblTitle.setFont(titleFont);
-    	
-    	
     	// Labels Layout konfigurieren
-    	//Border border = LineBorder.createBlackLineBorder();
-    	//lblTitle.setBorder(border);
+    	Border border = LineBorder.createBlackLineBorder();
+    	lblTitle.setBorder(border);
     	//lblContent.setBorder(border);
-    	lblContent.setText(languages.getContent());
     	lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
     	lblContent.setHorizontalAlignment(SwingConstants.CENTER);
     	  	
-    	// Listener für alle Buttons und die Sprachbox erstellen
+    	// Listener fï¿½r alle Buttons und die Sprachbox erstellen
     	btnStart.addActionListener(new ButtonListener());
     	btnSave.addActionListener(new ButtonListener());
     	btnLoad.addActionListener(new ButtonListener());
     	btnRegister.addActionListener(new ButtonListener());
     	btnHelp.addActionListener(new ButtonListener());
     	boxLanguage.addActionListener(new ComboboxListener());
+
+		// Testkarten hinzufuegen
+    	final Logic logic = new Logic().getInstance();
+		logic.addCard("haus", "house", 1, "de", "en");
+		logic.addCard("spiel", "game", 1, "de", "en");
   	}
     
 	// Zusammenbauen und anzeigen des Main-GUI.
@@ -137,32 +119,32 @@ public class MainGUI {
     	lowerPanel.add(btnRegister);
     	lowerPanel.add(btnHelp);
 		
-    	// Alle Panels dem Frame hinzufügen und Layout bestimmen
+    	// Alle Panels dem Frame hinzufï¿½gen und Layout bestimmen
 	    mainFrame.add(upperPanel, BorderLayout.NORTH);
 	    mainFrame.add(mainPanel, BorderLayout.CENTER);
 	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
 	    
   	}
 
-	// Listener für Buttons.
+	// Listener fï¿½r Buttons.
 	// Startet Lern-GUI, In- oder Exportiert Karteikarten, startet Erfassen-GUI und ruft Hilfe auf.
 	class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			// Wird aufgerufen, wenn der Help Button gedrückt wird
+			// Wird aufgerufen, wenn der Help Button gedrï¿½ckt wird
 			if (e.getSource() == btnHelp){
 				getHelp();
 			}
-			// Wird aufgerufen, wenn der Starten Button gedrückt wird
+			// Wird aufgerufen, wenn der Starten Button gedrï¿½ckt wird
 			if (e.getSource() == btnStart){
-				workGUI.paint(languages.getLanguage());
+				workGUI.paint(languages.language);
 				workGUI.setFocus();
 			}
-			// Wird aufgerufen, wenn der Erfassen Button gedrückt wird
+			// Wird aufgerufen, wenn der Erfassen Button gedrï¿½ckt wird
 			if (e.getSource() == btnRegister) {
-				registerGUI.paint(languages.getLanguage());
+				registerGUI.paint();
 				registerGUI.setFocus();
 			}
-			// Wird aufgerufen, wenn der Speichern Button gedrückt wird
+			// Wird aufgerufen, wenn der Speichern Button gedrï¿½ckt wird
 			if (e.getSource() == btnSave) {
 
 				// instantiate a new file dialog
@@ -176,7 +158,15 @@ public class MainGUI {
 					System.out.println("Saving: " + file.getName() + ".");
 
 					// get instance of VocabLogik by calling getInstance-singleton-method
-					final Logic logic = new Logic().getInstance();					
+					final Logic logic = new Logic().getInstance();
+
+					// adding some dummy-Vocabulary-objects to verify exporting works the way we expect it to 
+					//logic.addCard("hallo", "hello", 1, "de", "en");
+					//logic.addCard("nein", "no", 2, "de", "en");
+					//logic.addCard("tier", "animal", 3, "de", "en");
+					//logic.addCard("hund", "dog", 4, "de", "en");
+					//logic.addCard("katze", "cat", 5, "de", "en");
+
 
 					// create instance of Exporter
 					Exporter ex = new Exporter();
@@ -189,7 +179,7 @@ public class MainGUI {
 					System.out.println("Save command cancelled by user.");
 				}
 			}
-			// Wird aufgerufen, wenn der Laden Button gedrückt wird
+			// Wird aufgerufen, wenn der Laden Button gedrï¿½ckt wird
 			else if (e.getSource() == btnLoad) {
 
 				// instantiate a new file dialog
@@ -220,8 +210,8 @@ public class MainGUI {
 		}
 	}
 	
-	// Listener für Sprachauswahl.
-	// Setzt die in der Combobox gewählte Sprache.
+	// Listener fï¿½r Sprachauswahl.
+	// Setzt die in der Combobox gewï¿½hlte Sprache.
 	class ComboboxListener implements ActionListener {
 	    // Is called when help button is pressed
 		public void actionPerformed(ActionEvent e) {
@@ -245,7 +235,7 @@ public class MainGUI {
 		}
 	}
 	
-  	// Methode setzt die via Combobox gewählte Sprache
+  	// Methode setzt die via Combobox gewï¿½hlte Sprache
   	private void setLang() {
     	lblTitle.setText(languages.getTitle());
     	lblContent.setText(languages.getContent());
