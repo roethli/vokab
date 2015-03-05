@@ -34,7 +34,7 @@ public class Logic {
 	public Logic getInstance() {
 		if (instance == null) {
 			instance = new Logic();
-			instance.vocabularylist = new ArrayList<Card>(); // initialisere ArrayList
+			instance.vocabularylist = new ArrayList<Card>(); // initialisiere ArrayList
 			instance.category_max = 5; // initialize maximum of categories 5
 			instance.success = false; // initialize success
 			instance.switch_card_side = false; // initalize cardside - TRUE is
