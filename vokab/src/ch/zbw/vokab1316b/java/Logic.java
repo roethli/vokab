@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
- * @author Daniel Röthlisberger, ZbW
+ * @author Daniel Rï¿½thlisberger, ZbW
  * @version 1.0 07s.02.2015
  */
 
@@ -78,8 +78,8 @@ public class Logic {
 	private boolean checkInputNormal(String input, String front) {
 
 		for (Card v : vocabularylist) {
-			if (v.getFront().equals(front)) {
-				if (v.getBack().equals(input)) {
+			if (v.getFront().equalsIgnoreCase(front)) {
+				if (v.getBack().equalsIgnoreCase(input)) {
 					if (v.getCategory() < getCategory_max())
 						v.setCategory(v.getCategory() + 1);
 					setSuccesscounter();
@@ -100,8 +100,8 @@ public class Logic {
 	private boolean checkInputTurned(String input, String back) {
 
 		for (Card v2 : vocabularylist) {
-			if (v2.getBack().equals(back)) {
-				if (v2.getFront().equals(input)) {
+			if (v2.getBack().equalsIgnoreCase(back)) {
+				if (v2.getFront().equalsIgnoreCase(input)) {
 					if (v2.getCategory() < getCategory_max())
 						v2.setCategory(v2.getCategory() + 1);
 					setSuccesscounter();
@@ -295,12 +295,12 @@ public class Logic {
 	}
 
 	/**
-	 * Erfolgsübersicht Einfach - anzahl falsche / richtige
+	 * Erfolgsï¿½bersicht Einfach - anzahl falsche / richtige
 	 */
 	public void getOverview() {
 		JOptionPane.showMessageDialog(null, "Anzahl Richtig: "
 				+ getSuccesscounter() + "\n" + "Anzahl Falsche: "
-				+ getFaultcounter(), "Erfolgsübersicht",
+				+ getFaultcounter(), "Erfolgsï¿½bersicht",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 
