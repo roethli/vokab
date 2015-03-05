@@ -141,12 +141,7 @@ public class WorkGUI {
 	    mainFrame.add(mainLeftPanel,  BorderLayout.WEST);
 	    mainFrame.add(mainRightPanel,  BorderLayout.EAST);
 	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
-	    
-		// Testkarten hinzufuegen
-		logic.addCard("haus", "house", 1, "de", "en");
-		logic.addCard("spiel", "game", 1, "de", "en");
-		
-		
+
         // F�llt erstes Wort zum �bersetzen in das Front-Textfield und beschriftet die Sprache der Boxen
 		txtFront.setText(logic.getCard());
 		lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));

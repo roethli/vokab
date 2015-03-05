@@ -115,6 +115,12 @@ public class MainGUI {
     	btnRegister.addActionListener(new ButtonListener());
     	btnHelp.addActionListener(new ButtonListener());
     	boxLanguage.addActionListener(new ComboboxListener());
+    	
+		// Testkarten hinzufuegen
+    	final Logic logic = new Logic().getInstance();
+		logic.addCard("haus", "house", 1, "de", "en");
+		logic.addCard("spiel", "game", 1, "de", "en");
+
   	}
     
 	// Zusammenbauen und anzeigen des Main-GUI.
