@@ -36,8 +36,8 @@ import javax.swing.border.*;
 
 /**
  * Diese Klasse implementiert einen einfachen Start-GUI (Main-GUI).
- * Beim erstellen der Klassen wird der Main-GUI mittels Komponenten wie Labels, Textfields, Buttons, etc. angezeigt
- * und reagiert auf User-Befehle wie z.B. das dr�cken eines Buttons.
+ * Beim Erstellen der Klassen wird der Main-GUI mittels Komponenten wie Labels, Textfields, Buttons, etc. angezeigt
+ * und reagiert auf User-Befehle wie z.B. das Dr�cken eines Buttons.
  * 
  * @author Marcel Baumgartner, ZbW
  * @version 1.0 02.02.2015
@@ -171,54 +171,57 @@ public class MainGUI {
 			// Wird aufgerufen, wenn der Speichern Button gedr�ckt wird
 			if (e.getSource() == btnSave) {
 
-				// instantiate a new file dialog
+				// Neuen File Dialog instanzieren
 				final JFileChooser fc = new JFileChooser();
 				int returnVal = fc.showSaveDialog(mainFrame);
-				// user clicked 'save' in file dialog
+				// user hat 'save' im File Dialog geklickt
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 
-					// instantiate file from path returned from file dialog
+					// eine File-Instanz erzeugen mit dem Pfad, der vom 
+					// File Dialog zurück gegeben wurde
 					File file = fc.getSelectedFile();
 					System.out.println("Saving: " + file.getName() + ".");
 
-					// get instance of VocabLogik by calling getInstance-singleton-method
+					// Logic-Instance abholen durch Aufruf der getInstance()-Singleton-Methode
 					final Logic logic = new Logic().getInstance();					
 
-					// create instance of Exporter
+					// Instanz der Exporter-Klasse erzeugen
 					Exporter ex = new Exporter();
 
-					// export all vocabs, get list from logic
+					// Alle Vocabulary-Objekte exportieren, Liste dazu von Logic-Instanz holen
 					ex.exportToFile(logic.getVocabularylist(), file);
 				}
 				else {
-					// user clicked on 'cancel' in file dialog
+					// Benutzer hat im File Dialog auf 'cancel' geklickt
 					System.out.println("Save command cancelled by user.");
 				}
 			}
 			// Wird aufgerufen, wenn der Laden Button gedr�ckt wird
 			else if (e.getSource() == btnLoad) {
 
-				// instantiate a new file dialog
+				// neuer File-Dialog wird instanziert
 				final JFileChooser fc = new JFileChooser();
 				int returnVal = fc.showOpenDialog(mainFrame);
 
-				// user clicked 'open' in file dialog
+				// Benutzer hat im File-Dialog auf 'open' geklickt
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					// create instance of file using path returned from file dialog
+					// eine File-Instanz erzeugen mit dem Pfad, der vom 
+					// File Dialog zurück gegeben wurde					
 					File file = fc.getSelectedFile();
-					// output result (just for debugging purposes)
+					// Resultat ausgeben (nur für's Debugging)
 					System.out.println("Opening: " + file.getName() + ".");
 
-					// get instance of VocabLogik by calling getInstance-singleton-method
+					// Logic-Instance abholen durch Aufruf der getInstance()-Singleton-Methode
 					final Logic logic = new Logic().getInstance();
 
-					// create instance of Importer
+					// Importer-Instanz erzeugen
 					Importer imp = new Importer();
 
-					// replace vocab-list in logic by arraylist returned from Importer 
+					// Vocabulary-Liste ersetzen in der Logik durch die ArrayList, welche
+					// vom Importer zurück gegeben wird.
 					logic.setVocabularylist(imp.importFromFile(file));
 				}
-				// user clicked 'cancel'
+				// Benutzer hat auf 'cancel' geklickt
 				else {
 					System.out.println("Open command cancelled by user.");
 				}
@@ -229,7 +232,7 @@ public class MainGUI {
 	// Listener f�r Sprachauswahl.
 	// Setzt die in der Combobox gew�hlte Sprache.
 	class ComboboxListener implements ActionListener {
-	    // Is called when help button is pressed
+		// Wird aufgerufen, when der 'Help'-Button angeklickt wird
 		public void actionPerformed(ActionEvent e) {
 			String selectedItem = (String)boxLanguage.getSelectedItem();
 			if(selectedItem.equals("de")) {
