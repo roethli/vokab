@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * 
- * Sole purpose of this class is to act as a sort of wrapper for a vocabulary list. 
- * Since we need to have a single and unique root element when marshalling to XML, 
- * this class acts as one.
+ * Einziger Sinn und Zweck dieser Klasse ist es eine Vocabulary-Liste zu wrappen.
+ * Dies ist nötig, da wir beim Marshalling nach XML ein einziges und eindeutiges
+ * Root-Element haben müssen.
  * 
  * @author Habib Ben Abdelbaki, ZbW
  * @version 1.0 19.02.2015
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class List {
 
-	private ArrayList<Card> vocabularylist; // Arraylist for the words
+	private ArrayList<Card> vocabularylist; // ArrayList für die Karten
 
 	public List() {
 		
