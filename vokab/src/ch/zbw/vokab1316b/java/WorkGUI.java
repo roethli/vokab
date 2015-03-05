@@ -108,12 +108,12 @@ public class WorkGUI {
     	// Listener für Button Close und die Sprachbox erstellen
     	btnClose.addActionListener(new ButtonListener());
     	boxLanguage.addActionListener(new ComboboxListener());
-		
   	}
   	
   	// Zusammenbauen und anzeigen des Work-GUI.
-  	public void paint(){
-  		
+  	public void paint(String language){
+  		this.languages.language = language;
+  		this.boxLanguage.setSelectedItem(language);
   		setLang();
   		setFocus();
   		
@@ -226,7 +226,6 @@ public class WorkGUI {
 			if(e.getSource() == btnClose){
 				mainFrame.setVisible(false);
 				logic.getOverview();
-				
 			}
 		}
 	}
@@ -288,6 +287,7 @@ public class WorkGUI {
 		}
 		
 		WorkGUI gui = new WorkGUI();
-		gui.paint();
+		
+		gui.paint(null);
 	}  	
 }

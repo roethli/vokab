@@ -132,7 +132,7 @@ public class MainGUI {
 			}
 			// Wird aufgerufen, wenn der Starten Button gedrückt wird
 			if (e.getSource() == btnStart){
-				workGUI.paint();
+				workGUI.paint(languages.language);
 				workGUI.setFocus();
 			}
 			// Wird aufgerufen, wenn der Erfassen Button gedrückt wird
