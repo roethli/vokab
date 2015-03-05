@@ -27,7 +27,7 @@ public class Card {
 	private int successful;
 
 	/*
-	 * constructor with no parameter needed for XML-marshalling
+	 * Konstruktor ohne Parameter. Wird für das XML-Mashalling gebraucht.
 	 */
 	public Card() {
 
