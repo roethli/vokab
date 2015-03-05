@@ -62,7 +62,6 @@ public class WorkGUI {
   	private JLabel lblDesc1 = new JLabel();
   	private JLabel lblDesc2 = new JLabel();
   	private JLabel lblResult1 = new JLabel();
-  	private JLabel lblResult2 = new JLabel();
   	private JLabel lblSpaceCenter  = new JLabel();
   	private JLabel lblSpaceLeft  = new JLabel("                                        ");
   	private JLabel lblSpaceRight  = new JLabel("                                        ");
@@ -89,8 +88,6 @@ public class WorkGUI {
         // Labels Layout konfigurieren
 		lblResult1.setOpaque(true);
 		lblResult1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblResult2.setOpaque(true);
-		lblResult2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDesc1.setOpaque(true);
 		lblDesc1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDesc2.setOpaque(true);
@@ -114,7 +111,6 @@ public class WorkGUI {
   	public void paint(String language){
   		this.languages.language = language;
   		this.boxLanguage.setSelectedItem(language);
-  		setLang();
   		setFocus();
   		
    		// Klasse Logik instanzieren
@@ -133,7 +129,6 @@ public class WorkGUI {
 		mainPanel.add(lblDesc2);
 		mainPanel.add(txtBack);
 		mainPanel.add(lblResult1);
-		mainPanel.add(lblResult2);
 		mainLeftPanel.add(lblSpaceLeft);
 		mainRightPanel.add(lblSpaceRight);
     	lowerPanel.add(btnSwitch);
@@ -146,9 +141,13 @@ public class WorkGUI {
 	    mainFrame.add(mainLeftPanel,  BorderLayout.WEST);
 	    mainFrame.add(mainRightPanel,  BorderLayout.EAST);
 	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
-	    		
+	    
+		// Testkarten hinzufuegen
+		logic.addCard("haus", "house", 1, "de", "en");
+		logic.addCard("spiel", "game", 1, "de", "en");
 		
-        // F�llt erstes Wort zum �bersetzen in's Front-Textfield und beschriftet die Sprache der Boxen
+		
+        // F�llt erstes Wort zum �bersetzen in das Front-Textfield und beschriftet die Sprache der Boxen
 		txtFront.setText(logic.getCard());
 		lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));
 		lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
@@ -183,18 +182,18 @@ public class WorkGUI {
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
-				// Zur�cksetzen des L�sungsfeldes
-				lblResult2.setText("");
-				// Wenn keine Eingabe, Text anzeigen mit Aufforderung zur L�sungseingabe und Fokus wieder auf Feld txtBack setzen
+				// Wenn keine Eingabe, Popup mit Aufforderung zur L�sungseingabe und Fokus wieder auf Feld txtBack setzen
 				if(txtBack.getText().equals("")) {
-					lblResult1.setText(languages.getLangRequest());
+					JOptionPane.showMessageDialog(null,
+							languages.getLangRequest(),
+                            languages.getWordAttention(),
+	                        JOptionPane.WARNING_MESSAGE);
 					setFocus();
 				}
-				// Wenn Eingabe Richtig (also true): L�sungstext l�schen, Feedback ausgeben
+				// Wenn Eingabe Richtig (also true): L�sungstext l�schen,
 				// n�chste Karte laden und Fokus wieder auf Feld txtBack setzen
 				else if(check) {
 					txtBack.setText("");
-					lblResult1.setText(languages.getLangOk());
 					txtFront.setText(logic.getCard());
 					lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));
 					lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
@@ -203,9 +202,11 @@ public class WorkGUI {
 				// Wenn Eingabe Falsch (also false): L�sungstext l�schen, Feedback ausgeben,
 				// n�chste Karte laden und Fokus wieder auf Feld txtBack setzen
 				else {
+					JOptionPane.showMessageDialog(null,
+                            languages.getLangNok1() + languages.getLangNok2() + logic.getSolution(txtFront.getText()) + ")",
+                            languages.getWordAttention(),
+	                        JOptionPane.WARNING_MESSAGE);
 					txtBack.setText("");
-					lblResult1.setText(languages.getLangNok1());
-					lblResult2.setText(languages.getLangNok2() + logic.getSolution(txtFront.getText()) + ")");
 					txtFront.setText(logic.getCard());
 					lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));
 					lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
