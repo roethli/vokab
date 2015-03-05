@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -47,30 +49,39 @@ public class MainGUI {
 	RegisterGUI registerGUI = new RegisterGUI();
 	Languages languages = new Languages();
 	
+    // Schriftarten definieren
+	Font buttonFont = new Font("arial", Font.TRUETYPE_FONT, 15);
+	Font titleFont = new Font("arial", Font.BOLD, 25);
+	Font contentFont = new Font("arial", Font.TRUETYPE_FONT, 12);
+		
+	// Bild laden
+	ImageIcon picture = new ImageIcon("vokablogo.png");
+    
 	// Main frame
 	JFrame mainFrame = new JFrame(languages.getProduct() + languages.getVersion());
 	
-  	// Declare key buttons
+  	// Erstellen und beschriften der Buttons
   	private JButton btnStart = new JButton(languages.getLangBtnStart());
   	private JButton btnSave = new JButton(languages.getLangBtnSave());
   	private JButton btnLoad = new JButton(languages.getLangBtnLoad());
   	private JButton btnRegister = new JButton(languages.getLangBtnRegister());
   	private JButton btnHelp = new JButton(languages.getLangBtnHelp());
   
-  	// Declare panels
+  	// Erstellen der Panels
   	private JPanel upperPanel = new JPanel();
   	private JPanel mainPanel = new JPanel();
   	private JPanel lowerPanel = new JPanel();
   	
-  	// Declare label
+  	// Erstellen der Labels
   	private JLabel lblTitle  = new JLabel(languages.getTitle());
-  	private JLabel lblContent  = new JLabel(languages.getContent());
+  	private JLabel lblContent  = new JLabel(picture);
+  	// private JLabel lblContent  = new JLabel(languages.getContent());
   	
-  	// Declare and create combobox
+  	// Deklarieren und erstellen der Combobox
     private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
   	
     public MainGUI() {
-    			
+    	
     	// Layout Einstellungen für Frame und Panels
   		mainFrame.setTitle(languages.getProduct() + languages.getVersion());
     	mainFrame.setResizable(false);
@@ -79,10 +90,21 @@ public class MainGUI {
     	mainPanel.setLayout(new BorderLayout(25, 25));
     	upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     	
+    	// Schriftart für Buttons und Labels definieren
+    	btnStart.setFont(buttonFont);
+    	btnSave.setFont(buttonFont);
+    	btnLoad.setFont(buttonFont);
+    	btnRegister.setFont(buttonFont);
+    	btnHelp.setFont(buttonFont);
+    	lblContent.setFont(contentFont);
+    	lblTitle.setFont(titleFont);
+    	
+    	
     	// Labels Layout konfigurieren
-    	Border border = LineBorder.createBlackLineBorder();
-    	lblTitle.setBorder(border);
+    	//Border border = LineBorder.createBlackLineBorder();
+    	//lblTitle.setBorder(border);
     	//lblContent.setBorder(border);
+    	lblContent.setText(languages.getContent());
     	lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
     	lblContent.setHorizontalAlignment(SwingConstants.CENTER);
     	  	
@@ -132,12 +154,12 @@ public class MainGUI {
 			}
 			// Wird aufgerufen, wenn der Starten Button gedrückt wird
 			if (e.getSource() == btnStart){
-				workGUI.paint(languages.language);
+				workGUI.paint(languages.getLanguage());
 				workGUI.setFocus();
 			}
 			// Wird aufgerufen, wenn der Erfassen Button gedrückt wird
 			if (e.getSource() == btnRegister) {
-				registerGUI.paint();
+				registerGUI.paint(languages.getLanguage());
 				registerGUI.setFocus();
 			}
 			// Wird aufgerufen, wenn der Speichern Button gedrückt wird

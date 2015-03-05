@@ -91,8 +91,9 @@ public class RegisterGUI {
   	}
   	
   	// Zusammenbauen und anzeigen des Register-GUI.
-  	public void paint(){
-  		
+  	public void paint(String language){
+  		this.languages.language = language;
+  		this.boxLanguage.setSelectedItem(language);
   		setLang();
   		setFocus();
   		
@@ -208,6 +209,6 @@ public class RegisterGUI {
 		}
 		
 		RegisterGUI gui = new RegisterGUI();
-		gui.paint();
+		gui.paint(null);
 	}  	
 }

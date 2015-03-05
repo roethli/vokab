@@ -14,20 +14,16 @@ public class Languages {
 	String author = "Daniel, Habib und Marcel";
 	
 	// Definiere Titel für alle Sprachen (für Main-GUI)
-	String titleDe = ("<html><body><h1><strong>Herzlich Willkommen!</strong></h1></body></html>");
-	String titleEn = ("<html><body><h1><strong>Welcome!</strong></h1></body></html>");
-	String titleFr = ("<html><body><h1><strong>Bienvenue!</strong></h1></body></html>");
-	String titleIt = ("<html><body><h1><strong>Benvenuti!</strong></h1></body></html>");
+	String titleDe = ("Herzlich Willkommen!");
+	String titleEn = ("Welcome!");
+	String titleFr = ("Bienvenue!");
+	String titleIt = ("Benvenuti!");
 	
 	// Definiere Textinhalt für alle Sprachen (für Main-GUI)
-	String contentTextDe = ("<html><body><h3>Bitte waehle wie du weiter vorgehen moechtest:</h3><br><br>"
-	    	+ "Starten: Hiermit startest du das Lernprogramm Vokab V1.0<br>"
-	    	+ "Speichern\\Laden: Laden oder speichern von Karteien!<br>"
-	    	+ "Erfassen: Hinzufuegen von Lernkarteien!<br>"
-	    	+ "Hilfe: Kurzhilfe zu den wichtigesten Themen</body></html>");
-	String contentTextEn = ("<html><body><br> Please choose how you want to proceed further:<br><br></body></html>");
-	String contentTextFr = ("<html><body><br> S'il vous plait choisissez comment vous voulez proceder.:<br><br></body></html>");
-	String contentTextIt = ("<html><body><br>Si prega di scegliere come si vuole procedere ulteriormente:<br><br></body></html>");
+	String contentTextDe = "";
+	String contentTextEn = "";
+	String contentTextFr = "";
+	String contentTextIt = "";
 	
 	// Definiere Hilfetext für alle Sprachen (für Main-GUI)
     String helpTextDe = "In diesem Fenster wird eine einfache Hilfe angeboten."
@@ -44,6 +40,10 @@ public class Languages {
     String languageEn = ("Language");    
     String languageFr = ("Langue");
     String languageIt = ("Lingua");
+    String attentionDe = ("Achtung!");
+    String attentionEn = ("Attention!");    
+    String attentionFr = ("Attention!");
+    String attentionIt = ("Attento!");
     
     // Beschriftung der Buttons im Main-GUI
     String startDe = ("Starten");
@@ -94,18 +94,14 @@ public class Languages {
     String requestIt = ("Inserisci una soluzione!");
     
     // Übersetzung Feedback auf korrekt oder falsche Antwort
-    String feedbackOkDe = ("letzte Antwort war korrekt!");
-    String feedbackNokDe1 = ("letzte Antwort war falsch!");
-    String feedbackNokDe2 = ("(Auflösung: ");
-    String feedbackOkEn = ("last answer was correct!");
-    String feedbackNokEn1 = ("last answer was wrong!");
-    String feedbackNokEn2 = ("(solution: ");
-    String feedbackOkFr = ("dernière réponse était correcte!");
-    String feedbackNokFr1 = ("dernière réponse était fausse!");
-    String feedbackNokFr2 = ("(solution: ");
-    String feedbackOkIt = ("ultima risposta era corretta!");
-    String feedbackNokIt1 = ("ultima risposta era sbagliata!");
-    String feedbackNokIt2 = ("(soluzione: ");
+    String feedbackNokDe1 = ("Letzte Antwort war falsch!");
+    String feedbackNokDe2 = ("\n(Auflösung: ");
+    String feedbackNokEn1 = ("Last answer was wrong!");
+    String feedbackNokEn2 = ("\n(Solution: ");
+    String feedbackNokFr1 = ("Dernière réponse était fausse!");
+    String feedbackNokFr2 = ("\n(Solution: ");
+    String feedbackNokIt1 = ("Lltima risposta era sbagliata!");
+    String feedbackNokIt2 = ("\n(Soluzione: ");
     
 	// Gib aktuell Spracheinstellung
 	public String getLanguage() {
@@ -138,6 +134,20 @@ public class Languages {
 		}
 		return languageIt;
 	}
+	
+	// Gib Übersetzung Wort Falsch
+		public String getWordAttention() {
+			if(language == "de"){
+				return attentionDe;
+			}
+			if(language == "en"){
+				return attentionEn;
+			}
+			if(language == "fr"){
+				return attentionFr;
+			}
+			return attentionIt;
+		}
 	
 	// Gib Übersetzung Titel MainGUI
 	public String getTitle() {
@@ -314,21 +324,6 @@ public class Languages {
 			}
 			else
 				return closeIt;			
-			}
-		
-		// Gib Übersetzung korrekte Antwort
-		public String getLangOk() {
-			if(language == "de"){
-				return feedbackOkDe;			
-			}
-			if(language == "en"){
-				return feedbackOkEn;			
-			}
-			if(language == "fr"){
-				return feedbackOkFr;			
-			}
-			else
-				return feedbackOkIt;			
 			}
 		
 		// Gib Übersetzung falsche Antwort
