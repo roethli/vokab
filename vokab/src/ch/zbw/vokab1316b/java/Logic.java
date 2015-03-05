@@ -21,19 +21,20 @@ public class Logic {
 	private int faultcounter; // Simple counter for faults
 	private boolean switch_card_side;
 
-	// only here to avoid instantiation, for getting an instace 'getInstance'
-	// needs to be called
+
+	// Ist hier um die Instanzierung zu verhindern. Um eine Instanz der Logic-Klasse
+	// zu erhalten, muss getInstance() aufgerufen werden
 	protected Logic() {
 
 	}
 
-	// always returns the same instance of VocabLogik, no matter from which
-	// class this is called
+	// Gibt immer die exakt gleiche Instanz der Logic-Klasse zurück, unabhängig davon
+	// aus welcher Klasse diese aufgerufen wird. Somit kann sicher gestellt werden, 
+	// dass alle aufrufenden Klassen mit den gleichen Karten arbeiten bzw. diese manipulieren.
 	public Logic getInstance() {
 		if (instance == null) {
 			instance = new Logic();
-			instance.vocabularylist = new ArrayList<Card>(); // initialize
-																// Arraylist
+			instance.vocabularylist = new ArrayList<Card>(); // initialisere ArrayList
 			instance.category_max = 5; // initialize maximum of categories 5
 			instance.success = false; // initialize success
 			instance.switch_card_side = false; // initalize cardside - TRUE is
