@@ -254,7 +254,7 @@ public class MainGUI {
 		}
 	}
 	
-  	// Methode setzt die via Combobox gewï¿½hlte Sprache
+  	// Methode setzt die via Combobox gewählte Sprache
   	private void setLang() {
     	lblTitle.setText(languages.getTitle());
     	lblContent.setText(languages.getContent());
@@ -268,8 +268,7 @@ public class MainGUI {
   	
     // Methode zum anzeigen der Hilfefunktion
     private void getHelp() {
-        JOptionPane.showMessageDialog(mainFrame, languages.getLangHelp()
-        + languages.getWordLanguage() + ": " + languages.getLanguage(), languages.getLangBtnHelp() + "!", JOptionPane.QUESTION_MESSAGE);
+        JOptionPane.showMessageDialog(mainFrame, languages.getLangHelp(), languages.getLangBtnHelp() + "!", JOptionPane.QUESTION_MESSAGE);
     }
 	
   	/**

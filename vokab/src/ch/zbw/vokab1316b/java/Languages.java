@@ -9,9 +9,8 @@ public class Languages {
 	String language = "de";
 	
 	// Definiere Software Details
-	String product = "Vokab Trainer ";
+	String product = "Vokab Trainer";
 	String version = "V1.0";
-	String author = "Daniel, Habib und Marcel";
 	
 	// Definiere Titel für alle Sprachen (für Main-GUI)
 	String titleDe = ("Herzlich Willkommen!");
@@ -26,24 +25,51 @@ public class Languages {
 	String contentTextIt = "";
 	
 	// Definiere Hilfetext für alle Sprachen (für Main-GUI)
-    String helpTextDe = "In diesem Fenster wird eine einfache Hilfe angeboten."
-        		    + "\nFolgende Themen werden bearbeitet:" + "\nThema1" + "\nThema2" + "\nThema3" + "\n\n";
-    String helpTextEn = "In this window, a simple help is offered."
-        		    + "\nThe following topics are dealt with:" + "\nTopic1"	+ "\nTopic2" + "\nTopic3" + "\n\n";
-    String helpTextFr = "Dans cette fenetre, une aide simple est offert."
-        		    + "\nLes sujets suivants sont traites:"	+ "\nSujet1" + "\nSujet2" + "\nSujet3" + "\n\n";
-    String helpTextIt = "In questa finestra, un semplice aiuto viene offerto."
-        		    + "\nI seguenti argomenti sono trattati:" + "\nArgomento1" + "\nArgomento2" + "\nArgomento3" + "\n\n";
+    String helpTextDe = "In dieser Hilfe werden die Programmoptionen erklärt."
+        		    + "\n\n<html><u>Starten</>: Hier startest du den Lernmodus, also die Wortabfrage beginnt.</html>"
+        		    + "\n<html><u>Speichern</>: Diese Auswahl speichert die geladenen Wörter und den aktuellen Lernfortschritt.</html>"
+        		    + "\n<html><u>Laden</>: Mittels dem Laden-Knopf kann eine zuvor gespeicherte Wortliste geladen werden.</html>"
+        		    + "\n<html><u>Erfassen</>: Eigene oder zusätzliche Wörter zum lernen erfassen.</html>"
+        		    + "\n\nFür weitere Fragen bitte Mail an support@vokabtrainer.ch schicken." + "\n\n";
+    String helpTextEn = "In this help the program options are explained."
+		    		+ "\n\n<html><u>Start</>: Here you start the learning mode, so the word query begins.</html>"
+		    		+ "\n<html><u>Save</>: This selection saves the loaded words and the current progress.</html>"
+		    		+ "\n<html><u>Load</>: By means of the load button, a previously saved list will be loaded.</html>"
+		    		+ "\n<html><u>Register</>: Own or acquire additional words to learn.</html>"
+		    		+ "\n\nFor further questions please mail to support@vokabtrainer.ch." + "\n\n";
+    String helpTextFr = "Dans ce aide les options du programme seront expliquées."
+    				+ "\n\n<html><u>Début</>: Ici vous démarrez le mode d'apprentissage, de sorte que le mot requête commence.</html>"
+    				+ "\n<html><u>Enregistrer</>: Cette sélection permet d'économiser les mots chargés et les progrès en cours.</html>"
+    				+ "\n<html><u>Chargement</>: Au moyen de la touche de chargement, une liste sauvegardée auparavant sera chargé.</html>"
+    				+ "\n<html><u>Capture</>: Posséder ou acquérir des mots supplémentaires à apprendre.</html>"
+    				+ "\n\nPour d'autres questions se il vous plaît mail à support@vokabtrainer.ch." + "\n\n";
+    String helpTextIt = "In questo aiuto verranno spiegate le opzioni del programma."
+		    		+ "\n\n<html><u>Inizio</>: Qui si avvia la modalità di apprendimento, così inizia la query di parola.</html>"
+		    		+ "\n<html><u>Salva</>: Questa selezione consente di risparmiare le parole caricate e lo stato di avanzamento attuale.</html>"
+		    		+ "\n<html><u>Caricamento</>: Tramite il pulsante di carico, viene caricato un elenco precedentemente salvato.</html>"
+		    		+ "\n<html><u>Cattura</>: Acquistare o acquisire ulteriori parole da imparare.</html>"
+		    		+ "\n\nPer ulteriori domande scrivere a support@vokabtrainer.ch." + "\n\n";
     
-    // Übersetzung des Wortes Sprache
-    String languageDe = ("Sprache");
-    String languageEn = ("Language");    
-    String languageFr = ("Langue");
-    String languageIt = ("Lingua");
-    String attentionDe = ("Achtung!");
-    String attentionEn = ("Attention!");    
-    String attentionFr = ("Attention!");
-    String attentionIt = ("Attento!");
+    // Übersetzung der Wörter Sprache und Achtung
+    String languageDe = "Sprache";
+    String languageEn = "Language";    
+    String languageFr = "Langue";
+    String languageIt = "Lingua";
+    String attentionDe = "Achtung!";
+    String attentionEn = "Attention!";    
+    String attentionFr = "Attention!";
+    String attentionIt = "Attento!";
+    
+    // Übersetzungen für Register-GUI
+    String questionDe = "Fragewort";
+    String questionEn = "Question word";
+    String questionFr = "Question mot";
+    String questionIt = "Domanda di parola";
+    String answerDe = "Antwort";
+    String answerEn = "Solution";
+    String answerFr = "Solution";
+    String answerIt = "Soluzione";
+    
     
     // Beschriftung der Buttons im Main-GUI
     String startDe = ("Starten");
@@ -354,5 +380,33 @@ public class Languages {
 				}
 				else
 					return feedbackNokIt2;			
+				}
+		// Gib Übersetzung Wort erfassen, Fragewort
+			public String getLangQuestion() {
+				if(language == "de"){
+					return questionDe;			
+				}
+				if(language == "en"){
+					return questionEn;			
+				}
+				if(language == "fr"){
+					return questionFr;			
+				}
+				else
+					return questionIt;			
+				}
+		// Gib Übersetzung Wort erfassen, Fragewort
+			public String getLangAnswer() {
+				if(language == "de"){
+					return answerDe;			
+				}
+				if(language == "en"){
+					return answerEn;			
+				}
+				if(language == "fr"){
+					return answerFr;			
+				}
+				else
+					return answerIt;			
 				}
 }

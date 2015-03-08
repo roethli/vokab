@@ -12,7 +12,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -35,10 +38,10 @@ public class RegisterGUI {
   	private JPanel mainRightPanel  = new JPanel();
   	private JPanel lowerPanel  = new JPanel();
   	
-  	private JLabel lblDesc1 = new JLabel("Wort1:");
-  	private JLabel lblDesc2 = new JLabel("Sprache Wort1:");
-  	private JLabel lblDesc3 = new JLabel("Wort2:");
-  	private JLabel lblDesc4 = new JLabel("Sprache Wort2:");
+  	private JLabel lblDesc1 = new JLabel(languages.getLangQuestion() + ": ");
+  	private JLabel lblDesc2 = new JLabel(languages.getWordLanguage() + " " + languages.getLangQuestion() + ": ");
+  	private JLabel lblDesc3 = new JLabel(languages.getLangAnswer() + ": ");
+  	private JLabel lblDesc4 = new JLabel(languages.getWordLanguage() + " " + languages.getLangAnswer() + ": ");
   	private JLabel lblSpaceCenter  = new JLabel();
   	private JLabel lblSpaceLeft  = new JLabel("                                        ");
   	private JLabel lblSpaceRight  = new JLabel("                                        ");
@@ -131,14 +134,19 @@ public class RegisterGUI {
 		// Prüft Eingabe und reagiert entsprechend.
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				logic.addCard(txtFront.getText(), txtBack.getText(), 1, txtLang1.getText(), txtLang2.getText());
-				System.out.println(logic.checkInput("ape", "affe"));
-				//Alle Eingabefelder wieder löschen damit bereit für nächste Karte
-				txtFront.setText("");
-				txtBack.setText("");
-				txtLang1.setText("");
-				txtLang2.setText("");
-				setFocus();
+				if (txtLang1.getText().equalsIgnoreCase("de") || txtLang1.getText().equalsIgnoreCase("en") || txtLang1.getText().equalsIgnoreCase("fr") || txtLang1.getText().equalsIgnoreCase("it")) {
+					logic.addCard(txtFront.getText(), txtBack.getText(), 1, txtLang1.getText(), txtLang2.getText());
+					System.out.println(logic.checkInput("ape", "affe"));
+					//Alle Eingabefelder wieder löschen damit bereit für nächste Karte
+					txtFront.setText("");
+					txtBack.setText("");
+					txtLang1.setText("");
+					txtLang2.setText("");
+					setFocus();
+				}
+				else {
+					JOptionPane.showMessageDialog(mainFrame, "de, en, fr, it", languages.getWordAttention(), JOptionPane.INFORMATION_MESSAGE);	
+				}
 			}
 		});
   	}
