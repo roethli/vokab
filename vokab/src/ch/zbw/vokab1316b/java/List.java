@@ -21,18 +21,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class List {
 
-	private ArrayList<Card> vocabularylist; // ArrayList für die Karten
+	private ArrayList<Card> aavocabularylist; // ArrayList für die Karten
 
 	public List() {
 		
 	}
 
 	@XmlElement
-	public ArrayList<Card> getVocabularylist() {
-		return vocabularylist;
+	public ArrayList<Card> getCard() {
+		return aavocabularylist;
 	}
 
 	public void setVocabularylist(ArrayList<Card> vocabularylist) {
-		this.vocabularylist = vocabularylist;
+		this.aavocabularylist = vocabularylist;
 	}
 }

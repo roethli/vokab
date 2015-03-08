@@ -31,13 +31,13 @@ public class Importer {
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			vl = (List) jaxbUnmarshaller.unmarshal(file);
-			System.out.println(vl.getVocabularylist().get(0).getBack());
+			System.out.println(vl.getCard().get(0).getBack());
 		} 
 		catch (JAXBException e) {
 			e.printStackTrace();
 		}
 
-		return vl.getVocabularylist();
+		return vl.getCard();
 	}
 
 }

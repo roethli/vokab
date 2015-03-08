@@ -254,7 +254,7 @@ public class MainGUI {
 		}
 	}
 	
-  	// Methode setzt die via Combobox gewählte Sprache
+  	// Methode setzt die via Combobox gewï¿½hlte Sprache
   	private void setLang() {
     	lblTitle.setText(languages.getTitle());
     	lblContent.setText(languages.getContent());
