@@ -31,7 +31,7 @@ public class Exporter {
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
 			List vl = new List();
-			vl.setVocabularylist(arrList);
+			vl.setCard(arrList);
 
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 

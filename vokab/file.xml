@@ -1,38 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<vokabList>
-    <vocabularylist>
-        <backside>hello</backside>
-        <cardFaults>0</cardFaults>
-        <cardSucesses>0</cardSucesses>
+<list>
+    <card>
+        <back>houseaSDasdasD</back>
         <category>1</category>
-        <frontside>Hallo</frontside>
-    </vocabularylist>
-    <vocabularylist>
-        <backside>no</backside>
-        <cardFaults>0</cardFaults>
-        <cardSucesses>0</cardSucesses>
-        <category>2</category>
-        <frontside>Nein</frontside>
-    </vocabularylist>
-    <vocabularylist>
-        <backside>animal</backside>
-        <cardFaults>0</cardFaults>
-        <cardSucesses>0</cardSucesses>
-        <category>3</category>
-        <frontside>Tier</frontside>
-    </vocabularylist>
-    <vocabularylist>
-        <backside>dog</backside>
-        <cardFaults>0</cardFaults>
-        <cardSucesses>0</cardSucesses>
-        <category>4</category>
-        <frontside>Hund</frontside>
-    </vocabularylist>
-    <vocabularylist>
-        <backside>cat</backside>
-        <cardFaults>0</cardFaults>
-        <cardSucesses>0</cardSucesses>
-        <category>5</category>
-        <frontside>Katze</frontside>
-    </vocabularylist>
-</vokabList>
+        <faults>0</faults>
+        <front>haus</front>
+        <langBack>en</langBack>
+        <langFront>de</langFront>
+        <successful>0</successful>
+    </card>
+    <card>
+        <back>game</back>
+        <category>1</category>
+        <faults>0</faults>
+        <front>spiel</front>
+        <langBack>en</langBack>
+        <langFront>de</langFront>
+        <successful>0</successful>
+    </card>
+</list>
