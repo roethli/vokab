@@ -134,18 +134,29 @@ public class RegisterGUI {
 		// Prüft Eingabe und reagiert entsprechend.
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//Prüft ob im ersten Sprache-Textfeld de,en,fr oder it steht.
 				if (txtLang1.getText().equalsIgnoreCase("de") || txtLang1.getText().equalsIgnoreCase("en") || txtLang1.getText().equalsIgnoreCase("fr") || txtLang1.getText().equalsIgnoreCase("it")) {
 					logic.addCard(txtFront.getText(), txtBack.getText(), 1, txtLang1.getText(), txtLang2.getText());
-					System.out.println(logic.checkInput("ape", "affe"));
-					//Alle Eingabefelder wieder löschen damit bereit für nächste Karte
 					txtFront.setText("");
 					txtBack.setText("");
 					txtLang1.setText("");
 					txtLang2.setText("");
 					setFocus();
 				}
+				//Prüft ob im zweiten Sprache-Textfeld de,en,fr oder it steht.
+				else if (txtLang2.getText().equalsIgnoreCase("de") || txtLang2.getText().equalsIgnoreCase("en") || txtLang2.getText().equalsIgnoreCase("fr") || txtLang2.getText().equalsIgnoreCase("it")) {
+					logic.addCard(txtFront.getText(), txtBack.getText(), 1, txtLang1.getText(), txtLang2.getText());
+					txtFront.setText("");
+					txtBack.setText("");
+					txtLang1.setText("");
+					txtLang2.setText("");
+					setFocus();					
+				}
+				//Wenn nicht Popup mit Fehlermeldung ausgeben.
 				else {
-					JOptionPane.showMessageDialog(mainFrame, "de, en, fr, it", languages.getWordAttention(), JOptionPane.INFORMATION_MESSAGE);	
+					JOptionPane.showMessageDialog(mainFrame, languages.getLangError(), languages.getWordAttention(), JOptionPane.INFORMATION_MESSAGE);
+					boolean x = txtLang1.getText().equalsIgnoreCase("de");
+					System.out.println(x);
 				}
 			}
 		});
@@ -184,6 +195,17 @@ public class RegisterGUI {
 				setLang();
 			}
 		}
+	}
+	
+	// Test
+	private void setNewWord() {
+		logic.addCard(txtFront.getText(), txtBack.getText(), 1, txtLang1.getText(), txtLang2.getText());
+		//System.out.println(logic.checkInput("ape", "affe"));
+		txtFront.setText("");
+		txtBack.setText("");
+		txtLang1.setText("");
+		txtLang2.setText("");
+		setFocus();
 	}
 	
   	// Methode setzt die via Combobox gewählte Sprache

@@ -82,7 +82,7 @@ public class MainGUI {
   	
     public MainGUI() {
     	
-    	// Layout Einstellungen fï¿½r Frame und Panels
+    	// Layout Einstellungen für Frame und Panels
   		mainFrame.setTitle(languages.getProduct() + languages.getVersion());
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,7 +90,7 @@ public class MainGUI {
     	mainPanel.setLayout(new BorderLayout(25, 25));
     	upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     	
-    	// Schriftart fï¿½r Buttons und Labels definieren
+    	// Schriftart für Buttons und Labels definieren
     	btnStart.setFont(buttonFont);
     	btnSave.setFont(buttonFont);
     	btnLoad.setFont(buttonFont);
@@ -108,7 +108,7 @@ public class MainGUI {
     	lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
     	lblContent.setHorizontalAlignment(SwingConstants.CENTER);
     	  	
-    	// Listener fï¿½r alle Buttons und die Sprachbox erstellen
+    	// Listener für alle Buttons und die Sprachbox erstellen
     	btnStart.addActionListener(new ButtonListener());
     	btnSave.addActionListener(new ButtonListener());
     	btnLoad.addActionListener(new ButtonListener());
@@ -143,14 +143,14 @@ public class MainGUI {
     	lowerPanel.add(btnRegister);
     	lowerPanel.add(btnHelp);
 		
-    	// Alle Panels dem Frame hinzufï¿½gen und Layout bestimmen
+    	// Alle Panels dem Frame hinzufügen und Layout bestimmen
 	    mainFrame.add(upperPanel, BorderLayout.NORTH);
 	    mainFrame.add(mainPanel, BorderLayout.CENTER);
 	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
 	    
   	}
 
-	// Listener fï¿½r Buttons.
+	// Listener für Buttons.
 	// Startet Lern-GUI, In- oder Exportiert Karteikarten, startet Erfassen-GUI und ruft Hilfe auf.
 	class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -178,7 +178,7 @@ public class MainGUI {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 
 					// eine File-Instanz erzeugen mit dem Pfad, der vom 
-					// File Dialog zurÃ¼ck gegeben wurde
+					// File Dialog zurück gegeben wurde
 					File file = fc.getSelectedFile();
 					System.out.println("Saving: " + file.getName() + ".");
 
@@ -196,7 +196,7 @@ public class MainGUI {
 					System.out.println("Save command cancelled by user.");
 				}
 			}
-			// Wird aufgerufen, wenn der Laden Button gedrï¿½ckt wird
+			// Wird aufgerufen, wenn der Laden Button gedrückt wird
 			else if (e.getSource() == btnLoad) {
 
 				// neuer File-Dialog wird instanziert
@@ -206,9 +206,9 @@ public class MainGUI {
 				// Benutzer hat im File-Dialog auf 'open' geklickt
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					// eine File-Instanz erzeugen mit dem Pfad, der vom 
-					// File Dialog zurÃ¼ck gegeben wurde					
+					// File Dialog zurück gegeben wurde					
 					File file = fc.getSelectedFile();
-					// Resultat ausgeben (nur fÃ¼r's Debugging)
+					// Resultat ausgeben (nur für's Debugging)
 					System.out.println("Opening: " + file.getName() + ".");
 
 					// Logic-Instance abholen durch Aufruf der getInstance()-Singleton-Methode
@@ -218,7 +218,7 @@ public class MainGUI {
 					Importer imp = new Importer();
 
 					// Vocabulary-Liste ersetzen in der Logik durch die ArrayList, welche
-					// vom Importer zurÃ¼ck gegeben wird.
+					// vom Importer zurück gegeben wird.
 					logic.setVocabularylist(imp.importFromFile(file));
 				}
 				// Benutzer hat auf 'cancel' geklickt
@@ -229,8 +229,8 @@ public class MainGUI {
 		}
 	}
 	
-	// Listener fï¿½r Sprachauswahl.
-	// Setzt die in der Combobox gewï¿½hlte Sprache.
+	// Listener für Sprachauswahl.
+	// Setzt die in der Combobox gewählte Sprache.
 	class ComboboxListener implements ActionListener {
 		// Wird aufgerufen, when der 'Help'-Button angeklickt wird
 		public void actionPerformed(ActionEvent e) {
@@ -254,7 +254,7 @@ public class MainGUI {
 		}
 	}
 	
-  	// Methode setzt die via Combobox gewï¿½hlte Sprache
+  	// Methode setzt die via Combobox gewählte Sprache
   	private void setLang() {
     	lblTitle.setText(languages.getTitle());
     	lblContent.setText(languages.getContent());

@@ -69,7 +69,10 @@ public class Languages {
     String answerEn = "Solution";
     String answerFr = "Solution";
     String answerIt = "Soluzione";
-    
+    String errorDe = "Bitte für Sprachkennung eine der folgende Möglichkeiten verwenden:\nde, en, fr oder it";
+    String errorEn = "Please use one of the following language tags:\nde, en, fr oder it";
+    String errorFr = "Se il vous plaît exprimer étiquette de l'une des options utilisation suivante:\nde, en, fr oder it";
+    String errorIt = "Si prega di esprimere tag per una delle seguenti opzioni uso:\nde, en, fr oder it";
     
     // Beschriftung der Buttons im Main-GUI
     String startDe = ("Starten");
@@ -381,7 +384,7 @@ public class Languages {
 				else
 					return feedbackNokIt2;			
 				}
-		// Gib Übersetzung Wort erfassen, Fragewort
+		// Register-GUI: Gib Übersetzung Wort erfassen, Fragewort.
 			public String getLangQuestion() {
 				if(language == "de"){
 					return questionDe;			
@@ -395,7 +398,7 @@ public class Languages {
 				else
 					return questionIt;			
 				}
-		// Gib Übersetzung Wort erfassen, Fragewort
+		// Register-GUI: Gib Übersetzung Wort erfassen, Fragewort.
 			public String getLangAnswer() {
 				if(language == "de"){
 					return answerDe;			
@@ -408,5 +411,20 @@ public class Languages {
 				}
 				else
 					return answerIt;			
+				}
+			
+		// Register-GUI: Gib Übersetzung falsche Spracheingabe "de, en, fr, it".
+			public String getLangError() {
+				if(language == "de"){
+					return errorDe;			
+				}
+				if(language == "en"){
+					return errorEn;			
+				}
+				if(language == "fr"){
+					return errorFr;			
+				}
+				else
+					return errorIt;			
 				}
 }
