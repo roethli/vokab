@@ -81,6 +81,12 @@ public class MainGUI {
   	// Deklarieren und erstellen der Combobox
     private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
   	
+    /**
+	 * Konstruktor Klasse MainGUI
+	 * 
+	 * @param text 
+	 * @return text
+	 */
     public MainGUI() {
     	
     	// Layout Einstellungen für Frame und Panels

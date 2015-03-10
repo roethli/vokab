@@ -144,7 +144,7 @@ public class RegisterGUI {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Prüft ob leere Felder vorhanden sind.
-				if (txtFront.getText() == null || txtBack.getText() == "" || txtLang1.getText() == "" || txtLang2.getText() == "") {
+				if (txtFront.getText().equals("") || txtBack.getText().equals("") || txtLang1.getText().equals("") || txtLang2.getText().equals("")) {
 					JOptionPane.showMessageDialog(mainFrame, languages.getInputError(), languages.getWordAttention(), JOptionPane.INFORMATION_MESSAGE);			
 				}
 				//Wenn nicht Popup mit Fehlermeldung ausgeben.

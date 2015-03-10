@@ -138,7 +138,7 @@ public class Languages {
     String closeFr = ("Rompre");
     String closeIt = ("Rottura");
     
-    // Übersetzung für zur Aufforderung bei Fehlender Lösungseingabe    
+    // Ausgabe zur Aufforderung bei Fehlender Lösungseingabe.    
     String requestDe = ("Bitte gib eine Lösung ein!");
     String requestEn = ("Please enter a solution!");
     String requestFr = ("S'il vous plait entrer une solution!");
