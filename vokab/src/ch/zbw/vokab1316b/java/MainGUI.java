@@ -35,12 +35,13 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.*;
 
 /**
- * Diese Klasse implementiert einen einfachen Start-GUI (Main-GUI).
- * Beim Erstellen der Klasse wird der MainGUI mittels Komponenten wie Labels, Textfields, Buttons, etc. aufgebaut
- * und reagiert auf User-Befehle wie z.B. das Druecken eines Buttons.
+ * Diese Klasse implementiert ein System zum erlernen von Vokabeln. Das System kommuniziert mit dem Benutzer ueber den GUI (MainGUI).
+ * Diese Klasse benutzt ein Exemplar der Klasse WorkGUI und RegisterGUI, um aus dem Startprogramm das Lernprogramm und das Programm
+ * zum erfassen von neuen Vokabeln zu oeffnen. Ebenfalls benutzt diese Klasse eine Klasse Languages, von der alle Sprachuebersetzungen
+ * bezogen werden.
  * 
  * @author Marcel Baumgartner, ZbW
- * @version 1.0 10.03.2015
+ * @version 1.0 (10.03.2015)
  */
 public class MainGUI {
 
@@ -48,19 +49,19 @@ public class MainGUI {
 	WorkGUI workGUI = new WorkGUI();
 	RegisterGUI registerGUI = new RegisterGUI();
 	Languages languages = new Languages();
+		
+	// Main frame
+    JFrame mainFrame = new JFrame(languages.getProduct() + languages.getVersion());
 	
-    // Schriftarten definieren
+    // Definiere Schriftarten fuer Buttons und Texte
 	Font buttonFont = new Font("arial", Font.TRUETYPE_FONT, 15);
 	Font titleFont = new Font("arial", Font.BOLD, 25);
 	Font contentFont = new Font("arial", Font.TRUETYPE_FONT, 12);
 		
-	// Bild laden
+	// Bild laden (Logo)
 	ImageIcon picture = new ImageIcon("vokablogo.png");
-    
-	// Main frame
-	JFrame mainFrame = new JFrame(languages.getProduct() + languages.getVersion());
 	
-  	// Erstellen und beschriften der Buttons
+  	// Erstellen und beschriften aller Buttons
   	private JButton btnStart = new JButton(languages.getLangBtnStart());
   	private JButton btnSave = new JButton(languages.getLangBtnSave());
   	private JButton btnLoad = new JButton(languages.getLangBtnLoad());
@@ -68,24 +69,20 @@ public class MainGUI {
   	private JButton btnChange = new JButton(languages.getLangBtnChange());
   	private JButton btnHelp = new JButton(languages.getLangBtnHelp());
   
-  	// Erstellen der Panels
+  	// Erstellen aller Panels
   	private JPanel upperPanel = new JPanel();
   	private JPanel mainPanel = new JPanel();
   	private JPanel lowerPanel = new JPanel();
   	
-  	// Erstellen der Labels
+  	// Erstellen aller Labels
   	private JLabel lblTitle  = new JLabel(languages.getTitle());
   	private JLabel lblContent  = new JLabel(picture);
-  	// private JLabel lblContent  = new JLabel(languages.getContent());
   	
-  	// Deklarieren und erstellen der Combobox
+  	// Erstellen und abfuellen der Combobox
     private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
   	
     /**
-	 * Konstruktor Klasse MainGUI
-	 * 
-	 * @param text 
-	 * @return text
+	 * Initialisiere einen neuen MainGUI.
 	 */
     public MainGUI() {
     	
@@ -97,7 +94,7 @@ public class MainGUI {
     	mainPanel.setLayout(new BorderLayout(25, 25));
     	upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     	
-    	// Schriftart für Buttons und Labels definieren
+    	// Schriftart für Buttons und Texte setzen
     	btnStart.setFont(buttonFont);
     	btnSave.setFont(buttonFont);
     	btnLoad.setFont(buttonFont);
@@ -107,13 +104,12 @@ public class MainGUI {
     	lblContent.setFont(contentFont);
     	lblTitle.setFont(titleFont);
     	
-    	
-    	// Labels Layout konfigurieren
+    	// Layout fuer Labels konfigurieren
     	lblContent.setText(languages.getContent());
     	lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
     	lblContent.setHorizontalAlignment(SwingConstants.CENTER);
     	  	
-    	// Listener für alle Buttons und die Sprachbox erstellen
+    	// Listener für Buttons und die Combobox erstellen und zuweisen
     	btnStart.addActionListener(new ButtonListener());
     	btnSave.addActionListener(new ButtonListener());
     	btnLoad.addActionListener(new ButtonListener());
@@ -126,13 +122,15 @@ public class MainGUI {
     	final Logic logic = new Logic().getInstance();
 		logic.addCard("haus", "house", 1, "de", "en");
 		logic.addCard("spiel", "game", 1, "de", "en");
-
+		logic.addCard("strasse", "street", 1, "de", "en");
   	}
     
-	// Zusammenbauen und anzeigen des Main-GUI.
+	/**
+	 *  Zusammenbauen und anzeigen des Main-GUI.
+	 */
   	public void paint(){
   		
-  	    // GUI zentral im Bildschirm setzen
+  	    // Bildschirmaufloesung berechnen und dann GUI zentral ausrichten
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         mainFrame.setLocation(d.width/2 - mainFrame.getWidth()/2, d.height/2 - mainFrame.getHeight()/2);
         mainFrame.setVisible(true);
@@ -265,7 +263,9 @@ public class MainGUI {
 		}
 	}
 	
-  	// Methode setzt die via Combobox gewählte Sprache
+  	/**
+	* Methode setzt die via Combobox gewählte Sprache
+	*/
   	private void setLang() {
     	lblTitle.setText(languages.getTitle());
     	lblContent.setText(languages.getContent());
@@ -275,19 +275,19 @@ public class MainGUI {
     	btnRegister.setText(languages.getLangBtnRegister());
     	btnChange.setText(languages.getLangBtnChange());
     	btnHelp.setText(languages.getLangBtnHelp());
-    	System.out.println(languages.getLanguage());
     }
   	
-    // Methode zum anzeigen der Hilfefunktion
+    /**
+     * Methode zum anzeigen der Hilfefunktion
+     */
     private void getHelp() {
         JOptionPane.showMessageDialog(mainFrame, languages.getLangHelp(), languages.getLangBtnHelp() + "!", JOptionPane.QUESTION_MESSAGE);
     }
 	
   	/**
-  	 * Main method to start the application
+  	 * Main Methode um die Anwendung zu starten.
   	 */
 	public static void main(String[] args) {
-		
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		        if ("Nimbus".equals(info.getName())) {
@@ -298,7 +298,6 @@ public class MainGUI {
 		} catch (Exception e) {
 		    // If Nimbus is not available, you can set the GUI to another look and feel.
 		}
-		
 		MainGUI gui = new MainGUI();
 		gui.paint();
 	}  	
