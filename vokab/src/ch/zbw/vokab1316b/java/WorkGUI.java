@@ -36,12 +36,12 @@ import javax.swing.border.*;
 import ch.zbw.vokab1316b.java.*;
 
 /**
- * Diese Klasse implementiert einen einfachen Lern-GUI.
- * Beim erstellen der Klassen wird der Work-GUI zum lernen mittels Komponenten wie Labels, Textfields, Buttons, etc. angezeigt
- * und reagiert auf User-Befehle wie z.B. das dr�cken eines Buttons.
+ * Diese Klasse implementiert den wichtigsten aller GUIs, denjenigen zum lernen der Woerter. (WorkGUI).
+ * Beim erstellen der Klasse wird der WorkGUI mittels Komponenten wie Labels, Textfields, Buttons, etc. angezeigt
+ * und reagiert auf User-Befehle wie z.B. das Druecken eines Buttons.
  * 
  * @author Marcel Baumgartner, ZbW
- * @version 1.0 02.02.2015
+ * @version 1.0 10.03.2015
  */
 public class WorkGUI {
 	

@@ -36,11 +36,11 @@ import javax.swing.border.*;
 
 /**
  * Diese Klasse implementiert einen einfachen Start-GUI (Main-GUI).
- * Beim Erstellen der Klassen wird der Main-GUI mittels Komponenten wie Labels, Textfields, Buttons, etc. angezeigt
- * und reagiert auf User-Befehle wie z.B. das Drï¿½cken eines Buttons.
+ * Beim Erstellen der Klasse wird der MainGUI mittels Komponenten wie Labels, Textfields, Buttons, etc. aufgebaut
+ * und reagiert auf User-Befehle wie z.B. das Druecken eines Buttons.
  * 
  * @author Marcel Baumgartner, ZbW
- * @version 1.0 02.02.2015
+ * @version 1.0 10.03.2015
  */
 public class MainGUI {
 
@@ -65,6 +65,7 @@ public class MainGUI {
   	private JButton btnSave = new JButton(languages.getLangBtnSave());
   	private JButton btnLoad = new JButton(languages.getLangBtnLoad());
   	private JButton btnRegister = new JButton(languages.getLangBtnRegister());
+  	private JButton btnChange = new JButton(languages.getLangBtnChange());
   	private JButton btnHelp = new JButton(languages.getLangBtnHelp());
   
   	// Erstellen der Panels
@@ -95,15 +96,13 @@ public class MainGUI {
     	btnSave.setFont(buttonFont);
     	btnLoad.setFont(buttonFont);
     	btnRegister.setFont(buttonFont);
+    	btnChange.setFont(buttonFont);
     	btnHelp.setFont(buttonFont);
     	lblContent.setFont(contentFont);
     	lblTitle.setFont(titleFont);
     	
     	
     	// Labels Layout konfigurieren
-    	//Border border = LineBorder.createBlackLineBorder();
-    	//lblTitle.setBorder(border);
-    	//lblContent.setBorder(border);
     	lblContent.setText(languages.getContent());
     	lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
     	lblContent.setHorizontalAlignment(SwingConstants.CENTER);
@@ -113,6 +112,7 @@ public class MainGUI {
     	btnSave.addActionListener(new ButtonListener());
     	btnLoad.addActionListener(new ButtonListener());
     	btnRegister.addActionListener(new ButtonListener());
+    	btnChange.addActionListener(new ButtonListener());
     	btnHelp.addActionListener(new ButtonListener());
     	boxLanguage.addActionListener(new ComboboxListener());
     	
@@ -141,6 +141,7 @@ public class MainGUI {
     	lowerPanel.add(btnSave);
     	lowerPanel.add(btnLoad);
     	lowerPanel.add(btnRegister);
+    	lowerPanel.add(btnChange);
     	lowerPanel.add(btnHelp);
 		
     	// Alle Panels dem Frame hinzufügen und Layout bestimmen
@@ -154,21 +155,25 @@ public class MainGUI {
 	// Startet Lern-GUI, In- oder Exportiert Karteikarten, startet Erfassen-GUI und ruft Hilfe auf.
 	class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			// Wird aufgerufen, wenn der Help Button gedrï¿½ckt wird
+			// Wird aufgerufen, wenn der Help Button gedrückt wird
 			if (e.getSource() == btnHelp){
 				getHelp();
 			}
-			// Wird aufgerufen, wenn der Starten Button gedrï¿½ckt wird
+			// Wird aufgerufen, wenn der Starten Button gedrückt wird
 			if (e.getSource() == btnStart){
 				workGUI.paint(languages.getLanguage());
 				workGUI.setFocus();
 			}
-			// Wird aufgerufen, wenn der Erfassen Button gedrï¿½ckt wird
+			// Wird aufgerufen, wenn der Erfassen Button gedrückt wird
 			if (e.getSource() == btnRegister) {
 				registerGUI.paint(languages.getLanguage());
 				registerGUI.setFocus();
 			}
-			// Wird aufgerufen, wenn der Speichern Button gedrï¿½ckt wird
+			// Wird aufgerufen, wenn der Ändern Button gedrückt wird
+						if (e.getSource() == btnChange) {
+							//Text
+						}
+			// Wird aufgerufen, wenn der Speichern Button gedrückt wird
 			if (e.getSource() == btnSave) {
 
 				// Neuen File Dialog instanzieren
@@ -262,6 +267,7 @@ public class MainGUI {
     	btnSave.setText(languages.getLangBtnSave());
     	btnLoad.setText(languages.getLangBtnLoad());
     	btnRegister.setText(languages.getLangBtnRegister());
+    	btnChange.setText(languages.getLangBtnChange());
     	btnHelp.setText(languages.getLangBtnHelp());
     	System.out.println(languages.getLanguage());
     }

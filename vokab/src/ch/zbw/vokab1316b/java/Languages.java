@@ -3,6 +3,14 @@ package ch.zbw.vokab1316b.java;
 import javax.swing.JOptionPane;
 // TODO GUI Sprachen auslagern 
 
+/**
+ * Diese Klasse dient als reine Hilfsklasse.
+ * In Ihr werden saemtliche Uebersetzungen fuer die GUI-Sprachen deutsch, englisch, franzoesisch und italienisch definiert
+ * und koennen via Methoden aus den GUI-Klassen MainGUI, RegisterGUI, WorkGUI und EditGUI aufgerufen werden.
+ * 
+ * @author Marcel Baumgartner, ZbW
+ * @version 1.0 10.03.2015
+ */
 public class Languages {
 	
 	// Definiere Variable für Spracheeinstellung
@@ -30,24 +38,28 @@ public class Languages {
         		    + "\n<html><u>Speichern</>: Diese Auswahl speichert die geladenen Wörter und den aktuellen Lernfortschritt.</html>"
         		    + "\n<html><u>Laden</>: Mittels dem Laden-Knopf kann eine zuvor gespeicherte Wortliste geladen werden.</html>"
         		    + "\n<html><u>Erfassen</>: Eigene oder zusätzliche Wörter zum lernen erfassen.</html>"
+        		    + "\n<html><u>Ändern</>: Bestehende Wörter ändern oder löschen.</html>"
         		    + "\n\nFür weitere Fragen bitte Mail an support@vokabtrainer.ch schicken." + "\n\n";
     String helpTextEn = "In this help the program options are explained."
 		    		+ "\n\n<html><u>Start</>: Here you start the learning mode, so the word query begins.</html>"
 		    		+ "\n<html><u>Save</>: This selection saves the loaded words and the current progress.</html>"
 		    		+ "\n<html><u>Load</>: By means of the load button, a previously saved list will be loaded.</html>"
 		    		+ "\n<html><u>Register</>: Own or acquire additional words to learn.</html>"
+		    		+ "\n<html><u>Edit</>: Modify or delete existing words.</html>"
 		    		+ "\n\nFor further questions please mail to support@vokabtrainer.ch." + "\n\n";
     String helpTextFr = "Dans ce aide les options du programme seront expliquées."
     				+ "\n\n<html><u>Début</>: Ici vous démarrez le mode d'apprentissage, de sorte que le mot requête commence.</html>"
     				+ "\n<html><u>Enregistrer</>: Cette sélection permet d'économiser les mots chargés et les progrès en cours.</html>"
     				+ "\n<html><u>Chargement</>: Au moyen de la touche de chargement, une liste sauvegardée auparavant sera chargé.</html>"
     				+ "\n<html><u>Capture</>: Posséder ou acquérir des mots supplémentaires à apprendre.</html>"
+    				+ "\n<html><u>Changement</>: Modifier ou supprimer des mots existants.</html>"
     				+ "\n\nPour d'autres questions se il vous plaît mail à support@vokabtrainer.ch." + "\n\n";
     String helpTextIt = "In questo aiuto verranno spiegate le opzioni del programma."
 		    		+ "\n\n<html><u>Inizio</>: Qui si avvia la modalità di apprendimento, così inizia la query di parola.</html>"
 		    		+ "\n<html><u>Salva</>: Questa selezione consente di risparmiare le parole caricate e lo stato di avanzamento attuale.</html>"
 		    		+ "\n<html><u>Caricamento</>: Tramite il pulsante di carico, viene caricato un elenco precedentemente salvato.</html>"
 		    		+ "\n<html><u>Cattura</>: Acquistare o acquisire ulteriori parole da imparare.</html>"
+		    		+ "\n<html><u>Cambiamento</>: Modificare o eliminare parole esistenti.</html>"
 		    		+ "\n\nPer ulteriori domande scrivere a support@vokabtrainer.ch." + "\n\n";
     
     // Übersetzung der Wörter Sprache und Achtung
@@ -65,14 +77,19 @@ public class Languages {
     String questionEn = "Question word";
     String questionFr = "Question mot";
     String questionIt = "Domanda di parola";
-    String answerDe = "Antwort";
-    String answerEn = "Solution";
-    String answerFr = "Solution";
-    String answerIt = "Soluzione";
-    String errorDe = "Bitte für Sprachkennung eine der folgende Möglichkeiten verwenden:\nde, en, fr oder it";
-    String errorEn = "Please use one of the following language tags:\nde, en, fr oder it";
-    String errorFr = "Se il vous plaît exprimer étiquette de l'une des options utilisation suivante:\nde, en, fr oder it";
-    String errorIt = "Si prega di esprimere tag per una delle seguenti opzioni uso:\nde, en, fr oder it";
+    String answerDe = "Übersetzung";
+    String answerEn = "Translation";
+    String answerFr = "Traduction";
+    String answerIt = "Traduzione";
+    String langCodeDe = "Sprachcode";
+    String langCodeEn = "Language code";
+    String langCodeFr = "Code de langue";
+    String langCodeIt = "Codice della lingua";
+    
+    String errorDe = "Bitte fülle alle Felder aus!";
+    String errorEn = "Please fill in all fields!";
+    String errorFr = "S'il vous plaît remplir tous les champs!";
+    String errorIt = "Si prega di compilare tutti i campi!";
     
     // Beschriftung der Buttons im Main-GUI
     String startDe = ("Starten");
@@ -94,6 +111,11 @@ public class Languages {
     String registerEn = ("Register");
     String registerFr = ("Capture");
     String registerIt = ("Cattura");
+    
+    String changeDe = ("Ändern");
+    String changeEn = ("Edit");
+    String changeFr = ("Changement");
+    String changeIt = ("Cambiamento");
     
     String helpDe = ("Hilfe");
     String helpEn = ("Help");
@@ -295,6 +317,21 @@ public class Languages {
 			return registerIt;
 		}
 	
+	// Gib Übersetzung Button change
+		public String getLangBtnChange() {
+			if(language == "de"){
+				return changeDe;
+			}
+			if(language == "en"){
+				return changeEn;
+			}
+			if(language == "fr"){
+				return changeFr;
+			}
+			else
+				return changeIt;
+			}
+	
 	// Gib Übersetzung Button help
 	public String getLangBtnHelp() {
 		if(language == "de"){
@@ -413,8 +450,23 @@ public class Languages {
 					return answerIt;			
 				}
 			
+		// Register-GUI: Gib Übersetzung Wort erfassen, Fragewort.
+			public String getLangCode() {
+				if(language == "de"){
+					return langCodeDe;			
+				}
+				if(language == "en"){
+					return langCodeEn;			
+				}
+				if(language == "fr"){
+					return langCodeFr;			
+				}
+				else
+					return langCodeIt;			
+				}
+			
 		// Register-GUI: Gib Übersetzung falsche Spracheingabe "de, en, fr, it".
-			public String getLangError() {
+			public String getInputError() {
 				if(language == "de"){
 					return errorDe;			
 				}

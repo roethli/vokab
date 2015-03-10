@@ -21,6 +21,15 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+/**
+ * Diese Klasse implementiert den Bildschrim zum erstellen von erlernbaren Wortpaaren und deren Uebersetzungen (Register-GUI).
+ * Beim Erstellen der Klasse wird der RegisterGUI mittels Komponenten wie Labels, Textfields, Buttons, etc. aufgebaut
+ * und reagiert auf User-Befehle wie z.B. das Druecken eines Buttons.
+ * 
+ * @author Marcel Baumgartner, ZbW
+ * @version 1.0 10.03.2015
+ */
+
 // TODO GUI für die Erfassung von Karten erstellen
 public class RegisterGUI {
 
@@ -39,9 +48,9 @@ public class RegisterGUI {
   	private JPanel lowerPanel  = new JPanel();
   	
   	private JLabel lblDesc1 = new JLabel(languages.getLangQuestion() + ": ");
-  	private JLabel lblDesc2 = new JLabel(languages.getWordLanguage() + " " + languages.getLangQuestion() + ": ");
+  	private JLabel lblDesc2 = new JLabel(languages.getLangCode() + " " + languages.getLangQuestion() + ": ");
   	private JLabel lblDesc3 = new JLabel(languages.getLangAnswer() + ": ");
-  	private JLabel lblDesc4 = new JLabel(languages.getWordLanguage() + " " + languages.getLangAnswer() + ": ");
+  	private JLabel lblDesc4 = new JLabel(languages.getLangCode() + " " + languages.getLangAnswer() + ": ");
   	private JLabel lblSpaceCenter  = new JLabel();
   	private JLabel lblSpaceLeft  = new JLabel("                                        ");
   	private JLabel lblSpaceRight  = new JLabel("                                        ");
@@ -134,29 +143,19 @@ public class RegisterGUI {
 		// Prüft Eingabe und reagiert entsprechend.
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//Prüft ob im ersten Sprache-Textfeld de,en,fr oder it steht.
-				if (txtLang1.getText().equalsIgnoreCase("de") || txtLang1.getText().equalsIgnoreCase("en") || txtLang1.getText().equalsIgnoreCase("fr") || txtLang1.getText().equalsIgnoreCase("it")) {
-					logic.addCard(txtFront.getText(), txtBack.getText(), 1, txtLang1.getText(), txtLang2.getText());
-					txtFront.setText("");
-					txtBack.setText("");
-					txtLang1.setText("");
-					txtLang2.setText("");
-					setFocus();
-				}
-				//Prüft ob im zweiten Sprache-Textfeld de,en,fr oder it steht.
-				else if (txtLang2.getText().equalsIgnoreCase("de") || txtLang2.getText().equalsIgnoreCase("en") || txtLang2.getText().equalsIgnoreCase("fr") || txtLang2.getText().equalsIgnoreCase("it")) {
-					logic.addCard(txtFront.getText(), txtBack.getText(), 1, txtLang1.getText(), txtLang2.getText());
-					txtFront.setText("");
-					txtBack.setText("");
-					txtLang1.setText("");
-					txtLang2.setText("");
-					setFocus();					
+				//Prüft ob leere Felder vorhanden sind.
+				if (txtFront.getText() == null || txtBack.getText() == "" || txtLang1.getText() == "" || txtLang2.getText() == "") {
+					JOptionPane.showMessageDialog(mainFrame, languages.getInputError(), languages.getWordAttention(), JOptionPane.INFORMATION_MESSAGE);			
 				}
 				//Wenn nicht Popup mit Fehlermeldung ausgeben.
 				else {
-					JOptionPane.showMessageDialog(mainFrame, languages.getLangError(), languages.getWordAttention(), JOptionPane.INFORMATION_MESSAGE);
-					boolean x = txtLang1.getText().equalsIgnoreCase("de");
-					System.out.println(x);
+					logic.addCard(txtFront.getText(), txtBack.getText(), 1, txtLang1.getText(), txtLang2.getText());
+					txtFront.setText("");
+					txtBack.setText("");
+					txtLang1.setText("");
+					txtLang2.setText("");
+					setFocus();	
+					
 				}
 			}
 		});
@@ -197,21 +196,14 @@ public class RegisterGUI {
 		}
 	}
 	
-	// Test
-	private void setNewWord() {
-		logic.addCard(txtFront.getText(), txtBack.getText(), 1, txtLang1.getText(), txtLang2.getText());
-		//System.out.println(logic.checkInput("ape", "affe"));
-		txtFront.setText("");
-		txtBack.setText("");
-		txtLang1.setText("");
-		txtLang2.setText("");
-		setFocus();
-	}
-	
   	// Methode setzt die via Combobox gewählte Sprache
   	private void setLang() {
     	btnSave.setText(languages.getLangBtnSave());
     	btnClose.setText(languages.getLangBtnClose());
+    	lblDesc1.setText(languages.getLangQuestion() + ": ");
+      	lblDesc2.setText(languages.getLangCode() + " " + languages.getLangQuestion() + ": ");
+      	lblDesc3.setText(languages.getLangAnswer() + ": ");
+      	lblDesc4.setText(languages.getLangCode() + " " + languages.getLangAnswer() + ": ");
     	System.out.println(languages.getLanguage());
     }
   	
