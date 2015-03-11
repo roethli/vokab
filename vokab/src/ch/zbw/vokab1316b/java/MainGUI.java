@@ -61,7 +61,8 @@ public class MainGUI {
   	private JPanel lowerPanel = new JPanel();
   	
   	private JLabel lblTitle  = new JLabel(languages.getTitle());
-  	ImageIcon picture = new ImageIcon("vokablogo.png");
+  	ImageIcon picture = new ImageIcon(getClass().getResource("/ch/zbw/vokab1316b/java/vokablogo.png"));
+  
   	private JLabel lblContent  = new JLabel(picture);
   	
     private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
