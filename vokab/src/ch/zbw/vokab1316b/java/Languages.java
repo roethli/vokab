@@ -1,60 +1,64 @@
 package ch.zbw.vokab1316b.java;
 
 import javax.swing.JOptionPane;
-// TODO GUI Sprachen auslagern 
 
 /**
- * Diese Klasse dient als reine Hilfsklasse.
+ * Languages ist eine kleine Hilfsklasse mit Methoden zum Laden von Texten in verschiedenen Sprachen.
+ * 
  * In Ihr werden saemtliche Uebersetzungen fuer die GUI-Sprachen deutsch, englisch, franzoesisch und italienisch definiert
  * und koennen via Methoden aus den GUI-Klassen MainGUI, RegisterGUI, WorkGUI und EditGUI aufgerufen werden.
  * 
  * @author Marcel Baumgartner, ZbW
- * @version 1.0 10.03.2015
+ * @version <b>1.0</b> (10.03.2015)
  */
 public class Languages {
 	
-	// Definiere Variable für Spracheeinstellung
+	// Datenfelder allgemein
 	String language = "de";
-	
-	// Definiere Software Details
-	String product = "Vokab Trainer";
+	String product = "VokabTrainer";
 	String version = "V1.0";
 	
-	// Definiere Titel für alle Sprachen (für Main-GUI)
+	String attentionDe = "Achtung!";
+	String attentionEn = "Attention!";    
+	String attentionFr = "Attention!";
+	String attentionIt = "Attento!";
+    String errorDe = "Bitte fuelle alle Felder aus!";
+    String errorEn = "Please fill in all fields!";
+    String errorFr = "S'il vous plaît remplir tous les champs!";
+    String errorIt = "Si prega di compilare tutti i campi!";
+	
+	// Datenfelder allgemein Klasse MainGUI
 	String titleDe = ("Herzlich Willkommen!");
 	String titleEn = ("Welcome!");
 	String titleFr = ("Bienvenue!");
 	String titleIt = ("Benvenuti!");
+	String contentDe = "";
+	String contentEn = "";
+	String contentFr = "";
+	String contentIt = "";
 	
-	// Definiere Textinhalt für alle Sprachen (für Main-GUI)
-	String contentTextDe = "";
-	String contentTextEn = "";
-	String contentTextFr = "";
-	String contentTextIt = "";
-	
-	// Definiere Hilfetext für alle Sprachen (für Main-GUI)
-    String helpTextDe = "In dieser Hilfe werden die Programmoptionen erklärt."
+    String helpDe = "In dieser Hilfe werden die Programmoptionen erklaert."
         		    + "\n\n<html><u>Starten</>: Hier startest du den Lernmodus, also die Wortabfrage beginnt.</html>"
-        		    + "\n<html><u>Speichern</>: Diese Auswahl speichert die geladenen Wörter und den aktuellen Lernfortschritt.</html>"
+        		    + "\n<html><u>Speichern</>: Diese Auswahl speichert die geladenen Woerter und den aktuellen Lernfortschritt.</html>"
         		    + "\n<html><u>Laden</>: Mittels dem Laden-Knopf kann eine zuvor gespeicherte Wortliste geladen werden.</html>"
-        		    + "\n<html><u>Erfassen</>: Eigene oder zusätzliche Wörter zum lernen erfassen.</html>"
-        		    + "\n<html><u>Ändern</>: Bestehende Wörter ändern oder löschen.</html>"
-        		    + "\n\nFür weitere Fragen bitte Mail an support@vokabtrainer.ch schicken." + "\n\n";
-    String helpTextEn = "In this help the program options are explained."
+        		    + "\n<html><u>Erfassen</>: Eigene oder zusaetzliche Woerter zum lernen erfassen.</html>"
+        		    + "\n<html><u>aendern</>: Bestehende Woerter aendern oder loeschen.</html>"
+        		    + "\n\nFuer weitere Fragen bitte Mail an support@vokabtrainer.ch schicken." + "\n\n";
+    String helpEn = "In this help the program options are explained."
 		    		+ "\n\n<html><u>Start</>: Here you start the learning mode, so the word query begins.</html>"
 		    		+ "\n<html><u>Save</>: This selection saves the loaded words and the current progress.</html>"
 		    		+ "\n<html><u>Load</>: By means of the load button, a previously saved list will be loaded.</html>"
 		    		+ "\n<html><u>Register</>: Own or acquire additional words to learn.</html>"
 		    		+ "\n<html><u>Edit</>: Modify or delete existing words.</html>"
 		    		+ "\n\nFor further questions please mail to support@vokabtrainer.ch." + "\n\n";
-    String helpTextFr = "Dans ce aide les options du programme seront expliquées."
+    String helpFr = "Dans ce aide les options du programme seront expliquées."
     				+ "\n\n<html><u>Début</>: Ici vous démarrez le mode d'apprentissage, de sorte que le mot requête commence.</html>"
     				+ "\n<html><u>Enregistrer</>: Cette sélection permet d'économiser les mots chargés et les progrès en cours.</html>"
     				+ "\n<html><u>Chargement</>: Au moyen de la touche de chargement, une liste sauvegardée auparavant sera chargé.</html>"
     				+ "\n<html><u>Capture</>: Posséder ou acquérir des mots supplémentaires à apprendre.</html>"
     				+ "\n<html><u>Changement</>: Modifier ou supprimer des mots existants.</html>"
     				+ "\n\nPour d'autres questions se il vous plaît mail à support@vokabtrainer.ch." + "\n\n";
-    String helpTextIt = "In questo aiuto verranno spiegate le opzioni del programma."
+    String helpIt = "In questo aiuto verranno spiegate le opzioni del programma."
 		    		+ "\n\n<html><u>Inizio</>: Qui si avvia la modalità di apprendimento, così inizia la query di parola.</html>"
 		    		+ "\n<html><u>Salva</>: Questa selezione consente di risparmiare le parole caricate e lo stato di avanzamento attuale.</html>"
 		    		+ "\n<html><u>Caricamento</>: Tramite il pulsante di carico, viene caricato un elenco precedentemente salvato.</html>"
@@ -62,22 +66,38 @@ public class Languages {
 		    		+ "\n<html><u>Cambiamento</>: Modificare o eliminare parole esistenti.</html>"
 		    		+ "\n\nPer ulteriori domande scrivere a support@vokabtrainer.ch." + "\n\n";
     
-    // Übersetzung der Wörter Sprache und Achtung
-    String languageDe = "Sprache";
-    String languageEn = "Language";    
-    String languageFr = "Langue";
-    String languageIt = "Lingua";
-    String attentionDe = "Achtung!";
-    String attentionEn = "Attention!";    
-    String attentionFr = "Attention!";
-    String attentionIt = "Attento!";
+    // Datenfelder Buttons Klasse MainGUI
+    String btnStartDe = ("Starten");
+    String btnStartEn = ("Start");
+    String btnStartFr = ("Début");
+    String btnStartIt = ("Inizio");
+    String btnSaveDe = ("Speichern");
+    String btnSaveEn = ("Save");
+    String btnSaveFr = ("Enregistrer");
+    String btnSaveIt = ("Salva");
+    String btnLoadDe = ("Laden");
+    String btnLoadEn = ("Load");
+    String btnLoadFr = ("Chargement");
+    String btnLoadIt = ("Caricamento");
+    String btnRegisterDe = ("Erfassen");
+    String btnRegisterEn = ("Register");
+    String btnRegisterFr = ("Capture");
+    String btnRegisterIt = ("Cattura");
+    String btnEditDe = ("aendern");
+    String btnEditEn = ("Edit");
+    String btnEditFr = ("Changement");
+    String btnEditIt = ("Cambiamento");
+    String btnHelpDe = ("Hilfe");
+    String btnHelpEn = ("Help");
+    String btnHelpFr = ("Aidez-Moi");
+    String btnHelpIt = ("Aiuto");
     
-    // Übersetzungen für Register-GUI
+    // Datenfelder allgemein Klasse RegisterGUI
     String questionDe = "Fragewort";
     String questionEn = "Question word";
     String questionFr = "Question mot";
     String questionIt = "Domanda di parola";
-    String answerDe = "Übersetzung";
+    String answerDe = "Uebersetzung";
     String answerEn = "Translation";
     String answerFr = "Traduction";
     String answerIt = "Traduzione";
@@ -85,68 +105,10 @@ public class Languages {
     String langCodeEn = "Language code";
     String langCodeFr = "Code de langue";
     String langCodeIt = "Codice della lingua";
-    
-    String errorDe = "Bitte fülle alle Felder aus!";
-    String errorEn = "Please fill in all fields!";
-    String errorFr = "S'il vous plaît remplir tous les champs!";
-    String errorIt = "Si prega di compilare tutti i campi!";
-    
-    // Beschriftung der Buttons im Main-GUI
-    String startDe = ("Starten");
-    String startEn = ("Start");
-    String startFr = ("Début");
-    String startIt = ("Inizio");
-    
-    String saveDe = ("Speichern");
-    String saveEn = ("Save");
-    String saveFr = ("Enregistrer");
-    String saveIt = ("Salva");
-    
-    String loadDe = ("Laden");
-    String loadEn = ("Load");
-    String loadFr = ("Chargement");
-    String loadIt = ("Caricamento");
-    
-    String registerDe = ("Erfassen");
-    String registerEn = ("Register");
-    String registerFr = ("Capture");
-    String registerIt = ("Cattura");
-    
-    String changeDe = ("Ändern");
-    String changeEn = ("Edit");
-    String changeFr = ("Changement");
-    String changeIt = ("Cambiamento");
-    
-    String helpDe = ("Hilfe");
-    String helpEn = ("Help");
-    String helpFr = ("Aidez-Moi");
-    String helpIt = ("Aiuto");
-    
-    // Beschriften der Buttons im Work-GUI)
-    String switchDe = ("Wechseln");
-    String switchEn = ("Switch");
-    String switchFr = ("Interrupteur");
-    String switchIt = ("Interruttore");
-    
-    String nextDe = ("Weiter");
-    String nextEn = ("Next");
-    String nextFr = ("Suivant");
-    String nextIt = ("Seguente");
-    
-    String closeDe = ("Beenden");
-    String closeEn = ("Close");
-    String closeFr = ("Rompre");
-    String closeIt = ("Rottura");
-    
-    // Ausgabe zur Aufforderung bei Fehlender Lösungseingabe.    
-    String requestDe = ("Bitte gib eine Lösung ein!");
-    String requestEn = ("Please enter a solution!");
-    String requestFr = ("S'il vous plait entrer une solution!");
-    String requestIt = ("Inserisci una soluzione!");
-    
-    // Übersetzung Feedback auf korrekt oder falsche Antwort
+
+    // Datenfelder allgemein Klasse WorkGUI
     String feedbackNokDe1 = ("Letzte Antwort war falsch!");
-    String feedbackNokDe2 = ("\n(Auflösung: ");
+    String feedbackNokDe2 = ("\n(Aufloesung: ");
     String feedbackNokEn1 = ("Last answer was wrong!");
     String feedbackNokEn2 = ("\n(Solution: ");
     String feedbackNokFr1 = ("Dernière réponse était fausse!");
@@ -154,39 +116,58 @@ public class Languages {
     String feedbackNokIt1 = ("Lltima risposta era sbagliata!");
     String feedbackNokIt2 = ("\n(Soluzione: ");
     
-	// Gib aktuell Spracheinstellung
+    // Datenfelder Buttons Klasse WorkGUI)
+    String btnSwitchDe = ("Wechseln");
+    String btnSwitchEn = ("Switch");
+    String btnSwitchFr = ("Interrupteur");
+    String btnSwitchIt = ("Interruttore");
+    String btnNextDe = ("Weiter");
+    String btnNextEn = ("Next");
+    String btnNextFr = ("Suivant");
+    String btnNextIt = ("Seguente");
+    String btnCloseDe = ("Beenden");
+    String btnCloseEn = ("Close");
+    String btnCloseFr = ("Rompre");
+    String btnCloseIt = ("Rottura");
+    
+    /**
+	 * Liefere die aktuell gesetzte Spracheinstellung des GUI.
+	 * Zum Beispiel "de" oder "fr".
+	 * @return die aktuelle Spracheinstellung des GUI.
+	 */
 	public String getLanguage() {
 		return language;
 	}
 	
-	// Gib Software Name(Product) und Version
+	/**
+	 * Liefere den Produktename der Software im Fromat.
+	 * Zum Beispiel "VokabTrainer".
+	 * @return den aktuellen Namen der Software.
+	 */
 	public String getProduct() {
 		return product;
 	}
+	/**
+	 * Liefere die Versionierung der Software.
+	 * Zum Beispiel "V1.0".
+	 * @return die aktuelle Version der Software.
+	 */
 	public String getVersion() {
 		return version;
 	}
 	
-	// Setze aktuell Spracheinstellung
+	/**
+	 * Setze die im GUI gewaehlte Spracheinstellung.
+	 * @param language die gewaehlte Spracheinstellung.
+	 */
 	public void setLanguage(String language) {
 		this.language = language;
 	}
 	
-	// Gib Übersetzung Wort Sprache
-	public String getWordLanguage() {
-		if(language == "de"){
-			return languageDe;
-		}
-		if(language == "en"){
-			return languageEn;
-		}
-		if(language == "fr"){
-			return languageFr;
-		}
-		return languageIt;
-	}
-	
-	// Gib Übersetzung Wort Falsch
+	/**
+	 * Liefere die richtige Uebersetzung zum Wort "Achtung".
+	 * @return das Wort "Achtung" in der richtigen Sprache.
+	 */
 		public String getWordAttention() {
 			if(language == "de"){
 				return attentionDe;
@@ -199,8 +180,12 @@ public class Languages {
 			}
 			return attentionIt;
 		}
-	
-	// Gib Übersetzung Titel MainGUI
+		
+	/**
+	 * Liefere den Titel des MainGUI in aktuell gewaehlten Spracheinstellung.
+	 * Zum Beispiel: "Herzlich Willkommen!".
+	 * @return den Titel des MainGUI in der richtigen Sprache.
+	 */
 	public String getTitle() {
 		if(language == "de"){
 			return titleDe;
@@ -214,126 +199,31 @@ public class Languages {
 		return titleIt;
 	}
 	
-	// Gib Übersetzung Inhalt MainGUI
+	/**
+	 * Liefere den Textinhalt des MainGUI in aktuell gewaehlten Spracheinstellung.
+	 * Zum Beispiel: "Bitte waehlen Sie eine der folgenden Optionen: ".
+	 * Achtung: Aktuell nur ein Platzhalter.
+	 * @return den Textinhalt des MainGUI in der richtigen Sprache.
+	 */
 	public String getContent() {
 		if(language == "de"){
-			return contentTextDe;
+			return contentDe;
 		}
 		if(language == "en"){
-			return contentTextEn;
+			return contentEn;
 		}
 		if(language == "fr"){
-			return contentTextFr;
+			return contentFr;
 		}
-		return contentTextIt;
+		return contentIt;
 	}
 	
-	// Gib Übersetzung Hilfe
+	/**
+	 * Liefere den Hilfeinhalt des MainGUI in aktuell gewaehlten Spracheinstellung.
+	 * Zum Beispiel: "In dieser Hilfe werden...".
+	 * @return die Hilfe im MainGUI in der richtigen Sprache.
+	 */
 	public String getLangHelp() {
-		if(language == "de"){
-			return helpTextDe;
-		}
-		if(language == "en"){
-			return helpTextEn;
-		}
-		if(language == "fr"){
-			return helpTextFr;
-		}
-		return helpTextIt;
-	}
-	
-	// Gib Übersetzung zur Aufforderung der Lösungseingabe
-	public String getLangRequest() {
-		if(language == "de"){
-			return requestDe;			
-		}
-		if(language == "en"){
-			return requestEn;			
-		}
-		if(language == "fr"){
-			return requestFr;
-		}
-		else
-			return requestIt;
-		}
-	
-	// Gib Übersetzung Button start
-	public String getLangBtnStart() {
-		if(language == "de"){
-			return startDe;			
-		}
-		if(language == "en"){
-			return startEn;			
-		}
-		if(language == "fr"){
-			return startFr;
-		}
-		else
-			return startIt;
-		}
-	
-	// Gib Übersetzung Button save
-	public String getLangBtnSave() {
-		if(language == "de"){
-			return saveDe;			
-		}
-		if(language == "en"){
-			return saveEn;			
-		}
-		if(language == "fr"){
-			return saveFr;			
-		}
-		else
-			return saveIt;
-		}
-	
-	// Gib Übersetzung Button load
-	public String getLangBtnLoad() {
-		if(language == "de"){
-			return loadDe;
-		}
-		if(language == "en"){
-			return loadEn;
-		}
-		if(language == "fr"){
-			return loadFr;
-		}
-		else
-			return loadIt;
-		}
-	
-	// Gib Übersetzung Button register
-	public String getLangBtnRegister() {
-		if(language == "de"){
-			return registerDe;
-		}
-		if(language == "en"){
-			return registerEn;
-		}
-		if(language == "fr"){
-			return registerFr;
-		}
-		else
-			return registerIt;
-		}
-	
-	// Gib Übersetzung Button change
-		public String getLangBtnChange() {
-			if(language == "de"){
-				return changeDe;
-			}
-			if(language == "en"){
-				return changeEn;
-			}
-			if(language == "fr"){
-				return changeFr;
-			}
-			else
-				return changeIt;
-			}
-	
-	// Gib Übersetzung Button help
-	public String getLangBtnHelp() {
 		if(language == "de"){
 			return helpDe;
 		}
@@ -343,140 +233,276 @@ public class Languages {
 		if(language == "fr"){
 			return helpFr;
 		}
+		return helpIt;
+	}
+	
+	/**
+	 * Liefere die richtige Uebersetzung fuer den Button "Starten".
+	 * @return die Button-Beschriftung "Starten" in der richtigen Sprache.
+	 */
+	public String getLangBtnStart() {
+		if(language == "de"){
+			return btnStartDe;			
+		}
+		if(language == "en"){
+			return btnStartEn;			
+		}
+		if(language == "fr"){
+			return btnStartFr;
+		}
 		else
-			return helpIt;
+			return btnStartIt;
 		}
 	
-	// Gib Übersetzung Button check
-		public String getLangBtnSwitch() {
-			if(language == "de"){
-				return switchDe;			
-			}
-			if(language == "en"){
-				return switchEn;			
-			}
-			if(language == "fr"){
-				return switchFr;			
-			}
-			else
-				return switchIt;			
-			}
+	/**
+	 * Liefere die richtige Uebersetzung fuer den Button "Speichern".
+	 * @return die Button-Beschriftung "Speichern" in der richtigen Sprache.
+	 */
+	public String getLangBtnSave() {
+		if(language == "de"){
+			return btnSaveDe;			
+		}
+		if(language == "en"){
+			return btnSaveEn;			
+		}
+		if(language == "fr"){
+			return btnSaveFr;			
+		}
+		else
+			return btnSaveIt;
+		}
+	
+	/**
+	 * Liefere die richtige Uebersetzung fuer den Button "Laden".
+	 * @return die Button-Beschriftung "Laden" in der richtigen Sprache.
+	 */
+	public String getLangBtnLoad() {
+		if(language == "de"){
+			return btnLoadDe;
+		}
+		if(language == "en"){
+			return btnLoadEn;
+		}
+		if(language == "fr"){
+			return btnLoadFr;
+		}
+		else
+			return btnLoadIt;
+		}
+	
+	/**
+	 * Liefere die richtige Uebersetzung fuer den Button "Erfassen".
+	 * @return die Button-Beschriftung "Erfassen" in der richtigen Sprache.
+	 */
+	public String getLangBtnRegister() {
+		if(language == "de"){
+			return btnRegisterDe;
+		}
+		if(language == "en"){
+			return btnRegisterEn;
+		}
+		if(language == "fr"){
+			return btnRegisterFr;
+		}
+		else
+			return btnRegisterIt;
+		}
+	
+	/**
+	 * Liefere die richtige Uebersetzung fuer den Button "Aendern".
+	 * @return die Button-Beschriftung "Aendern" in der richtigen Sprache.
+	 */
+	public String getLangBtnEdit() {
+		if(language == "de"){
+			return btnEditDe;
+		}
+		if(language == "en"){
+			return btnEditEn;
+		}
+		if(language == "fr"){
+			return btnEditFr;
+		}
+		else
+			return btnEditIt;
+		}
+	
+	/**
+	 * Liefere die richtige Uebersetzung fuer den Button "Hilfe".
+	 * @return die Button-Beschriftung "Hilfe" in der richtigen Sprache.
+	 */
+	public String getLangBtnHelp() {
+		if(language == "de"){
+			return btnHelpDe;
+		}
+		if(language == "en"){
+			return btnHelpEn;
+		}
+		if(language == "fr"){
+			return btnHelpFr;
+		}
+		else
+			return btnHelpIt;
+		}
+	
+	/**
+	 * Liefere die richtige Uebersetzung fuer den Button "Wechseln".
+	 * @return die Button-Beschriftung "Wechseln" in der richtigen Sprache.
+	 */
+	public String getLangBtnSwitch() {
+		if(language == "de"){
+			return btnSwitchDe;			
+		}
+		if(language == "en"){
+			return btnSwitchEn;			
+		}
+		if(language == "fr"){
+			return btnSwitchFr;			
+		}
+		else
+			return btnSwitchIt;			
+		}
 		
-		// Gib Übersetzung Button next
-		public String getLangBtnNext() {
-			if(language == "de"){
-				return nextDe;			
-			}
-			if(language == "en"){
-				return nextEn;			
-			}
-			if(language == "fr"){
-				return nextFr;			
-			}
-			else
-				return nextIt;			
-			}
+	/**
+	 * Liefere die richtige Uebersetzung fuer den Button "Weiter".
+	 * @return die Button-Beschriftung "Weiter" in der richtigen Sprache.
+	 */
+	public String getLangBtnNext() {
+		if(language == "de"){
+			return btnNextDe;			
+		}
+		if(language == "en"){
+			return btnNextEn;			
+		}
+		if(language == "fr"){
+			return btnNextFr;			
+		}
+		else
+			return btnNextIt;			
+		}
 		
-		// Gib Übersetzung Button close
-		public String getLangBtnClose() {
-			if(language == "de"){
-				return closeDe;			
-			}
-			if(language == "en"){
-				return closeEn;			
-			}
-			if(language == "fr"){
-				return closeFr;			
-			}
-			else
-				return closeIt;			
-			}
+	/**
+	 * Liefere die richtige Uebersetzung fuer den Button "Hilfe".
+	 * @return die Button-Beschriftung "Hilfe" in der richtigen Sprache.
+	 */
+	public String getLangBtnClose() {
+		if(language == "de"){
+			return btnCloseDe;			
+		}
+		if(language == "en"){
+			return btnCloseEn;			
+		}
+		if(language == "fr"){
+			return btnCloseFr;			
+		}
+		else
+			return btnCloseIt;			
+		}
 		
-		// Gib Übersetzung falsche Antwort
-		public String getLangNok1() {
-			if(language == "de"){
-				return feedbackNokDe1;			
-			}
-			if(language == "en"){
-				return feedbackNokEn1;			
-			}
-			if(language == "fr"){
-				return feedbackNokFr1;			
-			}
-			else
-				return feedbackNokIt1;			
-			}
+	/**
+	 * Liefere die richtige Uebersetzung zum Satz "Letzte Antwort war falsch!".
+	 * @return den Satz "Letzte Antwort war falsch!" in der richtigen Sprache.
+	 */
+	public String getLangNok1() {
+		if(language == "de"){
+			return feedbackNokDe1;			
+		}
+		if(language == "en"){
+			return feedbackNokEn1;			
+		}
+		if(language == "fr"){
+			return feedbackNokFr1;			
+		}
+		else
+			return feedbackNokIt1;			
+		}
+	
+	/**
+	 * Liefere die richtige Uebersetzung zum Satz "Aufloesung: ".
+	 * @return den Satz "Aufloesung: " in der richtigen Sprache.
+	 */
+	public String getLangNok2() {
+		if(language == "de"){
+			return feedbackNokDe2;			
+		}
+		if(language == "en"){
+			return feedbackNokEn2;			
+		}
+		if(language == "fr"){
+			return feedbackNokFr2;			
+		}
+		else
+			return feedbackNokIt2;			
+		}
+	
+	/**
+	 * Liefere die richtige Uebersetzung zum Wort "Fragewort".
+	 * @return das Wort "Fragewort" in der richtigen Sprache.
+	 */
+	public String getLangQuestion() {
+		if(language == "de"){
+			return questionDe;			
+		}
+		if(language == "en"){
+			return questionEn;			
+		}
+		if(language == "fr"){
+			return questionFr;			
+		}
+		else
+			return questionIt;			
+		}
+	
+	/**
+	 * Liefere die richtige Uebersetzung zum Wort "Uebersetzung".
+	 * @return das Wort "Uebersetzung" in der richtigen Sprache.
+	 */
+	public String getLangAnswer() {
+		if(language == "de"){
+			return answerDe;			
+		}
+		if(language == "en"){
+			return answerEn;			
+		}
+		if(language == "fr"){
+			return answerFr;			
+		}
+		else
+			return answerIt;			
+		}
 		
-		// Gib Übersetzung falsche Antwort
-			public String getLangNok2() {
-				if(language == "de"){
-					return feedbackNokDe2;			
-				}
-				if(language == "en"){
-					return feedbackNokEn2;			
-				}
-				if(language == "fr"){
-					return feedbackNokFr2;			
-				}
-				else
-					return feedbackNokIt2;			
-				}
-		// Register-GUI: Gib Übersetzung Wort erfassen, Fragewort.
-			public String getLangQuestion() {
-				if(language == "de"){
-					return questionDe;			
-				}
-				if(language == "en"){
-					return questionEn;			
-				}
-				if(language == "fr"){
-					return questionFr;			
-				}
-				else
-					return questionIt;			
-				}
-		// Register-GUI: Gib Übersetzung Wort erfassen, Fragewort.
-			public String getLangAnswer() {
-				if(language == "de"){
-					return answerDe;			
-				}
-				if(language == "en"){
-					return answerEn;			
-				}
-				if(language == "fr"){
-					return answerFr;			
-				}
-				else
-					return answerIt;			
-				}
+	/**
+	 * Liefere die richtige Uebersetzung zum Wort "Sprachcode".
+	 * @return das Wort "Sprachcode" in der richtigen Sprache.
+	 */
+	public String getLangCode() {
+		if(language == "de"){
+			return langCodeDe;			
+		}
+		if(language == "en"){
+			return langCodeEn;			
+		}
+		if(language == "fr"){
+			return langCodeFr;			
+		}
+		else
+			return langCodeIt;			
+		}
 			
-		// Register-GUI: Gib Übersetzung Wort erfassen, Fragewort.
-			public String getLangCode() {
-				if(language == "de"){
-					return langCodeDe;			
-				}
-				if(language == "en"){
-					return langCodeEn;			
-				}
-				if(language == "fr"){
-					return langCodeFr;			
-				}
-				else
-					return langCodeIt;			
-				}
-			
-		// Register-GUI: Gib Übersetzung falsche Spracheingabe "de, en, fr, it".
-			public String getInputError() {
-				if(language == "de"){
-					return errorDe;			
-				}
-				if(language == "en"){
-					return errorEn;			
-				}
-				if(language == "fr"){
-					return errorFr;			
-				}
-				else
-					return errorIt;			
-				}
+	/**
+	 * Liefere die richtige Uebersetzung zum Satz "Bitte fuelle alle Felder aus!".
+	 * @return den Satz "Bitte fuelle alle Felder aus!" in der richtigen Sprache.
+	 */
+	public String getInputError() {
+		if(language == "de"){
+			return errorDe;			
+		}
+		if(language == "en"){
+			return errorEn;			
+		}
+		if(language == "fr"){
+			return errorFr;			
+		}
+		else
+			return errorIt;			
+		}
 }

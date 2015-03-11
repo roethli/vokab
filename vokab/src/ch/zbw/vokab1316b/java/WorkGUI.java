@@ -41,19 +41,16 @@ import ch.zbw.vokab1316b.java.*;
  * und reagiert auf User-Befehle wie z.B. das Druecken eines Buttons.
  * 
  * @author Marcel Baumgartner, ZbW
- * @version 1.0 10.03.2015
+ * @version <b>1.0</b> (10.03.2015)
  */
 public class WorkGUI {
 	
-	String tempsol;
-	// Klasse Languages und Logic instanzieren
+	// Datenfelder
 	Languages languages = new Languages();
 	Logic logic = new Logic();
 	
-	// Frame erstellen und beschriften
-	JFrame mainFrame = new JFrame(languages.getProduct() + languages.getVersion());
-		
-	// Panels, Labels, Textfields und Buttons erstellen, zum Teil auch gleich beschriften.
+	JFrame mainFrame = new JFrame();
+	
   	private JPanel upperPanel  = new JPanel();
   	private JPanel mainPanel  = new JPanel();
   	private JPanel mainLeftPanel  = new JPanel();
@@ -74,19 +71,22 @@ public class WorkGUI {
   	private JButton btnNext = new JButton(languages.getLangBtnNext());
   	private JButton btnClose = new JButton(languages.getLangBtnClose());
 	
-  	// Combobox (Sprachauswahl) erstellen und mit Objekten abfüllen
     private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
     
-  	public WorkGUI() {  		
-     	// Layout Einstellungen für Frame und Panels
-		mainFrame.setTitle(languages.getProduct() + languages.getVersion());
+    /**
+     * Erzeuge ein Fenster zum lernen der Woerter (WorkGUI)
+     * und zeige seine GUI auf dem Bildschirm an.
+     */
+  	public WorkGUI() {  
+  		
+  	    // RegisterGUI Design und Einstellungen
+		mainFrame.setTitle(languages.getProduct() + " " + languages.getVersion());
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     	mainFrame.setSize(600, 400);
     	upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     	mainPanel.setLayout(new GridLayout(10, 1));
     	
-        // Labels Layout konfigurieren
 		lblResult1.setOpaque(true);
 		lblResult1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDesc1.setOpaque(true);
@@ -97,32 +97,34 @@ public class WorkGUI {
 		lblSpaceLeft.setOpaque(true);
 		lblSpaceRight.setOpaque(true);
   	  	
-  	  	// Textfelder Layout konfigurieren
 		txtFront.setColumns(15);
 		txtFront.setEditable(false);
 		txtFront.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBack.setHorizontalAlignment(SwingConstants.CENTER);
 		
-    	// Listener für Button Close und die Sprachbox erstellen
+		// Listener fuer Button Close und Combobox erstellen
     	btnClose.addActionListener(new ButtonListener());
     	boxLanguage.addActionListener(new ComboboxListener());
   	}
   	
-  	// Zusammenbauen und anzeigen des Work-GUI.
+  	/**
+	 *  Zusammenbauen und anzeigen des WorkGUI.
+	 *  Beim aufbauen wird die Sprache des MainGUI uebernommen.
+	 *  @param language die gewaehlte Spracheinstellung.
+	 */
   	public void paint(String language){
+  		
   		this.languages.language = language;
   		this.boxLanguage.setSelectedItem(language);
   		setFocus();
-  		
-   		// Klasse Logik instanzieren
 		final Logic logic = new Logic().getInstance();
         
-        // GUI zentral im Bildschirm setzen
+		// Bildschirmaufloesung berechnen und dann GUI zentral ausrichten
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         mainFrame.setLocation(d.width/2 - mainFrame.getWidth()/2, d.height/2 - mainFrame.getHeight()/2);
         mainFrame.setVisible(true);
     	
-		// Platziert die Elemente in den Panels
+        // Baut GUI zusammen.
     	upperPanel.add(boxLanguage);
     	mainPanel.add(lblDesc1);
 		mainPanel.add(txtFront);
@@ -136,24 +138,19 @@ public class WorkGUI {
     	lowerPanel.add(btnNext);
     	lowerPanel.add(btnClose);
 		
-	    // Alle Panels dem Frame hinzufügen und Layout bestimmen
 	    mainFrame.add(upperPanel, BorderLayout.NORTH);
 	    mainFrame.add(mainPanel, BorderLayout.CENTER);
 	    mainFrame.add(mainLeftPanel,  BorderLayout.WEST);
 	    mainFrame.add(mainRightPanel,  BorderLayout.EAST);
 	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
 
-        // Füllt erstes Wort zum übersetzen in das Front-Textfield und beschriftet die Sprache der Boxen
+        // Fuellt erstes Abfragewort in das Front Textfeld und beschriftet den Sprachcode
 		txtFront.setText(logic.getCard());
 		lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));
 		lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
 		
 		
-		// Switch Knopf dreht Lernkarten. Wenn false dann true und wenn true dann false. Am Schluss neue Karte laden
-		/**
-		 * Switch-Button auf Listener setzen. Boolean Switch card side auf false oder true setzen.
-		 * Nächste Karte laden.
-		 */
+		// Switch Knopf dreht Lernkarten betreffend Sprachabfrage. Am Schluss neue Karte laden
 		btnSwitch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (logic.isSwitch_card_side() == true) {
@@ -173,22 +170,19 @@ public class WorkGUI {
 			}
 		});
 		
-		// Listener für Next Button.
-		// Prüft Eingabe und reagiert entsprechend.
+		// Listener fuer Next Button.
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
 				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
-				// Wenn keine Eingabe, Popup mit Aufforderung zur Lösungseingabe und Fokus wieder auf Feld txtBack setzen
+				//Prueft ob leere Felder vorhanden sind und gibt Warnmeldung aus.
 				if(txtBack.getText().equals("")) {
 					JOptionPane.showMessageDialog(null,
-							languages.getLangRequest(),
+							languages.getInputError(),
                             languages.getWordAttention(),
 	                        JOptionPane.WARNING_MESSAGE);
 					setFocus();
 				}
-				// Wenn Eingabe Richtig (also true): Lösungstext löschen,
-				// nächste Karte laden und Fokus wieder auf Feld txtBack setzen
+				// Wenn richtig Loesungstext loeschen, naechste Karte laden und Fokus wieder auf Feld Loesungseingabe setzen
 				else if(check) {
 					txtBack.setText("");
 					txtFront.setText(logic.getCard());
@@ -196,10 +190,9 @@ public class WorkGUI {
 					lblDesc2.setText(logic.getCardLangBack(txtFront.getText()));
 					setFocus();
 				}
-				// Wenn Eingabe Falsch (also false): Lösungstext löschen, Feedback ausgeben,
-				// nächste Karte laden und Fokus wieder auf Feld txtBack setzen
+				// Wenn falsch Loesungstext loeschen, Feedback ausgeben, naechste Karte laden und Fokus wieder auf Feld Loesungseingabe setzen
 				else {
-					JOptionPane.showMessageDialog(null, languages.getLangNok1() + languages.getLangNok2() + logic.getSolution(tempsol) + ")", languages.getWordAttention(), JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, languages.getLangNok1() + languages.getLangNok2() + logic.getSolution(txtFront.getText()) + ")", languages.getWordAttention(), JOptionPane.WARNING_MESSAGE);
 					txtBack.setText("");
 					txtFront.setText(logic.getCard());
 					lblDesc1.setText(logic.getCardLangFront(txtFront.getText()));
@@ -211,8 +204,7 @@ public class WorkGUI {
 		});
   	}
     
-	// Listener für Close Button.
-	// Schliesst mainFrame der Klasse Work-GUI und zeigt die Auswertung an.
+	// Listener fuer Beenden Button. Schliesst mainFrame des WorkGUI und zeigt eine Erfolgsuebersicht an.
 	class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btnClose){
@@ -222,11 +214,9 @@ public class WorkGUI {
 		}
 	}
 	
-	// Listener für Sprachauswahl.
-	// Setzt die in der Combobox gewählte Sprache.
+	// Listener fuer Sprachauswahl .Setzt die in der Combobox gewaehlte Sprache.
 	class ComboboxListener implements ActionListener {
-	    // Is called when combobox is selected
-		public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(ActionEvent e) {
 			String selectedItem = (String)boxLanguage.getSelectedItem();
 			if(selectedItem.equals("de")) {
 				languages.setLanguage("de");
@@ -247,7 +237,10 @@ public class WorkGUI {
 		}
 	}
 	
-  	// Methode setzt die via Combobox gewählte Sprache
+	/**
+	* Aendert Beschriftung der Labels und Buttons auf die gewaehlte Sprache.
+	* Uebersetzungen werden aus der Hilfsklasse Languages geholt.
+	*/
   	private void setLang() {
     	btnSwitch.setText(languages.getLangBtnSwitch());
     	btnNext.setText(languages.getLangBtnNext());
@@ -255,15 +248,18 @@ public class WorkGUI {
     	System.out.println(languages.getLanguage());
     }
   	
-    // Setzt Next Button als Standard Button (Enter)
-  	// Setzt txtBack Feld aktiv für Eingabe
+  	/**
+	* Setzt den Button "Weiter" als Fokus, damit schneller via Enter-Taste zum nachesten Wort gelangt werden kann.
+	* Ebenfalls wird nach dem Betaetigen des Button "Weiter" wieder das Textfeld zur Loesungseingabe ausgewaehlt.
+	*/
   	public void setFocus(){
         mainFrame.getRootPane().setDefaultButton(btnNext);
         txtBack.requestFocusInWindow();
   	}
 	
   	/**
-  	 * Main method to start the application
+  	 * Hauptmethode um das Program selbstaendig zu starten.
+  	 * @param args arguments
   	 */
 	public static void main(String[] args) {
 		
@@ -277,9 +273,7 @@ public class WorkGUI {
 		} catch (Exception e) {
 		    // If Nimbus is not available, you can set the GUI to another look and feel.
 		}
-		
 		WorkGUI gui = new WorkGUI();
-		
 		gui.paint(null);
 	}  	
 }
