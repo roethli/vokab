@@ -56,13 +56,12 @@ public class MainGUI {
   	private JButton btnChange = new JButton(languages.getLangBtnEdit());
   	private JButton btnHelp = new JButton(languages.getLangBtnHelp());
   
-  	private JPanel upperPanel = new JPanel();
-  	private JPanel mainPanel = new JPanel();
-  	private JPanel lowerPanel = new JPanel();
+  	private JPanel northPanel = new JPanel();
+  	private JPanel centerPanel = new JPanel();
+  	private JPanel southPanel = new JPanel();
   	
   	private JLabel lblTitle  = new JLabel(languages.getTitle());
   	ImageIcon picture = new ImageIcon(getClass().getResource("/ch/zbw/vokab1316b/java/vokablogo.png"));
-  
   	private JLabel lblContent  = new JLabel(picture);
   	
     private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
@@ -84,8 +83,8 @@ public class MainGUI {
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	mainFrame.setSize(800, 600);
-    	mainPanel.setLayout(new BorderLayout(25, 25));
-    	upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+    	centerPanel.setLayout(new BorderLayout(25, 25));
+    	northPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     	
     	btnStart.setFont(buttonFont);
     	btnSave.setFont(buttonFont);
@@ -127,21 +126,21 @@ public class MainGUI {
         mainFrame.setVisible(true);
         
   	    // Baut GUI zusammen.
-  		upperPanel.add(boxLanguage);
-    	mainPanel.add(lblTitle);
-    	mainPanel.add(lblContent);
-    	mainPanel.add(lblTitle, BorderLayout.NORTH);
-		mainPanel.add(lblContent, BorderLayout.CENTER);
-		lowerPanel.add(btnStart);
-    	lowerPanel.add(btnSave);
-    	lowerPanel.add(btnLoad);
-    	lowerPanel.add(btnRegister);
-    	lowerPanel.add(btnChange);
-    	lowerPanel.add(btnHelp);
+  		northPanel.add(boxLanguage);
+    	centerPanel.add(lblTitle);
+    	centerPanel.add(lblContent);
+    	centerPanel.add(lblTitle, BorderLayout.NORTH);
+		centerPanel.add(lblContent, BorderLayout.CENTER);
+		southPanel.add(btnStart);
+    	southPanel.add(btnSave);
+    	southPanel.add(btnLoad);
+    	southPanel.add(btnRegister);
+    	southPanel.add(btnChange);
+    	southPanel.add(btnHelp);
 		
-	    mainFrame.add(upperPanel, BorderLayout.NORTH);
-	    mainFrame.add(mainPanel, BorderLayout.CENTER);
-	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
+	    mainFrame.add(northPanel, BorderLayout.NORTH);
+	    mainFrame.add(centerPanel, BorderLayout.CENTER);
+	    mainFrame.add(southPanel, BorderLayout.SOUTH);
   	}
 
 	// Listener fuer Buttons.

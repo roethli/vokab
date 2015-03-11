@@ -48,14 +48,13 @@ public class WorkGUI {
 	// Datenfelder
 	Languages languages = new Languages();
 	Logic logic = new Logic();
-	
 	JFrame mainFrame = new JFrame();
 	
-  	private JPanel upperPanel  = new JPanel();
-  	private JPanel mainPanel  = new JPanel();
-  	private JPanel mainLeftPanel  = new JPanel();
-  	private JPanel mainRightPanel  = new JPanel();
-  	private JPanel lowerPanel  = new JPanel();
+  	private JPanel northPanel  = new JPanel();
+  	private JPanel centerPanel  = new JPanel();
+  	private JPanel westPanel  = new JPanel();
+  	private JPanel eastPanel  = new JPanel();
+  	private JPanel southPanel  = new JPanel();
   	
   	private JLabel lblDesc1 = new JLabel();
   	private JLabel lblDesc2 = new JLabel();
@@ -84,8 +83,8 @@ public class WorkGUI {
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     	mainFrame.setSize(600, 400);
-    	upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-    	mainPanel.setLayout(new GridLayout(10, 1));
+    	northPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+    	centerPanel.setLayout(new GridLayout(10, 1));
     	
 		lblResult1.setOpaque(true);
 		lblResult1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -125,24 +124,24 @@ public class WorkGUI {
         mainFrame.setVisible(true);
     	
         // Baut GUI zusammen.
-    	upperPanel.add(boxLanguage);
-    	mainPanel.add(lblDesc1);
-		mainPanel.add(txtFront);
-		mainPanel.add(lblSpaceCenter);
-		mainPanel.add(lblDesc2);
-		mainPanel.add(txtBack);
-		mainPanel.add(lblResult1);
-		mainLeftPanel.add(lblSpaceLeft);
-		mainRightPanel.add(lblSpaceRight);
-    	lowerPanel.add(btnSwitch);
-    	lowerPanel.add(btnNext);
-    	lowerPanel.add(btnClose);
+    	northPanel.add(boxLanguage);
+    	centerPanel.add(lblDesc1);
+		centerPanel.add(txtFront);
+		centerPanel.add(lblSpaceCenter);
+		centerPanel.add(lblDesc2);
+		centerPanel.add(txtBack);
+		centerPanel.add(lblResult1);
+		westPanel.add(lblSpaceLeft);
+		eastPanel.add(lblSpaceRight);
+    	southPanel.add(btnSwitch);
+    	southPanel.add(btnNext);
+    	southPanel.add(btnClose);
 		
-	    mainFrame.add(upperPanel, BorderLayout.NORTH);
-	    mainFrame.add(mainPanel, BorderLayout.CENTER);
-	    mainFrame.add(mainLeftPanel,  BorderLayout.WEST);
-	    mainFrame.add(mainRightPanel,  BorderLayout.EAST);
-	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
+	    mainFrame.add(northPanel, BorderLayout.NORTH);
+	    mainFrame.add(centerPanel, BorderLayout.CENTER);
+	    mainFrame.add(westPanel,  BorderLayout.WEST);
+	    mainFrame.add(eastPanel,  BorderLayout.EAST);
+	    mainFrame.add(southPanel, BorderLayout.SOUTH);
 
         // Fuellt erstes Abfragewort in das Front Textfeld und beschriftet den Sprachcode
 		txtFront.setText(logic.getCard());

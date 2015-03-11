@@ -36,11 +36,11 @@ public class RegisterGUI {
 	Logic logic = new Logic();
 	JFrame mainFrame = new JFrame();
 		
-	private JPanel upperPanel  = new JPanel();
-  	private JPanel mainPanel  = new JPanel();
-  	private JPanel mainLeftPanel  = new JPanel();
-  	private JPanel mainRightPanel  = new JPanel();
-  	private JPanel lowerPanel  = new JPanel();
+	private JPanel northPanel  = new JPanel();
+  	private JPanel centerPanel  = new JPanel();
+  	private JPanel westPanel  = new JPanel();
+  	private JPanel eastPanel  = new JPanel();
+  	private JPanel southPanel  = new JPanel();
   	
   	private JLabel lblDesc1 = new JLabel(languages.getLangQuestion() + ": ");
   	private JLabel lblDesc2 = new JLabel(languages.getLangCode() + " " + languages.getLangQuestion() + ": ");
@@ -71,8 +71,8 @@ public class RegisterGUI {
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     	mainFrame.setSize(600, 400);
-    	upperPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-    	mainPanel.setLayout(new GridLayout(10, 1));
+    	northPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+    	centerPanel.setLayout(new GridLayout(10, 1));
     	
         lblDesc1.setOpaque(true);
 		lblDesc1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -115,25 +115,25 @@ public class RegisterGUI {
         mainFrame.setVisible(true);
     	
         // Baut GUI zusammen.
-    	upperPanel.add(boxLanguage);
-    	mainPanel.add(lblDesc1);
-		mainPanel.add(txtFront);
-		mainPanel.add(lblDesc2);
-		mainPanel.add(txtLang1);
-		mainPanel.add(lblDesc3);
-		mainPanel.add(txtBack);
-		mainPanel.add(lblDesc4);
-		mainPanel.add(txtLang2);
-		mainLeftPanel.add(lblSpaceLeft);
-		mainRightPanel.add(lblSpaceRight);
-    	lowerPanel.add(btnSave);
-    	lowerPanel.add(btnClose);
+    	northPanel.add(boxLanguage);
+    	centerPanel.add(lblDesc1);
+		centerPanel.add(txtFront);
+		centerPanel.add(lblDesc2);
+		centerPanel.add(txtLang1);
+		centerPanel.add(lblDesc3);
+		centerPanel.add(txtBack);
+		centerPanel.add(lblDesc4);
+		centerPanel.add(txtLang2);
+		westPanel.add(lblSpaceLeft);
+		eastPanel.add(lblSpaceRight);
+    	southPanel.add(btnSave);
+    	southPanel.add(btnClose);
 		
-	    mainFrame.add(upperPanel, BorderLayout.NORTH);
-	    mainFrame.add(mainPanel, BorderLayout.CENTER);
-	    mainFrame.add(mainLeftPanel,  BorderLayout.WEST);
-	    mainFrame.add(mainRightPanel,  BorderLayout.EAST);
-	    mainFrame.add(lowerPanel, BorderLayout.SOUTH);
+	    mainFrame.add(northPanel, BorderLayout.NORTH);
+	    mainFrame.add(centerPanel, BorderLayout.CENTER);
+	    mainFrame.add(westPanel,  BorderLayout.WEST);
+	    mainFrame.add(eastPanel,  BorderLayout.EAST);
+	    mainFrame.add(southPanel, BorderLayout.SOUTH);
 	    		
         // Listener fuer Speichern Button.
 		btnSave.addActionListener(new ActionListener() {
