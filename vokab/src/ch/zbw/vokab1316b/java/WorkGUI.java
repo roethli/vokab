@@ -177,7 +177,7 @@ public class WorkGUI {
 		// Prüft Eingabe und reagiert entsprechend.
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				tempsol = txtFront.getText();
+				
 				boolean check = logic.checkInput(txtBack.getText(), txtFront.getText());
 				// Wenn keine Eingabe, Popup mit Aufforderung zur Lösungseingabe und Fokus wieder auf Feld txtBack setzen
 				if(txtBack.getText().equals("")) {
