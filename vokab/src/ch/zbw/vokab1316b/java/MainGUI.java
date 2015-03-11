@@ -46,10 +46,7 @@ import javax.swing.border.*;
 public class MainGUI {
 
 	// Datenfelder
-	WorkGUI workGUI = new WorkGUI();
-	RegisterGUI registerGUI = new RegisterGUI();
 	Languages languages = new Languages();
-
     JFrame mainFrame = new JFrame();
 	
     private JButton btnStart = new JButton(languages.getLangBtnStart());
@@ -155,11 +152,13 @@ public class MainGUI {
 			}
 			// Wird aufgerufen, wenn der Starten Button gedrueckt wird
 			if (e.getSource() == btnStart){
+				WorkGUI workGUI = new WorkGUI();
 				workGUI.paint(languages.getLanguage());
 				workGUI.setFocus();
 			}
 			// Wird aufgerufen, wenn der Erfassen Button gedrueckt wird
 			if (e.getSource() == btnRegister) {
+				RegisterGUI registerGUI = new RegisterGUI();
 				registerGUI.paint(languages.getLanguage());
 				registerGUI.setFocus();
 			}

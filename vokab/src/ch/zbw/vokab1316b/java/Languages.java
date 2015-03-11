@@ -42,7 +42,7 @@ public class Languages {
         		    + "\n<html><u>Speichern</>: Diese Auswahl speichert die geladenen Woerter und den aktuellen Lernfortschritt.</html>"
         		    + "\n<html><u>Laden</>: Mittels dem Laden-Knopf kann eine zuvor gespeicherte Wortliste geladen werden.</html>"
         		    + "\n<html><u>Erfassen</>: Eigene oder zusaetzliche Woerter zum lernen erfassen.</html>"
-        		    + "\n<html><u>aendern</>: Bestehende Woerter aendern oder loeschen.</html>"
+        		    + "\n<html><u>Aendern</>: Bestehende Woerter aendern oder loeschen.</html>"
         		    + "\n\nFuer weitere Fragen bitte Mail an support@vokabtrainer.ch schicken." + "\n\n";
     String helpEn = "In this help the program options are explained."
 		    		+ "\n\n<html><u>Start</>: Here you start the learning mode, so the word query begins.</html>"
@@ -83,7 +83,7 @@ public class Languages {
     String btnRegisterEn = ("Register");
     String btnRegisterFr = ("Capture");
     String btnRegisterIt = ("Cattura");
-    String btnEditDe = ("aendern");
+    String btnEditDe = ("Aendern");
     String btnEditEn = ("Edit");
     String btnEditFr = ("Changement");
     String btnEditIt = ("Cambiamento");
