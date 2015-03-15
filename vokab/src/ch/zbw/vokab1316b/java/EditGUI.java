@@ -61,6 +61,7 @@ public class EditGUI {
   	
   	private JButton btnSave = new JButton(languages.getLangBtnSave());
   	private JButton btnClose = new JButton(languages.getLangBtnClose());
+  	private JButton btnDelete = new JButton(languages.getLangBtnDelete());
 	
     private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
     private JComboBox boxFrotsideList = new JComboBox();
@@ -143,6 +144,7 @@ public class EditGUI {
 		westPanel.add(lblSpaceLeft);
 		eastPanel.add(lblSpaceRight);
     	southPanel.add(btnSave);
+    	southPanel.add(btnDelete);
     	southPanel.add(btnClose);
 		
 	    mainFrame.add(northPanel, BorderLayout.NORTH);
@@ -153,6 +155,29 @@ public class EditGUI {
 	    this.boxFrotsideList.addItem("Bitte wähle ein Wort aus");
 		logic.getAllFront(boxFrotsideList);
 		logic.getCardInformations((String) boxFrotsideList.getSelectedItem(), txtFront, txtBack, txtLang1, txtLang2, boxFrotsideList);
+		
+		// Listener fuer Loeschen Buttoon.
+		btnDelete.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (txtFront.getText().equals("") || txtBack.getText().equals("") || txtLang1.getText().equals("") || txtLang2.getText().equals("")) {
+					JOptionPane.showMessageDialog(mainFrame, languages.getInputError(), languages.getWordAttention(), JOptionPane.WARNING_MESSAGE);			
+				}
+				//Wenn nicht wird Karte gespeichert.
+				else {
+					
+					logic.deleteCard((String) boxFrotsideList.getSelectedItem(), boxFrotsideList);
+					boxFrotsideList.addItem("Bitte wähle ein Wort aus");
+					logic.getAllFront(boxFrotsideList);
+
+				}
+			}
+				
+			}
+		);
+		
+		
         // Listener fuer Speichern Button.
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -163,11 +188,10 @@ public class EditGUI {
 				//Wenn nicht wird Karte gespeichert.
 				else {
 					logic.addCard(txtFront.getText(), txtBack.getText(), 1, txtLang1.getText(), txtLang2.getText());
-					txtFront.setText("");
-					txtBack.setText("");
-					txtLang1.setText("");
-					txtLang2.setText("");
-					setFocus();	
+					logic.deleteCard((String) boxFrotsideList.getSelectedItem(), boxFrotsideList);
+					boxFrotsideList.addItem("Bitte wähle ein Wort aus");
+					logic.getAllFront(boxFrotsideList);
+
 				}
 			}
 		});
@@ -213,6 +237,7 @@ public class EditGUI {
   	private void setLang() {
     	btnSave.setText(languages.getLangBtnSave());
     	btnClose.setText(languages.getLangBtnClose());
+    	btnDelete.setText(languages.getLangBtnDelete());
     	lblDesc1.setText(languages.getLangQuestion() + ": ");
       	lblDesc2.setText(languages.getLangCode() + " " + languages.getLangQuestion() + ": ");
       	lblDesc3.setText(languages.getLangAnswer() + ": ");

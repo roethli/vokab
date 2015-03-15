@@ -12,6 +12,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,8 +64,9 @@ public class MainGUI {
   	
   	private JLabel lblTitle  = new JLabel(languages.getTitle());
   	ImageIcon picture = new ImageIcon(getClass().getResource("/ch/zbw/vokab1316b/java/vokablogo.png"));
+  	ImageIcon success = new ImageIcon(getClass().getResource("/ch/zbw/vokab1316b/java/trophy_icon.png"));
   	private JLabel lblContent  = new JLabel(picture);
-  	
+  	private JLabel lblSuccess = new JLabel(success);
     private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
     
     // Definiere Schriftarten fuer Buttons und Texte
@@ -107,7 +110,35 @@ public class MainGUI {
     	btnChange.addActionListener(new ButtonListener());
     	btnHelp.addActionListener(new ButtonListener());
     	boxLanguage.addActionListener(new ComboboxListener());
-    	
+    	lblSuccess.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Success overview = new Success();
+		        overview.setVisible(true);
+			    Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+			    overview.setLocation(d.width/2 - overview.getWidth()/2, d.height/2 - overview.getHeight()/2);
+				
+			}
+		});
+			
+
 		// Testkarten hinzufuegen
     	final Logic logic = new Logic().getInstance();
 		logic.addCard("haus", "house", 1, "de", "en");
@@ -137,6 +168,7 @@ public class MainGUI {
     	southPanel.add(btnRegister);
     	southPanel.add(btnChange);
     	southPanel.add(btnHelp);
+    	southPanel.add(lblSuccess);
 		
 	    mainFrame.add(northPanel, BorderLayout.NORTH);
 	    mainFrame.add(centerPanel, BorderLayout.CENTER);
@@ -167,11 +199,6 @@ public class MainGUI {
 		    	EditGUI editGUI = new EditGUI();
 		    	editGUI.paint(languages.getLanguage());
 		    	editGUI.setFocus();
-		    	
-//				Success overview = new Success();
-//	            overview.setVisible(true);
-//	            Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-//			      overview.setLocation(d.width/2 - overview.getWidth()/2, d.height/2 - overview.getHeight()/2);
 			}
 			// Wird aufgerufen, wenn der Speichern Button gedrueckt wird
 			if (e.getSource() == btnSave) {

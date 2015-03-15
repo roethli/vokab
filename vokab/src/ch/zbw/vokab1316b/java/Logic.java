@@ -349,6 +349,19 @@ public class Logic {
 		}
 	}
 	
+	public void deleteCard(String front, JComboBox box)
+	{
+		for(int i=0;i<vocabularylist.size();i++) {
+		     
+		    if(vocabularylist.get(i).getFront().equals(front) )
+		    		{ 
+		       vocabularylist.remove(i);
+		        i--;
+		        box.removeAllItems();
+		        
+		    }
+		}
+	}
 	
 	
 	

@@ -71,6 +71,10 @@ public class Languages {
     String btnStartEn = ("Start");
     String btnStartFr = ("Début");
     String btnStartIt = ("Inizio");
+    String btnDeleteDe = ("Loeschen");
+    String btnDeleteEn = ("Delete");
+    String btnDeleteFr = ("Effacer");
+    String btnDeleteIt = ("Cancellare");
     String btnSaveDe = ("Speichern");
     String btnSaveEn = ("Save");
     String btnSaveFr = ("Enregistrer");
@@ -288,6 +292,24 @@ public class Languages {
 		}
 		else
 			return btnLoadIt;
+		}
+	
+	/**
+	 * Liefere die richtige Uebersetzung fuer den Button "Loeschen".
+	 * @return die Button-Beschriftung "Loeschen" in der richtigen Sprache.
+	 */
+	public String getLangBtnDelete() {
+		if(language == "de"){
+			return btnDeleteDe;
+		}
+		if(language == "en"){
+			return btnDeleteEn;
+		}
+		if(language == "fr"){
+			return btnDeleteFr;
+		}
+		else
+			return btnDeleteIt;
 		}
 	
 	/**
