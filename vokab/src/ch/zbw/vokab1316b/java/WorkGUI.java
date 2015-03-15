@@ -208,7 +208,10 @@ public class WorkGUI {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btnClose){
 				mainFrame.setVisible(false);
-				logic.getOverview();
+				Success overview = new Success();
+	            overview.setVisible(true);
+	            Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+			    overview.setLocation(d.width/2 - overview.getWidth()/2, d.height/2 - overview.getHeight()/2);
 			}
 		}
 	}

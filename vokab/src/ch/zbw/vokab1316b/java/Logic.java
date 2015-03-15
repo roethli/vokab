@@ -294,7 +294,36 @@ public class Logic {
 	public void setFaultcounter() {
 		this.faultcounter = this.faultcounter + 1;
 	}
-
+	
+	public int getPercentFault() {
+		int tempsum =  getFaultcounter() + getSuccesscounter() ;
+		if(tempsum > 0)
+		{
+		int tempsum2 = 100 / tempsum;
+		int percent = tempsum2 * getFaultcounter();
+		
+		return percent;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public int getPercentSuccess() {
+		
+		int tempsum =  getFaultcounter() + getSuccesscounter() ;
+		if(tempsum > 0)
+		{
+		int tempsum2 = 100 / tempsum;
+		int percent = tempsum2 * getSuccesscounter();
+		
+		return percent;
+		}
+		else
+		return 0;
+	}
+	
 	/**
 	 * Erfolgs�bersicht Einfach - anzahl falsche / richtige
 	 */
