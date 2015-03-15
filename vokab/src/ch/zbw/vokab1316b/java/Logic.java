@@ -334,7 +334,20 @@ public class Logic {
 		}
 	}
 	
-
+	public void getCardInformations(String choosen,JTextField front, JTextField back,
+			JTextField langfront, JTextField langback, JComboBox box)
+	{
+		for(Card v : vocabularylist)
+		{
+			if(v.getFront().equals(choosen))
+			{
+				front.setText(v.getFront());
+				back.setText(v.getBack());
+				langfront.setText(v.getLangFront());
+				langback.setText(v.getLangBack());
+			}
+		}
+	}
 	
 	
 	

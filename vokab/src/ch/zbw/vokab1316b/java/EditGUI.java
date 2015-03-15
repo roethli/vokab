@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -35,7 +37,7 @@ public class EditGUI {
 
 	// Datenfelder
 	Languages languages = new Languages();
-	Logic logic = new Logic();
+	Logic logic = new Logic().getInstance();
 	JFrame mainFrame = new JFrame();
 		
 	private JPanel northPanel  = new JPanel();
@@ -62,6 +64,7 @@ public class EditGUI {
 	
     private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
     private JComboBox boxFrotsideList = new JComboBox();
+    
     /**
      * Erzeuge ein Fenster zum Woerter erfassen (RegisterGUI)
      * und zeige seine GUI auf dem Bildschirm an.
@@ -98,8 +101,17 @@ public class EditGUI {
 		// Listener fuer Button Close und Combobox erstellen
     	btnClose.addActionListener(new ButtonListener());
     	boxLanguage.addActionListener(new ComboboxListener());
-    
+    	boxFrotsideList.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				String selected = e.getItem().toString();
+				logic.getCardInformations(selected, txtFront, txtBack, txtLang1, txtLang2, boxFrotsideList);
+			}
+		});
   	}
+		
+  	
   	
   	/**
 	 *  Zusammenbauen und anzeigen des RegisterGUI.
@@ -118,7 +130,7 @@ public class EditGUI {
         mainFrame.setVisible(true);
     	
         // Baut GUI zusammen.
-        northPanel.add(boxFrotsideList, Alignment.CENTER);
+        northPanel.add(boxFrotsideList);
         northPanel.add(boxLanguage);
     	centerPanel.add(lblDesc1);
 		centerPanel.add(txtFront);
@@ -138,7 +150,9 @@ public class EditGUI {
 	    mainFrame.add(westPanel,  BorderLayout.WEST);
 	    mainFrame.add(eastPanel,  BorderLayout.EAST);
 	    mainFrame.add(southPanel, BorderLayout.SOUTH);
+	    this.boxFrotsideList.addItem("Bitte wähle ein Wort aus");
 		logic.getAllFront(boxFrotsideList);
+		logic.getCardInformations((String) boxFrotsideList.getSelectedItem(), txtFront, txtBack, txtLang1, txtLang2, boxFrotsideList);
         // Listener fuer Speichern Button.
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -190,6 +204,7 @@ public class EditGUI {
 			}
 		}
 	}
+		
 	
 	/**
 	* Aendert die Beschriftung der Labels und Buttons auf die gewaehlte Sprache.
