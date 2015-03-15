@@ -1,6 +1,5 @@
 package ch.zbw.vokab1316b.java;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -10,22 +9,23 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.GridLayout;
-
 import javax.swing.JLabel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot3D;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.util.Rotation;
 
 import java.awt.Font;
-import java.awt.Window.Type;
 
+/**
+ * Diese Klasse implementiert eine Einfach Erfolgsuebersicht bzw. bekommt der Benutzer eine Tendenz welchen 
+ * Fortschritt sein Lernerfolg macht. 
+ * @author Daniel Roethlisberger, ZbW
+ * @version <b>1.0</b> (10.03.2015)
+ */
 public class Success extends JFrame {
 
 	private JPanel contentPane;
@@ -39,8 +39,9 @@ public class Success extends JFrame {
 				try {
 					Success frame = new Success();
 					frame.setVisible(true);
-					 Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-				      frame.setLocation(d.width/2 - frame.getWidth()/2, d.height/2 - frame.getHeight()/2);
+					Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+					frame.setLocation(d.width / 2 - frame.getWidth() / 2,
+							d.height / 2 - frame.getHeight() / 2);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,7 +50,7 @@ public class Success extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Zeichne das Fenster fuer die Uebersicht.
 	 */
 	public Success() {
 		setTitle("Erfolgs\u00FCbersicht");
@@ -60,36 +61,37 @@ public class Success extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		
 		JPanel chartpanel = new JPanel();
 		chartpanel.setBounds(10, 11, 211, 249);
 		contentPane.add(chartpanel);
+		// Logic Instanz uebernehmen
 		Logic logic = new Logic().getInstance();
-
+		// Ein Datenset fuer ein 3d Kuchendiagramm erstellen
 		DefaultPieDataset result = new DefaultPieDataset();
-
 		result.setValue("Falsch", logic.getFaultcounter());
 		result.setValue("Richtig", logic.getSuccesscounter());
-		JFreeChart chart = ChartFactory.createPieChart3D("", // chart
-																		// title
-				result, // data
-				true, // include legend
-				true, false);
-
-		PiePlot3D plot = (PiePlot3D) chart.getPlot();
-		plot.setNoDataMessage("noch keine Daten");
+		JFreeChart chart = ChartFactory.createPieChart3D("",result,true,true, false);
+		PiePlot3D plot = (PiePlot3D) chart.getPlot(); // Plot erstellen
+		plot.setNoDataMessage("noch keine Daten"); // Wird ausgegeben wenn keine Daten verfuegbar sind.
 		plot.setStartAngle(290);
 		plot.setDirection(Rotation.CLOCKWISE);
-		Dimension size = new Dimension(250, 220);
+		Dimension size = new Dimension(220, 220);
 		ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(size);
 		chartPanel.setZoomTriggerDistance(2);
 		chartPanel.setDismissDelay(2000);
 		chartPanel.setMaximumDrawHeight(750);
 
-		System.out.println(logic.getPercentSuccess());
+		
 		JLabel lbl_sucess_smiles = new JLabel("");
+		
+		/**
+		 * Hier erfolgt die Abfrage der Erfolgs bzw. Misserfolgszahlen.
+		 * Je nach Prozentzahl wird ein anderer Text oder ein anderes Bild (Pokal, Smile usw.)
+		 * angezeigt um dem Benutzer eine gewissen Motivation zu geben.
+		 *
+		 */
+		   
 		if (logic.getPercentSuccess() > logic.getPercentFault()
 				&& logic.getPercentSuccess() < 60) {
 			lbl_sucess_smiles.setIcon(new ImageIcon(Success.class
@@ -116,10 +118,6 @@ public class Success extends JFrame {
 			lblgoodLuck.setBounds(307, 61, 120, 21);
 			contentPane.add(lblgoodLuck);
 			;
-
-			ImageIcon trophyGold = new ImageIcon(
-					"/vokab/src/ch/zbw/vokab1316b/java/trophy_gold.png");
-
 			JLabel lvltrophy1 = new JLabel(
 					new ImageIcon(
 							Success.class

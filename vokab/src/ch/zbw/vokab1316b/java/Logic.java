@@ -1,38 +1,43 @@
 package ch.zbw.vokab1316b.java;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
-
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
- * @author Daniel R�thlisberger, ZbW
- * @version 1.0 07s.02.2015
+ * Diese Klasse implementiert ein System zum erlernen von Vokabeln. Sie implementiert die komplette Logik der Lernsoftware
+ * zum erlenen von Wortpaaren.
+ * 
+ * @author Daniel Roethlisberger, ZbW
+ * @version <b>1.0</b> (10.03.2015)
  */
 
 public class Logic {
-
+	// Datenfelder
 	private static Logic instance = null;
-	private ArrayList<Card> vocabularylist; // Arraylist for the words
-	private int category_max; // category maximum
-	boolean success; // success?
-	private int successcounter; // Simple counter for success
-	private int faultcounter; // Simple counter for faults
-	private boolean switch_card_side;
+	private ArrayList<Card> vocabularylist; // ArrayList fuer die Wortpaare
+	private int category_max; // Maximum an Kategorien
+	boolean success; // Abfrage ob erfolgreich oder nicht
+	private int successcounter; // Counter welcher hochgezaehlt wird wenn erfolgreich
+	private int faultcounter; // Counter welcher hochgezaehlt wird wenn nicht erfolgreich
+	private boolean switch_card_side; // Boolean zur Auswahl der Kartenseite welche der Benutzer erlernen moechte.
 
 
-	// Ist hier um die Instanzierung zu verhindern. Um eine Instanz der Logic-Klasse
-	// zu erhalten, muss getInstance() aufgerufen werden
+	/**
+	 * Ist hier um die Instanzierung zu verhindern. Um eine Instanz der Logic-Klasse
+	 * zu erhalten, muss getInstance() aufgerufen werden
+	 */
 	protected Logic() {
 
 	}
 
-	// Gibt immer die exakt gleiche Instanz der Logic-Klasse zurück, unabhängig davon
-	// aus welcher Klasse diese aufgerufen wird. Somit kann sicher gestellt werden, 
-	// dass alle aufrufenden Klassen mit den gleichen Karten arbeiten bzw. diese manipulieren.
+	/**
+	 * Gibt immer die exakt gleiche Instanz der Logic-Klasse zurück, unabhängig davon
+	 * aus welcher Klasse diese aufgerufen wird. Somit kann sicher gestellt werden, 
+	 * dass alle aufrufenden Klassen mit den gleichen Karten arbeiten bzw. diese manipulieren.
+	 * @return Gibt eine Instanz der Klasse Logic zurueck.
+	 */
 	public Logic getInstance() {
 		if (instance == null) {
 			instance = new Logic();
@@ -46,8 +51,13 @@ public class Logic {
 
 	}
 
-	/*
-	 * addCard with front side, back side and category
+	/**
+	 * Methode zum hinzufuegen einer Karte bzw. eines Wortpaares.
+	 * @param frontside Vorderseite der Lernkarte
+	 * @param backside Rueckseite der Lernkarte
+	 * @param category Kategorie der Lernkarte
+	 * @param lang_frontside Sprache der Vorderseite der Lernkarte
+	 * @param lang_backside Sprache der Rueckseite der Lernkarte
 	 */
 
 	public void addCard(String frontside, String backside, int category,
@@ -55,7 +65,12 @@ public class Logic {
 		vocabularylist.add(new Card(frontside, backside, category,
 				lang_frontside, lang_backside));
 	}
-
+	
+	/**
+	 * Methode zum Anzeigen der Vorderseite der Lernkarte.
+	 * @param back Rueckseite der Lernkarte.
+	 * @return gibt die Vorderseite der Lernkarte zurueck.
+	 */
 	public String showFront(String back) {
 		for (Card v : vocabularylist) {
 			if (back.equals(v.getBack()))
@@ -65,8 +80,11 @@ public class Logic {
 		return null;
 	}
 
-	/*
-	 * Check card if solution is right or wrong!
+	/**
+	 * Methode zur Ueberpruefung bzw. dem Vergleich der eingegebenen Loesung. 
+	 * @param input Eingabe des benutzers
+	 * @param front Bekannte Vorgegebene Seite der Karte der Karte
+	 * @return Gibt richtig oder falsch zurueck.
 	 */
 	public boolean checkInput(String input, String front) {
 
@@ -77,7 +95,14 @@ public class Logic {
 		}
 
 	}
-
+	
+	/**
+	 * Hilfsmethode fuer checkInput() zur ueberpruefung der Usereingabe.
+	 * Wenn im Normalen Modus gearbeitet wird (Vorderseite wird angezeigt).
+	 * @param input Usereingabe
+	 * @param front Vorderseite der Lernkartei
+	 * @return Gibt richtig oder falsch zurueck.
+	 */
 	private boolean checkInputNormal(String input, String front) {
 
 		for (Card v : vocabularylist) {
@@ -99,7 +124,15 @@ public class Logic {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Hilfsmethode fuer checkInput() zur ueberpruefung der Usereingabe.
+	 * Wenn im "gewechselten" Modus gearbeitet wird (Rueckseite wird angezeigt).
+	 * @param input Usereingabe
+	 * @param front Rueckseite der Lernkartei
+	 * @return Gibt richtig oder falsch zurueck.
+	 */
+	
 	private boolean checkInputTurned(String input, String back) {
 
 		for (Card v2 : vocabularylist) {
@@ -123,15 +156,19 @@ public class Logic {
 		return false;
 	}
 
-	/*
-	 * main logic
+	/**
+	 * Eine Methode welche eine Karte nach einer Bestimmten Gewichtung ausgewaehlt wird.
+	 * Karten der Kategorie 1 werden am meisten angezeigt und Karten der Kategorie 5 am wenigsten.
+	 * So ist gewaehrleistet das in einem Sinnvollen Lernrythums gelernt wird. 
+	 * 
+	 * @return gibt eine Karte zurueck.
 	 */
-	public String getCard() {
+	public String getCard()  {
 		Random r = new Random();
 		int low = 1;
 		int high = 100;
 		int random = r.nextInt(high - low) + low;
-
+		
 		{
 			for (Card v : vocabularylist) {
 				if (v.getCategory() == 1 && random > 0 && random <= 50) {
@@ -171,7 +208,12 @@ public class Logic {
 		}
 		return getCard();
 	}
-
+	
+	/**
+	 * Methode zur ausgabe der Wort-Sprache der Vorderseite einer Lernkarte.
+	 * @param Text welcher zur Bestimmung der Sprache benoetigt wird.
+	 * @return Gibt die Sprache der Lernkartei zurueck.
+	 */
 	public String getCardLangFront(String text) {
 
 		for (Card v : vocabularylist) {
@@ -188,6 +230,11 @@ public class Logic {
 		return null;
 	}
 
+	/**
+	 * Methode zur ausgabe der Wort-Sprache der Rueckseite einer Lernkarte.
+	 * @param Text welcher zur Bestimmung der Sprache benoetigt wird.
+	 * @return Gibt die Sprache der Lernkartei zurueck.
+	 */
 	public String getCardLangBack(String text) {
 
 		for (Card v : vocabularylist) {
@@ -204,6 +251,11 @@ public class Logic {
 		return null;
 	}
 	
+	/**
+	 * Methode zur ermittlung der Loesung bzw. des Loesungswortes.
+	 * @param Usereingabe
+	 * @return gibt die Loesung zurueck.
+	 */
 	public String getSolution(String text)
 	{
 		for(Card v : vocabularylist)
@@ -223,80 +275,91 @@ public class Logic {
 	}
 	
 	
-	//
-	//
-	// TODO switch_card_side ?
+	/**
+	 * Methode zur ermittlung der aktuellen Lernkarteiseite welche angezeigt wird.
+	 * @return
+	 */
 	public boolean isSwitch_card_side() {
 		return switch_card_side;
 	}
-
+	
+	/**
+	 * Methode zum Setzten der Lernkarteiseite mit welcher man lernen moechte.
+	 * @param switch_card_side True fuer Vorderseite / False fuer Rueckseite.
+	 */
 	public void setSwitch_card_side(boolean switch_card_side) {
 		this.switch_card_side = switch_card_side;
 	}
 
-	/*
-	 * Getter for Vocabulary Arraylist...
+	/**
+	 * Methode zum ermitteln der Wortliste.
+	 * @return
 	 */
-	// TODO getVocabularlist used?
+
 	public ArrayList<Card> getVocabularylist() {
 		return vocabularylist;
 	}
 
-	/*
-	 * Setter for a Arraylist
+	/**
+	 * Methode zum Hinzufuegen einer Arraylist / Wortliste.
+	 * @param vocabularylist
 	 */
-	// TODO setVocabularylist used?
+
 	public void setVocabularylist(ArrayList<Card> vocabularylist) {
 		this.vocabularylist = vocabularylist;
 	}
 
-	/*
-	 * Getter to find out the Category maximum
+	/**
+	 * Methode zum Ermitteln des Maximums an Kategorien.
+	 * @return gibt eine Zahl zurueck welche das Maximum der Kategorien ist.
 	 */
 	public int getCategory_max() {
 		return category_max;
 	}
 
-	/*
-	 * setter to set the Category Maximum.... ACHTUNG NICHT BENUTZEN
+	/**
+	 * Methode setzten des Maximums an Kategorien.
+	 * @param category_max Zahl welche das Maximum an Kategorien angibt.
 	 */
 	public void setCategory_max(int category_max) {
 		this.category_max = category_max;
 	}
 
-	/*
-	 * get the actual INT for succeeded cards
+	/**
+	 * Methode zum ermitteln wie viele Lernkarten richtig beantwortet wurden.
+	 * @return Zahl welche den aktuellen Erfolgszaehler zurueck gibt.
 	 */
 	public int getSuccesscounter() {
 		return successcounter;
 	}
 
-	/*
-	 * get the actual INT for succeeded cards + 1
+	/**
+	 * Methode zum hochzaehlen des Erfolgszaehlers.
 	 */
-	// TODO sucess counter
 	public void setSuccesscounter() {
 		this.successcounter = this.successcounter + 1;
 	}
 
-	/*
-	 * get the actual INT for Fault cards
+	/**
+	 * Methode zum ermitteln wie viele Lernkarten falsch beantwortet wurden.
+	 * @return Zahl welche den aktuellen Misserfolgszaehler zurueck gibt.
 	 */
-	// TODO fault counter
-
 	public int getFaultcounter() {
 		return faultcounter;
 	}
 
-	/*
-	 * set the actual INT for Fault cards +1
+	/**
+	 * Methode zum hochzaehlen des Misserfolgszaehlers.
 	 */
 
-	// TODO fault counter setter
 	public void setFaultcounter() {
 		this.faultcounter = this.faultcounter + 1;
 	}
 	
+	/**
+	 * Methode zur Ermittlung wie viel Prozent Lernkarten falsch beantwortet wurden.
+	 * @return gibt die Prozentzahl an falsch beantworteten Lernkarten zurueck.
+	 */
 	public int getPercentFault() {
 		int tempsum =  getFaultcounter() + getSuccesscounter() ;
 		if(tempsum > 0)
@@ -312,6 +375,10 @@ public class Logic {
 		}
 	}
 	
+	/**
+	 * Methode zur Ermittlung wie viel Prozent Lernkarten richtig beantwortet wurden.
+	 * @return gibt die Prozentzahl an richtig beantworteten Lernakrten zurueck.
+	 */
 	public int getPercentSuccess() {
 		
 		int tempsum =  getFaultcounter() + getSuccesscounter() ;
@@ -326,6 +393,10 @@ public class Logic {
 		return 0;
 	}
 	
+	/**
+	 * Methode zur Ermittlung aller Kartenvorderseiten. Diese wird zum abfuellen einer JComboBox benoetigt. (EditGUI)
+	 * @param box erwartet eine JCombobox welche abgefuellt wird.
+	 */
 	public void getAllFront(JComboBox box)
 	{
 		for(Card v : vocabularylist)
@@ -334,6 +405,15 @@ public class Logic {
 		}
 	}
 	
+	/**
+	 * Methode zur Ermittlung aller Lernkarteninformationen um anschliessend Textfelder damit zu befuellen. (EditGUI)
+	 * @param choosen erwartet einen String mit dem Ausgewaehlten Wort.
+	 * @param front erwartet ein Textfeld fuer den Text der Vorderseite einer Lernkarte.
+	 * @param back erwartet ein Textfeld fuer den Text der Rueckseite einer Lernkarte.
+	 * @param langfront erwartet ein Textfeld fuer den Text der Sprache einer Vorderseite von einer Lernkarte.
+	 * @param langback erwartet ein Textfeld fuer den Text der Sprache einer Rueckseite von einer Lernkarte.
+	 * @param box erwartet eine JComboBox.
+	 */
 	public void getCardInformations(String choosen,JTextField front, JTextField back,
 			JTextField langfront, JTextField langback, JComboBox box)
 	{
@@ -349,6 +429,12 @@ public class Logic {
 		}
 	}
 	
+	/**
+	 * Methode zum Loeschen von Lernkarten.
+	 * @param front erwartet einen Text zur Ermittlung welche Karte geloescht werden soll.
+	 * @param box erwartet eine JComboBox um diese zu leeren damit diese anschliessend wieder im 
+	 *        EditGUI befuellt werden kann. 
+	 */
 	public void deleteCard(String front, JComboBox box)
 	{
 		for(int i=0;i<vocabularylist.size();i++) {

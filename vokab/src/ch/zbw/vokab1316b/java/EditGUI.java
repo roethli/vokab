@@ -10,27 +10,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.text.Position;
 
 /**
- * Diese Klasse implementiert den Bildschrim zum erstellen von erlernbaren Wortpaaren und deren Uebersetzungen (RegisterGUI).
- * Beim Erstellen der Klasse wird der RegisterGUI mittels Komponenten wie Labels, Textfields, Buttons, etc. aufgebaut
- * und reagiert auf User-Befehle wie z.B. das Druecken eines Buttons.
+ * Die Klasse implementiert den Bildschirm zum bearbeiten und löschen von erlernbaren Wortpaaren 
  * 
- * @author Marcel Baumgartner, ZbW
+ * @author Daniel Roethlisberger, ZbW
  * @version <b>1.0</b> (10.03.2015)
  */
 public class EditGUI {
@@ -67,12 +61,12 @@ public class EditGUI {
     private JComboBox boxFrotsideList = new JComboBox();
     
     /**
-     * Erzeuge ein Fenster zum Woerter erfassen (RegisterGUI)
+     * Erzeuge ein Fenster zum bearbeiten und löschen von Wortpaaren (EditGUI)
      * und zeige seine GUI auf dem Bildschirm an.
      */
   	public EditGUI() {
   		
-  	    // RegisterGUI Design und Einstellungen
+  	    // EditGUI Design und Einstellungen
 		mainFrame.setTitle(languages.getProduct() + " " + languages.getVersion());
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -99,12 +93,16 @@ public class EditGUI {
 		txtLang1.setHorizontalAlignment(SwingConstants.CENTER);
 		txtLang2.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		// Listener fuer Button Close und Combobox erstellen
+		// Listener fuer Button Close und Combobox für eine Wortliste und Combobox für Sprachen erstellen
     	btnClose.addActionListener(new ButtonListener());
     	boxLanguage.addActionListener(new ComboboxListener());
     	boxFrotsideList.addItemListener(new ItemListener() {
 			
 			@Override
+			
+			/**
+			 * ItemListener für die Combobox in welcher eine Liste von Wörtern angezeigt wird.
+			 */
 			public void itemStateChanged(ItemEvent e) {
 				String selected = e.getItem().toString();
 				logic.getCardInformations(selected, txtFront, txtBack, txtLang1, txtLang2, boxFrotsideList);
@@ -115,7 +113,7 @@ public class EditGUI {
   	
   	
   	/**
-	 *  Zusammenbauen und anzeigen des RegisterGUI.
+	 *  Zusammenbauen und anzeigen des EditGUI
 	 *  Beim aufbauen wird die Sprache des MainGUI uebernommen.
 	 *  @param language die gewaehlte Spracheinstellung.
 	 */
@@ -152,7 +150,11 @@ public class EditGUI {
 	    mainFrame.add(westPanel,  BorderLayout.WEST);
 	    mainFrame.add(eastPanel,  BorderLayout.EAST);
 	    mainFrame.add(southPanel, BorderLayout.SOUTH);
+	    
+	    //Fügt einen Platzhalter in der Combobox für die Wortliste hinzu.
 	    this.boxFrotsideList.addItem("Bitte wähle ein Wort aus");
+	    
+	    //Abfüllen der Combobox für die Wortliste.
 		logic.getAllFront(boxFrotsideList);
 		logic.getCardInformations((String) boxFrotsideList.getSelectedItem(), txtFront, txtBack, txtLang1, txtLang2, boxFrotsideList);
 		
@@ -197,7 +199,7 @@ public class EditGUI {
 		});
   	}
     
-	// Listener fuer Beenden Button und schliesst mainFrame des WorkGUI.
+	// Listener fuer Beenden Button und schliesst mainFrame des EditGUI.
 	class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btnClose){

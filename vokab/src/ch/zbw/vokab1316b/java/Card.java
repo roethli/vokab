@@ -15,11 +15,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Card {
 
-	// variabe frontside of a voc. card
+	// Datenfelder
 	private String front;
-	// variable backside of a voc. card
 	private String back;
-	// variable category of a voc. card
 	private int category;
 	private String langFront;
 	private String langBack;
@@ -27,12 +25,20 @@ public class Card {
 	private int successful;
 
 	/*
-	 * Konstruktor ohne Parameter. Wird für das XML-Mashalling gebraucht.
+	 * Konstruktor ohne Parameter. Wird fuer das XML-Mashalling gebraucht.
 	 */
 	public Card() {
 
 	}
-
+	
+	/**
+	 * Konstruktior der Klasse Card
+	 * @param front hier wird ein Parameter fuer die Vorderseite einer Lernkarte erwartet.
+	 * @param back hier wird ein Parameter fuer die Rueckseite einer Lernkarte erwartet.
+	 * @param category Es wird ein Parameter fuer die Kategorie erwartet.
+	 * @param langFront Es wird ein Parameter fuer die Sprache der Vorderseite einer Lernkartei erwartet.
+	 * @param langBack Es wird ein Parameter fuer die Sprache der Rueckseite erwartet.
+	 */
 	public Card(String front, String back, int category, String langFront,
 			String langBack) {
 		// declare variable frontside
@@ -47,84 +53,87 @@ public class Card {
 		this.successful = 0;
 	}
 
-	@XmlElement
-	public int getFaults() {
-		return faults;
-	}
 
-	public void setFaults() {
-		int temp_CardFaults = this.faults;
-		this.faults = temp_CardFaults + 1;
-	}
-
-	@XmlElement
-	public int getSuccessful() {
-		return successful;
-	}
-
-	public void setSuccessful() {
-		int temp_CardSuccess = this.successful;
-		this.successful = temp_CardSuccess + 1;
-	}
-
-	/*
-	 * @return frontside String of a vocabulary card
+	/**
+	 * Methode zur Ermittlung der Lernkarten Vorderseite.
+	 * @return gibt die Vorderseite einer Lernkarte zurueck.
 	 */
 	@XmlElement
 	public String getFront() {
 		return front;
 	}
 
-	/*
-	 * set frontside String of a vocabulary card
+	/**
+	 * Methode zum setzten einer Lernkarten Vorderseite.
+	 * @param erwartet einen Wert welcher als Kartenvorderseite gespeichert wird.
 	 */
 
 	public void setFront(String front) {
 		this.front = front;
 	}
 
-	/*
-	 * @return String of a vocabulary card
+	/**
+	 * Methode zum ermitteln einer Lernkarten Rueckseite.
+	 * @return gibt die Rueckseite einer Lernkarte zurueck.
 	 */
 	@XmlElement
 	public String getBack() {
 		return back;
 	}
 
-	/*
-	 * set backside String of a vocabulary card
+	/**
+	 * Methode zum setzten einer Lernkarten Ruckseite.
+	 * @param erwartet einen Wert welcher als Kartenrueckseite gespeichert wird.
 	 */
 	public void setBack(String back) {
 		this.back = back;
 	}
 
-	/*
-	 * @return int of the category of a vocabulary card
+	/**
+	 * Methode zum ermitteln der Kategorie welche die Lernkarte hat.
+	 * @return gibt eine Zahl zurueck welche der Kategorie entspricht.
 	 */
 	@XmlElement
 	public int getCategory() {
 		return category;
 	}
 
-	/*
-	 * set category of a vocabulary card
+	/**
+	 * Methode zum setzten der Kategorie der Lernkarte.
+	 * @param category erwartet einen Wert welcher der Kategorie der Karte entspricht.
 	 */
 	public void setCategory(int category) {
 		this.category = category;
 	}
 
+	/**
+	 * Methode zum ermitteln der Kartensprache. (Vorderseite)
+	 * @return gibt die Kartensprache zurueck. (Vorderseite)
+	 */
+	@XmlElement
 	public String getLangFront() {
 		return langFront;
 	}
 
+	/**
+	 * Methode zum setzten der Kartensprache. (Vorderseite)
+	 * @param langFront erwaret einen Wert welcher der Sprache der Karten Vorderseite entspricht.
+	 */
 	public void setLangFront(String langFront) {
 		this.langFront = langFront;
 	}
-
+	/**
+	 * Methode zum ermitteln der Kartensprache. (Rueckseite)
+	 * @return gibt die Kartensprache zurueck. (Rueckseite)
+	 */
+	@XmlElement
 	public String getLangBack() {
 		return langBack;
 	}
-
+	/**
+	 * Methode zum setzten der Kartensprache. (Rueckseite)
+	 * @param langBack erwartet einen Wert welcher der Sprache der Karten Rueckseite entspricht.
+	 */
 	public void setLangBack(String langBack) {
 		this.langBack = langBack;
 	}
