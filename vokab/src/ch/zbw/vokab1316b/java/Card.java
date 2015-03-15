@@ -4,12 +4,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/*
+/**
+ * Die Klasse implementiert den Inhalt einer Lernkarte welcher spaeter in der Logic Klasse 
+ * fuer die ArrayList bzw. die Wortliste verwendet wird.
  * 
- * @Author Daniel R�thlisberger ZbW
- * @Version 1.0 02.02.2015
- * 
- * 
+ * @author Daniel Roethlisberger, ZbW
+ * @version <b>1.0</b> (10.03.2015)
  */
 
 @XmlRootElement
