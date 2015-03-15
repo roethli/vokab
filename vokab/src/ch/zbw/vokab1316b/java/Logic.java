@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  * @author Daniel R�thlisberger, ZbW
@@ -324,14 +326,18 @@ public class Logic {
 		return 0;
 	}
 	
-	/**
-	 * Erfolgs�bersicht Einfach - anzahl falsche / richtige
-	 */
-	public void getOverview() {
-		JOptionPane.showMessageDialog(null, "Anzahl Richtig: "
-				+ getSuccesscounter() + "\n" + "Anzahl Falsche: "
-				+ getFaultcounter(), "Erfolgs�bersicht",
-				JOptionPane.INFORMATION_MESSAGE);
+	public void getAllFront(JComboBox box)
+	{
+		for(Card v : vocabularylist)
+		{
+			box.addItem(v.getFront());
+		}
 	}
+	
+
+	
+	
+	
+	
 
 }

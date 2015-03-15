@@ -1,34 +1,225 @@
 package ch.zbw.vokab1316b.java;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
+import javax.swing.text.Position;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JButton;
+/**
+ * Diese Klasse implementiert den Bildschrim zum erstellen von erlernbaren Wortpaaren und deren Uebersetzungen (RegisterGUI).
+ * Beim Erstellen der Klasse wird der RegisterGUI mittels Komponenten wie Labels, Textfields, Buttons, etc. aufgebaut
+ * und reagiert auf User-Befehle wie z.B. das Druecken eines Buttons.
+ * 
+ * @author Marcel Baumgartner, ZbW
+ * @version <b>1.0</b> (10.03.2015)
+ */
+public class EditGUI {
 
-public class EditGUI extends JFrame {
+	// Datenfelder
+	Languages languages = new Languages();
+	Logic logic = new Logic();
+	JFrame mainFrame = new JFrame();
+		
+	private JPanel northPanel  = new JPanel();
+  	private JPanel centerPanel  = new JPanel();
+  	private JPanel westPanel  = new JPanel();
+  	private JPanel eastPanel  = new JPanel();
+  	private JPanel southPanel  = new JPanel();
+  	
+  	private JLabel lblDesc1 = new JLabel(languages.getLangQuestion() + ": ");
+  	private JLabel lblDesc2 = new JLabel(languages.getLangCode() + " " + languages.getLangQuestion() + ": ");
+  	private JLabel lblDesc3 = new JLabel(languages.getLangAnswer() + ": ");
+  	private JLabel lblDesc4 = new JLabel(languages.getLangCode() + " " + languages.getLangAnswer() + ": ");
+  	private JLabel lblSpaceCenter  = new JLabel();
+  	private JLabel lblSpaceLeft  = new JLabel("                                        ");
+  	private JLabel lblSpaceRight  = new JLabel("                                        ");
 
-	private JPanel contentPane;
-	private JTextField txtFront;
-	private JTextField txtBack;
-	private JTextField txt_frontLang;
-	private JTextField txtBackLang;
-
-	/**
-	 * Launch the application.
+  	private JTextField txtFront = new JTextField();
+  	private JTextField txtBack = new JTextField();
+  	private JTextField txtLang1 = new JTextField();
+  	private JTextField txtLang2 = new JTextField();
+  	
+  	private JButton btnSave = new JButton(languages.getLangBtnSave());
+  	private JButton btnClose = new JButton(languages.getLangBtnClose());
+	
+    private JComboBox boxLanguage = new JComboBox(new Object[] {"de","en","fr","it"});
+    private JComboBox boxFrotsideList = new JComboBox();
+    /**
+     * Erzeuge ein Fenster zum Woerter erfassen (RegisterGUI)
+     * und zeige seine GUI auf dem Bildschirm an.
+     */
+  	public EditGUI() {
+  		
+  	    // RegisterGUI Design und Einstellungen
+		mainFrame.setTitle(languages.getProduct() + " " + languages.getVersion());
+    	mainFrame.setResizable(false);
+    	mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    	mainFrame.setSize(600, 400);
+    	northPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+    	centerPanel.setLayout(new GridLayout(10, 1));
+    	
+        lblDesc1.setOpaque(true);
+		lblDesc1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDesc2.setOpaque(true);
+		lblDesc2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDesc3.setOpaque(true);
+		lblDesc3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDesc4.setOpaque(true);
+		lblDesc4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSpaceCenter.setOpaque(true);
+		lblSpaceLeft.setOpaque(true);
+		lblSpaceRight.setOpaque(true);
+  	  	
+  	  	txtFront.setHorizontalAlignment(SwingConstants.CENTER);
+		txtFront.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBack.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBack.setHorizontalAlignment(SwingConstants.CENTER);
+		txtLang1.setHorizontalAlignment(SwingConstants.CENTER);
+		txtLang2.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		// Listener fuer Button Close und Combobox erstellen
+    	btnClose.addActionListener(new ButtonListener());
+    	boxLanguage.addActionListener(new ComboboxListener());
+    
+  	}
+  	
+  	/**
+	 *  Zusammenbauen und anzeigen des RegisterGUI.
+	 *  Beim aufbauen wird die Sprache des MainGUI uebernommen.
+	 *  @param language die gewaehlte Spracheinstellung.
 	 */
+  	public void paint(String language){
+  		this.languages.language = language;
+  		this.boxLanguage.setSelectedItem(language);
+  		final Logic logic = new Logic().getInstance();
+  		setFocus();
+        
+		// Bildschirmaufloesung berechnen und dann GUI zentral ausrichten
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        mainFrame.setLocation(d.width/2 - mainFrame.getWidth()/2, d.height/2 - mainFrame.getHeight()/2);
+        mainFrame.setVisible(true);
+    	
+        // Baut GUI zusammen.
+        northPanel.add(boxFrotsideList, Alignment.CENTER);
+        northPanel.add(boxLanguage);
+    	centerPanel.add(lblDesc1);
+		centerPanel.add(txtFront);
+		centerPanel.add(lblDesc2);
+		centerPanel.add(txtLang1);
+		centerPanel.add(lblDesc3);
+		centerPanel.add(txtBack);
+		centerPanel.add(lblDesc4);
+		centerPanel.add(txtLang2);
+		westPanel.add(lblSpaceLeft);
+		eastPanel.add(lblSpaceRight);
+    	southPanel.add(btnSave);
+    	southPanel.add(btnClose);
+		
+	    mainFrame.add(northPanel, BorderLayout.NORTH);
+	    mainFrame.add(centerPanel, BorderLayout.CENTER);
+	    mainFrame.add(westPanel,  BorderLayout.WEST);
+	    mainFrame.add(eastPanel,  BorderLayout.EAST);
+	    mainFrame.add(southPanel, BorderLayout.SOUTH);
+		logic.getAllFront(boxFrotsideList);
+        // Listener fuer Speichern Button.
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//Prueft ob leere Felder vorhanden sind und gibt Warnmeldung aus.
+				if (txtFront.getText().equals("") || txtBack.getText().equals("") || txtLang1.getText().equals("") || txtLang2.getText().equals("")) {
+					JOptionPane.showMessageDialog(mainFrame, languages.getInputError(), languages.getWordAttention(), JOptionPane.WARNING_MESSAGE);			
+				}
+				//Wenn nicht wird Karte gespeichert.
+				else {
+					logic.addCard(txtFront.getText(), txtBack.getText(), 1, txtLang1.getText(), txtLang2.getText());
+					txtFront.setText("");
+					txtBack.setText("");
+					txtLang1.setText("");
+					txtLang2.setText("");
+					setFocus();	
+				}
+			}
+		});
+  	}
+    
+	// Listener fuer Beenden Button und schliesst mainFrame des WorkGUI.
+	class ButtonListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == btnClose){
+				mainFrame.setVisible(false);
+			}
+		}
+	}
+	
+	// Listener fuer Sprachauswahl .Setzt die in der Combobox gewaehlte Sprache.
+	class ComboboxListener implements ActionListener {
+	    public void actionPerformed(ActionEvent e) {
+			String selectedItem = (String)boxLanguage.getSelectedItem();
+			if(selectedItem.equals("de")) {
+				languages.setLanguage("de");
+				setLang();
+			}
+			else if(selectedItem.equals("en")) {
+				languages.setLanguage("en");
+				setLang();
+			}
+			else if(selectedItem.equals("fr")) {
+				languages.setLanguage("fr");
+				setLang();
+			}
+			else if(selectedItem.equals("it")) {
+				languages.setLanguage("it");
+				setLang();
+			}
+		}
+	}
+	
+	/**
+	* Aendert die Beschriftung der Labels und Buttons auf die gewaehlte Sprache.
+	* Uebersetzungen werden aus der Hilfsklasse Languages geholt.
+	*/
+  	private void setLang() {
+    	btnSave.setText(languages.getLangBtnSave());
+    	btnClose.setText(languages.getLangBtnClose());
+    	lblDesc1.setText(languages.getLangQuestion() + ": ");
+      	lblDesc2.setText(languages.getLangCode() + " " + languages.getLangQuestion() + ": ");
+      	lblDesc3.setText(languages.getLangAnswer() + ": ");
+      	lblDesc4.setText(languages.getLangCode() + " " + languages.getLangAnswer() + ": ");
+    	System.out.println(languages.getLanguage());
+    }
+  	
+  	/**
+	* Methode setzt den Button "Speichern" als Fokus, damit schneller via Enter-Taste zur naechsten Eingabe gelangt werden kann.
+	* Ebenfalls wird nach dem Betaetigen des Button "Speichern" wieder das Textfeld fuer das naechste zu erfassende Wort ausgewaehlt.
+	*/
+  	public void setFocus(){
+        mainFrame.getRootPane().setDefaultButton(btnSave);
+        txtFront.requestFocusInWindow();
+  	}
+	
+  	/**
+  	 * Hauptmethode um das Program selbstaendig zu starten.
+  	 * @param args arguments
+  	 */
 	public static void main(String[] args) {
+		
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		        if ("Nimbus".equals(info.getName())) {
@@ -39,130 +230,7 @@ public class EditGUI extends JFrame {
 		} catch (Exception e) {
 		    // If Nimbus is not available, you can set the GUI to another look and feel.
 		}
-		
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EditGUI frame = new EditGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public EditGUI() {
-		final Logic logic = new Logic().getInstance();	
-		
-		logic.addCard("hallo", "hi", 1, "de", "en");
-		logic.addCard("Nein", "no", 1, "de", "en");
-		logic.addCard("Hund", "dog", 1, "de", "en");
-		logic.addCard("Ja", "yes", 1, "de", "en");
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 468, 203);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		final JComboBox comboBox = new JComboBox();
-		comboBox.addItem("Bitte wähle das gewünschte Wort aus");
-		
-		comboBox.setBounds(47, 11, 355, 28);
-		contentPane.add(comboBox);
-		
-		txtFront = new JTextField();
-		txtFront.setBounds(60, 72, 161, 28);
-		contentPane.add(txtFront);
-		txtFront.setColumns(10);
-		
-		txtBack = new JTextField();
-		txtBack.setColumns(10);
-		txtBack.setBounds(231, 72, 161, 28);
-		contentPane.add(txtBack);
-		
-		txt_frontLang = new JTextField();
-		txt_frontLang.setColumns(10);
-		txt_frontLang.setBounds(11, 73, 39, 26);
-		contentPane.add(txt_frontLang);
-		
-		txtBackLang = new JTextField();
-		txtBackLang.setColumns(10);
-		txtBackLang.setBounds(402, 73, 39, 26);
-		contentPane.add(txtBackLang);
-		
-		JButton btnndern = new JButton("\u00C4ndern");
-		
-		btnndern.setBounds(11, 128, 89, 23);
-		contentPane.add(btnndern);
-		
-		JButton btnLschen = new JButton("L\u00F6schen");
-		btnLschen.setBounds(110, 128, 89, 23);
-		contentPane.add(btnLschen);
-		
-		for(Card i : logic.getVocabularylist())
-		{
-			comboBox.addItem(i.getFront());
-			
-		}
-		
-		
-		
-		
-		comboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				for (Card i : logic.getVocabularylist())
-				{
-					
-					String front = i.getFront();
-					String back = i.getBack();
-					String frontLang = i.getLangFront();
-					String backLang = i.getLangBack();
-					
-					if(comboBox.getSelectedItem() == i.getFront())
-					{
-						txtFront.setText(front);
-						txtBack.setText(back);
-						txt_frontLang.setText(frontLang);
-						txtBackLang.setText(backLang);
-					}}
-				
-				
-			}
-		});
-		
-		btnndern.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				for (Card i : logic.getVocabularylist())
-				{
-					
-					String front = i.getFront();
-					String back = i.getBack();
-					String frontLang = i.getLangFront();
-					String backLang = i.getLangBack();
-					
-					if(comboBox.getSelectedItem() == i.getFront())
-					{
-						i.setFront(txtFront.getText());
-						i.setBack(txtBack.getText());
-						i.setLangFront(txt_frontLang.getText());
-						i.setLangBack(txtBackLang.getText());
-						
-					}}
-				
-			}
-		});
-		
-
-		
-	}
-	
-	
+		RegisterGUI gui = new RegisterGUI();
+		gui.paint(null);
+	}  	
 }

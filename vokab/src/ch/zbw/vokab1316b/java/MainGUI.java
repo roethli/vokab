@@ -164,10 +164,14 @@ public class MainGUI {
 			}
 			// Wird aufgerufen, wenn der aendern Button gedrueckt wird
 		    if (e.getSource() == btnChange) {
-				Success overview = new Success();
-	            overview.setVisible(true);
-	            Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-			      overview.setLocation(d.width/2 - overview.getWidth()/2, d.height/2 - overview.getHeight()/2);
+		    	EditGUI editGUI = new EditGUI();
+		    	editGUI.paint(languages.getLanguage());
+		    	editGUI.setFocus();
+		    	
+//				Success overview = new Success();
+//	            overview.setVisible(true);
+//	            Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+//			      overview.setLocation(d.width/2 - overview.getWidth()/2, d.height/2 - overview.getHeight()/2);
 			}
 			// Wird aufgerufen, wenn der Speichern Button gedrueckt wird
 			if (e.getSource() == btnSave) {
