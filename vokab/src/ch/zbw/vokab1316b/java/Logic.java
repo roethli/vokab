@@ -281,7 +281,7 @@ public class Logic {
 	
 	/**
 	 * Methode zur ermittlung der aktuellen Lernkarteiseite welche angezeigt wird.
-	 * @return
+	 * @return git den boolean zurueck auf welcher Kartenseite gearbeitet wird.
 	 */
 	public boolean isSwitch_card_side() {
 		return switch_card_side;
@@ -297,7 +297,7 @@ public class Logic {
 
 	/**
 	 * Methode zum ermitteln der Wortliste.
-	 * @return
+	 * @return gibt die vocabularylist zurueck.
 	 */
 
 	public ArrayList<Card> getVocabularylist() {

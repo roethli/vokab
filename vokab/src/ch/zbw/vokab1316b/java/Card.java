@@ -83,7 +83,7 @@ public class Card {
 
 	/**
 	 * Methode zum setzten einer Lernkarten Ruckseite.
-	 * @param erwartet einen Wert welcher als Kartenrueckseite gespeichert wird.
+	 * @param back erwartet einen Wert welcher als Kartenrueckseite gespeichert wird.
 	 */
 	public void setBack(String back) {
 		this.back = back;
