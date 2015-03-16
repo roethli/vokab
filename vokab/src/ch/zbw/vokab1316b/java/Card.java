@@ -65,7 +65,7 @@ public class Card {
 
 	/**
 	 * Methode zum setzten einer Lernkarten Vorderseite.
-	 * @param erwartet einen Wert welcher als Kartenvorderseite gespeichert wird.
+	 * @param front erwartet einen Wert welcher als Kartenvorderseite gespeichert wird.
 	 */
 
 	public void setFront(String front) {

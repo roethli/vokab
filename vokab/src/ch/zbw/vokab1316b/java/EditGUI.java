@@ -171,6 +171,10 @@ public class EditGUI {
 					
 					logic.deleteCard((String) boxFrotsideList.getSelectedItem(), boxFrotsideList);
 					boxFrotsideList.addItem("Bitte wähle ein Wort aus");
+					txtFront.setText("");
+					txtBack.setText("");
+					txtLang1.setText("");
+					txtLang2.setText("");
 					logic.getAllFront(boxFrotsideList);
 
 				}
@@ -258,7 +262,7 @@ public class EditGUI {
 	
   	/**
   	 * Hauptmethode um das Program selbstaendig zu starten.
-  	 * @param args arguments
+  	 * @param args arguments standart für main Methode
   	 */
 	public static void main(String[] args) {
 		

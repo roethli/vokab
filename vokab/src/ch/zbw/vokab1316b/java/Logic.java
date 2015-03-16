@@ -164,6 +164,7 @@ public class Logic {
 	 * @return gibt eine Karte zurueck.
 	 */
 	public String getCard()  {
+		
 		Random r = new Random();
 		int low = 1;
 		int high = 100;
@@ -171,6 +172,7 @@ public class Logic {
 		
 		{
 			for (Card v : vocabularylist) {
+				
 				if (v.getCategory() == 1 && random > 0 && random <= 50) {
 					if (!this.switch_card_side) {
 						return v.getFront();
@@ -207,11 +209,13 @@ public class Logic {
 			}
 		}
 		return getCard();
+		
+		
 	}
 	
 	/**
 	 * Methode zur ausgabe der Wort-Sprache der Vorderseite einer Lernkarte.
-	 * @param Text welcher zur Bestimmung der Sprache benoetigt wird.
+	 * @param text Text welcher zur Bestimmung der Sprache benoetigt wird.
 	 * @return Gibt die Sprache der Lernkartei zurueck.
 	 */
 	public String getCardLangFront(String text) {
@@ -232,7 +236,7 @@ public class Logic {
 
 	/**
 	 * Methode zur ausgabe der Wort-Sprache der Rueckseite einer Lernkarte.
-	 * @param Text welcher zur Bestimmung der Sprache benoetigt wird.
+	 * @param text Text welcher zur Bestimmung der Sprache benoetigt wird.
 	 * @return Gibt die Sprache der Lernkartei zurueck.
 	 */
 	public String getCardLangBack(String text) {
@@ -253,7 +257,7 @@ public class Logic {
 	
 	/**
 	 * Methode zur ermittlung der Loesung bzw. des Loesungswortes.
-	 * @param Usereingabe
+	 * @param text Usereingabe
 	 * @return gibt die Loesung zurueck.
 	 */
 	public String getSolution(String text)
@@ -302,7 +306,7 @@ public class Logic {
 
 	/**
 	 * Methode zum Hinzufuegen einer Arraylist / Wortliste.
-	 * @param vocabularylist
+	 * @param vocabularylist erwartet eine ArrayList des Typs Card
 	 */
 
 	public void setVocabularylist(ArrayList<Card> vocabularylist) {
